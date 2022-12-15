@@ -13,7 +13,7 @@ import styles from "./foodList.css";
 
 function FoodList() {
   const [foodList, setFoodList] = useState();
-  let [total, setTotal] = useState(0);
+  // let [total, setTotal] = useState(0);
 
   useEffect(() => {
     const foodRef = firebase.database().ref("crud-final");
@@ -25,18 +25,23 @@ function FoodList() {
       }
 
       setFoodList(foodList);
-      console.log(foodList);
+      // console.log(foodList);
 
       // foodList.forEach((food) => {
       //   setTotal((total += +food.cal));
       // });
 
-      let calcTotal = 0;
+      // let calcTotal = 0;
 
-      foodList.forEach((food) => {
-        console.log(food.cal);
-        calcTotal = calcTotal + food.cal;
-      });
+      // foodList.forEach((food) => {
+      //   console.log("cal: " + food.cal);
+      //   calcTotal = calcTotal + +food.cal;
+      //   console.log("calcTotal: " + calcTotal);
+      //   // setTotal(calcTotal);
+      //   // console.log("total: " + total);
+      // });
+      // setTotal(calcTotal);
+      // console.log("total: " + total);
     });
   }, []);
 

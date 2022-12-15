@@ -11,6 +11,7 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import styles from "./nav.css";
+import MacroCalc from "../macroCalc/macroCalc";
 
 function Navigation() {
   const [showNav, setShowNav] = useState(false);
@@ -42,7 +43,7 @@ function Navigation() {
             </MDBNavbarItem>
           </MDBNavbarNav>
           <MDBContainer id="nav-macro">
-            <span id="nav-macro-cal">Cal: 4000</span>
+            <span id="nav-macro-cal">Cal: 0</span>
             <span id="nav-macro-p">P: 0</span>
             <span id="nav-macro-c">C: 0</span>
             <span id="nav-macro-f">F: 0</span>
