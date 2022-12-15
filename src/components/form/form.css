@@ -1,0 +1,35 @@
+.user-form {
+  background-color: var(--site-black);
+}
+
+.form-meal {
+  background-color: var(--site-grey);
+  color: white;
+  height: 37px;
+  border: 1px solid white;
+}
+
+#input-name,
+#input-servings {
+  background-color: var(--site-grey);
+}
+
+#input-cal {
+  background-color: var(--site-yellow);
+}
+
+#input-protein {
+  background-color: var(--site-olivegreen);
+}
+
+#input-carbs {
+  background-color: var(--site-oceanblue);
+}
+
+#input-fat {
+  background-color: var(--site-greyblue);
+}
+
+.submit-btn {
+  background-color: red;
+}

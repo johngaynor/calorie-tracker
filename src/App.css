@@ -1,5 +1,27 @@
 .App {
+  --site-orange: #f07046;
+  --site-yellow: #f1cf48;
+  --site-darkyellow: #dfbe35;
+  --site-olivegreen: #95af3f;
+  --site-oceanblue: #478a69;
+  --site-greyblue: #467f8a;
+  --site-white: #fff;
+  --site-lightgrey: #f9f9f9;
+  --site-grey: #505050;
+  --site-darkgrey: #102e33;
+  --site-black: #0f2a2f;
+  /* COLOR CODE
+    colors are as follows:
+    - yellow = calories
+    - olivegreen = protein
+    - oceanblue = carbs
+    - greyblue = fat
+  */
+
   text-align: center;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--site-darkgrey);
+  color: #e7e7e7;
 }
 
 .App-logo {

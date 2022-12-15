@@ -1,0 +1,16 @@
+.dashboard-container {
+  height: 100vh;
+  background-color: red;
+}
+
+h1 {
+  /* background-color: blue; */
+}
+
+.col:nth-child(1) {
+  /* background-color: purple; */
+}
+
+.col:nth-child(2) {
+  /* background-color: indigo; */
+}
