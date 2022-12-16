@@ -4,63 +4,9 @@
 }
 
 .col:nth-child(2) {
-  background-color: indigo;
+  /* background-color: indigo; */
 }
 
 .dashboard-header {
   font-weight: bold;
-}
-
-.dashboard-macro-display {
-  background-color: red;
-  height: 250px;
-}
-
-.dashboard-big-display {
-  background-color: var(--site-yellow);
-  min-width: 200px;
-  color: var(--site-black);
-  position: relative;
-  overflow: hidden;
-}
-
-.ring-one {
-  width: 350px;
-  height: 350px;
-  position: absolute;
-  border: 3px solid var(--site-darkyellow);
-  border-radius: 50%;
-  top: -200px;
-  left: -215px;
-}
-
-.ring-two {
-  width: 400px;
-  height: 400px;
-  position: absolute;
-  border: 3px solid var(--site-darkyellow);
-  border-radius: 50%;
-  top: -315px;
-  left: -180px;
-}
-
-.dashboard-big-display span {
-  font-size: 20px;
-  font-weight: lighter;
-  margin-left: 2px;
-}
-
-.big-display-icon {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  background-color: var(--site-darkyellow);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-}
-
-.dashboard-macros {
-  background-color: var(--site-greyblue);
 }

@@ -10,11 +10,10 @@ function App() {
   return (
     <div className="App">
       <Navigation></Navigation>
-      {/* <MacroCalcNav></MacroCalcNav> */}
-      <Dashboard></Dashboard>
       {/* <h1>Food Log</h1> */}
-      {/* <UserForm></UserForm> */}
-      {/* <FoodList></FoodList> */}
+      <UserForm></UserForm>
+      <FoodList></FoodList>
+      <Dashboard></Dashboard>
     </div>
   );
 }
