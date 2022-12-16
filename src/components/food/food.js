@@ -43,8 +43,8 @@ function Food({ food }) {
         </div>
       </td>
       <td>
-        <p className="fw-normal mb-1">random</p>
-        <p className="text-muted mb-0">random</p>
+        <p className="fw-normal mb-1">{food.servings}</p>
+        <p className="text-muted mb-0">/size</p>
       </td>
       <td>
         <MDBBadge color="success" pill className="d-flex">

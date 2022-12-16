@@ -13,6 +13,7 @@ import styles from "./form.css";
 function UserForm() {
   const [meal, setMeal] = useState("");
   const [name, setName] = useState("");
+  const [servings, setServings] = useState("");
   const [cal, setCal] = useState("");
   const [protein, setProtein] = useState("");
   const [carbs, setCarbs] = useState("");
@@ -24,6 +25,10 @@ function UserForm() {
 
   const nameOnChange = (e) => {
     setName(e.target.value);
+  };
+
+  const servingsOnChange = (e) => {
+    setServings(e.target.value);
   };
 
   const calOnChange = (e) => {
@@ -47,6 +52,7 @@ function UserForm() {
     if (
       meal === "Select Meal" ||
       meal === "" ||
+      servings === "" ||
       name === "" ||
       cal === "" ||
       protein === "" ||
@@ -59,6 +65,7 @@ function UserForm() {
       const food = {
         meal,
         name,
+        servings,
         cal,
         protein,
         carbs,
@@ -70,6 +77,7 @@ function UserForm() {
 
       // setMeal("");
       setName("");
+      setServings("");
       setCal("");
       setProtein("");
       setCarbs("");
@@ -78,10 +86,6 @@ function UserForm() {
 
     // for some reason the box will reset for all of them except the one the user last entered *if* their next click was the submit button
   };
-
-  /// start math ///
-
-  /// end math ///
 
   return (
     <MDBContainer className="p-2 user-form">
@@ -113,8 +117,10 @@ function UserForm() {
         <MDBCol>
           <MDBInput
             id="input-servings"
-            label="SERVINGS"
+            label="servings"
             type="number"
+            onChange={servingsOnChange}
+            value={servings}
             contrast
           />
         </MDBCol>

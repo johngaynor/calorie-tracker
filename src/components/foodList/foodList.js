@@ -26,22 +26,6 @@ function FoodList() {
 
       setFoodList(foodList);
       // console.log(foodList);
-
-      // foodList.forEach((food) => {
-      //   setTotal((total += +food.cal));
-      // });
-
-      // let calcTotal = 0;
-
-      // foodList.forEach((food) => {
-      //   console.log("cal: " + food.cal);
-      //   calcTotal = calcTotal + +food.cal;
-      //   console.log("calcTotal: " + calcTotal);
-      //   // setTotal(calcTotal);
-      //   // console.log("total: " + total);
-      // });
-      // setTotal(calcTotal);
-      // console.log("total: " + total);
     });
   }, []);
 
@@ -53,7 +37,7 @@ function FoodList() {
             <th scope="col" className="col-4">
               Meal/Food
             </th>
-            <th scope="col">Name</th>
+            <th scope="col">Servings</th>
             <th scope="col">Calories</th>
             <th scope="col">P/C/F</th>
             <th scope="col" className="col-2">
