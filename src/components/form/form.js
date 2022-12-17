@@ -70,6 +70,7 @@ function UserForm() {
         protein,
         carbs,
         fat,
+        complete: false,
       };
 
       // console.log(food);

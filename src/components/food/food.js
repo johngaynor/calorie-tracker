@@ -18,13 +18,13 @@ import styles from "./food.css";
 //       .child(food.id);
 
 //     foodRef.update({
-//       // complete: !recipe.complete,
+//       complete: !recipe.complete,
 //     });
 //   };
 // }
 
 function Food({ food }) {
-  const [updateFood, setUpdateFood] = useState(-1);
+  // const [updateFood, setUpdateFood] = useState(-1);
   const [foods, setFoods] = useState(food);
   // hooks for updating the food
   const [name, setName] = useState("");
@@ -47,7 +47,7 @@ function Food({ food }) {
   // };
 
   const editFood = (id) => {
-    setUpdateFood(id);
+    // setUpdateFood(id);
     console.log("running editFoodBtns for id: " + id);
 
     // working with setting values ///////
@@ -151,10 +151,18 @@ function Food({ food }) {
     foodRef.push(food);
   };
 
+  const updateFood = () => {
+    const foodRef = firebase.database().ref("crud-final").child(food.id);
+
+    foodRef.update({
+      complete: !food.complete,
+    });
+  };
+
   // if value === "" (the user didn't put anything in), setValue = food.(insert objectItem)
 
   return (
-    <tr id="food-display">
+    <tr id="food-display" className={food.complete ? "complete" : ""}>
       <td>
         <div className="mx-auto" id="food-meal-name-display">
           <p className="fw-bold mb-1" id="food-name-display">
@@ -180,30 +188,33 @@ function Food({ food }) {
         {food.protein}/{food.carbs}/{food.fat}
       </td>
       <td id="food-log-btns">
-        {updateFood === food.id ? (
-          <MDBBtn
-            color="link"
-            rounded
-            size="sm"
-            onClick={() => SubmitEditedFood()}
-          >
-            Submit
-          </MDBBtn>
-        ) : (
-          <div>
-            <MDBBtn
+        {/* {updateFood === food.id ? ( */}
+        {/* <MDBBtn
+          color="link"
+          rounded
+          size="sm"
+          onClick={() => SubmitEditedFood()}
+        >
+          Submit
+        </MDBBtn> */}
+        {/* ) : ( */}
+        <div>
+          {/* <MDBBtn
               color="link"
               rounded
               size="sm"
               onClick={() => editFood(food.id)}
             >
               Edit
-            </MDBBtn>
-            <MDBBtn color="link" rounded size="sm" onClick={deleteFood}>
-              Delete
-            </MDBBtn>
-          </div>
-        )}
+            </MDBBtn> */}
+          <MDBBtn color="link" rounded size="sm" onClick={updateFood}>
+            ADD TO LOG
+          </MDBBtn>
+          <MDBBtn color="link" rounded size="sm" onClick={deleteFood}>
+            Delete
+          </MDBBtn>
+        </div>
+        {/* )} */}
       </td>
     </tr>
   );

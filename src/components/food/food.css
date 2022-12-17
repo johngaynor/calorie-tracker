@@ -31,3 +31,7 @@
 #edit-fat-input {
   width: 33px;
 }
+
+.complete {
+  background-color: var(--site-greyblue);
+}
