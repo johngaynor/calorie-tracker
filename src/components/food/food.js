@@ -59,10 +59,6 @@ function Food({ food }) {
       setServings(e.target.value);
     };
 
-    const calOnChange = (e) => {
-      setCal(e.target.value);
-    };
-
     const proteinOnChange = (e) => {
       setProtein(e.target.value);
     };
@@ -75,10 +71,22 @@ function Food({ food }) {
       setFat(e.target.value);
     };
     //////////////////////////////////////
-
     // changing cal
+    // const foodCalContent = document.getElementById("food-cal-display");
+    // foodCalContent.innerHTML = `<input id="edit-cal-input" type="number" class="food-input-boxes" placeholder=${food.cal} onChange={calOnChange} />`;
+
+    function insertCool() {
+      console.log("working");
+    }
+
+    const calOnChange = (e) => {
+      setCal(e.target.value);
+      console.log("it's working");
+    };
+
     const foodCalContent = document.getElementById("food-cal-display");
-    foodCalContent.innerHTML = `<input id="edit-cal-input" type="number" class="food-input-boxes" placeholder=${food.cal} onChange="{calOnChange}" />`;
+    foodCalContent.innerHTML = `<input id="edit-cal-input" type="number" class="food-input-boxes" placeholder=${food.cal} onChange={calOnChange}
+     />`;
 
     // changing name
     const foodNameContent = document.getElementById("food-name-display");
