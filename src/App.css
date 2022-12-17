@@ -24,6 +24,12 @@
   color: #e7e7e7;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

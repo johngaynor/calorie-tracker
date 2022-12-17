@@ -35,7 +35,7 @@ function FoodList() {
         <MDBTableHead>
           <tr>
             <th scope="col" className="col-4">
-              Meal/Food
+              Food/Meal
             </th>
             <th scope="col">Servings</th>
             <th scope="col">Calories</th>

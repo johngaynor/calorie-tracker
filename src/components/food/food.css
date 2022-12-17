@@ -1,3 +1,33 @@
 .food-table {
   background-color: var(--site-black);
 }
+
+.food-input-boxes {
+  background-color: var(--site-black);
+  height: 30px;
+  border: 2px solid white;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+.food-input-boxes::placeholder {
+  color: #ccc;
+}
+
+#edit-cal-input {
+  width: 80px;
+  background-color: #14a44d;
+  border-radius: 20px;
+}
+
+#edit-servings-input {
+  width: 60px;
+}
+
+#edit-protein-input,
+#edit-carbs-input,
+#edit-fat-input {
+  width: 33px;
+}

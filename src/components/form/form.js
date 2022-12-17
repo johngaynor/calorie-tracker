@@ -117,7 +117,7 @@ function UserForm() {
         <MDBCol>
           <MDBInput
             id="input-servings"
-            label="servings"
+            label="Servings"
             type="number"
             onChange={servingsOnChange}
             value={servings}
