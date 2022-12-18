@@ -45,11 +45,9 @@ function FoodList() {
             </th>
           </tr>
         </MDBTableHead>
-        <MDBTableBody>
-          {foodList
-            ? foodList.map((food, index) => <Food food={food} key={index} />)
-            : ""}
-        </MDBTableBody>
+        {foodList
+          ? foodList.map((food, index) => <Food food={food} key={index} />)
+          : ""}
       </MDBTable>
     </Container>
   );
