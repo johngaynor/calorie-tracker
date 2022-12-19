@@ -18,9 +18,9 @@ function Dashboard() {
           </div>
           <MacroCalcDash></MacroCalcDash>
         </MDBCol>
-        <MDBCol className="m-2">
+        {/* <MDBCol className="m-2">
           2 of 2 <FontAwesomeIcon icon={faApple} />
-        </MDBCol>
+        </MDBCol> */}
       </MDBRow>
     </MDBContainer>
   );

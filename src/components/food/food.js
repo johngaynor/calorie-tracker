@@ -9,6 +9,8 @@ import {
 import { Container } from "react-bootstrap";
 import firebase from "../../utilities/firebase";
 import styles from "./food.css";
+import { faHelicopterSymbol } from "@fortawesome/free-solid-svg-icons";
+import { faGoodreads } from "@fortawesome/free-brands-svg-icons";
 
 function Food({ food }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -37,7 +39,7 @@ function Food({ food }) {
   // these are the form listeners
   const nameOnChange = (e) => {
     setName(e.target.value);
-    // console.log(name);
+    // console.log(newName);
   };
 
   const servingsOnChange = (e) => {
@@ -60,31 +62,21 @@ function Food({ food }) {
     setFat(e.target.value);
   };
 
-  const submitEditedFood = () => {
+  const updateEditFood = () => {
     setIsEditing(false);
-    // console.log(food.id);
-    const foodRef = firebase.database().ref("crud-final");
-    const food = {
-      name,
-      // servings,
-      // cal,
-      // protein,
-      // carbs,
-      // fat,
-      // complete: false,
-    };
-    console.log(food);
-    foodRef.update(food);
+    const foodRef = firebase.database().ref("crud-final").child(food.id);
+    foodRef.update({
+      name: name,
+      servings: servings,
+      cal: cal,
+      protein: protein,
+      carbs: carbs,
+      fat: fat,
+    });
 
-    // setName("");
-    // setServings("");
-    // setCal("");
-    // setProtein("");
-    // setCarbs("");
-    // setFat("");
+    console.log("UPDATED FOOD");
+    // still need to work out updating bugs
   };
-
-  // if value === "" (the user didn't put anything in), setValue = food.(insert objectItem)
 
   return (
     <MDBTableBody>
@@ -97,7 +89,7 @@ function Food({ food }) {
                 type="text"
                 className="food-input-boxes"
                 placeholder={food.name}
-                value={food.newName}
+                value={food.name}
                 onChange={nameOnChange}
               />
               <p className="text-muted mb-0" id="food-meal-display">
@@ -111,6 +103,8 @@ function Food({ food }) {
               type="number"
               className="food-input-boxes"
               placeholder={food.servings}
+              value={food.servings}
+              onChange={servingsOnChange}
             />
             <p className="text-muted mb-0">/size</p>
           </td>
@@ -120,6 +114,8 @@ function Food({ food }) {
               type="number"
               className="food-input-boxes"
               placeholder={food.cal}
+              value={food.cal}
+              onChange={calOnChange}
             />
           </td>
           <td id="food-macros-display">
@@ -129,6 +125,8 @@ function Food({ food }) {
                 type="number"
                 className="food-input-boxes"
                 placeholder={food.protein}
+                value={food.protein}
+                onChange={proteinOnChange}
               />{" "}
               /
               <input
@@ -136,6 +134,8 @@ function Food({ food }) {
                 type="number"
                 className="food-input-boxes"
                 placeholder={food.carbs}
+                value={food.carbs}
+                onChange={carbsOnChange}
               />{" "}
               /
               <input
@@ -143,6 +143,8 @@ function Food({ food }) {
                 type="number"
                 className="food-input-boxes"
                 placeholder={food.fat}
+                value={food.fat}
+                onChange={fatOnChange}
               />
             </div>
           </td>
@@ -155,7 +157,7 @@ function Food({ food }) {
                 color="link"
                 rounded
                 size="sm"
-                onClick={submitEditedFood}
+                onClick={updateEditFood}
                 // this is just here to set it back to default
               >
                 Submit
