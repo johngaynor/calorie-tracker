@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../../utilities/firebase";
+import firebase from "../../../utilities/firebase";
 import {
   MDBInput,
   MDBRow,

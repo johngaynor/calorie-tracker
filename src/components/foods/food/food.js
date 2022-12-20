@@ -7,7 +7,7 @@ import {
   MDBTableBody,
 } from "mdb-react-ui-kit";
 import { Container } from "react-bootstrap";
-import firebase from "../../utilities/firebase";
+import firebase from "../../../utilities/firebase";
 import styles from "./food.css";
 import { faGoodreads } from "@fortawesome/free-brands-svg-icons";
 
@@ -179,12 +179,12 @@ function Food({ food }) {
               </p>
             </div>
           </td>
-          <td>
+          {/* <td>
             <p className="fw-normal mb-1" id="food-servings-display">
               {food.servings}
             </p>
             <p className="text-muted mb-0">/size</p>
-          </td>
+          </td> */}
           <td>
             <MDBBadge
               color="success"

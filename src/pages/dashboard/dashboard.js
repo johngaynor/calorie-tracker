@@ -1,7 +1,7 @@
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
-import MacroCalcDash from "../macroCalcDash/macroCalcDash";
+import MacroCalcDash from "../../components/macroCalcDash/macroCalcDash";
 import styles from "./dashboard.css";
 
 function Dashboard() {

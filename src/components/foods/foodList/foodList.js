@@ -1,6 +1,6 @@
 import Food from "../food/food";
 import React, { useState, useEffect } from "react";
-import firebase from "../../utilities/firebase";
+import firebase from "../../../utilities/firebase";
 import {
   MDBBadge,
   MDBBtn,
