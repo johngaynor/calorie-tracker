@@ -1,11 +1,11 @@
 import "./App.css";
 import Navigation from "./components/nav/nav";
-import UserForm from "./components/foods/form/form";
+// import UserForm from "./components/foods/form/form";
 // import Food from "./components/foods/food/food";
 // import FoodList from "./components/foods/foodList/foodList";
 import Dashboard from "./pages/dashboard/dashboard";
 import Foods from "./pages/foods/foods";
-import Recipes from "./components/recipes/recipes";
+import Recipes from "./pages/recipes/recipes";
 import { Route, Routes } from "react-router";
 
 function App() {

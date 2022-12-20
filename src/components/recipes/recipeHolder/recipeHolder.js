@@ -7,11 +7,11 @@ import {
   MDBBadge,
   MDBRow,
 } from "mdb-react-ui-kit";
-import firebase from "../../utilities/firebase";
-import styles from "./recipes.css";
+import firebase from "../../../utilities/firebase";
+import styles from "./recipeHolder.css";
 import React, { useState } from "react";
 
-function Recipes() {
+function RecipeHolder() {
   const [weight, setWeight] = useState(0);
   const [weightCal, setWeightCal] = useState("");
 
@@ -133,4 +133,4 @@ function Recipes() {
   );
 }
 
-export default Recipes;
+export default RecipeHolder;
