@@ -8,7 +8,7 @@ function Dashboard() {
   return (
     <MDBContainer fluid className="dashboard-container px-4">
       <MDBRow>
-        <h3 className="p-3 d-flex dashboard-header">Dashboard</h3>
+        <h3 className="p-3 d-flex basic-header">Dashboard</h3>
       </MDBRow>
       <MDBRow>
         <MDBCol className="m-2 p-2">

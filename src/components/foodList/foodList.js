@@ -7,6 +7,7 @@ import {
   MDBTable,
   MDBTableHead,
   MDBTableBody,
+  MDBRow,
 } from "mdb-react-ui-kit";
 import { Container } from "react-bootstrap";
 import styles from "./foodList.css";
@@ -37,7 +38,7 @@ function FoodList() {
             <th scope="col" className="col-4">
               Food/Meal
             </th>
-            <th scope="col">Servings</th>
+            {/* <th scope="col">Servings</th> */}
             <th scope="col">Calories</th>
             <th scope="col">P/C/F</th>
             <th scope="col" className="col-2">

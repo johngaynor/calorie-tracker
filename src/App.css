@@ -24,6 +24,10 @@
   color: #e7e7e7;
 }
 
+.basic-header {
+  font-weight: bold;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

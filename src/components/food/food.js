@@ -9,18 +9,17 @@ import {
 import { Container } from "react-bootstrap";
 import firebase from "../../utilities/firebase";
 import styles from "./food.css";
-import { faHelicopterSymbol } from "@fortawesome/free-solid-svg-icons";
 import { faGoodreads } from "@fortawesome/free-brands-svg-icons";
 
 function Food({ food }) {
   const [isEditing, setIsEditing] = useState(false);
   // this area is for updating the food
-  const [name, setName] = useState("");
-  const [servings, setServings] = useState("");
-  const [cal, setCal] = useState("");
-  const [protein, setProtein] = useState("");
-  const [carbs, setCarbs] = useState("");
-  const [fat, setFat] = useState("");
+  const [name, setName] = useState();
+  // const [servings, setServings] = useState();
+  const [cal, setCal] = useState();
+  const [protein, setProtein] = useState();
+  const [carbs, setCarbs] = useState();
+  const [fat, setFat] = useState();
 
   const deleteFood = () => {
     const foodRef = firebase.database().ref("crud-final").child(food.id);
@@ -42,9 +41,9 @@ function Food({ food }) {
     // console.log(newName);
   };
 
-  const servingsOnChange = (e) => {
-    setServings(e.target.value);
-  };
+  // const servingsOnChange = (e) => {
+  //   setServings(e.target.value);
+  // };
 
   const calOnChange = (e) => {
     setCal(e.target.value);
@@ -65,9 +64,12 @@ function Food({ food }) {
   const updateEditFood = () => {
     setIsEditing(false);
     const foodRef = firebase.database().ref("crud-final").child(food.id);
+
+    if (name === "") {
+    }
     foodRef.update({
       name: name,
-      servings: servings,
+      // servings: servings,
       cal: cal,
       protein: protein,
       carbs: carbs,
@@ -98,14 +100,14 @@ function Food({ food }) {
             </div>
           </td>
           <td>
-            <input
+            {/* <input
               id="edit-servings-input"
               type="number"
               className="food-input-boxes"
               placeholder={food.servings}
               value={food.servings}
               onChange={servingsOnChange}
-            />
+            /> */}
             <p className="text-muted mb-0">/size</p>
           </td>
           <td>

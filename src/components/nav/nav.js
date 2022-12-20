@@ -31,15 +31,15 @@ function Navigation() {
         <MDBCollapse navbar show={showNav}>
           <MDBNavbarNav>
             <MDBNavbarItem>
-              <MDBNavbarLink active aria-current="page" href="#">
-                Home
+              <MDBNavbarLink active aria-current="page" href="/">
+                Dashboard
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="#">Features</MDBNavbarLink>
+              <MDBNavbarLink href="#">Food Log</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="#">Pricing</MDBNavbarLink>
+              <MDBNavbarLink href="/recipes">Recipes</MDBNavbarLink>
             </MDBNavbarItem>
           </MDBNavbarNav>
           <MacroCalcNav></MacroCalcNav>

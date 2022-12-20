@@ -27,9 +27,9 @@ function UserForm() {
     setName(e.target.value);
   };
 
-  const servingsOnChange = (e) => {
-    setServings(e.target.value);
-  };
+  // const servingsOnChange = (e) => {
+  //   setServings(e.target.value);
+  // };
 
   const calOnChange = (e) => {
     setCal(e.target.value);
@@ -52,7 +52,7 @@ function UserForm() {
     if (
       meal === "Select Meal" ||
       meal === "" ||
-      servings === "" ||
+      // servings === "" ||
       name === "" ||
       cal === "" ||
       protein === "" ||
@@ -65,7 +65,7 @@ function UserForm() {
       const food = {
         meal,
         name,
-        servings,
+        // servings,
         cal,
         protein,
         carbs,
@@ -78,7 +78,7 @@ function UserForm() {
 
       // setMeal("");
       setName("");
-      setServings("");
+      // setServings("");
       setCal("");
       setProtein("");
       setCarbs("");
@@ -89,33 +89,37 @@ function UserForm() {
   };
 
   return (
-    <MDBContainer className="p-2 user-form">
-      <MDBRow className="m-3 d-flex align-items-center">
-        <MDBCol>
-          <Form.Select
-            aria-label="Default select"
-            size="md"
-            className="form-meal"
-            onChange={mealOnChange}
-          >
-            <option>Select Meal</option>
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-            <option value="snack">Snack</option>
-          </Form.Select>
-        </MDBCol>
-        <MDBCol>
-          <MDBInput
-            id="input-name"
-            label="Food"
-            type="text"
-            onChange={nameOnChange}
-            value={name}
-            contrast
-          />
-        </MDBCol>
-        <MDBCol>
+    <MDBContainer fluid>
+      <MDBRow>
+        <h3 className="p-3 d-flex basic-header">Food Log</h3>
+      </MDBRow>
+      <MDBContainer className="p-2 user-form">
+        <MDBRow className="m-3 d-flex align-items-center">
+          <MDBCol>
+            <Form.Select
+              aria-label="Default select"
+              size="md"
+              className="form-meal"
+              onChange={mealOnChange}
+            >
+              <option>Select Meal</option>
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+              <option value="snack">Snack</option>
+            </Form.Select>
+          </MDBCol>
+          <MDBCol>
+            <MDBInput
+              id="input-name"
+              label="Food"
+              type="text"
+              onChange={nameOnChange}
+              value={name}
+              contrast
+            />
+          </MDBCol>
+          {/* <MDBCol>
           <MDBInput
             id="input-servings"
             label="Servings"
@@ -124,60 +128,61 @@ function UserForm() {
             value={servings}
             contrast
           />
-        </MDBCol>
-      </MDBRow>
-      <MDBRow className="m-3">
-        <MDBCol>
-          <MDBInput
-            id="input-cal"
-            type="number"
-            label="Calories"
-            onChange={calOnChange}
-            value={cal}
-            contrast
-          />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput
-            id="input-protein"
-            type="number"
-            label="Protein"
-            onChange={proteinOnChange}
-            value={protein}
-            contrast
-          />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput
-            id="input-carbs"
-            type="number"
-            label="Carbs"
-            onChange={carbsOnChange}
-            value={carbs}
-            contrast
-          />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput
-            id="input-fat"
-            type="number"
-            label="Fat"
-            onChange={fatOnChange}
-            value={fat}
-            contrast
-          />
-        </MDBCol>
-      </MDBRow>
-      <MDBRow>
-        <MDBBtn
-          outline
-          color="light"
-          className="w-75 mx-auto border-1"
-          onClick={createFood}
-        >
-          Submit
-        </MDBBtn>
-      </MDBRow>
+        </MDBCol> */}
+        </MDBRow>
+        <MDBRow className="m-3">
+          <MDBCol>
+            <MDBInput
+              id="input-cal"
+              type="number"
+              label="Calories"
+              onChange={calOnChange}
+              value={cal}
+              contrast
+            />
+          </MDBCol>
+          <MDBCol>
+            <MDBInput
+              id="input-protein"
+              type="number"
+              label="Protein"
+              onChange={proteinOnChange}
+              value={protein}
+              contrast
+            />
+          </MDBCol>
+          <MDBCol>
+            <MDBInput
+              id="input-carbs"
+              type="number"
+              label="Carbs"
+              onChange={carbsOnChange}
+              value={carbs}
+              contrast
+            />
+          </MDBCol>
+          <MDBCol>
+            <MDBInput
+              id="input-fat"
+              type="number"
+              label="Fat"
+              onChange={fatOnChange}
+              value={fat}
+              contrast
+            />
+          </MDBCol>
+        </MDBRow>
+        <MDBRow>
+          <MDBBtn
+            outline
+            color="light"
+            className="w-75 mx-auto border-1"
+            onClick={createFood}
+          >
+            Submit
+          </MDBBtn>
+        </MDBRow>
+      </MDBContainer>
     </MDBContainer>
   );
 }
