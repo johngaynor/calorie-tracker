@@ -1,23 +1,34 @@
 import { MDBBadge, MDBBtn } from "mdb-react-ui-kit";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Recipe from "../recipe/recipe";
 import styles from "./recipeItem.css";
 
 function RecipeItem({ ingredient }) {
-  const [weight, setWeight] = useState(0);
+  const [weight, setWeight] = useState("");
+  const [calcCal, setCalcCal] = useState(0);
+  const [calcProtein, setCalcProtein] = useState(0);
+  const [calcCarbs, setCalcCarbs] = useState(0);
+  const [calcFat, setCalcFat] = useState(0);
+
+  // removing item from cart
   const removeRecipeItem = () => {
     console.log(ingredient.add);
     ingredient.add = false;
     console.log(ingredient.add);
   };
 
-  const weightOnChange = (e) => {
-    setWeight(e.target.value);
-    console.log(weight);
-    // let foodCal = recipes[0].ingredients[0].cal;
-    // let calcCal = weight * foodCal;
-    // setWeightCal(calcCal);
-  };
+  useEffect(() => {
+    let calcCal = (weight * ingredient.cal).toFixed(0);
+    let calcProtein = (weight * ingredient.protein).toFixed(1);
+    let calcCarbs = (weight * ingredient.carbs).toFixed(1);
+    let calcFat = (weight * ingredient.fat).toFixed(1);
+
+    setCalcCal(calcCal);
+    setCalcProtein(calcProtein);
+    setCalcCarbs(calcCarbs);
+    setCalcFat(calcFat);
+    // I want to figure out how to show just 0 instead of 0.0
+  }, [weight]);
 
   return (
     <tr id="food-display" className={ingredient.add ? "" : "ingredient-remove"}>
@@ -36,19 +47,19 @@ function RecipeItem({ ingredient }) {
           id="edit-weight-input"
           type="number"
           className="food-input-boxes"
-          onChange={weightOnChange}
-          // onKeyDown={weightOnChange}
-          // value={weight}
+          onChange={(e) => setWeight(e.target.value)}
+          value={weight}
+          placeholder="0"
         />
         <p className="text-muted mb-0">in {ingredient.unit}</p>
       </td>
       <td>
         <MDBBadge color="success" pill className="d-flex" id="food-cal-display">
-          {ingredient.cal}
+          {calcCal}
         </MDBBadge>
       </td>
       <td id="food-macros-display">
-        {ingredient.protein}/{ingredient.carbs}/{ingredient.fat}
+        {calcProtein}/{calcCarbs}/{calcFat}
       </td>
       <td id="food-log-btns">
         <div>
@@ -61,7 +72,7 @@ function RecipeItem({ ingredient }) {
           >
             Remove
             {/* this button will not update the page since it's stored locally but this will work on firebase, will change add to include */}
-            {/* want to add search bar functionality */}
+            {/* want to add search bar functionality for recipes */}
           </MDBBtn>
         </div>
       </td>

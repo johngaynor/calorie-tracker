@@ -81,20 +81,6 @@ function RecipeHolder() {
 
   //   console.log(recipes[0].ingredients[0]);
 
-  const weightOnChange = (e) => {
-    setWeight(e.target.value);
-    console.log(weight);
-    // let calcCal = weight * 3;
-    // console.log(calcCal);
-    let foodCal = recipes[0].ingredients[0].cal;
-    let calcCal = weight * foodCal;
-    setWeightCal(calcCal);
-  };
-
-  const recipeWeightCalc = () => {
-    console.log("calculating macros");
-  };
-
   return (
     <MDBContainer fluid>
       <MDBRow>
