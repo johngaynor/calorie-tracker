@@ -17,7 +17,7 @@ function FoodList() {
   // let [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const foodRef = firebase.database().ref("crud-final");
+    const foodRef = firebase.database().ref("foods");
     foodRef.on("value", (snapshot) => {
       const foods = snapshot.val();
       const foodList = [];

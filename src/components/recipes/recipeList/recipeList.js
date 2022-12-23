@@ -84,7 +84,7 @@ function RecipeHolder() {
   //   console.log(recipes[0].ingredients[0]);
 
   return (
-    <MDBContainer fluid>
+    <MDBContainer fluid className="pt-5">
       <MDBRow>
         <h3 className="p-3 d-flex basic-header">Recipes</h3>
       </MDBRow>

@@ -22,13 +22,13 @@ function Food({ food }) {
   const [fat, setFat] = useState();
 
   const deleteFood = () => {
-    const foodRef = firebase.database().ref("crud-final").child(food.id);
+    const foodRef = firebase.database().ref("foods").child(food.id);
 
     foodRef.remove();
   };
 
   const updateFood = () => {
-    const foodRef = firebase.database().ref("crud-final").child(food.id);
+    const foodRef = firebase.database().ref("foods").child(food.id);
 
     foodRef.update({
       complete: !food.complete,
@@ -63,7 +63,7 @@ function Food({ food }) {
 
   const updateEditFood = () => {
     setIsEditing(false);
-    const foodRef = firebase.database().ref("crud-final").child(food.id);
+    const foodRef = firebase.database().ref("foods").child(food.id);
 
     if (name === "") {
     }

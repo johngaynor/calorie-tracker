@@ -24,7 +24,7 @@ function Recipe({ recipe }) {
   console.log(recipeCalTotal);
 
   const pushRecipe = () => {
-    const recipeRef = firebase.database().ref("crud-recipes");
+    const recipeRef = firebase.database().ref("recipes");
     const recipe = {
       name: "hello",
     };
@@ -32,7 +32,7 @@ function Recipe({ recipe }) {
   };
 
   return (
-    <MDBContainer fluid>
+    <MDBContainer fluid className="user-form mb-5">
       <h1>{recipe.name}</h1>
       <MDBTable align="middle" className="w-100 mx-auto text-white">
         <MDBTableHead>

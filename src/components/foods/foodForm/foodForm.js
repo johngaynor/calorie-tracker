@@ -8,7 +8,7 @@ import {
   MDBBtn,
 } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
-import styles from "./form.css";
+import styles from "./foodForm.css";
 
 function UserForm() {
   const [meal, setMeal] = useState("");
@@ -61,7 +61,7 @@ function UserForm() {
     ) {
       alert("please fill all fields before submitting.");
     } else {
-      const foodRef = firebase.database().ref("crud-final");
+      const foodRef = firebase.database().ref("foods");
       const food = {
         meal,
         name,
@@ -109,7 +109,7 @@ function UserForm() {
               <option value="snack">Snack</option>
             </Form.Select>
           </MDBCol>
-          <MDBCol>
+          <MDBCol className="col-8">
             <MDBInput
               id="input-name"
               label="Food"
@@ -119,16 +119,6 @@ function UserForm() {
               contrast
             />
           </MDBCol>
-          {/* <MDBCol>
-          <MDBInput
-            id="input-servings"
-            label="Servings"
-            type="number"
-            onChange={servingsOnChange}
-            value={servings}
-            contrast
-          />
-        </MDBCol> */}
         </MDBRow>
         <MDBRow className="m-3">
           <MDBCol>
