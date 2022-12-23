@@ -1,5 +1,6 @@
 import { MDBBadge, MDBBtn } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
+import Recipes from "../../../pages/recipes/recipes";
 import Recipe from "../recipe/recipe";
 import styles from "./recipeItem.css";
 
@@ -12,9 +13,10 @@ function RecipeItem({ ingredient }) {
 
   // removing item from cart
   const removeRecipeItem = () => {
-    console.log(ingredient.add);
-    ingredient.add = false;
-    console.log(ingredient.add);
+    console.log("removed ingredient but it's not actually working yet");
+    // console.log(ingredient.add);
+    // ingredient.add = false;
+    // console.log(ingredient.add);
   };
 
   useEffect(() => {
@@ -27,6 +29,14 @@ function RecipeItem({ ingredient }) {
     setCalcProtein(calcProtein);
     setCalcCarbs(calcCarbs);
     setCalcFat(calcFat);
+
+    // ingredient.update({
+    //   userCal: calcCal,
+    //   userProtein: calcProtein,
+    //   userCarbs: calcCarbs,
+    //   userFat: calcFat,
+    // });
+
     // I want to figure out how to show just 0 instead of 0.0
   }, [weight]);
 

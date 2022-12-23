@@ -29,6 +29,7 @@ function RecipeHolder() {
           carbs: 2,
           fat: 4,
           add: true,
+          userCal: 3,
         },
         {
           name: "bread",
@@ -39,6 +40,7 @@ function RecipeHolder() {
           carbs: 11,
           fat: 1,
           add: true,
+          userCal: 20,
         },
       ],
     },
