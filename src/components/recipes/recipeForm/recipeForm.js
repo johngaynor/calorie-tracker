@@ -11,6 +11,14 @@ import { Form } from "react-bootstrap";
 import styles from "./recipeForm.css";
 
 function RecipeForm() {
+  const createRecipe = () => {
+    const recipeRef = firebase.database().ref("recipes");
+    const recipe = {
+      name: "",
+      ingredients: [{}, {}],
+    };
+  };
+
   return (
     <MDBContainer fluid>
       <h3 className="p-3 d-flex basic-header">New Recipe Form</h3>
@@ -26,6 +34,41 @@ function RecipeForm() {
                 //   value={name}
                 contrast
               />
+            </MDBCol>
+          </MDBRow>
+          <MDBRow className="m-3">
+            <MDBCol className="col-8">
+              <MDBInput
+                id="ingredient-name"
+                label="Ingredient Name"
+                type="text"
+                //   onChange={nameOnChange}
+                //   value={name}
+                contrast
+              />
+            </MDBCol>
+            <MDBCol>
+              <MDBInput
+                id="ingredient-size"
+                type="number"
+                label="Serving Size"
+                //   onChange={proteinOnChange}
+                //   value={protein}
+                contrast
+              />
+            </MDBCol>
+            <MDBCol>
+              <Form.Select
+                aria-label="Default select"
+                size="md"
+                // className="form-meal"
+                //   onChange={mealOnChange}
+              >
+                <option>Unit</option>
+                <option value="grams">grams</option>
+                <option value="oz">oz</option>
+                <option value="ml">ml</option>
+              </Form.Select>
             </MDBCol>
           </MDBRow>
           <MDBRow className="m-3">
@@ -68,31 +111,6 @@ function RecipeForm() {
                 //   value={fat}
                 contrast
               />
-            </MDBCol>
-            <MDBCol>
-              <MDBInput
-                id="input-size"
-                type="number"
-                label="Serving Size"
-                //   onChange={calOnChange}
-                //   value={cal}
-                contrast
-              />
-            </MDBCol>
-            <MDBCol>
-              <MDBCol>
-                <Form.Select
-                  aria-label="Default select"
-                  size="md"
-                  // className="form-meal"
-                  //   onChange={mealOnChange}
-                >
-                  <option>Unit</option>
-                  <option value="breakfast">grams</option>
-                  <option value="lunch">oz</option>
-                  <option value="dinner">ml</option>
-                </Form.Select>
-              </MDBCol>
             </MDBCol>
           </MDBRow>
           <MDBRow>
