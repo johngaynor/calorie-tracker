@@ -11,12 +11,47 @@ import { Form } from "react-bootstrap";
 import styles from "./recipeForm.css";
 
 function RecipeForm() {
+  const [ingredientList, setIngredientList] = useState();
+  const [name, setName] = useState("");
+  const [protein, setProtein] = useState("");
+
+  console.log(ingredientList);
+
+  const submitIngredient = () => {
+    const newIngredientRef = firebase.database().ref("add-ingredient");
+    const ingredient = {
+      name: name,
+      protein: protein,
+    };
+
+    newIngredientRef.push(ingredient);
+    setProtein("");
+  };
+
+  useEffect(() => {
+    const newIngredientRef = firebase.database().ref("add-ingredient");
+    newIngredientRef.on("value", (snapshot) => {
+      const ingredients = snapshot.val();
+      const ingredientList = [];
+      for (let id in ingredients) {
+        ingredientList.push({ id, ...ingredients[id] });
+      }
+
+      setIngredientList(ingredientList);
+    });
+  }, []);
+
   const createRecipe = () => {
     const recipeRef = firebase.database().ref("recipes");
     const recipe = {
       name: "",
-      ingredients: [{}, {}],
+      //   ingredients: [{}, {}],
     };
+
+    const newIngredientRef = firebase.database().ref("add-ingredient");
+    console.log(newIngredientRef);
+    newIngredientRef.set(null);
+    setIngredientList(null);
   };
 
   return (
@@ -30,20 +65,27 @@ function RecipeForm() {
                 id="input-recipe"
                 label="Recipe Name"
                 type="text"
-                //   onChange={nameOnChange}
-                //   value={name}
+                // onChange={(e) => {
+                //   setName(e.target.value);
+                // }}
                 contrast
               />
             </MDBCol>
           </MDBRow>
+          {ingredientList
+            ? ingredientList.map((ingredient, index) => (
+                <div>{ingredient.protein}</div>
+              ))
+            : ""}
           <MDBRow className="m-3">
             <MDBCol className="col-8">
               <MDBInput
                 id="ingredient-name"
                 label="Ingredient Name"
                 type="text"
-                //   onChange={nameOnChange}
-                //   value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
                 contrast
               />
             </MDBCol>
@@ -87,40 +129,38 @@ function RecipeForm() {
                 id="input-protein"
                 type="number"
                 label="Protein"
-                //   onChange={proteinOnChange}
-                //   value={protein}
+                onChange={(e) => {
+                  setProtein(e.target.value);
+                }}
+                value={protein}
                 contrast
               />
             </MDBCol>
             <MDBCol>
-              <MDBInput
-                id="input-carbs"
-                type="number"
-                label="Carbs"
-                //   onChange={carbsOnChange}
-                //   value={carbs}
-                contrast
-              />
+              <MDBInput id="input-carbs" type="number" label="Carbs" contrast />
             </MDBCol>
             <MDBCol>
-              <MDBInput
-                id="input-fat"
-                type="number"
-                label="Fat"
-                //   onChange={fatOnChange}
-                //   value={fat}
-                contrast
-              />
+              <MDBInput id="input-fat" type="number" label="Fat" contrast />
             </MDBCol>
           </MDBRow>
-          <MDBRow>
+          <MDBRow className="m-4 d-flex flex-row justify-content-between">
             <MDBBtn
               outline
               color="light"
-              className="w-75 mx-auto border-1"
-              // onClick={createFood}
+              className="border-1"
+              id="recipe-submit"
+              onClick={createRecipe}
             >
-              Submit
+              Submit Recipe
+            </MDBBtn>
+            <MDBBtn
+              outline
+              color="light"
+              className="border-1"
+              id="recipe-add-ingredient"
+              onClick={submitIngredient}
+            >
+              Add Ingredient
             </MDBBtn>
           </MDBRow>
         </MDBContainer>

@@ -11,17 +11,16 @@ import RecipeItem from "../recipeItem/recipeItem";
 import firebase from "../../../utilities/firebase";
 
 function Recipe({ recipe }) {
-  console.log(recipe.ingredients);
+  // console.log(recipe.ingredients);
   let recipeCalTotal = 0;
   let recipeProteinTotal = 0;
   let recipeCarbsTotal = 0;
   let recipeFatTotal = 0;
 
-  recipe.ingredients.forEach((ingredient) => {
-    recipeCalTotal = recipeCalTotal + ingredient.userCal;
-    // console.log(recipeCalTotal);
-  }, []);
-  console.log(recipeCalTotal);
+  // recipe.ingredients.forEach((ingredient) => {
+  //   recipeCalTotal = recipeCalTotal + ingredient.userCal;
+  // }, []);
+  // console.log(recipeCalTotal);
 
   const pushRecipe = () => {
     const recipeRef = firebase.database().ref("recipes");

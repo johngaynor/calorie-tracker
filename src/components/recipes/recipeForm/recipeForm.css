@@ -2,3 +2,11 @@
 #input-recipe {
   background-color: var(--site-grey);
 }
+
+#recipe-submit {
+  width: 30%;
+}
+
+#recipe-add-ingredient {
+  width: 65%;
+}
