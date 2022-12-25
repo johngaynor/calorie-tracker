@@ -6,40 +6,40 @@ import {
   MDBCol,
   MDBContainer,
   MDBBtn,
+  MDBTable,
+  MDBTableHead,
 } from "mdb-react-ui-kit";
+import Food from "../../foods/food/food";
+import IngredientList from "../ingredientList/ingredientList";
 import { Form } from "react-bootstrap";
 import styles from "./recipeForm.css";
 
 function RecipeForm() {
-  const [ingredientList, setIngredientList] = useState();
   const [name, setName] = useState("");
+  const [size, setSize] = useState("");
+  const [unit, setUnit] = useState("");
+  const [cal, setCal] = useState("");
   const [protein, setProtein] = useState("");
+  const [carbs, setCarbs] = useState("");
+  const [fat, setFat] = useState("");
 
-  console.log(ingredientList);
+  // this is to reference the "add-ingredient" obj from firebase
+  const newIngredientRef = firebase.database().ref("add-ingredient");
 
   const submitIngredient = () => {
-    const newIngredientRef = firebase.database().ref("add-ingredient");
-    const ingredient = {
+    let newIngredient = {
       name: name,
+      size: size,
+      unit: unit,
+      cal: cal,
       protein: protein,
+      carbs: carbs,
+      fat: fat,
     };
 
-    newIngredientRef.push(ingredient);
-    setProtein("");
+    newIngredientRef.push(newIngredient);
+    setName("");
   };
-
-  useEffect(() => {
-    const newIngredientRef = firebase.database().ref("add-ingredient");
-    newIngredientRef.on("value", (snapshot) => {
-      const ingredients = snapshot.val();
-      const ingredientList = [];
-      for (let id in ingredients) {
-        ingredientList.push({ id, ...ingredients[id] });
-      }
-
-      setIngredientList(ingredientList);
-    });
-  }, []);
 
   const createRecipe = () => {
     const recipeRef = firebase.database().ref("recipes");
@@ -48,10 +48,7 @@ function RecipeForm() {
       //   ingredients: [{}, {}],
     };
 
-    const newIngredientRef = firebase.database().ref("add-ingredient");
-    console.log(newIngredientRef);
-    newIngredientRef.set(null);
-    setIngredientList(null);
+    newIngredientRef.remove();
   };
 
   return (
@@ -72,11 +69,9 @@ function RecipeForm() {
               />
             </MDBCol>
           </MDBRow>
-          {ingredientList
-            ? ingredientList.map((ingredient, index) => (
-                <div>{ingredient.protein}</div>
-              ))
-            : ""}
+          <MDBRow className="m-3">
+            <IngredientList></IngredientList>
+          </MDBRow>
           <MDBRow className="m-3">
             <MDBCol className="col-8">
               <MDBInput
@@ -87,6 +82,7 @@ function RecipeForm() {
                   setName(e.target.value);
                 }}
                 contrast
+                value={name}
               />
             </MDBCol>
             <MDBCol>
@@ -94,8 +90,10 @@ function RecipeForm() {
                 id="ingredient-size"
                 type="number"
                 label="Serving Size"
-                //   onChange={proteinOnChange}
-                //   value={protein}
+                onChange={(e) => {
+                  setSize(e.target.value);
+                }}
+                value={size}
                 contrast
               />
             </MDBCol>
@@ -104,7 +102,9 @@ function RecipeForm() {
                 aria-label="Default select"
                 size="md"
                 // className="form-meal"
-                //   onChange={mealOnChange}
+                onChange={(e) => {
+                  setUnit(e.target.value);
+                }}
               >
                 <option>Unit</option>
                 <option value="grams">grams</option>
@@ -119,8 +119,10 @@ function RecipeForm() {
                 id="input-cal"
                 type="number"
                 label="Calories"
-                //   onChange={calOnChange}
-                //   value={cal}
+                onChange={(e) => {
+                  setCal(e.target.value);
+                }}
+                value={cal}
                 contrast
               />
             </MDBCol>
@@ -137,10 +139,28 @@ function RecipeForm() {
               />
             </MDBCol>
             <MDBCol>
-              <MDBInput id="input-carbs" type="number" label="Carbs" contrast />
+              <MDBInput
+                id="input-carbs"
+                type="number"
+                label="Carbs"
+                contrast
+                onChange={(e) => {
+                  setCarbs(e.target.value);
+                }}
+                value={carbs}
+              />
             </MDBCol>
             <MDBCol>
-              <MDBInput id="input-fat" type="number" label="Fat" contrast />
+              <MDBInput
+                id="input-fat"
+                type="number"
+                label="Fat"
+                contrast
+                onChange={(e) => {
+                  setFat(e.target.value);
+                }}
+                value={fat}
+              />
             </MDBCol>
           </MDBRow>
           <MDBRow className="m-4 d-flex flex-row justify-content-between">
@@ -170,3 +190,15 @@ function RecipeForm() {
 }
 
 export default RecipeForm;
+
+// old code
+
+//   const submitIngredient = () => {
+// const newIngredientRef = firebase.database().ref("add-ingredient");
+//     const ingredient = {
+//       name: name,
+//       protein: protein,
+//     };
+
+//     newIngredientRef.push(ingredient);
+//     setProtein("");
