@@ -15,7 +15,8 @@ import { Form } from "react-bootstrap";
 import styles from "./recipeForm.css";
 
 function RecipeForm() {
-  const [name, setName] = useState("");
+  const [ingredientList, setIngredientList] = useState("");
+  const [recipeName, setRecipeName] = useState("");
   const [size, setSize] = useState("");
   const [unit, setUnit] = useState("");
   const [cal, setCal] = useState("");
@@ -28,7 +29,7 @@ function RecipeForm() {
 
   const submitIngredient = () => {
     let newIngredient = {
-      name: name,
+      name: recipeName,
       size: size,
       unit: unit,
       cal: cal,
@@ -38,15 +39,35 @@ function RecipeForm() {
     };
 
     newIngredientRef.push(newIngredient);
-    setName("");
+    setRecipeName("");
+    setSize("");
+    setCal("");
+    setProtein("");
+    setCarbs("");
+    setFat("");
   };
+
+  // creating a local list of ingredients
+  useEffect(() => {
+    newIngredientRef.on("value", (snapshot) => {
+      const ingredients = snapshot.val();
+      const ingredientList = [];
+      for (let id in ingredients) {
+        ingredientList.push({ id, ...ingredients[id] });
+      }
+
+      setIngredientList(ingredientList);
+    });
+  }, []);
 
   const createRecipe = () => {
     const recipeRef = firebase.database().ref("recipes");
     const recipe = {
-      name: "",
-      //   ingredients: [{}, {}],
+      name: "cool name",
+      ingredients: ingredientList,
     };
+
+    recipeRef.push(recipe);
 
     newIngredientRef.remove();
   };
@@ -79,10 +100,10 @@ function RecipeForm() {
                 label="Ingredient Name"
                 type="text"
                 onChange={(e) => {
-                  setName(e.target.value);
+                  setRecipeName(e.target.value);
                 }}
                 contrast
-                value={name}
+                value={recipeName}
               />
             </MDBCol>
             <MDBCol>

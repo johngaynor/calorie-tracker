@@ -10,6 +10,9 @@ import firebase from "../../../utilities/firebase";
 
 function IngredientList() {
   const [ingredientList, setIngredientList] = useState("");
+  const [ingredientTable, setIngredientTable] = useState(false);
+
+  // used to reference firebase "add-ingredient" database
   const newIngredientRef = firebase.database().ref("add-ingredient");
 
   useEffect(() => {
@@ -24,23 +27,36 @@ function IngredientList() {
     });
   }, []);
 
+  // checks length of ingredientList to show/hide table head
+  useEffect(() => {
+    if (ingredientList.length == 0) {
+      setIngredientTable(false);
+    } else {
+      setIngredientTable(true);
+    }
+  }, [ingredientList]);
+
   return (
-    <MDBTable align="middle" className="w-100 mx-auto text-white">
-      <MDBTableHead>
-        <tr>
-          <th scope="col" className="col-4">
-            Ingredient
-          </th>
-          <th scope="col" className="col-4">
-            Serving Size
-          </th>
-          <th scope="col">Calories</th>
-          <th scope="col">P/C/F</th>
-          <th scope="col" className="col-2">
-            Actions
-          </th>
-        </tr>
-      </MDBTableHead>
+    <MDBTable align="middle" className="w-100 mx-auto text-white m-3">
+      {ingredientTable ? (
+        <MDBTableHead className="">
+          <tr>
+            <th scope="col" className="col-4">
+              Ingredient
+            </th>
+            <th scope="col" className="col-4">
+              Serving Size
+            </th>
+            <th scope="col">Calories</th>
+            <th scope="col">P/C/F</th>
+            <th scope="col" className="col-2">
+              Actions
+            </th>
+          </tr>
+        </MDBTableHead>
+      ) : (
+        "no ingredients have been added yet!"
+      )}
       {ingredientList
         ? ingredientList.map((ingredient, index) => (
             // <div>{ingredient.protein}</div>
