@@ -59,15 +59,11 @@ function IngredientList() {
       )}
       {ingredientList
         ? ingredientList.map((ingredient, index) => (
-            // <div>{ingredient.protein}</div>
             <MDBTableBody>
               <tr id="food-display">
                 <td>
                   <div className="mx-auto" id="food-meal-name-display">
                     <p className="fw-bold mb-1" id="food-name-display">
-                      {ingredient.name}
-                    </p>
-                    <p className="text-muted mb-0" id="food-meal-display">
                       {ingredient.name}
                     </p>
                   </div>

@@ -17,6 +17,7 @@ import styles from "./recipeForm.css";
 function RecipeForm() {
   const [ingredientList, setIngredientList] = useState("");
   const [recipeName, setRecipeName] = useState("");
+  const [ingredientName, setIngredientName] = useState("");
   const [size, setSize] = useState("");
   const [unit, setUnit] = useState("");
   const [cal, setCal] = useState("");
@@ -28,23 +29,37 @@ function RecipeForm() {
   const newIngredientRef = firebase.database().ref("add-ingredient");
 
   const submitIngredient = () => {
-    let newIngredient = {
-      name: recipeName,
-      size: size,
-      unit: unit,
-      cal: cal,
-      protein: protein,
-      carbs: carbs,
-      fat: fat,
-    };
+    // checking to see if all input boxes are filled
+    if (
+      recipeName === "" ||
+      size === "" ||
+      unit === "Unit" ||
+      unit === "" ||
+      cal === "" ||
+      protein === "" ||
+      carbs === "" ||
+      fat === ""
+    ) {
+      alert("please fill all fields before submitting.");
+    } else {
+      let newIngredient = {
+        name: ingredientName,
+        size: size,
+        unit: unit,
+        cal: cal,
+        protein: protein,
+        carbs: carbs,
+        fat: fat,
+      };
 
-    newIngredientRef.push(newIngredient);
-    setRecipeName("");
-    setSize("");
-    setCal("");
-    setProtein("");
-    setCarbs("");
-    setFat("");
+      newIngredientRef.push(newIngredient);
+      setIngredientName("");
+      setSize("");
+      setCal("");
+      setProtein("");
+      setCarbs("");
+      setFat("");
+    }
   };
 
   // creating a local list of ingredients
@@ -63,12 +78,19 @@ function RecipeForm() {
   const createRecipe = () => {
     const recipeRef = firebase.database().ref("recipes");
     const recipe = {
-      name: "cool name",
+      name: recipeName,
       ingredients: ingredientList,
     };
 
     recipeRef.push(recipe);
 
+    setRecipeName("");
+    setIngredientName("");
+    setSize("");
+    setCal("");
+    setProtein("");
+    setCarbs("");
+    setFat("");
     newIngredientRef.remove();
   };
 
@@ -83,9 +105,10 @@ function RecipeForm() {
                 id="input-recipe"
                 label="Recipe Name"
                 type="text"
-                // onChange={(e) => {
-                //   setName(e.target.value);
-                // }}
+                onChange={(e) => {
+                  setRecipeName(e.target.value);
+                }}
+                value={recipeName}
                 contrast
               />
             </MDBCol>
@@ -100,10 +123,10 @@ function RecipeForm() {
                 label="Ingredient Name"
                 type="text"
                 onChange={(e) => {
-                  setRecipeName(e.target.value);
+                  setIngredientName(e.target.value);
                 }}
                 contrast
-                value={recipeName}
+                value={ingredientName}
               />
             </MDBCol>
             <MDBCol>
