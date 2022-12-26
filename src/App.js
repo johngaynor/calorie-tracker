@@ -19,3 +19,6 @@ function App() {
 }
 
 export default App;
+
+// want to add search bar functionality for recipes
+// hover over each item to view database info? Click on it to change it? That would be cool

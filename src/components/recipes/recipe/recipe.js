@@ -11,16 +11,10 @@ import RecipeItem from "../recipeItem/recipeItem";
 import firebase from "../../../utilities/firebase";
 
 function Recipe({ recipe }) {
-  // console.log(recipe.ingredients);
   let recipeCalTotal = 0;
   let recipeProteinTotal = 0;
   let recipeCarbsTotal = 0;
   let recipeFatTotal = 0;
-
-  // console.log(recipe);
-  // console.log(recipe.id);
-
-  // const recipeID = recipe.id;
 
   // recipe.ingredients.forEach((ingredient) => {
   //   recipeCalTotal = recipeCalTotal + ingredient.userCal;
@@ -51,7 +45,6 @@ function Recipe({ recipe }) {
               Actions
             </th>
           </tr>
-          {/* hover over each item to view database info? Click on it to change it? That would be cool */}
         </MDBTableHead>
         <MDBTableBody>
           {recipe.ingredients
@@ -64,44 +57,6 @@ function Recipe({ recipe }) {
                 />
               ))
             : ""}
-          <tr
-            id="food-display"
-            // className={ingredient.add ? "" : "ingredient-remove"}
-          >
-            <td>
-              <div className="mx-auto" id="food-meal-name-display">
-                <p className="fw-bold mb-1" id="food-name-display">
-                  TOTAL
-                </p>
-              </div>
-            </td>
-            <td></td>
-            <td>
-              <MDBBadge
-                color="success"
-                pill
-                className="d-flex"
-                id="food-cal-display"
-              >
-                {recipeCalTotal}
-              </MDBBadge>
-            </td>
-            <td id="food-macros-display">
-              {/* {calcProtein}/{calcCarbs}/{calcFat} */}
-            </td>
-            <td id="food-log-btns">
-              <div>
-                <MDBBtn
-                  color="link"
-                  rounded
-                  size="sm"
-                  //  onClick={pushRecipe}
-                >
-                  Push
-                </MDBBtn>
-              </div>
-            </td>
-          </tr>
         </MDBTableBody>
       </MDBTable>
     </MDBContainer>
@@ -109,5 +64,3 @@ function Recipe({ recipe }) {
 }
 
 export default Recipe;
-
-// when clicking an "add" button it will create a new object in user items
