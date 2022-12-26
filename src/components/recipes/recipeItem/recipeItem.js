@@ -5,7 +5,7 @@ import Recipe from "../recipe/recipe";
 import styles from "./recipeItem.css";
 import firebase from "../../../utilities/firebase";
 
-function RecipeItem({ ingredient, recipeID }) {
+function RecipeItem({ ingredient, recipeID, ingredientIndex }) {
   const [weight, setWeight] = useState("");
   const [calcCal, setCalcCal] = useState(0);
   const [calcProtein, setCalcProtein] = useState(0);
@@ -14,16 +14,18 @@ function RecipeItem({ ingredient, recipeID }) {
 
   // removing item from calculator
   const removeRecipeItem = () => {
-    // console.log("ingredient.id: " + ingredient.id);
-    // console.log("key: " + recipeID);
-    // const ingredientRef = firebase
-    //   .database()
-    //   .ref("recipes")
-    //   .child(recipeID)
-    //   .child(ingredient.id);
-    // ingredientRef.update({
-    //   add: false,
-    // });
+    console.log("ingredient.id: " + ingredient.id);
+    console.log("key: " + recipeID);
+    console.log("ingredientIndex: " + ingredientIndex);
+    const ingredientRef = firebase
+      .database()
+      .ref("recipes")
+      .child(recipeID)
+      .child("ingredients")
+      .child(ingredientIndex);
+    ingredientRef.update({
+      add: false,
+    });
     // THIS DOES NOT WORK
     // ingredient.push({
     //   add: false,

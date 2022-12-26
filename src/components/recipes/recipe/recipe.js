@@ -59,6 +59,7 @@ function Recipe({ recipe }) {
                 <RecipeItem
                   ingredient={ingredient}
                   key={index}
+                  ingredientIndex={index}
                   recipeID={recipe.id}
                 />
               ))
