@@ -7,6 +7,7 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useState, useEffect } from "react";
 import firebase from "../../../utilities/firebase";
+import Ingredient from "../ingredient/ingredient";
 
 function IngredientList() {
   const [ingredientList, setIngredientList] = useState("");
@@ -57,50 +58,13 @@ function IngredientList() {
       ) : (
         "no ingredients have been added yet!"
       )}
-      {ingredientList
-        ? ingredientList.map((ingredient, index) => (
-            <MDBTableBody>
-              <tr id="food-display">
-                <td>
-                  <div className="mx-auto" id="food-meal-name-display">
-                    <p className="fw-bold mb-1" id="food-name-display">
-                      {ingredient.name}
-                    </p>
-                  </div>
-                </td>
-                <td>
-                  <p className="fw-normal mb-1" id="food-servings-display">
-                    {ingredient.size}
-                  </p>
-                  <p className="text-muted mb-0">{ingredient.unit}</p>
-                </td>
-                <td>
-                  <MDBBadge
-                    color="success"
-                    pill
-                    className="d-flex"
-                    id="food-cal-display"
-                  >
-                    {ingredient.cal}
-                  </MDBBadge>
-                </td>
-                <td id="food-macros-display">
-                  {ingredient.protein}/{ingredient.carbs}/{ingredient.fat}
-                </td>
-                <td id="food-log-btns">
-                  <div>
-                    <MDBBtn color="link" rounded size="sm">
-                      Delete
-                    </MDBBtn>
-                    {/* <MDBBtn color="link" rounded size="sm">
-                    Edit
-                  </MDBBtn> */}
-                  </div>
-                </td>
-              </tr>
-            </MDBTableBody>
-          ))
-        : ""}
+      <MDBTableBody>
+        {ingredientList
+          ? ingredientList.map((ingredient, index) => (
+              <Ingredient ingredient={ingredient} key={index} />
+            ))
+          : null}
+      </MDBTableBody>
     </MDBTable>
   );
 }

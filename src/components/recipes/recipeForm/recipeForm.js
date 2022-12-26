@@ -29,9 +29,8 @@ function RecipeForm() {
   const newIngredientRef = firebase.database().ref("add-ingredient");
 
   const submitIngredient = () => {
-    // checking to see if all input boxes are filled
     if (
-      recipeName === "" ||
+      ingredientName === "" ||
       size === "" ||
       unit === "Unit" ||
       unit === "" ||
@@ -76,22 +75,27 @@ function RecipeForm() {
   }, []);
 
   const createRecipe = () => {
-    const recipeRef = firebase.database().ref("recipes");
-    const recipe = {
-      name: recipeName,
-      ingredients: ingredientList,
-    };
+    if (recipeName === "") {
+      alert("please add a recipe name.");
+    } else {
+      const recipeRef = firebase.database().ref("recipes");
+      const recipe = {
+        name: recipeName,
+        ingredients: ingredientList,
+      };
 
-    recipeRef.push(recipe);
+      recipeRef.push(recipe);
+      alert("recipe successfully submitted!");
 
-    setRecipeName("");
-    setIngredientName("");
-    setSize("");
-    setCal("");
-    setProtein("");
-    setCarbs("");
-    setFat("");
-    newIngredientRef.remove();
+      setRecipeName("");
+      setIngredientName("");
+      setSize("");
+      setCal("");
+      setProtein("");
+      setCarbs("");
+      setFat("");
+      newIngredientRef.remove();
+    }
   };
 
   return (
