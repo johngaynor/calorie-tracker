@@ -49,6 +49,7 @@ function RecipeForm() {
         protein: protein,
         carbs: carbs,
         fat: fat,
+        add: true,
       };
 
       newIngredientRef.push(newIngredient);
@@ -156,6 +157,7 @@ function RecipeForm() {
               >
                 <option>Unit</option>
                 <option value="grams">grams</option>
+                <option value="pcs">pcs</option>
                 <option value="oz">oz</option>
                 <option value="ml">ml</option>
               </Form.Select>

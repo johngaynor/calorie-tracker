@@ -17,6 +17,11 @@ function Recipe({ recipe }) {
   let recipeCarbsTotal = 0;
   let recipeFatTotal = 0;
 
+  // console.log(recipe);
+  // console.log(recipe.id);
+
+  // const recipeID = recipe.id;
+
   // recipe.ingredients.forEach((ingredient) => {
   //   recipeCalTotal = recipeCalTotal + ingredient.userCal;
   // }, []);
@@ -46,13 +51,16 @@ function Recipe({ recipe }) {
               Actions
             </th>
           </tr>
-          {/* each food will store a serving size */}
           {/* hover over each item to view database info? Click on it to change it? That would be cool */}
         </MDBTableHead>
         <MDBTableBody>
           {recipe.ingredients
             ? recipe.ingredients.map((ingredient, index) => (
-                <RecipeItem ingredient={ingredient} key={index} />
+                <RecipeItem
+                  ingredient={ingredient}
+                  key={index}
+                  recipeID={recipe.id}
+                />
               ))
             : ""}
           <tr
@@ -82,7 +90,12 @@ function Recipe({ recipe }) {
             </td>
             <td id="food-log-btns">
               <div>
-                <MDBBtn color="link" rounded size="sm" onClick={pushRecipe}>
+                <MDBBtn
+                  color="link"
+                  rounded
+                  size="sm"
+                  //  onClick={pushRecipe}
+                >
                   Push
                 </MDBBtn>
               </div>

@@ -3,20 +3,31 @@ import React, { useEffect, useState } from "react";
 import Recipes from "../../../pages/recipes/recipes";
 import Recipe from "../recipe/recipe";
 import styles from "./recipeItem.css";
+import firebase from "../../../utilities/firebase";
 
-function RecipeItem({ ingredient }) {
+function RecipeItem({ ingredient, recipeID }) {
   const [weight, setWeight] = useState("");
   const [calcCal, setCalcCal] = useState(0);
   const [calcProtein, setCalcProtein] = useState(0);
   const [calcCarbs, setCalcCarbs] = useState(0);
   const [calcFat, setCalcFat] = useState(0);
 
-  // removing item from cart
+  // removing item from calculator
   const removeRecipeItem = () => {
-    console.log("removed ingredient but it's not actually working yet");
-    // console.log(ingredient.add);
-    // ingredient.add = false;
-    // console.log(ingredient.add);
+    // console.log("ingredient.id: " + ingredient.id);
+    // console.log("key: " + recipeID);
+    // const ingredientRef = firebase
+    //   .database()
+    //   .ref("recipes")
+    //   .child(recipeID)
+    //   .child(ingredient.id);
+    // ingredientRef.update({
+    //   add: false,
+    // });
+    // THIS DOES NOT WORK
+    // ingredient.push({
+    //   add: false,
+    // });
   };
 
   useEffect(() => {
@@ -41,14 +52,16 @@ function RecipeItem({ ingredient }) {
   }, [weight]);
 
   return (
-    <tr id="food-display" className={ingredient.add ? "" : "ingredient-remove"}>
+    <tr
+      id="food-display"
+      //  className={ingredient.add ? "" : "ingredient-remove"}
+      // if add = true, show the content normally. If add = false, make all the text dull and change the colors to be more dull. Change btn to add
+      className="text-muted"
+    >
       <td>
         <div className="mx-auto" id="food-meal-name-display">
           <p className="fw-bold mb-1" id="food-name-display">
             {ingredient.name}
-          </p>
-          <p className="text-muted mb-0" id="food-meal-display">
-            underline
           </p>
         </div>
       </td>
