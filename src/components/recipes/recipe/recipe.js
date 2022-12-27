@@ -34,13 +34,9 @@ function Recipe({ recipe }) {
     }
   });
 
-  // const recipeAddIngredient = () => {
-  //   console.log("adding ingredient");
-  // };
-
   const pushRecipe = () => {
     if (recipeCalTotal === 0) {
-      console.log(
+      alert(
         "please add at least one ingredient/weight before adding the recipe to daily log."
       );
     } else {
@@ -56,6 +52,7 @@ function Recipe({ recipe }) {
       userLogRef.push(userMeal);
       alert("added to daily log!");
       window.location.reload();
+      // add in a forEach loop to set all ingredients back to add: true
     }
   };
 

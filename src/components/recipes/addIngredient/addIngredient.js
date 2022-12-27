@@ -35,10 +35,8 @@ function AddIngredient({ recipe }) {
       }
 
       setIngredientList(ingredientList);
-      console.log(ingredientList);
     });
   }, []);
-  //   console.log(addIngredientRef);
 
   const submitIngredient = () => {
     if (
