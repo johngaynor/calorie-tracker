@@ -9,6 +9,10 @@
   font-weight: 400;
 }
 
+#total-weight {
+  border: 2px solid #666;
+}
+
 #recipe-total-cal {
   border: 2px solid var(--site-yellow);
   width: 100px;
@@ -24,4 +28,16 @@
 
 #recipe-total-f {
   border: 2px solid var(--site-greyblue);
+}
+
+.recipe-delete-warning {
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.recipe-delete-warning p {
+  margin: 10px auto;
 }

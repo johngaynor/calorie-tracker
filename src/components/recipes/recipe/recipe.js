@@ -10,8 +10,11 @@ import {
 import RecipeItem from "../recipeItem/recipeItem";
 import firebase from "../../../utilities/firebase";
 import styles from "./recipe.css";
+import { useState } from "react";
 
 function Recipe({ recipe }) {
+  const [deleteRecipe, setDeleteRecipe] = useState(false);
+
   let recipeCalTotal = 0;
   let recipeProteinTotal = 0;
   let recipeCarbsTotal = 0;
@@ -27,19 +30,34 @@ function Recipe({ recipe }) {
   });
 
   const pushRecipe = () => {
-    alert("added to daily log!");
-    window.location.reload();
-    // const recipeRef = firebase.database().ref("recipes");
-    // recipeRef.push(recipe);
+    if (recipeCalTotal === 0) {
+      console.log(
+        "please add at least one ingredient/weight before adding the recipe to daily log."
+      );
+    } else {
+      const userLogRef = firebase.database().ref("user-log");
+      const userMeal = {
+        name: recipe.name,
+        cal: recipeCalTotal,
+        protein: recipeProteinTotal,
+        carbs: recipeCarbsTotal,
+        fat: recipeFatTotal,
+      };
+
+      userLogRef.push(userMeal);
+      alert("added to daily log!");
+      window.location.reload();
+    }
   };
 
-  const deleteRecipe = () => {
+  const confirmDeleteRecipe = () => {
     const recipeRef = firebase.database().ref("recipes").child(recipe.id);
     recipeRef.remove();
+    alert("recipe has been deleted.");
   };
 
   return (
-    <MDBContainer fluid className="user-form mb-5">
+    <MDBContainer fluid className="user-form mb-5 pb-1">
       <h1>{recipe.name}</h1>
       <MDBTable align="middle" className="w-100 mx-auto text-white">
         <MDBTableHead>
@@ -74,7 +92,10 @@ function Recipe({ recipe }) {
                 </p>
               </div>
             </td>
-            <td></td>
+            <td>
+              <span id="total-weight"></span>
+              {/* this will get replaced later */}
+            </td>
             <td>
               <span id="recipe-total-cal">CAL: {recipeCalTotal}</span>
             </td>
@@ -94,14 +115,43 @@ function Recipe({ recipe }) {
                 <MDBBtn color="link" rounded size="sm" onClick={pushRecipe}>
                   Push to Log
                 </MDBBtn>
-                <MDBBtn color="link" rounded size="sm" onClick={deleteRecipe}>
-                  Delete Recipe
-                </MDBBtn>
+                {deleteRecipe ? (
+                  <MDBBtn
+                    color="link"
+                    rounded
+                    size="sm"
+                    onClick={() => setDeleteRecipe(false)}
+                  >
+                    Undelete Recipe
+                  </MDBBtn>
+                ) : (
+                  <MDBBtn
+                    color="link"
+                    rounded
+                    size="sm"
+                    onClick={() => setDeleteRecipe(true)}
+                  >
+                    Delete Recipe
+                  </MDBBtn>
+                )}
               </div>
             </td>
           </tr>
         </MDBTableBody>
       </MDBTable>
+      {deleteRecipe ? (
+        <MDBContainer fluid className="recipe-delete-warning bg-white w-75">
+          <p className="text-black">
+            Are you sure you want to delete this recipe? This action cannot be
+            undone.
+          </p>
+          <MDBBtn color="danger" size="sm" onClick={confirmDeleteRecipe}>
+            Delete Recipe
+          </MDBBtn>
+        </MDBContainer>
+      ) : (
+        ""
+      )}
     </MDBContainer>
   );
 }
