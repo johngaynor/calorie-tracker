@@ -38,6 +38,12 @@ function RecipeItem({ ingredient, recipeID, ingredientIndex }) {
   };
 
   useEffect(() => {
+    const ingredientRef = firebase
+      .database()
+      .ref("recipes")
+      .child(recipeID)
+      .child("ingredients")
+      .child(ingredientIndex);
     let calcCal = (weight * ingredient.cal).toFixed(0);
     let calcProtein = (weight * ingredient.protein).toFixed(1);
     let calcCarbs = (weight * ingredient.carbs).toFixed(1);
@@ -48,12 +54,12 @@ function RecipeItem({ ingredient, recipeID, ingredientIndex }) {
     setCalcCarbs(calcCarbs);
     setCalcFat(calcFat);
 
-    // ingredient.update({
-    //   userCal: calcCal,
-    //   userProtein: calcProtein,
-    //   userCarbs: calcCarbs,
-    //   userFat: calcFat,
-    // });
+    ingredientRef.update({
+      userCal: calcCal,
+      userProtein: calcProtein,
+      userCarbs: calcCarbs,
+      userFat: calcFat,
+    });
 
     // I want to figure out how to show just 0 instead of 0.0
   }, [weight]);
@@ -102,6 +108,7 @@ function RecipeItem({ ingredient, recipeID, ingredientIndex }) {
           </td>
         </tr>
       ) : (
+        // when ingredient is removed
         <tr id="food-display" className="text-muted">
           <td>
             <div className="mx-auto" id="food-meal-name-display">
@@ -111,29 +118,17 @@ function RecipeItem({ ingredient, recipeID, ingredientIndex }) {
             </div>
           </td>
           <td>
-            <input
-              id="edit-weight-input"
-              type="number"
-              className="food-input-boxes"
-              onChange={(e) => setWeight(e.target.value)}
-              value={weight}
-              placeholder="0"
-            />
-            <p className="text-muted mb-0">in {ingredient.unit}</p>
+            <div className="muted-weight-input"></div>
           </td>
           <td>
             <MDBBadge
-              color="success"
+              color="danger"
               pill
               className="d-flex"
               id="food-cal-display"
-            >
-              {calcCal}
-            </MDBBadge>
+            ></MDBBadge>
           </td>
-          <td id="food-macros-display">
-            {calcProtein}/{calcCarbs}/{calcFat}
-          </td>
+          <td id="food-macros-display">N/a</td>
           <td id="food-log-btns">
             <div>
               <MDBBtn color="link" rounded size="sm" onClick={addRecipeItem}>

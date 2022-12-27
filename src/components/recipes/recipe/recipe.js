@@ -9,6 +9,7 @@ import {
 } from "mdb-react-ui-kit";
 import RecipeItem from "../recipeItem/recipeItem";
 import firebase from "../../../utilities/firebase";
+import styles from "./recipe.css";
 
 function Recipe({ recipe }) {
   let recipeCalTotal = 0;
@@ -16,17 +17,18 @@ function Recipe({ recipe }) {
   let recipeCarbsTotal = 0;
   let recipeFatTotal = 0;
 
-  // recipe.ingredients.forEach((ingredient) => {
-  //   recipeCalTotal = recipeCalTotal + ingredient.userCal;
-  // }, []);
-  // console.log(recipeCalTotal);
+  recipe.ingredients.forEach((ingredient) => {
+    recipeCalTotal = recipeCalTotal + +ingredient.userCal;
+    recipeProteinTotal = recipeProteinTotal + +ingredient.userProtein;
+    recipeCarbsTotal = recipeCarbsTotal + +ingredient.userCarbs;
+    recipeFatTotal = recipeFatTotal + +ingredient.userFat;
+  });
 
   const pushRecipe = () => {
-    const recipeRef = firebase.database().ref("recipes");
-    const recipe = {
-      name: "hello",
-    };
-    recipeRef.push(recipe);
+    alert("added to daily log!");
+    window.location.reload();
+    // const recipeRef = firebase.database().ref("recipes");
+    // recipeRef.push(recipe);
   };
 
   return (
@@ -57,6 +59,37 @@ function Recipe({ recipe }) {
                 />
               ))
             : ""}
+          <tr id="food-display">
+            <td>
+              <div className="mx-auto" id="food-meal-name-display">
+                <p className="fw-bold mb-1" id="food-name-display">
+                  TOTAL
+                </p>
+              </div>
+            </td>
+            <td></td>
+            <td>
+              <span id="recipe-total-cal">CAL: {recipeCalTotal}</span>
+            </td>
+            <td id="food-macros-display">
+              <span id="recipe-total-p" className="mb-1">
+                P: {recipeProteinTotal}
+              </span>
+              <span id="recipe-total-c" className="mb-1">
+                C: {recipeCarbsTotal}
+              </span>
+              <span id="recipe-total-f" className="mb-1">
+                F: {recipeFatTotal}
+              </span>
+            </td>
+            <td id="food-log-btns">
+              <div>
+                <MDBBtn color="link" rounded size="sm" onClick={pushRecipe}>
+                  Push to Log
+                </MDBBtn>
+              </div>
+            </td>
+          </tr>
         </MDBTableBody>
       </MDBTable>
     </MDBContainer>

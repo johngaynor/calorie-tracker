@@ -1,3 +1,6 @@
-.ingredient-remove {
-  background-color: #f07046;
+.muted-weight-input {
+  width: 60px;
+  height: 30px;
+  border: 2px solid #666;
+  border-radius: 5px;
 }
