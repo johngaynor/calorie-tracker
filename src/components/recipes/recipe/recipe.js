@@ -18,10 +18,12 @@ function Recipe({ recipe }) {
   let recipeFatTotal = 0;
 
   recipe.ingredients.forEach((ingredient) => {
-    recipeCalTotal = recipeCalTotal + +ingredient.userCal;
-    recipeProteinTotal = recipeProteinTotal + +ingredient.userProtein;
-    recipeCarbsTotal = recipeCarbsTotal + +ingredient.userCarbs;
-    recipeFatTotal = recipeFatTotal + +ingredient.userFat;
+    if (ingredient.add === true) {
+      recipeCalTotal = recipeCalTotal + +ingredient.userCal;
+      recipeProteinTotal = recipeProteinTotal + +ingredient.userProtein;
+      recipeCarbsTotal = recipeCarbsTotal + +ingredient.userCarbs;
+      recipeFatTotal = recipeFatTotal + +ingredient.userFat;
+    }
   });
 
   const pushRecipe = () => {
