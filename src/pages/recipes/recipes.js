@@ -1,6 +1,5 @@
-import Recipe from "../../components/recipes/recipe/recipe";
 import RecipeHolder from "../../components/recipes/recipeList/recipeList";
-import RecipeForm from "../../components/recipes/recipeForm/recipeForm";
+import RecipeForm from "../../components/recipes/newRecipe/recipeForm/recipeForm";
 
 function Recipes() {
   return (

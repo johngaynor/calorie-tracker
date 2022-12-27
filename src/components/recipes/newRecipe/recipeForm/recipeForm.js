@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../../../utilities/firebase";
+import firebase from "../../../../utilities/firebase";
 import {
   MDBInput,
   MDBRow,
@@ -9,7 +9,7 @@ import {
   MDBTable,
   MDBTableHead,
 } from "mdb-react-ui-kit";
-import Food from "../../foods/food/food";
+import Food from "../../../foods/food/food";
 import IngredientList from "../ingredientList/ingredientList";
 import { Form } from "react-bootstrap";
 import styles from "./recipeForm.css";

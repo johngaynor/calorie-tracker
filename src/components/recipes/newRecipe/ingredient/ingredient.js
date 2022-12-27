@@ -6,7 +6,7 @@ import {
   MDBTableBody,
 } from "mdb-react-ui-kit";
 import React, { useState, useEffect } from "react";
-import firebase from "../../../utilities/firebase";
+import firebase from "../../../../utilities/firebase";
 
 function Ingredient({ ingredient }) {
   const deleteIngredient = () => {
