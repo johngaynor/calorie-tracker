@@ -6,14 +6,19 @@ import {
   MDBBtn,
   MDBBadge,
   MDBRow,
+  MDBCol,
+  MDBInput,
 } from "mdb-react-ui-kit";
+import { Form } from "react-bootstrap";
 import RecipeItem from "../recipeItem/recipeItem";
+import AddIngredient from "../addIngredient/addIngredient";
 import firebase from "../../../utilities/firebase";
 import styles from "./recipe.css";
 import { useState } from "react";
 
 function Recipe({ recipe }) {
   const [deleteRecipe, setDeleteRecipe] = useState(false);
+  const [addIngredient, setAddIngredient] = useState(false);
 
   let recipeCalTotal = 0;
   let recipeProteinTotal = 0;
@@ -28,6 +33,10 @@ function Recipe({ recipe }) {
       recipeFatTotal = recipeFatTotal + +ingredient.userFat;
     }
   });
+
+  // const recipeAddIngredient = () => {
+  //   console.log("adding ingredient");
+  // };
 
   const pushRecipe = () => {
     if (recipeCalTotal === 0) {
@@ -112,6 +121,25 @@ function Recipe({ recipe }) {
             </td>
             <td id="food-log-btns">
               <div>
+                {addIngredient ? (
+                  <MDBBtn
+                    color="link"
+                    rounded
+                    size="sm"
+                    onClick={() => setAddIngredient(false)}
+                  >
+                    Unadd Ingredient
+                  </MDBBtn>
+                ) : (
+                  <MDBBtn
+                    color="link"
+                    rounded
+                    size="sm"
+                    onClick={() => setAddIngredient(true)}
+                  >
+                    Add Ingredient
+                  </MDBBtn>
+                )}
                 <MDBBtn color="link" rounded size="sm" onClick={pushRecipe}>
                   Push to Log
                 </MDBBtn>
@@ -152,6 +180,7 @@ function Recipe({ recipe }) {
       ) : (
         ""
       )}
+      {addIngredient ? <AddIngredient recipe={recipe.id}></AddIngredient> : ""}
     </MDBContainer>
   );
 }

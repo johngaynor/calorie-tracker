@@ -79,7 +79,7 @@ function RecipeForm() {
     if (recipeName === "") {
       alert("please add a recipe name.");
     } else if (ingredientList.length == 0) {
-      alert("please add at least 1 ingredient!");
+      alert("please add at least 1 ingredient.");
     } else {
       const recipeRef = firebase.database().ref("recipes");
       const recipe = {
