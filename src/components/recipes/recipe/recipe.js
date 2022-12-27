@@ -31,6 +31,11 @@ function Recipe({ recipe }) {
     // recipeRef.push(recipe);
   };
 
+  const deleteRecipe = () => {
+    const recipeRef = firebase.database().ref("recipes").child(recipe.id);
+    recipeRef.remove();
+  };
+
   return (
     <MDBContainer fluid className="user-form mb-5">
       <h1>{recipe.name}</h1>
@@ -86,6 +91,9 @@ function Recipe({ recipe }) {
               <div>
                 <MDBBtn color="link" rounded size="sm" onClick={pushRecipe}>
                   Push to Log
+                </MDBBtn>
+                <MDBBtn color="link" rounded size="sm" onClick={deleteRecipe}>
+                  Delete Recipe
                 </MDBBtn>
               </div>
             </td>
