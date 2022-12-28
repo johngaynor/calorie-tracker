@@ -65,7 +65,7 @@ function AddIngredient({ recipe }) {
       //   updating ingredientList locally before updating the useState and pushing to firebase
       ingredientList.push(newIngredient);
       setIngredientList(ingredientList);
-      addIngredientRef.update(ingredientList);
+      addIngredientRef.set(ingredientList);
 
       setName("");
       setSize("");

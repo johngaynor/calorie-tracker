@@ -11,29 +11,30 @@ import {
 import styles from "./macroCalcDash.css";
 
 function MacroCalcDash() {
-  const [foodList, setFoodList] = useState();
+  const [mealList, setMealList] = useState();
   let [totalCal, setTotalCal] = useState(0);
   let [totalProtein, setTotalProtein] = useState(0);
   let [totalCarbs, setTotalCarbs] = useState(0);
   let [totalFat, setTotalFat] = useState(0);
 
   useEffect(() => {
-    const foodRef = firebase.database().ref("crud-final");
-    foodRef.on("value", (snapshot) => {
-      const foods = snapshot.val();
-      const foodList = [];
-      for (let id in foods) {
-        foodList.push({ id, ...foods[id] });
+    const mealRef = firebase.database().ref("user-log");
+    mealRef.on("value", (snapshot) => {
+      const meals = snapshot.val();
+      const mealList = [];
+      for (let id in meals) {
+        mealList.push({ id, ...meals[id] });
       }
 
-      setFoodList(foodList);
+      setMealList(mealList);
+      console.log(mealList);
 
       let calcCalTotal = 0;
       let calcProteinTotal = 0;
       let calcCarbsTotal = 0;
       let calcFatTotal = 0;
 
-      foodList.forEach((food) => {
+      mealList.forEach((food) => {
         calcCalTotal = calcCalTotal + +food.cal;
         calcProteinTotal = calcProteinTotal + +food.protein;
         calcCarbsTotal = calcCarbsTotal + +food.carbs;

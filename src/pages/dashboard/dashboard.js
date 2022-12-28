@@ -6,7 +6,7 @@ import styles from "./dashboard.css";
 
 function Dashboard() {
   return (
-    <MDBContainer fluid className="dashboard-container px-4">
+    <MDBContainer fluid className="dashboard-container pb-3 px-4">
       <MDBRow>
         <h3 className="p-3 d-flex basic-header">Dashboard</h3>
       </MDBRow>
