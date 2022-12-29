@@ -17,6 +17,17 @@ import { Form } from "react-bootstrap";
 import styles from "./stepForm.css";
 
 function StepForm() {
+  const [ingredientList, setIngredientList] = useState("");
+  const [recipeName, setRecipeName] = useState("");
+  const [ingredientName, setIngredientName] = useState("");
+  const [size, setSize] = useState("");
+  const [unit, setUnit] = useState("");
+  const [cal, setCal] = useState("");
+  const [protein, setProtein] = useState("");
+  const [carbs, setCarbs] = useState("");
+  const [fat, setFat] = useState("");
+
+  //   multi step form functionality
   useEffect(() => {
     const multiStepForm = document.querySelector("[data-multi-step]");
     const formSteps = Array.from(multiStepForm.querySelectorAll("[data-step]"));
@@ -56,6 +67,7 @@ function StepForm() {
       <h3 className="p-3 basic-header text-white">New Recipe Form</h3>
       <MDBContainer fluid className="w-75 recipe-form">
         <form data-multi-step className="mx-auto p-3 text-black">
+          {/* first card */}
           <div className="form-card" data-step>
             <MDBProgress style={{ height: "10px" }}>
               <MDBProgressBar
@@ -67,9 +79,8 @@ function StepForm() {
               />
             </MDBProgress>
             <MDBRow className="pt-5 mb-4">
-              <MDBCol className="p-0 col-9">
+              <MDBCol className="col-9">
                 <MDBInput
-                  // id="input-recipe"
                   label="Recipe Name"
                   type="text"
                   onChange={(e) => {
@@ -79,7 +90,7 @@ function StepForm() {
                   contrast
                 />
               </MDBCol>
-              <MDBCol className="p-0 recipe-form-category">
+              <MDBCol className="recipe-form-category">
                 <Form.Select
                   aria-label="Default select"
                   size="md"
@@ -96,43 +107,154 @@ function StepForm() {
               </MDBCol>
             </MDBRow>
             <MDBRow>
-              <MDBTextArea
-                label="Description"
-                type="text"
-                onChange={(e) => {
-                  //   setRecipeName(e.target.value);
-                }}
-                // value={recipeName}
-                contrast
-                rows={3}
-              />
+              <MDBCol>
+                <MDBTextArea
+                  label="Description"
+                  type="text"
+                  // onChange={(e) => {
+                  //     setRecipeName(e.target.value);
+                  // }}
+                  // value={recipeName}
+                  contrast
+                  rows={3}
+                />
+              </MDBCol>
             </MDBRow>
             <MDBRow className="recipe-form-btns">
-              {/* <button type="button" data-next>
-              Next
-            </button> */}
               <MDBBtn
                 outline
                 color="light"
-                className="border-1"
+                className="border-1 next"
                 type="button"
                 data-next
-                //   id="recipe-submit"
-                //   onClick={createRecipe}
               >
                 Next
               </MDBBtn>
             </MDBRow>
           </div>
+          {/* second card */}
           <div className="form-card" data-step>
-            <p>2</p>
-
-            <button type="button" data-previous>
-              Previous
-            </button>
-            <button type="button" data-next>
-              Next
-            </button>
+            <MDBProgress style={{ height: "10px" }}>
+              <MDBProgressBar
+                striped
+                animated
+                width="66"
+                valuemin={0}
+                valuemax={100}
+              />
+            </MDBProgress>
+            <MDBRow className="pt-5 mb-4">
+              <MDBCol className="col-8">
+                <MDBInput
+                  id="ingredient-name"
+                  label="Ingredient Name"
+                  type="text"
+                  onChange={(e) => {
+                    //   setIngredientName(e.target.value);
+                  }}
+                  contrast
+                  // value={ingredientName}
+                />
+              </MDBCol>
+              <MDBCol>
+                <MDBInput
+                  id="ingredient-size"
+                  type="number"
+                  label="Serving Size"
+                  onChange={(e) => {
+                    //   setSize(e.target.value);
+                  }}
+                  // value={size}
+                  contrast
+                />
+              </MDBCol>
+              <MDBCol>
+                <Form.Select
+                  aria-label="Default select"
+                  size="md"
+                  // className="form-meal"
+                  onChange={(e) => {
+                    //   setUnit(e.target.value);
+                  }}
+                >
+                  <option>Unit</option>
+                  <option value="grams">grams</option>
+                  <option value="pcs">pcs</option>
+                  <option value="oz">oz</option>
+                  <option value="ml">ml</option>
+                </Form.Select>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol>
+                <MDBInput
+                  id="input-cal"
+                  type="number"
+                  label="Calories"
+                  onChange={(e) => {
+                    //   setCal(e.target.value);
+                  }}
+                  // value={cal}
+                  contrast
+                />
+              </MDBCol>
+              <MDBCol>
+                <MDBInput
+                  id="input-protein"
+                  type="number"
+                  label="Protein"
+                  onChange={(e) => {
+                    //   setProtein(e.target.value);
+                  }}
+                  // value={protein}
+                  contrast
+                />
+              </MDBCol>
+              <MDBCol>
+                <MDBInput
+                  id="input-carbs"
+                  type="number"
+                  label="Carbs"
+                  contrast
+                  onChange={(e) => {
+                    //   setCarbs(e.target.value);
+                  }}
+                  // value={carbs}
+                />
+              </MDBCol>
+              <MDBCol>
+                <MDBInput
+                  id="input-fat"
+                  type="number"
+                  label="Fat"
+                  contrast
+                  onChange={(e) => {
+                    //   setFat(e.target.value);
+                  }}
+                  // value={fat}
+                />
+              </MDBCol>
+            </MDBRow>
+            <MDBRow className="recipe-form-btns">
+              <MDBBtn
+                outline
+                color="light"
+                className="border-1 previous "
+                type="button"
+                data-previous
+              >
+                Previous
+              </MDBBtn>
+              <MDBBtn
+                outline
+                color="light"
+                className="border-1 next"
+                type="button"
+                data-next
+              >
+                Next
+              </MDBBtn>
+            </MDBRow>
           </div>
           <div className="form-card" data-step>
             <p>3</p>

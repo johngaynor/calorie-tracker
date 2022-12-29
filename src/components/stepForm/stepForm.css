@@ -22,15 +22,20 @@
   justify-content: center;
 }
 
-.recipe-form-category {
+/* .recipe-form-category {
   margin-left: 10px;
-}
+} */
 
-.recipe-form-btns {
+.recipe-form-btns .next {
   position: absolute;
   bottom: 0;
-  left: 50%;
-  right: 50%;
-  display: flex;
-  justify-content: center;
+  right: 0;
+  width: 50px;
+}
+
+.recipe-form-btns .previous {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
 }
