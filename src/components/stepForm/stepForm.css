@@ -14,20 +14,23 @@
 
 .recipe-form {
   background-color: var(--site-black);
-  /* background-color: red; */
 }
 
 .recipe-form button {
-  width: 60px;
+  min-width: 100px;
   display: flex;
   justify-content: center;
 }
 
 .recipe-form-category {
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
-.recipe-form-desc {
-  margin-left: 10px;
-  height: 100px;
+.recipe-form-btns {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  right: 50%;
+  display: flex;
+  justify-content: center;
 }

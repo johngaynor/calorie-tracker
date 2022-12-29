@@ -11,6 +11,7 @@ import {
   MDBProgress,
   MDBProgressBar,
   MDBTextArea,
+  MDBTabsContent,
 } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
 import styles from "./stepForm.css";
@@ -53,7 +54,6 @@ function StepForm() {
   return (
     <MDBContainer>
       <h3 className="p-3 basic-header text-white">New Recipe Form</h3>
-
       <MDBContainer fluid className="w-75 recipe-form">
         <form data-multi-step className="mx-auto p-3 text-black">
           <div className="form-card" data-step>
@@ -66,19 +66,19 @@ function StepForm() {
                 valuemax={100}
               />
             </MDBProgress>
-            <MDBRow className="pt-5">
-              <MDBInput
-                // id="input-recipe"
-                label="Recipe Name"
-                type="text"
-                onChange={(e) => {
-                  //   setRecipeName(e.target.value);
-                }}
-                // value={recipeName}
-                contrast
-              />
-            </MDBRow>
-            <MDBRow className="bg-primary d-flex justify-content-between pt-3">
+            <MDBRow className="pt-5 mb-4">
+              <MDBCol className="p-0 col-9">
+                <MDBInput
+                  // id="input-recipe"
+                  label="Recipe Name"
+                  type="text"
+                  onChange={(e) => {
+                    //   setRecipeName(e.target.value);
+                  }}
+                  // value={recipeName}
+                  contrast
+                />
+              </MDBCol>
               <MDBCol className="p-0 recipe-form-category">
                 <Form.Select
                   aria-label="Default select"
@@ -94,21 +94,20 @@ function StepForm() {
                   <option value="snack">Snack</option>
                 </Form.Select>
               </MDBCol>
-              <MDBCol className="p-0 recipe-form-desc">
-                <MDBTextArea
-                  // id="input-recipe"
-                  label="Description"
-                  type="text"
-                  onChange={(e) => {
-                    //   setRecipeName(e.target.value);
-                  }}
-                  // value={recipeName}
-                  contrast
-                  rows={4}
-                />
-              </MDBCol>
             </MDBRow>
             <MDBRow>
+              <MDBTextArea
+                label="Description"
+                type="text"
+                onChange={(e) => {
+                  //   setRecipeName(e.target.value);
+                }}
+                // value={recipeName}
+                contrast
+                rows={3}
+              />
+            </MDBRow>
+            <MDBRow className="recipe-form-btns">
               {/* <button type="button" data-next>
               Next
             </button> */}
@@ -117,6 +116,7 @@ function StepForm() {
                 color="light"
                 className="border-1"
                 type="button"
+                data-next
                 //   id="recipe-submit"
                 //   onClick={createRecipe}
               >
