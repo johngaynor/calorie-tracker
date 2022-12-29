@@ -1,11 +1,33 @@
 .form-card {
-  background-color: white;
-  border: 2px solid black;
+  /* background-color: white; */
+  /* border: 2px solid black; */
   border-radius: 2px;
   padding: 5px;
   display: none;
+  height: 300px;
+  position: relative;
 }
 
 .form-card.active {
   display: block;
+}
+
+.recipe-form {
+  background-color: var(--site-black);
+  /* background-color: red; */
+}
+
+.recipe-form button {
+  width: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.recipe-form-category {
+  margin-right: 10px;
+}
+
+.recipe-form-desc {
+  margin-left: 10px;
+  height: 100px;
 }
