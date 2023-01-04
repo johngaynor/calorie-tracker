@@ -23,12 +23,35 @@ function StepForm() {
   // these are for recipe/ingredient submission
   const [recipeName, setRecipeName] = useState("");
   const [ingredientName, setIngredientName] = useState("");
+  const [recipeCategory, setRecipeCategory] = useState("");
   const [size, setSize] = useState("");
   const [unit, setUnit] = useState("");
   const [cal, setCal] = useState("");
   const [protein, setProtein] = useState("");
   const [carbs, setCarbs] = useState("");
   const [fat, setFat] = useState("");
+
+  //   let a = true;
+  //   let b = true;
+  //   if (a && b) {
+  //     console.log("both are true");
+  //   } else {
+  //     console.log("both are not true");
+  //   }
+
+  // creates local list of new ingredients from firebase
+  useEffect(() => {
+    const ingredientListRef = firebase.database().ref("add-ingredient");
+    ingredientListRef.on("value", (snapshot) => {
+      const ingredients = snapshot.val();
+      const ingredientList = [];
+      for (let id in ingredients) {
+        ingredientList.push({ id, ...ingredients[id] });
+      }
+
+      setIngredientList(ingredientList);
+    });
+  }, []);
 
   //   multi step form functionality
   useEffect(() => {
@@ -41,8 +64,10 @@ function StepForm() {
         // checking to see if everything is filled out
         const inputs = [...formSteps[formStep].querySelectorAll("input")];
         const allValid = inputs.every((input) => input.reportValidity());
-        if (allValid) {
+        if (allValid && recipeCategory != "") {
           setFormStep(formStep + 1);
+        } else {
+          console.log("Please select a category before moving on.");
         }
       } else if (e.target.matches("[data-previous]")) {
         setFormStep(formStep - 1);
@@ -129,8 +154,9 @@ function StepForm() {
                 <Form.Select
                   aria-label="Default select"
                   size="md"
+                  id="recipe-form-category"
                   onChange={(e) => {
-                    // setUnit(e.target.value);
+                    setRecipeCategory(e.target.value);
                   }}
                   // need to set up some sort of logic gate for this to catch
                 >
