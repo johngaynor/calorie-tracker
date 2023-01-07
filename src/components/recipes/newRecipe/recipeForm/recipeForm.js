@@ -28,6 +28,8 @@ function RecipeForm() {
   // this is to reference the "add-ingredient" obj from firebase
   const newIngredientRef = firebase.database().ref("add-ingredient");
 
+  console.log();
+
   const submitIngredient = () => {
     if (
       ingredientName === "" ||

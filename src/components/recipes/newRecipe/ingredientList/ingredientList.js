@@ -38,34 +38,38 @@ function IngredientList() {
   }, [ingredientList]);
 
   return (
-    <MDBTable align="middle" className="w-100 mx-auto text-white m-3">
-      {ingredientTable ? (
-        <MDBTableHead className="">
-          <tr>
-            <th scope="col" className="col-4">
-              Ingredient
-            </th>
-            <th scope="col" className="col-4">
-              Serving Size
-            </th>
-            <th scope="col">Calories</th>
-            <th scope="col">P/C/F</th>
-            <th scope="col" className="col-2">
-              Actions
-            </th>
-          </tr>
-        </MDBTableHead>
-      ) : (
-        "no ingredients have been added yet!"
-      )}
-      <MDBTableBody>
-        {ingredientList
-          ? ingredientList.map((ingredient, index) => (
-              <Ingredient ingredient={ingredient} key={index} />
-            ))
-          : null}
-      </MDBTableBody>
-    </MDBTable>
+    <>
+      {ingredientTable ? <h3 className="text-white mt-4">Ingredients:</h3> : ""}
+      {/* <h3 className="text-white mt-4">Ingredients:</h3> */}
+      <MDBTable align="middle" className="w-100 mx-auto text-white m-3">
+        {ingredientTable ? (
+          <MDBTableHead className="">
+            <tr>
+              <th scope="col" className="col-4">
+                Ingredient
+              </th>
+              <th scope="col" className="col-4">
+                Serving Size
+              </th>
+              <th scope="col">Calories</th>
+              <th scope="col">P/C/F</th>
+              <th scope="col" className="col-2">
+                Actions
+              </th>
+            </tr>
+          </MDBTableHead>
+        ) : (
+          <p className="mt-4">Add an ingredient to get started!</p>
+        )}
+        <MDBTableBody>
+          {ingredientList
+            ? ingredientList.map((ingredient, index) => (
+                <Ingredient ingredient={ingredient} key={index} />
+              ))
+            : null}
+        </MDBTableBody>
+      </MDBTable>
+    </>
   );
 }
 

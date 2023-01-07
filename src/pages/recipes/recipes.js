@@ -6,8 +6,8 @@ function Recipes() {
   return (
     <>
       <StepForm></StepForm>
-      <RecipeForm></RecipeForm>
-      <RecipeHolder></RecipeHolder>
+      {/* <RecipeForm></RecipeForm> */}
+      {/* <RecipeHolder></RecipeHolder> */}
     </>
   );
 }

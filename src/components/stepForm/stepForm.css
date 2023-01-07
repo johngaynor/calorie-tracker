@@ -1,6 +1,9 @@
+.recipe-form {
+  background-color: var(--site-black);
+  height: 100vh;
+}
+
 .form-card {
-  border-radius: 2px;
-  padding: 5px;
   display: none;
   min-height: 300px;
   position: relative;
@@ -8,10 +11,6 @@
 
 .form-card.active {
   display: block;
-}
-
-.recipe-form {
-  background-color: var(--site-black);
 }
 
 .recipe-form button {
@@ -32,4 +31,8 @@
   bottom: 0;
   left: 0;
   width: 50px;
+}
+
+#recipe-form-grey {
+  background-color: var(--site-grey);
 }

@@ -31,14 +31,6 @@ function StepForm() {
   const [carbs, setCarbs] = useState("");
   const [fat, setFat] = useState("");
 
-  //   let a = true;
-  //   let b = true;
-  //   if (a && b) {
-  //     console.log("both are true");
-  //   } else {
-  //     console.log("both are not true");
-  //   }
-
   // creates local list of new ingredients from firebase
   useEffect(() => {
     const ingredientListRef = firebase.database().ref("add-ingredient");
@@ -64,10 +56,8 @@ function StepForm() {
         // checking to see if everything is filled out
         const inputs = [...formSteps[formStep].querySelectorAll("input")];
         const allValid = inputs.every((input) => input.reportValidity());
-        if (allValid && recipeCategory != "") {
+        if (allValid) {
           setFormStep(formStep + 1);
-        } else {
-          console.log("Please select a category before moving on.");
         }
       } else if (e.target.matches("[data-previous]")) {
         setFormStep(formStep - 1);
@@ -79,7 +69,7 @@ function StepForm() {
     formSteps.forEach((step, index) => {
       step.classList.toggle("active", index === formStep);
     });
-  });
+  }, [formStep]);
 
   // function to submit recipes
   const submitIngredient = () => {
@@ -117,14 +107,10 @@ function StepForm() {
     }
   };
 
-  // problem ended up being that nodeList doesn't work with findIndex, had to convert it to an array first
-
-  // left off on the video at 16:17
-
   return (
     <MDBContainer>
       <h3 className="p-3 basic-header text-white">New Recipe Form</h3>
-      <MDBContainer fluid className="w-75 recipe-form">
+      <MDBContainer fluid className="recipe-form">
         <form data-multi-step className="mx-auto p-3 text-black">
           {/* first card */}
           <div className="form-card" data-step>
@@ -132,20 +118,21 @@ function StepForm() {
               <MDBProgressBar
                 striped
                 animated
-                width="33"
+                width="25"
                 valuemin={0}
                 valuemax={100}
               />
             </MDBProgress>
             <MDBRow className="pt-5 mb-4">
-              <MDBCol className="col-9">
+              <MDBCol className="col-8">
                 <MDBInput
                   label="Recipe Name"
                   type="text"
+                  id="recipe-form-grey"
                   onChange={(e) => {
-                    //   setRecipeName(e.target.value);
+                    setRecipeName(e.target.value);
                   }}
-                  // value={recipeName}
+                  value={recipeName}
                   contrast
                   required
                 />
@@ -158,9 +145,8 @@ function StepForm() {
                   onChange={(e) => {
                     setRecipeCategory(e.target.value);
                   }}
-                  // need to set up some sort of logic gate for this to catch
                 >
-                  <option>Category</option>
+                  <option>Category (optional)</option>
                   <option value="breakfast">Breakfast</option>
                   <option value="lunch">Lunch</option>
                   <option value="dinner">Dinner</option>
@@ -173,6 +159,7 @@ function StepForm() {
                 <MDBTextArea
                   label="Description (optional)"
                   type="text"
+                  id="recipe-form-grey"
                   // onChange={(e) => {
                   //     setRecipeName(e.target.value);
                   // }}
@@ -200,7 +187,7 @@ function StepForm() {
               <MDBProgressBar
                 striped
                 animated
-                width="66"
+                width="50"
                 valuemin={0}
                 valuemax={100}
               />
@@ -208,7 +195,7 @@ function StepForm() {
             <MDBRow className="pt-5 mb-4">
               <MDBCol className="col-8">
                 <MDBInput
-                  id="ingredient-name"
+                  id="recipe-form-grey"
                   label="Ingredient Name"
                   type="text"
                   onChange={(e) => {
@@ -220,7 +207,7 @@ function StepForm() {
               </MDBCol>
               <MDBCol>
                 <MDBInput
-                  id="ingredient-size"
+                  id="recipe-form-grey"
                   type="number"
                   label="Serving Size"
                   onChange={(e) => {
@@ -310,7 +297,6 @@ function StepForm() {
               </MDBCol>
             </MDBRow>
             <MDBRow className="mb-5 w-75 mx-auto">
-              <h3 className="text-white mt-3">Ingredients:</h3>
               <IngredientList></IngredientList>
             </MDBRow>
 
@@ -335,13 +321,63 @@ function StepForm() {
               </MDBBtn>
             </MDBRow>
           </div>
+          {/* third card */}
           <div className="form-card" data-step>
-            <p>3</p>
-
-            <button type="button" data-previous>
-              Previous
-            </button>
-            <button type="submit">Submit</button>
+            <MDBProgress style={{ height: "10px" }}>
+              <MDBProgressBar
+                striped
+                animated
+                width="75"
+                valuemin={0}
+                valuemax={100}
+              />
+            </MDBProgress>
+            <MDBRow className="pt-3 mb-4 text-white">
+              <MDBCol className="d-flex flex-start my-auto">
+                <h4 className="text-decoration-underline">Review Recipe</h4>
+              </MDBCol>
+              <MDBCol className="col-5">
+                <p>
+                  Tip: to edit any information, click on the section you want to
+                  edit and you will be taken to that section of the form.
+                </p>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol>
+                <MDBTextArea
+                  label="Description (optional)"
+                  type="text"
+                  id="recipe-form-grey"
+                  // onChange={(e) => {
+                  //     setRecipeName(e.target.value);
+                  // }}
+                  // value={recipeName}
+                  contrast
+                  rows={3}
+                />
+              </MDBCol>
+            </MDBRow>
+            <MDBRow className="recipe-form-btns">
+              <MDBBtn
+                outline
+                color="light"
+                className="border-1 next"
+                type="button"
+                data-next
+              >
+                Next
+              </MDBBtn>
+              <MDBBtn
+                outline
+                color="light"
+                className="border-1 previous"
+                type="button"
+                data-previous
+              >
+                Previous
+              </MDBBtn>
+            </MDBRow>
           </div>
         </form>
       </MDBContainer>

@@ -26,6 +26,10 @@
 
 .basic-header {
   font-weight: bold;
+  border: 2px solid white;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 30px auto;
 }
 
 input::-webkit-outer-spin-button,
