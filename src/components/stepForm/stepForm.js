@@ -12,38 +12,31 @@ import {
   MDBProgressBar,
   MDBTextArea,
   MDBTabsContent,
+  MDBTableBody,
 } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
 import IngredientList from "../recipes/newRecipe/ingredientList/ingredientList";
+import IngredientReview from "./ingredientReview/ingredientReview";
 import styles from "./stepForm.css";
 
 function StepForm() {
+  // these are for form functionality
   const [formStep, setFormStep] = useState(0);
-  const [ingredientList, setIngredientList] = useState("");
-  // these are for recipe/ingredient submission
+
+  // these are for recipe submission
   const [recipeName, setRecipeName] = useState("");
-  const [ingredientName, setIngredientName] = useState("");
   const [recipeCategory, setRecipeCategory] = useState("");
+  const [recipeDesc, setRecipeDesc] = useState("");
+  const [ingredientList, setIngredientList] = useState("");
+
+  // these are for ingredient submission
+  const [ingredientName, setIngredientName] = useState("");
   const [size, setSize] = useState("");
   const [unit, setUnit] = useState("");
   const [cal, setCal] = useState("");
   const [protein, setProtein] = useState("");
   const [carbs, setCarbs] = useState("");
   const [fat, setFat] = useState("");
-
-  // creates local list of new ingredients from firebase
-  useEffect(() => {
-    const ingredientListRef = firebase.database().ref("add-ingredient");
-    ingredientListRef.on("value", (snapshot) => {
-      const ingredients = snapshot.val();
-      const ingredientList = [];
-      for (let id in ingredients) {
-        ingredientList.push({ id, ...ingredients[id] });
-      }
-
-      setIngredientList(ingredientList);
-    });
-  }, []);
 
   //   multi step form functionality
   useEffect(() => {
@@ -53,7 +46,6 @@ function StepForm() {
     // event listeners to update formStep
     multiStepForm.addEventListener("click", (e) => {
       if (e.target.matches("[data-next]")) {
-        // checking to see if everything is filled out
         const inputs = [...formSteps[formStep].querySelectorAll("input")];
         const allValid = inputs.every((input) => input.reportValidity());
         if (allValid) {
@@ -71,10 +63,37 @@ function StepForm() {
     });
   }, [formStep]);
 
-  // function to submit recipes
+  if (recipeCategory === "") {
+    setRecipeCategory("Miscellaneous");
+  }
+
+  // creates local list of new ingredients from firebase
+  useEffect(() => {
+    const ingredientListRef = firebase.database().ref("add-ingredient");
+    ingredientListRef.on("value", (snapshot) => {
+      const ingredients = snapshot.val();
+      const ingredientList = [];
+      for (let id in ingredients) {
+        ingredientList.push({ id, ...ingredients[id] });
+      }
+
+      setIngredientList(ingredientList);
+
+      // hiding the next button if there are no ingredients
+      const nextBtn = document.getElementById("step-two-submit");
+      if (ingredientList.length === 0) {
+        nextBtn.classList.add("prevent-next");
+      } else {
+        nextBtn.classList.remove("prevent-next");
+      }
+    });
+  }, []);
+
+  // function to submit ingredients
   const submitIngredient = () => {
     const newIngredientRef = firebase.database().ref("add-ingredient");
     if (
+      // just add required to these fields and then add a catch for unit?
       ingredientName === "" ||
       size === "" ||
       unit === "Unit" ||
@@ -107,8 +126,34 @@ function StepForm() {
     }
   };
 
+  // function to submit recipes
+  const submitRecipe = () => {
+    // const recipeRef = firebase.database().ref("recipes");
+    // const recipe = {
+    //   name: recipeName,
+    //   description: recipeDesc,
+    //   category: recipeCategory,
+    //   ingredients: ingredientList,
+    // };
+
+    // recipeRef.push(recipe);
+    // alert("recipe successfully submitted!");
+
+    // setRecipeName("");
+    // setIngredientName("");
+    // setSize("");
+    // setCal("");
+    // setProtein("");
+    // setCarbs("");
+    // setFat("");
+
+    firebase.database().ref("add-ingredient").remove();
+  };
+
+  // creates local list of new ingredients from firebase
+
   return (
-    <MDBContainer>
+    <MDBContainer className="pb-5 page-container">
       <h3 className="p-3 basic-header text-white">New Recipe Form</h3>
       <MDBContainer fluid className="recipe-form">
         <form data-multi-step className="mx-auto p-3 text-black">
@@ -141,7 +186,7 @@ function StepForm() {
                 <Form.Select
                   aria-label="Default select"
                   size="md"
-                  id="recipe-form-category"
+                  //   id="recipe-form-category"
                   onChange={(e) => {
                     setRecipeCategory(e.target.value);
                   }}
@@ -160,10 +205,10 @@ function StepForm() {
                   label="Description (optional)"
                   type="text"
                   id="recipe-form-grey"
-                  // onChange={(e) => {
-                  //     setRecipeName(e.target.value);
-                  // }}
-                  // value={recipeName}
+                  onChange={(e) => {
+                    setRecipeDesc(e.target.value);
+                  }}
+                  value={recipeDesc}
                   contrast
                   rows={3}
                 />
@@ -315,6 +360,7 @@ function StepForm() {
                 color="light"
                 className="border-1 next"
                 type="button"
+                id="step-two-submit"
                 data-next
               >
                 Next
@@ -332,7 +378,7 @@ function StepForm() {
                 valuemax={100}
               />
             </MDBProgress>
-            <MDBRow className="pt-3 mb-4 text-white">
+            <MDBRow className="pt-3 text-white">
               <MDBCol className="d-flex flex-start my-auto">
                 <h4 className="text-decoration-underline">Review Recipe</h4>
               </MDBCol>
@@ -343,30 +389,55 @@ function StepForm() {
                 </p>
               </MDBCol>
             </MDBRow>
-            <MDBRow>
-              <MDBCol>
-                <MDBTextArea
-                  label="Description (optional)"
-                  type="text"
-                  id="recipe-form-grey"
-                  // onChange={(e) => {
-                  //     setRecipeName(e.target.value);
-                  // }}
-                  // value={recipeName}
-                  contrast
-                  rows={3}
-                />
+            <MDBRow className="review-recipe p-3 mb-5 mx-1">
+              <MDBCol className="col-3" onClick={() => setFormStep(0)}>
+                <p className="review-title">Recipe Name:</p>
+                <div className="review-recipe-box">{recipeName}</div>
+                <p className="review-title">Category:</p>
+                <div className="review-recipe-box">{recipeCategory}</div>
+                <p className="review-title">Description:</p>
+                <div className="review-recipe-box description">
+                  {recipeDesc}
+                </div>
+              </MDBCol>
+              <MDBCol className="col-9 mx-auto" onClick={() => setFormStep(1)}>
+                {/* <IngredientList></IngredientList> */}
+                <MDBTable>
+                  <MDBTableHead className="text-white">
+                    <tr>
+                      <th scope="col" className="col-4">
+                        Ingredient
+                      </th>
+                      <th scope="col" className="col-4">
+                        Serving Size
+                      </th>
+                      <th scope="col">Calories</th>
+                      <th scope="col">P/C/F</th>
+                    </tr>
+                  </MDBTableHead>
+                  <MDBTableBody>
+                    {ingredientList
+                      ? ingredientList.map((ingredient, index) => (
+                          <IngredientReview
+                            ingredient={ingredient}
+                            key={index}
+                          />
+                        ))
+                      : null}
+                  </MDBTableBody>
+                </MDBTable>
               </MDBCol>
             </MDBRow>
             <MDBRow className="recipe-form-btns">
               <MDBBtn
                 outline
                 color="light"
-                className="border-1 next"
+                className="border-1 next bg-danger"
                 type="button"
+                onClick={submitRecipe}
                 data-next
               >
-                Next
+                Submit
               </MDBBtn>
               <MDBBtn
                 outline

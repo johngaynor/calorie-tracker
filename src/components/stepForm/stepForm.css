@@ -1,6 +1,9 @@
+.page-container {
+  min-height: 100vh;
+}
+
 .recipe-form {
   background-color: var(--site-black);
-  height: 100vh;
 }
 
 .form-card {
@@ -33,6 +36,36 @@
   width: 50px;
 }
 
-#recipe-form-grey {
+.recipe-form-btns .prevent-next {
+  border: 2px solid grey;
+  color: grey;
+  pointer-events: none;
+}
+
+.recipe-form- #recipe-form-grey {
   background-color: var(--site-grey);
+}
+
+.review-recipe {
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.review-recipe-box {
+  min-height: 30px;
+  border: 2px solid white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  color: white;
+  margin-bottom: 10px;
+  background-color: var(--site-grey);
+}
+
+.review-title {
+  margin: 0 auto;
+  color: white;
+  text-align: left;
+  /* background-color: var(--site-grey); */
 }

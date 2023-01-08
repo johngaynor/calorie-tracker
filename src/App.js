@@ -3,6 +3,7 @@ import Navigation from "./components/nav/nav";
 import Dashboard from "./pages/dashboard/dashboard";
 import Foods from "./pages/foods/foods";
 import Recipes from "./pages/recipes/recipes";
+import NewRecipe from "./pages/newRecipe/newRecipe";
 import { Route, Routes } from "react-router";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/foods" element={<Foods />} />
+        <Route path="/new-recipe" element={<NewRecipe />} />
       </Routes>
     </div>
   );
