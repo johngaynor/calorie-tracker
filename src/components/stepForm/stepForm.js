@@ -67,6 +67,10 @@ function StepForm() {
     setRecipeCategory("Miscellaneous");
   }
 
+  if (recipeCategory === "Category (optional)") {
+    setRecipeCategory("Miscellaneous");
+  }
+
   // creates local list of new ingredients from firebase
   useEffect(() => {
     const ingredientListRef = firebase.database().ref("add-ingredient");
@@ -93,7 +97,6 @@ function StepForm() {
   const submitIngredient = () => {
     const newIngredientRef = firebase.database().ref("add-ingredient");
     if (
-      // just add required to these fields and then add a catch for unit?
       ingredientName === "" ||
       size === "" ||
       unit === "Unit" ||
@@ -128,29 +131,20 @@ function StepForm() {
 
   // function to submit recipes
   const submitRecipe = () => {
-    // const recipeRef = firebase.database().ref("recipes");
-    // const recipe = {
-    //   name: recipeName,
-    //   description: recipeDesc,
-    //   category: recipeCategory,
-    //   ingredients: ingredientList,
-    // };
+    const recipeRef = firebase.database().ref("recipes");
+    const recipe = {
+      name: recipeName,
+      description: recipeDesc,
+      category: recipeCategory,
+      ingredients: ingredientList,
+    };
 
-    // recipeRef.push(recipe);
-    // alert("recipe successfully submitted!");
+    console.log(recipe);
 
-    // setRecipeName("");
-    // setIngredientName("");
-    // setSize("");
-    // setCal("");
-    // setProtein("");
-    // setCarbs("");
-    // setFat("");
-
+    recipeRef.push(recipe);
+    alert("recipe successfully submitted!");
     firebase.database().ref("add-ingredient").remove();
   };
-
-  // creates local list of new ingredients from firebase
 
   return (
     <MDBContainer className="pb-5 page-container">
@@ -447,6 +441,37 @@ function StepForm() {
                 data-previous
               >
                 Previous
+              </MDBBtn>
+            </MDBRow>
+          </div>
+          {/* fourth card */}
+          <div className="form-card" data-step>
+            <MDBProgress style={{ height: "10px" }}>
+              <MDBProgressBar
+                striped
+                animated
+                width="100"
+                valuemin={0}
+                valuemax={100}
+              />
+            </MDBProgress>
+            <MDBRow className="pt-3 text-white">
+              <MDBCol className="col-5 mx-auto mt-5">
+                <p>
+                  Thanks for submitting your recipe! You can view it as well as
+                  other submitted recipes <a href="/recipes">here.</a>
+                </p>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow className="recipe-form-btns">
+              <MDBBtn
+                outline
+                color="light"
+                className="border-1 next w-25"
+                type="button"
+                onClick={() => window.location.reload()}
+              >
+                Submit another recipe
               </MDBBtn>
             </MDBRow>
           </div>

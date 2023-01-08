@@ -4,7 +4,7 @@ import RecipeForm from "../../components/recipes/newRecipe/recipeForm/recipeForm
 function Recipes() {
   return (
     <>
-      <RecipeForm></RecipeForm>
+      {/* <RecipeForm></RecipeForm> */}
       <RecipeHolder></RecipeHolder>
     </>
   );
