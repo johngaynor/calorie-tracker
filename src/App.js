@@ -1,5 +1,6 @@
 import "./App.css";
 import Navigation from "./components/nav/nav";
+import Footer from "./components/footer/footer";
 import Dashboard from "./pages/dashboard/dashboard";
 import Foods from "./pages/foods/foods";
 import Recipes from "./pages/recipes/recipes";
@@ -16,6 +17,7 @@ function App() {
         <Route path="/foods" element={<Foods />} />
         <Route path="/new-recipe" element={<NewRecipe />} />
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }

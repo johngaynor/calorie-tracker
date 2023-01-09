@@ -1,0 +1,18 @@
+.footer-box {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+}
+
+.footer-text {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.footer-light {
+  color: #888;
+}
