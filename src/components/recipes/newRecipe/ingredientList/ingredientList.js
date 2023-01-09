@@ -4,10 +4,12 @@ import {
   MDBBadge,
   MDBBtn,
   MDBTableBody,
+  MDBContainer,
 } from "mdb-react-ui-kit";
 import React, { useState, useEffect } from "react";
 import firebase from "../../../../utilities/firebase";
 import Ingredient from "../ingredient/ingredient";
+import styles from "./ingredientList.css";
 
 function IngredientList() {
   const [ingredientList, setIngredientList] = useState("");
@@ -38,21 +40,26 @@ function IngredientList() {
   }, [ingredientList]);
 
   return (
-    <>
+    <MDBContainer className="">
       {ingredientTable ? <h3 className="text-white mt-4">Ingredients:</h3> : ""}
       {/* <h3 className="text-white mt-4">Ingredients:</h3> */}
-      <MDBTable align="middle" className="w-100 mx-auto text-white m-3">
+      <MDBTable align="middle" className="ingredient-table text-white">
         {ingredientTable ? (
           <MDBTableHead className="">
             <tr>
               <th scope="col" className="col-4">
                 Ingredient
               </th>
+              <th scope="col" className="col-2 only-sm">
+                Info
+              </th>
               <th scope="col" className="col-4">
                 Serving Size
               </th>
               <th scope="col">Calories</th>
-              <th scope="col">P/C/F</th>
+              <th scope="col" className="col-4">
+                P/C/F
+              </th>
               <th scope="col" className="col-2">
                 Actions
               </th>
@@ -69,7 +76,7 @@ function IngredientList() {
             : null}
         </MDBTableBody>
       </MDBTable>
-    </>
+    </MDBContainer>
   );
 }
 

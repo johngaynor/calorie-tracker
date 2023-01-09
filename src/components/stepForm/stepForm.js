@@ -21,7 +21,7 @@ import styles from "./stepForm.css";
 
 function StepForm() {
   // these are for form functionality
-  const [formStep, setFormStep] = useState(0);
+  const [formStep, setFormStep] = useState(1);
 
   // these are for recipe submission
   const [recipeName, setRecipeName] = useState("");
@@ -335,7 +335,7 @@ function StepForm() {
                 </MDBBtn>
               </MDBCol>
             </MDBRow>
-            <MDBRow className="mb-5 w-75 mx-auto">
+            <MDBRow className="mb-5">
               <IngredientList></IngredientList>
             </MDBRow>
 

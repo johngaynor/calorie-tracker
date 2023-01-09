@@ -7,6 +7,7 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useState, useEffect } from "react";
 import firebase from "../../../../utilities/firebase";
+import styles from "./ingredient.css";
 
 function Ingredient({ ingredient }) {
   const deleteIngredient = () => {
@@ -28,21 +29,39 @@ function Ingredient({ ingredient }) {
           </p>
         </div>
       </td>
-      <td>
+      <td className="only-sm">
         <p className="fw-normal mb-1" id="food-servings-display">
-          {ingredient.size}
+          Serving Size: {ingredient.size} {""}
+          <span className="text-muted">{ingredient.unit}</span>
         </p>
-        <p className="text-muted mb-0">{ingredient.unit}</p>
+        <p>Cal: {ingredient.cal}</p>
+        <p>
+          P/C/F: {ingredient.protein}/{ingredient.carbs}/{ingredient.fat}
+        </p>
       </td>
       <td>
-        <MDBBadge color="success" pill className="d-flex" id="food-cal-display">
+        <p className="fw-normal mb-1" id="food-servings-display">
+          {ingredient.size} {""}
+          <span className="text-muted">{ingredient.unit}</span>
+        </p>
+      </td>
+      <td>
+        <MDBBadge
+          color="success"
+          pill
+          className="d-flex justify-content-center"
+          id="food-cal-display"
+        >
           {ingredient.cal}
         </MDBBadge>
       </td>
       <td id="food-macros-display">
         {ingredient.protein}/{ingredient.carbs}/{ingredient.fat}
       </td>
-      <td id="food-log-btns">
+      <td
+        id="food-log-btns"
+        className="bg-danger d-flex justify-content-center"
+      >
         <div>
           <MDBBtn color="link" rounded size="sm" onClick={deleteIngredient}>
             Delete
