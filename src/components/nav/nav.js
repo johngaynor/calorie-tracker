@@ -39,6 +39,9 @@ function Navigation() {
               <MDBNavbarLink href="/foods">Foods</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
+              <MDBNavbarLink href="/new-food">New Food</MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
               <MDBNavbarLink href="/recipes">Recipes</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>

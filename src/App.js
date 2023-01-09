@@ -3,6 +3,7 @@ import Navigation from "./components/nav/nav";
 import Footer from "./components/footer/footer";
 import Dashboard from "./pages/dashboard/dashboard";
 import Foods from "./pages/foods/foods";
+import NewFood from "./pages/newFood/newFood";
 import Recipes from "./pages/recipes/recipes";
 import NewRecipe from "./pages/newRecipe/newRecipe";
 import { Route, Routes } from "react-router";
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/foods" element={<Foods />} />
+        <Route path="/new-food" element={<NewFood />} />
         <Route path="/new-recipe" element={<NewRecipe />} />
       </Routes>
       <Footer></Footer>
