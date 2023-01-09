@@ -1,12 +1,10 @@
-import RecipeHolder from "../../components/recipes/recipeList/recipeList";
-// import RecipeForm from "../../components/recipes/newRecipe/recipeForm/recipeForm";
+import RecipeList from "../../components/recipes/recipeList/recipeList";
 
 function Recipes() {
   return (
-    <>
-      {/* <RecipeForm></RecipeForm> */}
-      <RecipeHolder></RecipeHolder>
-    </>
+    // <>
+    <RecipeList></RecipeList>
+    // </>
   );
 }
 

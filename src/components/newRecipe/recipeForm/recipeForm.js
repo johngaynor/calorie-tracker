@@ -148,7 +148,7 @@ function RecipeForm() {
 
   return (
     <MDBContainer className="pb-5 page-container">
-      <h3 className="p-3 basic-header text-white">New Recipe Form</h3>
+      <h3 className="p-3 basic-header">New Recipe Form</h3>
       <MDBContainer fluid className="recipe-form">
         <form data-multi-step className="mx-auto p-3 text-black">
           {/* first card */}

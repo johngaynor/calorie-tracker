@@ -12,7 +12,7 @@ import styles from "./recipeList.css";
 import React, { useEffect, useState } from "react";
 import Recipe from "../recipe/recipe";
 
-function RecipeHolder() {
+function RecipeList() {
   const [recipeList, setRecipeList] = useState();
   const [weight, setWeight] = useState(0);
   const [weightCal, setWeightCal] = useState("");
@@ -34,11 +34,9 @@ function RecipeHolder() {
   }, []);
 
   return (
-    <MDBContainer fluid className="pt-5">
-      <MDBRow>
-        <h3 className="p-3 d-flex basic-header">Your Recipes</h3>
-      </MDBRow>
-      <MDBContainer fluid className="recipe-table p-4 my-auto w-75">
+    <MDBContainer fluid>
+      <h3 className="p-3 basic-header">Your Recipes</h3>
+      <MDBContainer fluid className="recipe-table p-3 my-auto w-75">
         {recipeList
           ? recipeList.map((recipe, index) => (
               <Recipe recipe={recipe} key={index} />
@@ -49,4 +47,4 @@ function RecipeHolder() {
   );
 }
 
-export default RecipeHolder;
+export default RecipeList;
