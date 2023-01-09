@@ -45,7 +45,7 @@ function IngredientList() {
       {/* <h3 className="text-white mt-4">Ingredients:</h3> */}
       <MDBTable align="middle" className="ingredient-table text-white">
         {ingredientTable ? (
-          <MDBTableHead className="">
+          <MDBTableHead>
             <tr>
               <th scope="col" className="col-4">
                 Ingredient

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../../utilities/firebase";
+import firebase from "../../../utilities/firebase";
 import {
   MDBInput,
   MDBRow,
@@ -15,11 +15,11 @@ import {
   MDBTableBody,
 } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
-import IngredientList from "../recipes/newRecipe/ingredientList/ingredientList";
-import IngredientReview from "./ingredientReview/ingredientReview";
-import styles from "./stepForm.css";
+import IngredientList from "../ingredientList/ingredientList";
+import IngredientReview from "../ingredientReview/ingredientReview";
+import styles from "./recipeForm.css";
 
-function StepForm() {
+function RecipeForm() {
   // these are for form functionality
   const [formStep, setFormStep] = useState(0);
 
@@ -142,7 +142,7 @@ function StepForm() {
     console.log(recipe);
 
     recipeRef.push(recipe);
-    alert("recipe successfully submitted!");
+    // alert("recipe successfully submitted!");
     firebase.database().ref("add-ingredient").remove();
   };
 
@@ -487,4 +487,4 @@ function StepForm() {
   );
 }
 
-export default StepForm;
+export default RecipeForm;

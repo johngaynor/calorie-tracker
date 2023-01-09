@@ -1,7 +1,7 @@
-import StepForm from "../../components/stepForm/stepForm";
+import RecipeForm from "../../components/newRecipe/recipeForm/recipeForm";
 
 function NewRecipe() {
-  return <StepForm></StepForm>;
+  return <RecipeForm></RecipeForm>;
 }
 
 export default NewRecipe;
