@@ -31,15 +31,6 @@ function FoodForm() {
   const [carbs, setCarbs] = useState("");
   const [fat, setFat] = useState("");
 
-  // console.log(category);
-  const customForm = document.getElementById("custom-category-row");
-  if (category === "custom") {
-    console.log("yes, custom is selected");
-    customForm.classList.add("show-custom");
-  } else {
-    customForm.classList.remove("show-custom");
-  }
-
   const createFood = (e) => {
     // making sure all form values are filled
     if (
@@ -103,6 +94,19 @@ function FoodForm() {
     });
   }, [formStep]);
 
+  // adds/removes custom category form box
+  useEffect(() => {
+    const customForm = document.getElementById("custom-category-row");
+    if (category === "custom") {
+      console.log("yes, custom is selected");
+      customForm.classList.add("visible");
+      customForm.classList.remove("invisible");
+    } else {
+      customForm.classList.remove("visible");
+      customForm.classList.add("invisible");
+    }
+  });
+
   return (
     <MDBContainer className="pb-5 page-container">
       <h3 className="p-3 basic-header">New Food Form</h3>
@@ -153,16 +157,18 @@ function FoodForm() {
             <MDBRow className="text-white px-3 my-1">
               To add a custom category, select "CUSTOM" from the dropdown menu.
             </MDBRow>
-            <MDBRow className="custom-category" id="custom-category-row">
+            <MDBRow
+              className="custom-category invisible"
+              id="custom-category-row"
+            >
               <MDBCol className="text-white">
                 <MDBInput
                   label="Custom Category"
                   type="text"
-                  className="custom-category"
                   onChange={(e) => {
-                    setName(e.target.value);
+                    // setName(e.target.value);
                   }}
-                  value={name}
+                  // value={name}
                   contrast
                 />
               </MDBCol>
