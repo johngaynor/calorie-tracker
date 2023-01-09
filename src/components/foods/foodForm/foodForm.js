@@ -23,47 +23,28 @@ function FoodForm() {
 
   // these are for food info
   const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
   const [size, setSize] = useState("");
-  const [meal, setMeal] = useState("");
   const [servings, setServings] = useState("");
   const [cal, setCal] = useState("");
   const [protein, setProtein] = useState("");
   const [carbs, setCarbs] = useState("");
   const [fat, setFat] = useState("");
 
-  const mealOnChange = (e) => {
-    setMeal(e.target.value);
-  };
-
-  const nameOnChange = (e) => {
-    setName(e.target.value);
-  };
-
-  // const servingsOnChange = (e) => {
-  //   setServings(e.target.value);
-  // };
-
-  const calOnChange = (e) => {
-    setCal(e.target.value);
-  };
-
-  const proteinOnChange = (e) => {
-    setProtein(e.target.value);
-  };
-
-  const carbsOnChange = (e) => {
-    setCarbs(e.target.value);
-  };
-
-  const fatOnChange = (e) => {
-    setFat(e.target.value);
-  };
+  // console.log(category);
+  const customForm = document.getElementById("custom-category-row");
+  if (category === "custom") {
+    console.log("yes, custom is selected");
+    customForm.classList.add("show-custom");
+  } else {
+    customForm.classList.remove("show-custom");
+  }
 
   const createFood = (e) => {
     // making sure all form values are filled
     if (
-      meal === "Select Meal" ||
-      meal === "" ||
+      category === "Select Meal" ||
+      category === "" ||
       // servings === "" ||
       name === "" ||
       cal === "" ||
@@ -75,14 +56,13 @@ function FoodForm() {
     } else {
       const foodRef = firebase.database().ref("foods");
       const food = {
-        meal,
         name,
-        // servings,
+        category,
+        size,
         cal,
         protein,
         carbs,
         fat,
-        complete: false,
       };
 
       // console.log(food);
@@ -96,8 +76,6 @@ function FoodForm() {
       setCarbs("");
       setFat("");
     }
-
-    // for some reason the box will reset for all of them except the one the user last entered *if* their next click was the submit button
   };
 
   //   multi step form functionality
@@ -146,11 +124,10 @@ function FoodForm() {
                 <MDBInput
                   label="Food Name"
                   type="text"
-                  id="recipe-form-grey"
                   onChange={(e) => {
-                    // setRecipeName(e.target.value);
+                    setName(e.target.value);
                   }}
-                  // value={recipeName}
+                  value={name}
                   contrast
                   required
                 />
@@ -159,22 +136,35 @@ function FoodForm() {
                 <Form.Select
                   aria-label="Default select"
                   size="md"
-                  //   id="recipe-form-category"
                   onChange={(e) => {
-                    // setRecipeCategory(e.target.value);
+                    setCategory(e.target.value);
                   }}
                 >
                   <option>Category (optional)</option>
+                  <option value="custom">CUSTOM</option>
                   <option value="drinks">drinks</option>
                   <option value="condiments">condiments</option>
                   <option value="chips">chips</option>
                   <option value="snacks">snacks</option>
+                  {/* will want to sort these alphabetically */}
                 </Form.Select>
               </MDBCol>
             </MDBRow>
-            <MDBRow>
+            <MDBRow className="text-white px-3 my-1">
+              To add a custom category, select "CUSTOM" from the dropdown menu.
+            </MDBRow>
+            <MDBRow className="custom-category" id="custom-category-row">
               <MDBCol className="text-white">
-                SOMETHING TO ADD CATEGORIES
+                <MDBInput
+                  label="Custom Category"
+                  type="text"
+                  className="custom-category"
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  value={name}
+                  contrast
+                />
               </MDBCol>
             </MDBRow>
             <MDBRow className="recipe-form-btns">

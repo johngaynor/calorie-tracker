@@ -33,3 +33,12 @@
 .submit-btn {
   background-color: red;
 }
+
+.custom-category {
+  /* display: none; */
+  visibility: hidden;
+}
+
+.show-custom {
+  visibility: visible;
+}
