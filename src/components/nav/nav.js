@@ -45,7 +45,7 @@ function Navigation() {
               <MDBNavbarLink href="/new-recipe">New Recipe</MDBNavbarLink>
             </MDBNavbarItem>
           </MDBNavbarNav>
-          <MacroCalcNav></MacroCalcNav>
+          {/* <MacroCalcNav></MacroCalcNav> */}
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>

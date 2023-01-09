@@ -21,7 +21,7 @@ import styles from "./stepForm.css";
 
 function StepForm() {
   // these are for form functionality
-  const [formStep, setFormStep] = useState(1);
+  const [formStep, setFormStep] = useState(0);
 
   // these are for recipe submission
   const [recipeName, setRecipeName] = useState("");
@@ -260,6 +260,7 @@ function StepForm() {
                 <Form.Select
                   aria-label="Default select"
                   size="md"
+                  className="form-unit"
                   onChange={(e) => {
                     setUnit(e.target.value);
                   }}
@@ -376,15 +377,15 @@ function StepForm() {
               <MDBCol className="d-flex flex-start my-auto">
                 <h4 className="text-decoration-underline">Review Recipe</h4>
               </MDBCol>
-              <MDBCol className="col-5">
-                <p>
+              <MDBCol className="col-sm-5">
+                <p className="review-tip">
                   Tip: to edit any information, click on the section you want to
                   edit and you will be taken to that section of the form.
                 </p>
               </MDBCol>
             </MDBRow>
             <MDBRow className="review-recipe p-3 mb-5 mx-1">
-              <MDBCol className="col-3" onClick={() => setFormStep(0)}>
+              <MDBCol onClick={() => setFormStep(0)}>
                 <p className="review-title">Recipe Name:</p>
                 <div className="review-recipe-box">{recipeName}</div>
                 <p className="review-title">Category:</p>
@@ -394,10 +395,12 @@ function StepForm() {
                   {recipeDesc}
                 </div>
               </MDBCol>
-              <MDBCol className="col-9 mx-auto" onClick={() => setFormStep(1)}>
-                {/* <IngredientList></IngredientList> */}
+              <MDBCol
+                className="col-sm-8 col-review-table"
+                onClick={() => setFormStep(1)}
+              >
                 <MDBTable>
-                  <MDBTableHead className="text-white">
+                  <MDBTableHead className="text-white review-table-head">
                     <tr>
                       <th scope="col" className="col-4">
                         Ingredient
@@ -407,6 +410,9 @@ function StepForm() {
                       </th>
                       <th scope="col">Calories</th>
                       <th scope="col">P/C/F</th>
+                      <th scope="col" className="xs-header">
+                        Info
+                      </th>
                     </tr>
                   </MDBTableHead>
                   <MDBTableBody>
@@ -456,7 +462,7 @@ function StepForm() {
               />
             </MDBProgress>
             <MDBRow className="pt-3 text-white">
-              <MDBCol className="col-5 mx-auto mt-5">
+              <MDBCol className="col-sm-5 mx-auto mt-5">
                 <p>
                   Thanks for submitting your recipe! You can view it as well as
                   other submitted recipes <a href="/recipes">here.</a>

@@ -21,12 +21,22 @@ function Ingredient({ ingredient }) {
   };
 
   return (
-    <tr id="food-display">
+    <tr id="food-display" className="ingredient-display">
       <td>
         <div className="mx-auto" id="food-meal-name-display">
           <p className="fw-bold mb-1" id="food-name-display">
             {ingredient.name}
           </p>
+          <MDBBtn
+            color="link"
+            rounded
+            size="sm"
+            className="mx-auto"
+            id="ingredient-xs-btn"
+            onClick={deleteIngredient}
+          >
+            Delete
+          </MDBBtn>
         </div>
       </td>
       <td className="only-sm">
@@ -58,12 +68,15 @@ function Ingredient({ ingredient }) {
       <td id="food-macros-display">
         {ingredient.protein}/{ingredient.carbs}/{ingredient.fat}
       </td>
-      <td
-        id="food-log-btns"
-        className="bg-danger d-flex justify-content-center"
-      >
+      <td id="food-log-btns">
         <div>
-          <MDBBtn color="link" rounded size="sm" onClick={deleteIngredient}>
+          <MDBBtn
+            color="link"
+            rounded
+            size="sm"
+            className="mx-auto"
+            onClick={deleteIngredient}
+          >
             Delete
           </MDBBtn>
           {/* <MDBBtn color="link" rounded size="sm">

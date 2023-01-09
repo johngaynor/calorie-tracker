@@ -57,7 +57,6 @@
   border-radius: 5px;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   color: white;
   margin-bottom: 10px;
   background-color: var(--site-grey);
@@ -67,5 +66,30 @@
   margin: 0 auto;
   color: white;
   text-align: left;
-  /* background-color: var(--site-grey); */
+}
+
+.xs-header {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .review-recipe {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .review-table-head th:nth-child(2),
+  th:nth-child(3),
+  th:nth-child(4) {
+    display: none;
+  }
+  .xs-header {
+    display: table-cell;
+  }
+
+  .form-card .review-tip {
+    font-size: 13px;
+  }
 }

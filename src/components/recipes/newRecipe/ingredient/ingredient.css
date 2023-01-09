@@ -1,4 +1,5 @@
-.only-sm {
+.only-sm,
+#ingredient-xs-btn {
   display: none;
 }
 
@@ -7,10 +8,23 @@
     display: table-cell;
   }
 
-  tr td:nth-child(3),
-  td:nth-child(4),
-  td:nth-child(5) {
-    /* background-color: green; */
+  .ingredient-display td:nth-child(3),
+  .ingredient-display td:nth-child(4),
+  .ingredient-display td:nth-child(5) {
     display: none;
+  }
+}
+
+@media screen and (max-width: 421px) {
+  .form-unit {
+    margin-top: 22px;
+  }
+
+  tr td:nth-child(6) {
+    display: none;
+  }
+
+  #ingredient-xs-btn {
+    display: flex;
   }
 }
