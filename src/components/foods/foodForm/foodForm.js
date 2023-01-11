@@ -39,9 +39,7 @@ function FoodForm() {
         const allValid = inputs.every((input) => input.reportValidity());
 
         if (formStep === 1) {
-          console.log("this is step 2");
           let unitInput = document.getElementById("food-input-unit").value;
-          console.log(unitInput);
           if (unitInput === "unit") {
             alert("Please select a unit of measurement.");
           } else if (allValid) {
@@ -75,12 +73,16 @@ function FoodForm() {
     }
   });
 
-  const submitFood = () => {
-    if (unit === "") {
-      // alert("unit is empty, submitFood()");
-      // console.log("NOT WORKING unit: " + unit);
+  function submitFood() {
+    if (
+      unit === "" ||
+      size === "" ||
+      cal === "" ||
+      protein === "" ||
+      carbs === "" ||
+      fat === ""
+    ) {
     } else {
-      console.log("WORKING unit");
       const foodRef = firebase.database().ref("foods");
       const food = {
         name: name,
@@ -96,7 +98,7 @@ function FoodForm() {
       console.log(food);
       // foodRef.push(food);
     }
-  };
+  }
 
   return (
     <MDBContainer className="pb-5 page-container">
@@ -187,8 +189,7 @@ function FoodForm() {
                 valuemax={100}
               />
             </MDBProgress>
-
-            <MDBRow className="pt-5 mb-4">
+            <MDBRow className="mb-2 pt-5">
               <MDBCol className="col-8">
                 <MDBInput
                   type="number"
@@ -199,6 +200,7 @@ function FoodForm() {
                   value={size}
                   contrast
                   required
+                  className="needs-validation"
                 />
               </MDBCol>
               <MDBCol>
