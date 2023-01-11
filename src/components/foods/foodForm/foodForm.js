@@ -98,7 +98,7 @@ function FoodForm() {
       fat === ""
     ) {
     } else {
-      const foodRef = firebase.database().ref("foods");
+      const foodRef = firebase.database().ref("foods").child(category);
       const food = {
         name: name,
         category: finalCategory,
@@ -110,8 +110,7 @@ function FoodForm() {
         fat: fat,
       };
 
-      console.log(food);
-      // foodRef.push(food);
+      foodRef.push(food);
     }
   }
 
