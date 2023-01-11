@@ -29,15 +29,3 @@
 #input-fat {
   background-color: var(--site-greyblue);
 }
-
-.submit-btn {
-  background-color: red;
-}
-/* 
-.custom-category {
-  visibility: hidden;
-}
-
-.show-custom {
-  visibility: visible;
-} */

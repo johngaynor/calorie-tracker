@@ -6,13 +6,8 @@ import {
   MDBCol,
   MDBContainer,
   MDBBtn,
-  MDBTable,
-  MDBTableHead,
   MDBProgress,
   MDBProgressBar,
-  MDBTextArea,
-  MDBTabsContent,
-  MDBTableBody,
 } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
 import styles from "./foodForm.css";
@@ -24,50 +19,13 @@ function FoodForm() {
   // these are for food info
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
+  const [unit, setUnit] = useState("");
+  const [validUnit, setValidUnit] = useState(true);
   const [size, setSize] = useState("");
-  const [servings, setServings] = useState("");
   const [cal, setCal] = useState("");
   const [protein, setProtein] = useState("");
   const [carbs, setCarbs] = useState("");
   const [fat, setFat] = useState("");
-
-  const createFood = (e) => {
-    // making sure all form values are filled
-    if (
-      category === "Select Meal" ||
-      category === "" ||
-      // servings === "" ||
-      name === "" ||
-      cal === "" ||
-      protein === "" ||
-      carbs === "" ||
-      fat === ""
-    ) {
-      alert("please fill all fields before submitting.");
-    } else {
-      const foodRef = firebase.database().ref("foods");
-      const food = {
-        name,
-        category,
-        size,
-        cal,
-        protein,
-        carbs,
-        fat,
-      };
-
-      // console.log(food);
-      foodRef.push(food);
-
-      // setMeal("");
-      setName("");
-      // setServings("");
-      setCal("");
-      setProtein("");
-      setCarbs("");
-      setFat("");
-    }
-  };
 
   //   multi step form functionality
   useEffect(() => {
@@ -79,7 +37,17 @@ function FoodForm() {
       if (e.target.matches("[data-next]")) {
         const inputs = [...formSteps[formStep].querySelectorAll("input")];
         const allValid = inputs.every((input) => input.reportValidity());
-        if (allValid) {
+
+        if (formStep === 1) {
+          console.log("this is step 2");
+          let unitInput = document.getElementById("food-input-unit").value;
+          console.log(unitInput);
+          if (unitInput === "unit") {
+            alert("Please select a unit of measurement.");
+          } else if (allValid) {
+            setFormStep(formStep + 1);
+          }
+        } else if (allValid) {
           setFormStep(formStep + 1);
         }
       } else if (e.target.matches("[data-previous]")) {
@@ -106,6 +74,29 @@ function FoodForm() {
       customForm.classList.add("invisible");
     }
   });
+
+  const submitFood = () => {
+    if (unit === "") {
+      // alert("unit is empty, submitFood()");
+      // console.log("NOT WORKING unit: " + unit);
+    } else {
+      console.log("WORKING unit");
+      const foodRef = firebase.database().ref("foods");
+      const food = {
+        name: name,
+        category: category,
+        servingSize: size,
+        unit: unit,
+        cal: cal,
+        protein: protein,
+        carbs: carbs,
+        fat: fat,
+      };
+
+      console.log(food);
+      // foodRef.push(food);
+    }
+  };
 
   return (
     <MDBContainer className="pb-5 page-container">
@@ -196,29 +187,18 @@ function FoodForm() {
                 valuemax={100}
               />
             </MDBProgress>
+
             <MDBRow className="pt-5 mb-4">
               <MDBCol className="col-8">
                 <MDBInput
-                  id="recipe-form-grey"
-                  label="Ingredient Name"
-                  type="text"
-                  onChange={(e) => {
-                    // setIngredientName(e.target.value);
-                  }}
-                  contrast
-                  // value={ingredientName}
-                />
-              </MDBCol>
-              <MDBCol>
-                <MDBInput
-                  id="recipe-form-grey"
                   type="number"
                   label="Serving Size"
                   onChange={(e) => {
-                    // setSize(e.target.value);
+                    setSize(e.target.value);
                   }}
-                  // value={size}
+                  value={size}
                   contrast
+                  required
                 />
               </MDBCol>
               <MDBCol>
@@ -227,16 +207,23 @@ function FoodForm() {
                   size="md"
                   className="form-unit"
                   onChange={(e) => {
-                    // setUnit(e.target.value);
+                    setUnit(e.target.value);
                   }}
+                  defaultValue="unit"
+                  id="food-input-unit"
                 >
-                  <option>Unit</option>
+                  <option disabled value="unit">
+                    Unit
+                  </option>
                   <option value="grams">grams</option>
                   <option value="pcs">pcs</option>
                   <option value="oz">oz</option>
                   <option value="ml">ml</option>
                 </Form.Select>
               </MDBCol>
+            </MDBRow>
+            <MDBRow className="text-white px-3 my-1">
+              Add nutritional information for one (1) serving.
             </MDBRow>
             <MDBRow>
               <MDBCol>
@@ -249,6 +236,7 @@ function FoodForm() {
                   }}
                   value={cal}
                   contrast
+                  required
                 />
               </MDBCol>
               <MDBCol>
@@ -261,6 +249,7 @@ function FoodForm() {
                   }}
                   value={protein}
                   contrast
+                  required
                 />
               </MDBCol>
               <MDBCol>
@@ -273,6 +262,7 @@ function FoodForm() {
                     setCarbs(e.target.value);
                   }}
                   value={carbs}
+                  required
                 />
               </MDBCol>
               <MDBCol>
@@ -285,33 +275,17 @@ function FoodForm() {
                     setFat(e.target.value);
                   }}
                   value={fat}
+                  required
                 />
               </MDBCol>
             </MDBRow>
-            <MDBRow className="mt-4">
-              <MDBCol>
-                <MDBBtn
-                  outline
-                  color="light"
-                  type="button"
-                  className="border-1 bg-danger w-100"
-                  // onClick={submitIngredient}
-                >
-                  Add Ingredient
-                </MDBBtn>
-              </MDBCol>
-            </MDBRow>
-            <MDBRow className="mb-5">
-              {/* <IngredientList></IngredientList> */}
-            </MDBRow>
-
             <MDBRow className="recipe-form-btns">
               <MDBBtn
                 outline
                 color="light"
                 className="border-1 next bg-danger"
                 type="button"
-                // onClick={submitRecipe}
+                onClick={submitFood}
                 data-next
               >
                 Submit
@@ -342,7 +316,7 @@ function FoodForm() {
               <MDBCol className="col-sm-5 mx-auto mt-5">
                 <p>
                   Thanks for submitting your food! You can view it as well as
-                  other submitted foods <a href="/recipes">here.</a>
+                  other submitted foods <a href="/foods">here.</a>
                 </p>
               </MDBCol>
             </MDBRow>
