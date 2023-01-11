@@ -1,4 +1,3 @@
-import Food from "../food/food";
 import React, { useState, useEffect } from "react";
 import firebase from "../../../utilities/firebase";
 import {
@@ -10,30 +9,37 @@ import {
   MDBRow,
   MDBContainer,
 } from "mdb-react-ui-kit";
-import styles from "./foodList.css";
+import FoodList from "../foodList/foodList";
 
-function FoodList({ category }) {
-  // const [foodList, setFoodList] = useState();
-  // let [total, setTotal] = useState(0);
+function CategoryList() {
+  const [categoryList, setCategoryList] = useState("");
 
-  // useEffect(() => {
-  //   const foodRef = firebase.database().ref("foods");
-  //   foodRef.on("value", (snapshot) => {
-  //     const foods = snapshot.val();
-  //     const foodList = [];
-  //     for (let id in foods) {
-  //       foodList.push({ id, ...foods[id] });
-  //     }
-
-  //     setFoodList(foodList);
-  //     console.log(foodList);
-  //   });
-  // }, []);
+  useEffect(() => {
+    const categoryListRef = firebase.database().ref("foods");
+    categoryListRef.on("value", (snapshot) => {
+      const categories = snapshot.val();
+      const categoryList = [];
+      for (let categoryName in categories) {
+        categoryList.push({ categoryName, ...categories[categoryName] });
+      }
+      const categoryNames = [];
+      categoryList.forEach(function (category, index) {
+        categoryNames.push(category.categoryName);
+      });
+      setCategoryList(categoryNames);
+    });
+  }, []);
+  console.log(categoryList);
 
   return (
     <MDBContainer fluid>
       {/* begin for each loop */}
-      <h3>{category}</h3>
+      {categoryList
+        ? categoryList.map((category, index) => (
+            <FoodList category={category} key={index} />
+          ))
+        : null}
+
       <MDBContainer className="food-table p-4 w-75">
         <MDBTable align="middle" className="w-100 mx-auto text-white">
           <MDBTableHead>
@@ -56,9 +62,4 @@ function FoodList({ category }) {
   );
 }
 
-export default FoodList;
-
-// old loop for foods
-// {foodList
-// ? foodList.map((food, index) => <Food food={food} key={index} />)
-// : ""}
+export default CategoryList;

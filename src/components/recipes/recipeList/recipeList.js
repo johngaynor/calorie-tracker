@@ -36,7 +36,7 @@ function RecipeList() {
   return (
     <MDBContainer fluid>
       <h3 className="p-3 basic-header">Your Recipes</h3>
-      <MDBContainer fluid className="recipe-table p-3 my-auto w-75">
+      <MDBContainer fluid className="p-3 my-auto w-75">
         {recipeList
           ? recipeList.map((recipe, index) => (
               <Recipe recipe={recipe} key={index} />

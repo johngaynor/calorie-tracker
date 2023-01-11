@@ -184,8 +184,11 @@ function RecipeForm() {
                   onChange={(e) => {
                     setRecipeCategory(e.target.value);
                   }}
+                  defaultValue="default-category"
                 >
-                  <option>Category (optional)</option>
+                  <option value="default-category" disabled>
+                    Category (optional)
+                  </option>
                   <option value="breakfast">Breakfast</option>
                   <option value="lunch">Lunch</option>
                   <option value="dinner">Dinner</option>
