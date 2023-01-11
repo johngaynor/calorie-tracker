@@ -83,27 +83,11 @@ function FoodForm() {
       for (let categoryName in categories) {
         categoryList.push({ categoryName, ...categories[categoryName] });
       }
-      // console.log(categoryList);
       const categoryNames = [];
       categoryList.forEach(function (category, index) {
         categoryNames.push(category.categoryName);
       });
-      // console.log(categoryNames);
       setCategoryList(categoryNames);
-      // console.log(categories);
-      // categories.forEach(function (category, index) {
-      //   console.log(category);
-      // });
-
-      // for (let categoryName in categories) {
-      //   categoryList.push({ categoryName, ...categories[categoryName] });
-      // }
-      // console.log(categoryList);
-      // categoryList.forEach(function (category, index) {
-      //   console.log(category.categoryName, index);
-      // });
-      // setCategoryList(categoryList);
-      // console.log(categoryList[0].categoryName);
     });
   }, []);
 
@@ -147,16 +131,7 @@ function FoodForm() {
         fat: fat,
       };
 
-      // foodRef.push(food);
-      // console.log(category);
-      // if (category === "custom") {
-      //   console.log("custom category: " + customCategory);
-      //   const userCategoryRef = firebase
-      //     .database()
-      //     .ref("user-categories")
-      //     .child(`${customCategory}`);
-      //   userCategoryRef.push(`${customCategory}`);
-      // }
+      foodRef.push(food);
     }
   }
 
@@ -209,11 +184,7 @@ function FoodForm() {
                         </option>
                       ))
                     : null}
-                  {/* <option value="drinks">drinks</option>
-                  <option value="condiments">condiments</option>
-                  <option value="chips">chips</option>
-                  <option value="snacks">snacks</option> */}
-                  {/* will want to sort these alphabetically */}
+                  {/* will want to sort these alphabetically if the list gets too big*/}
                 </Form.Select>
               </MDBCol>
             </MDBRow>
@@ -270,10 +241,9 @@ function FoodForm() {
                   value={size}
                   contrast
                   required
-                  className="needs-validation"
                 />
               </MDBCol>
-              <MDBCol>
+              <MDBCol className="tester-col">
                 <Form.Select
                   aria-label="Default select"
                   size="md"
