@@ -18,6 +18,7 @@ function FoodForm() {
 
   // these are for food info
   const [name, setName] = useState("");
+  const [categoryList, setCategoryList] = useState("");
   const [category, setCategory] = useState("");
   const [customCategory, setCustomCategory] = useState("");
   const [finalCategory, setFinalCategory] = useState("");
@@ -73,6 +74,39 @@ function FoodForm() {
     }
   });
 
+  // creates local list of user categories
+  useEffect(() => {
+    const categoryListRef = firebase.database().ref("foods");
+    categoryListRef.on("value", (snapshot) => {
+      const categories = snapshot.val();
+      const categoryList = [];
+      for (let categoryName in categories) {
+        categoryList.push({ categoryName, ...categories[categoryName] });
+      }
+      // console.log(categoryList);
+      const categoryNames = [];
+      categoryList.forEach(function (category, index) {
+        categoryNames.push(category.categoryName);
+      });
+      // console.log(categoryNames);
+      setCategoryList(categoryNames);
+      // console.log(categories);
+      // categories.forEach(function (category, index) {
+      //   console.log(category);
+      // });
+
+      // for (let categoryName in categories) {
+      //   categoryList.push({ categoryName, ...categories[categoryName] });
+      // }
+      // console.log(categoryList);
+      // categoryList.forEach(function (category, index) {
+      //   console.log(category.categoryName, index);
+      // });
+      // setCategoryList(categoryList);
+      // console.log(categoryList[0].categoryName);
+    });
+  }, []);
+
   // updates the finalCategory useState();
   useEffect(() => {
     if (category === "custom") {
@@ -98,7 +132,10 @@ function FoodForm() {
       fat === ""
     ) {
     } else {
-      const foodRef = firebase.database().ref("foods").child(category);
+      const foodRef = firebase
+        .database()
+        .ref("foods")
+        .child(`${finalCategory}`);
       const food = {
         name: name,
         category: finalCategory,
@@ -110,7 +147,16 @@ function FoodForm() {
         fat: fat,
       };
 
-      foodRef.push(food);
+      // foodRef.push(food);
+      // console.log(category);
+      // if (category === "custom") {
+      //   console.log("custom category: " + customCategory);
+      //   const userCategoryRef = firebase
+      //     .database()
+      //     .ref("user-categories")
+      //     .child(`${customCategory}`);
+      //   userCategoryRef.push(`${customCategory}`);
+      // }
     }
   }
 
@@ -156,10 +202,17 @@ function FoodForm() {
                     Category (optional)
                   </option>
                   <option value="custom">CUSTOM</option>
-                  <option value="drinks">drinks</option>
+                  {categoryList
+                    ? categoryList.map((category, index) => (
+                        <option key={index} value={category}>
+                          {category}
+                        </option>
+                      ))
+                    : null}
+                  {/* <option value="drinks">drinks</option>
                   <option value="condiments">condiments</option>
                   <option value="chips">chips</option>
-                  <option value="snacks">snacks</option>
+                  <option value="snacks">snacks</option> */}
                   {/* will want to sort these alphabetically */}
                 </Form.Select>
               </MDBCol>
