@@ -19,8 +19,9 @@ function FoodForm() {
   // these are for food info
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
+  const [customCategory, setCustomCategory] = useState("");
+  const [finalCategory, setFinalCategory] = useState("");
   const [unit, setUnit] = useState("");
-  const [validUnit, setValidUnit] = useState(true);
   const [size, setSize] = useState("");
   const [cal, setCal] = useState("");
   const [protein, setProtein] = useState("");
@@ -64,12 +65,26 @@ function FoodForm() {
   useEffect(() => {
     const customForm = document.getElementById("custom-category-row");
     if (category === "custom") {
-      console.log("yes, custom is selected");
       customForm.classList.add("visible");
       customForm.classList.remove("invisible");
     } else {
       customForm.classList.remove("visible");
       customForm.classList.add("invisible");
+    }
+  });
+
+  // updates the finalCategory useState();
+  useEffect(() => {
+    if (category === "custom") {
+      if (customCategory === "") {
+        setFinalCategory("Miscellaneous");
+      } else {
+        setFinalCategory(customCategory);
+      }
+    } else if (category === "") {
+      setFinalCategory("Miscellaneous");
+    } else {
+      setFinalCategory(category);
     }
   });
 
@@ -86,7 +101,7 @@ function FoodForm() {
       const foodRef = firebase.database().ref("foods");
       const food = {
         name: name,
-        category: category,
+        category: finalCategory,
         servingSize: size,
         unit: unit,
         cal: cal,
@@ -136,8 +151,11 @@ function FoodForm() {
                   onChange={(e) => {
                     setCategory(e.target.value);
                   }}
+                  defaultValue="default-category"
                 >
-                  <option>Category (optional)</option>
+                  <option disabled value="default-category">
+                    Category (optional)
+                  </option>
                   <option value="custom">CUSTOM</option>
                   <option value="drinks">drinks</option>
                   <option value="condiments">condiments</option>
@@ -159,9 +177,9 @@ function FoodForm() {
                   label="Custom Category"
                   type="text"
                   onChange={(e) => {
-                    // setName(e.target.value);
+                    setCustomCategory(e.target.value);
                   }}
-                  // value={name}
+                  value={customCategory}
                   contrast
                 />
               </MDBCol>
