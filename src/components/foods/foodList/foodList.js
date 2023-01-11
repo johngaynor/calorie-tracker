@@ -13,35 +13,36 @@ import {
 import styles from "./foodList.css";
 
 function FoodList({ category }) {
-  // const [foodList, setFoodList] = useState();
-  // let [total, setTotal] = useState(0);
+  const [foodList, setFoodList] = useState();
+  let [total, setTotal] = useState(0);
 
-  // useEffect(() => {
-  //   const foodRef = firebase.database().ref("foods");
-  //   foodRef.on("value", (snapshot) => {
-  //     const foods = snapshot.val();
-  //     const foodList = [];
-  //     for (let id in foods) {
-  //       foodList.push({ id, ...foods[id] });
-  //     }
+  useEffect(() => {
+    const foodRef = firebase.database().ref("foods").child(`${category}`);
+    foodRef.on("value", (snapshot) => {
+      const foods = snapshot.val();
+      const foodList = [];
+      for (let id in foods) {
+        foodList.push({ id, ...foods[id] });
+      }
 
-  //     setFoodList(foodList);
-  //     console.log(foodList);
-  //   });
-  // }, []);
+      setFoodList(foodList);
+      // console.log(`${category}` + " foodList: " + foodList);
+    });
+  }, []);
 
   return (
-    <MDBContainer fluid>
+    <MDBContainer fluid className="food-table mb-5">
       {/* begin for each loop */}
+      {/* click on the name to show all the foods under that category,  */}
       <h3>{category}</h3>
-      <MDBContainer className="food-table p-4 w-75">
+      <MDBContainer fluid className="p-4">
         <MDBTable align="middle" className="w-100 mx-auto text-white">
           <MDBTableHead>
             <tr>
               <th scope="col" className="col-4">
-                Food/Meal
+                Food
               </th>
-              <th scope="col">Servings</th>
+              <th scope="col">Weight</th>
               <th scope="col">Calories</th>
               <th scope="col">P/C/F</th>
               <th scope="col" className="col-2">
@@ -49,6 +50,11 @@ function FoodList({ category }) {
               </th>
             </tr>
           </MDBTableHead>
+          <MDBTableBody>
+            {foodList
+              ? foodList.map((food, index) => <Food food={food} key={index} />)
+              : null}
+          </MDBTableBody>
         </MDBTable>
       </MDBContainer>
       {/* end loop */}

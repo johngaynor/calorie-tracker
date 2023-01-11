@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MDBBadge,
   MDBBtn,
   MDBTable,
   MDBTableHead,
   MDBTableBody,
+  MDBContainer,
 } from "mdb-react-ui-kit";
 import { Container } from "react-bootstrap";
 import firebase from "../../../utilities/firebase";
@@ -12,213 +13,82 @@ import styles from "./food.css";
 import { faGoodreads } from "@fortawesome/free-brands-svg-icons";
 
 function Food({ food }) {
-  const [isEditing, setIsEditing] = useState(false);
-  // this area is for updating the food
-  const [name, setName] = useState();
-  // const [servings, setServings] = useState();
-  const [cal, setCal] = useState();
-  const [protein, setProtein] = useState();
-  const [carbs, setCarbs] = useState();
-  const [fat, setFat] = useState();
+  const [weight, setWeight] = useState("");
+  const [calcCal, setCalcCal] = useState(0);
+  const [calcProtein, setCalcProtein] = useState(0);
+  const [calcCarbs, setCalcCarbs] = useState(0);
+  const [calcFat, setCalcFat] = useState(0);
 
-  const deleteFood = () => {
-    const foodRef = firebase.database().ref("foods").child(food.id);
+  // updates calculated macros
+  useEffect(() => {
+    let calcCal = ((weight * food.cal) / food.servingSize).toFixed(0);
+    let calcProtein = ((weight * food.protein) / food.servingSize).toFixed(1);
+    let calcCarbs = ((weight * food.carbs) / food.servingSize).toFixed(1);
+    let calcFat = ((weight * food.fat) / food.servingSize).toFixed(1);
 
-    foodRef.remove();
-  };
+    setCalcCal(calcCal);
+    setCalcProtein(calcProtein);
+    setCalcCarbs(calcCarbs);
+    setCalcFat(calcFat);
 
-  const updateFood = () => {
-    const foodRef = firebase.database().ref("foods").child(food.id);
+    // I want to figure out how to show just 0 instead of 0.0
+  }, [weight]);
 
-    foodRef.update({
-      complete: !food.complete,
-    });
-  };
+  // const deleteFood = () => {
+  //   const foodRef = firebase.database().ref("foods").child(food.id);
 
-  // these are the form listeners
-  const nameOnChange = (e) => {
-    setName(e.target.value);
-    // console.log(newName);
-  };
-
-  // const servingsOnChange = (e) => {
-  //   setServings(e.target.value);
+  //   foodRef.remove();
   // };
 
-  const calOnChange = (e) => {
-    setCal(e.target.value);
-  };
-
-  const proteinOnChange = (e) => {
-    setProtein(e.target.value);
-  };
-
-  const carbsOnChange = (e) => {
-    setCarbs(e.target.value);
-  };
-
-  const fatOnChange = (e) => {
-    setFat(e.target.value);
-  };
-
-  const updateEditFood = () => {
-    setIsEditing(false);
-    const foodRef = firebase.database().ref("foods").child(food.id);
-
-    if (name === "") {
-    }
-    foodRef.update({
-      name: name,
-      // servings: servings,
-      cal: cal,
-      protein: protein,
-      carbs: carbs,
-      fat: fat,
-    });
-
-    console.log("UPDATED FOOD");
-    // still need to work out updating bugs
-  };
-
   return (
-    <MDBTableBody>
-      {isEditing ? (
-        <tr id="food-display">
-          <td>
-            <div className="mx-auto" id="food-meal-name-display">
-              <input
-                id="edit-name-input"
-                type="text"
-                className="food-input-boxes"
-                placeholder={food.name}
-                value={food.name}
-                onChange={nameOnChange}
-              />
-              <p className="text-muted mb-0" id="food-meal-display">
-                {food.meal}
-              </p>
-            </div>
-          </td>
-          <td>
-            {/* <input
-              id="edit-servings-input"
-              type="number"
-              className="food-input-boxes"
-              placeholder={food.servings}
-              value={food.servings}
-              onChange={servingsOnChange}
-            /> */}
-            <p className="text-muted mb-0">/size</p>
-          </td>
-          <td>
-            <input
-              id="edit-cal-input"
-              type="number"
-              className="food-input-boxes"
-              placeholder={food.cal}
-              value={food.cal}
-              onChange={calOnChange}
-            />
-          </td>
-          <td id="food-macros-display">
-            <div>
-              <input
-                id="edit-protein-input"
-                type="number"
-                className="food-input-boxes"
-                placeholder={food.protein}
-                value={food.protein}
-                onChange={proteinOnChange}
-              />{" "}
-              /
-              <input
-                id="edit-carbs-input"
-                type="number"
-                className="food-input-boxes"
-                placeholder={food.carbs}
-                value={food.carbs}
-                onChange={carbsOnChange}
-              />{" "}
-              /
-              <input
-                id="edit-fat-input"
-                type="number"
-                className="food-input-boxes"
-                placeholder={food.fat}
-                value={food.fat}
-                onChange={fatOnChange}
-              />
-            </div>
-          </td>
-          <td id="food-log-btns">
-            <div>
-              <MDBBtn color="link" rounded size="sm" onClick={deleteFood}>
-                Delete
-              </MDBBtn>
-              <MDBBtn
-                color="link"
-                rounded
-                size="sm"
-                onClick={updateEditFood}
-                // this is just here to set it back to default
-              >
-                Submit
-              </MDBBtn>
-            </div>
-          </td>
-        </tr>
-      ) : (
-        <tr id="food-display" className={food.complete ? "complete" : ""}>
-          <td>
-            <div className="mx-auto" id="food-meal-name-display">
-              <p className="fw-bold mb-1" id="food-name-display">
-                {food.name}
-              </p>
-              <p className="text-muted mb-0" id="food-meal-display">
-                {food.meal}
-              </p>
-            </div>
-          </td>
-          {/* <td>
-            <p className="fw-normal mb-1" id="food-servings-display">
-              {food.servings}
-            </p>
-            <p className="text-muted mb-0">/size</p>
-          </td> */}
-          <td>
-            <MDBBadge
-              color="success"
-              pill
-              className="d-flex"
-              id="food-cal-display"
-            >
-              {food.cal}
-            </MDBBadge>
-          </td>
-          <td id="food-macros-display">
-            {food.protein}/{food.carbs}/{food.fat}
-          </td>
-          <td id="food-log-btns">
-            <div>
-              <MDBBtn color="link" rounded size="sm" onClick={updateFood}>
-                ADD TO LOG
-              </MDBBtn>
-              <MDBBtn color="link" rounded size="sm" onClick={deleteFood}>
-                Delete
-              </MDBBtn>
-              <MDBBtn
-                color="link"
-                rounded
-                size="sm"
-                onClick={() => setIsEditing(true)}
-              >
-                Edit
-              </MDBBtn>
-            </div>
-          </td>
-        </tr>
-      )}
-    </MDBTableBody>
+    <tr id="food-display">
+      <td>
+        <div className="mx-auto" id="food-meal-name-display">
+          <p className="fw-bold mb-1" id="food-name-display">
+            {food.name}
+          </p>
+        </div>
+      </td>
+      <td>
+        <input
+          id="edit-weight-input"
+          type="number"
+          className="food-input-boxes"
+          onChange={(e) => setWeight(e.target.value)}
+          value={weight}
+          placeholder="0"
+        />
+        <p className="text-muted mb-0">in {food.unit}</p>
+      </td>
+      <td>
+        <MDBBadge color="success" pill className="cal-pill">
+          {calcCal}
+        </MDBBadge>
+      </td>
+      <td id="food-macros-display">
+        {calcProtein}/{calcCarbs}/{calcFat}
+      </td>
+      <td id="food-log-btns">
+        <div className="d-flex">
+          <MDBBtn
+            color="link"
+            rounded
+            size="sm"
+            // onClick={updateFood}
+          >
+            ADD TO LOG
+          </MDBBtn>
+          <MDBBtn
+            color="link"
+            rounded
+            size="sm"
+            //  onClick={deleteFood}
+          >
+            Delete
+          </MDBBtn>
+        </div>
+      </td>
+    </tr>
   );
 }
 
