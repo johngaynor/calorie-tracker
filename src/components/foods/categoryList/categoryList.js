@@ -31,7 +31,7 @@ function CategoryList() {
   }, []);
 
   return (
-    <MDBContainer fluid>
+    <MDBContainer fluid className="w-100">
       {categoryList
         ? categoryList.map((category, index) => (
             <FoodList category={category} key={index} />

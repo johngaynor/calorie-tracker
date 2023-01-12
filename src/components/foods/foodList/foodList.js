@@ -31,11 +31,11 @@ function FoodList({ category }) {
   }, []);
 
   return (
-    <MDBContainer fluid className="food-table mb-5">
+    <MDBContainer className="food-table mx-auto">
       {/* begin for each loop */}
       {/* click on the name to show all the foods under that category,  */}
       <h3>{category}</h3>
-      <MDBContainer fluid className="p-4">
+      <MDBContainer className="p-md-4">
         <MDBTable align="middle" className="w-100 mx-auto text-white">
           <MDBTableHead>
             <tr>

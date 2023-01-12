@@ -88,6 +88,17 @@ function Food({ food }) {
     // can't think of a better way to get this to reload, need to update foodList in "foodList.js" but can't access that useEffect from here
   };
 
+  const submitFood = () => {
+    if (weight === "" || "0") {
+      alert("please add weight before submitting to your log.");
+    } else {
+      setAddLog(false);
+      setDeleteRecipe(false);
+      alert("tried to submit food");
+      // not sure if I want to refresh the page or just clear it out, probably just set setWeight to 0
+    }
+  };
+
   return (
     <tr id="food-display">
       <td>
@@ -169,7 +180,7 @@ function Food({ food }) {
               <FontAwesomeIcon
                 icon={faCheckCircle}
                 className="delete-btns confirm"
-                // onClick={deleteFood}
+                onClick={submitFood}
               />
             </div>
           </div>
