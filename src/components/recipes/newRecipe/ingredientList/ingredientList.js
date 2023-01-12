@@ -7,7 +7,7 @@ import {
   MDBContainer,
 } from "mdb-react-ui-kit";
 import React, { useState, useEffect } from "react";
-import firebase from "../../../utilities/firebase";
+import firebase from "../../../../utilities/firebase";
 import Ingredient from "../ingredient/ingredient";
 import styles from "./ingredientList.css";
 
@@ -66,7 +66,11 @@ function IngredientList() {
             </tr>
           </MDBTableHead>
         ) : (
-          <p className="mt-4">Add an ingredient to get started!</p>
+          <thead>
+            <tr className="mt-4">
+              <td>Add an ingredient to get started!</td>
+            </tr>
+          </thead>
         )}
         <MDBTableBody>
           {ingredientList

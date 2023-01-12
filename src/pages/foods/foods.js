@@ -1,5 +1,5 @@
 import { MDBContainer } from "mdb-react-ui-kit";
-import CategoryList from "../../components/foods/categoryList/categoryList";
+import FoodCategoryList from "../../components/foods/foodCategoryList/foodCategoryList";
 
 function Foods() {
   return (
@@ -7,7 +7,7 @@ function Foods() {
       <h3 className="p-3 d-flex basic-header justify-content-center">
         Your Foods
       </h3>
-      <CategoryList></CategoryList>
+      <FoodCategoryList></FoodCategoryList>
     </MDBContainer>
   );
 }

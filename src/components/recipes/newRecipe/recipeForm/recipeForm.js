@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../../../utilities/firebase";
+import firebase from "../../../../utilities/firebase";
 import {
   MDBInput,
   MDBRow,
@@ -26,7 +26,9 @@ function RecipeForm() {
   // these are for recipe submission
   const [recipeName, setRecipeName] = useState("");
   const [recipeCategory, setRecipeCategory] = useState("");
+  const [finalCategory, setFinalCategory] = useState("");
   const [recipeDesc, setRecipeDesc] = useState("");
+  const [finalDesc, setFinalDesc] = useState("");
   const [ingredientList, setIngredientList] = useState("");
 
   // these are for ingredient submission
@@ -63,13 +65,20 @@ function RecipeForm() {
     });
   }, [formStep]);
 
-  if (recipeCategory === "") {
-    setRecipeCategory("Miscellaneous");
-  }
+  // updates the finalCategory useState();
+  useEffect(() => {
+    if (recipeCategory === "") {
+      setFinalCategory("Miscellaneous");
+    } else {
+      setFinalCategory(recipeCategory);
+    }
 
-  if (recipeCategory === "Category (optional)") {
-    setRecipeCategory("Miscellaneous");
-  }
+    if (recipeDesc === "") {
+      setFinalDesc("no description added");
+    } else {
+      setFinalDesc(recipeDesc);
+    }
+  });
 
   // creates local list of new ingredients from firebase
   useEffect(() => {
@@ -131,18 +140,20 @@ function RecipeForm() {
 
   // function to submit recipes
   const submitRecipe = () => {
-    const recipeRef = firebase.database().ref("recipes");
+    const recipeRef = firebase
+      .database()
+      .ref("recipes")
+      .child(`${finalCategory}`);
     const recipe = {
       name: recipeName,
-      description: recipeDesc,
-      category: recipeCategory,
+      description: finalDesc,
+      category: finalCategory,
       ingredients: ingredientList,
     };
 
-    console.log(recipe);
-
+    // console.log(recipe);
     recipeRef.push(recipe);
-    // alert("recipe successfully submitted!");
+    alert("recipe successfully submitted!");
     firebase.database().ref("add-ingredient").remove();
   };
 
@@ -267,8 +278,11 @@ function RecipeForm() {
                   onChange={(e) => {
                     setUnit(e.target.value);
                   }}
+                  defaultValue="unit"
                 >
-                  <option>Unit</option>
+                  <option value="unit" disabled>
+                    Unit
+                  </option>
                   <option value="grams">grams</option>
                   <option value="pcs">pcs</option>
                   <option value="oz">oz</option>

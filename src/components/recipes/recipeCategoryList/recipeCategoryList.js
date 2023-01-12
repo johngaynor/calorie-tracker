@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../../../utilities/firebase";
-import {
-  MDBBadge,
-  MDBBtn,
-  MDBTable,
-  MDBTableHead,
-  MDBTableBody,
-  MDBRow,
-  MDBContainer,
-} from "mdb-react-ui-kit";
-import FoodList from "../foodList/foodList";
+import { MDBContainer } from "mdb-react-ui-kit";
+import RecipeList from "../recipeList/recipeList";
 
-function CategoryList() {
+function RecipeCategoryList() {
   const [categoryList, setCategoryList] = useState("");
 
   useEffect(() => {
-    const categoryListRef = firebase.database().ref("foods");
+    const categoryListRef = firebase.database().ref("recipes");
     categoryListRef.on("value", (snapshot) => {
       const categories = snapshot.val();
       const categoryList = [];
@@ -34,11 +26,11 @@ function CategoryList() {
     <MDBContainer fluid>
       {categoryList
         ? categoryList.map((category, index) => (
-            <FoodList category={category} key={index} />
+            <RecipeList category={category} key={index} />
           ))
         : null}
     </MDBContainer>
   );
 }
 
-export default CategoryList;
+export default RecipeCategoryList;

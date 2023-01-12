@@ -1,10 +1,14 @@
-import RecipeList from "../../components/recipes/recipeList/recipeList";
+import { MDBContainer } from "mdb-react-ui-kit";
+import RecipeCategoryList from "../../components/recipes/recipeCategoryList/recipeCategoryList";
 
 function Recipes() {
   return (
-    // <>
-    <RecipeList></RecipeList>
-    // </>
+    <MDBContainer fluid>
+      <h3 className="p-3 d-flex basic-header justify-content-center">
+        Your Recipes
+      </h3>
+      <RecipeCategoryList></RecipeCategoryList>
+    </MDBContainer>
   );
 }
 

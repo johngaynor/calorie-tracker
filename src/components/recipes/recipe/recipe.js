@@ -25,14 +25,14 @@ function Recipe({ recipe }) {
   let recipeCarbsTotal = 0;
   let recipeFatTotal = 0;
 
-  recipe.ingredients.forEach((ingredient) => {
-    if (ingredient.add === true) {
-      recipeCalTotal = recipeCalTotal + +ingredient.userCal;
-      recipeProteinTotal = recipeProteinTotal + +ingredient.userProtein;
-      recipeCarbsTotal = recipeCarbsTotal + +ingredient.userCarbs;
-      recipeFatTotal = recipeFatTotal + +ingredient.userFat;
-    }
-  });
+  // recipe.ingredients.forEach((ingredient) => {
+  //   if (ingredient.add === true) {
+  //     recipeCalTotal = recipeCalTotal + +ingredient.userCal;
+  //     recipeProteinTotal = recipeProteinTotal + +ingredient.userProtein;
+  //     recipeCarbsTotal = recipeCarbsTotal + +ingredient.userCarbs;
+  //     recipeFatTotal = recipeFatTotal + +ingredient.userFat;
+  //   }
+  // });
 
   const pushRecipe = () => {
     if (recipeCalTotal === 0) {
