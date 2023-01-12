@@ -26,3 +26,9 @@
     display: block;
   }
 }
+
+@media screen and (max-width: 421px) {
+  table th:nth-child(6) {
+    display: none;
+  }
+}

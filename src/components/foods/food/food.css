@@ -80,9 +80,9 @@
   color: #dc4c64;
 }
 
-/* .food-input-boxes .only-md {
-  color: red;
-} */
+#food-display .only-xxs {
+  display: none;
+}
 
 @media screen and (max-width: 991px) {
   #food-delete-icon {
@@ -104,5 +104,15 @@
 @media screen and (max-width: 522px) {
   #food-display td:nth-child(3) {
     display: none;
+  }
+}
+
+@media screen and (max-width: 421px) {
+  #food-display td:nth-child(6) {
+    display: none;
+  }
+
+  #food-display .only-xxs {
+    display: block;
   }
 }

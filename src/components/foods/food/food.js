@@ -112,6 +112,56 @@ function Food({ food }) {
             onClick={alertFoodInfo}
           />
         </div>
+        <td id="food-log-btns" className="p-2 only-xxs">
+          <div className="d-flex justify-content-around mx-auto">
+            <FontAwesomeIcon
+              icon={faShoppingBasket}
+              className="food-icons"
+              id="food-add-icon"
+              onClick={() => setAddLog(true)}
+            />
+            <FontAwesomeIcon
+              icon={faTrashCan}
+              className="food-icons"
+              id="food-delete-icon"
+              onClick={() => setDeleteRecipe(true)}
+            />
+          </div>
+          {deleteRecipe ? (
+            <div className="mt-2 delete-btn-container mx-auto">
+              <p>delete food?</p>
+              <div>
+                <FontAwesomeIcon
+                  icon={faXmarkCircle}
+                  className="delete-btns cancel"
+                  onClick={() => setDeleteRecipe(false)}
+                />
+                <FontAwesomeIcon
+                  icon={faCheckCircle}
+                  className="delete-btns confirm"
+                  onClick={deleteFood}
+                />
+              </div>
+            </div>
+          ) : null}
+          {addLog ? (
+            <div className="mt-2 delete-btn-container mx-auto">
+              <p>add to log?</p>
+              <div>
+                <FontAwesomeIcon
+                  icon={faXmarkCircle}
+                  className="delete-btns cancel"
+                  onClick={() => setAddLog(false)}
+                />
+                <FontAwesomeIcon
+                  icon={faCheckCircle}
+                  className="delete-btns confirm"
+                  onClick={submitFood}
+                />
+              </div>
+            </div>
+          ) : null}
+        </td>
       </td>
       <td>
         <input
@@ -203,29 +253,3 @@ function Food({ food }) {
 }
 
 export default Food;
-
-// edit notes
-
-//   //////////////////////////////////////
-
-// changing meal -> will come back to this later
-//   const foodMealContent = document.getElementById("food-meal-display");
-//   foodMealContent.innerHTML = ``;
-
-//   const foodNameMealContent = document.getElementById(
-//     "food-meal-name-display"
-//   );
-//   foodNameMealContent.append(`<Form.Select
-//   aria-label="Default select"
-//   size="md"
-//   className=""
-//   onChange={mealOnChange}
-// >
-//   <option>Select Meal</option>
-//   <option value="breakfast">Breakfast</option>
-//   <option value="lunch">Lunch</option>
-//   <option value="dinner">Dinner</option>
-//   <option value="snack">Snack</option>
-// </Form.Select>`);
-
-//   //////////////////////////////////////
