@@ -52,9 +52,7 @@ function FoodList({ category }) {
           </MDBTableHead>
           <MDBTableBody>
             {foodList
-              ? foodList.map((food, category, index) => (
-                  <Food food={food} category={category} key={index} />
-                ))
+              ? foodList.map((food, index) => <Food food={food} key={index} />)
               : null}
           </MDBTableBody>
         </MDBTable>

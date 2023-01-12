@@ -9,6 +9,7 @@ import {
 } from "mdb-react-ui-kit";
 import {
   faCheckCircle,
+  faInfoCircle,
   faShoppingBag,
   faShoppingBasket,
   faTrashCan,
@@ -19,13 +20,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import firebase from "../../../utilities/firebase";
 import styles from "./food.css";
 
-function Food({ food, category }) {
+function Food({ food }) {
   const [weight, setWeight] = useState("");
   const [calcCal, setCalcCal] = useState(0);
   const [calcProtein, setCalcProtein] = useState(0);
   const [calcCarbs, setCalcCarbs] = useState(0);
   const [calcFat, setCalcFat] = useState(0);
+
+  // these are for delete/log functionality
   const [deleteRecipe, setDeleteRecipe] = useState(false);
+  const [addLog, setAddLog] = useState(false);
 
   // updates calculated macros
   useEffect(() => {
@@ -42,7 +46,7 @@ function Food({ food, category }) {
     // I want to figure out how to show just 0 instead of 0.0
   }, [weight]);
 
-  // toggles delete btn styling
+  // toggles food btn styling
   useEffect(() => {
     const deleteBtn = document.getElementById("food-delete-icon");
     if (deleteRecipe) {
@@ -50,7 +54,27 @@ function Food({ food, category }) {
     } else {
       deleteBtn.classList.remove("active-btn");
     }
+
+    const addBtn = document.getElementById("food-add-icon");
+    if (addLog) {
+      addBtn.classList.add("active-btn");
+    } else {
+      addBtn.classList.remove("active-btn");
+    }
   });
+
+  const alertFoodInfo = () => {
+    window.confirm(`
+    Name: ${food.name}
+    Category: ${food.category}
+    Serving Size: ${food.servingSize} ${food.unit}
+    Calories (per serving): ${food.cal}
+    Protein (per serving): ${food.protein}
+    Carbs (per serving): ${food.carbs}
+    Fat (per serving): ${food.fat}
+    `);
+    // might want to come up with something better for this, maybe hover?
+  };
 
   const deleteFood = () => {
     const foodRef = firebase
@@ -71,7 +95,11 @@ function Food({ food, category }) {
           <p className="fw-bold mb-1" id="food-name-display">
             {food.name}
           </p>
-          <p className="text-muted mb-0">get info - I logo</p>
+          <FontAwesomeIcon
+            icon={faInfoCircle}
+            className="food-info"
+            onClick={alertFoodInfo}
+          />
         </div>
       </td>
       <td>
@@ -99,7 +127,12 @@ function Food({ food, category }) {
       </td>
       <td id="food-log-btns">
         <div className="d-flex w-50 justify-content-between mx-auto">
-          <FontAwesomeIcon icon={faShoppingBasket} className="food-icons" />
+          <FontAwesomeIcon
+            icon={faShoppingBasket}
+            className="food-icons"
+            id="food-add-icon"
+            onClick={() => setAddLog(true)}
+          />
           <FontAwesomeIcon
             icon={faTrashCan}
             className="food-icons"
@@ -120,6 +153,23 @@ function Food({ food, category }) {
                 icon={faCheckCircle}
                 className="delete-btns confirm"
                 onClick={deleteFood}
+              />
+            </div>
+          </div>
+        ) : null}
+        {addLog ? (
+          <div className="mt-2 delete-btn-container">
+            <p>add to log?</p>
+            <div>
+              <FontAwesomeIcon
+                icon={faXmarkCircle}
+                className="delete-btns cancel"
+                onClick={() => setAddLog(false)}
+              />
+              <FontAwesomeIcon
+                icon={faCheckCircle}
+                className="delete-btns confirm"
+                // onClick={deleteFood}
               />
             </div>
           </div>

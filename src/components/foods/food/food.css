@@ -32,8 +32,12 @@
   width: 33px;
 }
 
-.complete {
-  background-color: var(--site-greyblue);
+.food-info {
+  height: 20px;
+}
+
+.food-info:hover {
+  color: #3b71ca;
 }
 
 .cal-pill {
