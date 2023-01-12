@@ -7,17 +7,25 @@ import {
   MDBTableBody,
   MDBContainer,
 } from "mdb-react-ui-kit";
-import { Container } from "react-bootstrap";
+import {
+  faCheckCircle,
+  faShoppingBag,
+  faShoppingBasket,
+  faTrashCan,
+  faWindowClose,
+  faXmarkCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import firebase from "../../../utilities/firebase";
 import styles from "./food.css";
-import { faGoodreads } from "@fortawesome/free-brands-svg-icons";
 
-function Food({ food }) {
+function Food({ food, category }) {
   const [weight, setWeight] = useState("");
   const [calcCal, setCalcCal] = useState(0);
   const [calcProtein, setCalcProtein] = useState(0);
   const [calcCarbs, setCalcCarbs] = useState(0);
   const [calcFat, setCalcFat] = useState(0);
+  const [deleteRecipe, setDeleteRecipe] = useState(false);
 
   // updates calculated macros
   useEffect(() => {
@@ -34,11 +42,27 @@ function Food({ food }) {
     // I want to figure out how to show just 0 instead of 0.0
   }, [weight]);
 
-  // const deleteFood = () => {
-  //   const foodRef = firebase.database().ref("foods").child(food.id);
+  // toggles delete btn styling
+  useEffect(() => {
+    const deleteBtn = document.getElementById("food-delete-icon");
+    if (deleteRecipe) {
+      deleteBtn.classList.add("active-btn");
+    } else {
+      deleteBtn.classList.remove("active-btn");
+    }
+  });
 
-  //   foodRef.remove();
-  // };
+  const deleteFood = () => {
+    const foodRef = firebase
+      .database()
+      .ref("foods")
+      .child(`${food.category}`)
+      .child(food.id);
+
+    foodRef.remove();
+    window.location.reload();
+    // can't think of a better way to get this to reload, need to update foodList in "foodList.js" but can't access that useEffect from here
+  };
 
   return (
     <tr id="food-display">
@@ -47,6 +71,7 @@ function Food({ food }) {
           <p className="fw-bold mb-1" id="food-name-display">
             {food.name}
           </p>
+          <p className="text-muted mb-0">get info - I logo</p>
         </div>
       </td>
       <td>
@@ -61,7 +86,11 @@ function Food({ food }) {
         <p className="text-muted mb-0">in {food.unit}</p>
       </td>
       <td>
-        <MDBBadge color="success" pill className="cal-pill">
+        <MDBBadge
+          color="success"
+          pill
+          className="cal-pill d-flex justify-content-center align-items-center mx-auto"
+        >
           {calcCal}
         </MDBBadge>
       </td>
@@ -69,24 +98,32 @@ function Food({ food }) {
         {calcProtein}/{calcCarbs}/{calcFat}
       </td>
       <td id="food-log-btns">
-        <div className="d-flex">
-          <MDBBtn
-            color="link"
-            rounded
-            size="sm"
-            // onClick={updateFood}
-          >
-            ADD TO LOG
-          </MDBBtn>
-          <MDBBtn
-            color="link"
-            rounded
-            size="sm"
-            //  onClick={deleteFood}
-          >
-            Delete
-          </MDBBtn>
+        <div className="d-flex w-50 justify-content-between mx-auto">
+          <FontAwesomeIcon icon={faShoppingBasket} className="food-icons" />
+          <FontAwesomeIcon
+            icon={faTrashCan}
+            className="food-icons"
+            id="food-delete-icon"
+            onClick={() => setDeleteRecipe(true)}
+          />
         </div>
+        {deleteRecipe ? (
+          <div className="mt-2 delete-btn-container">
+            <p>delete food?</p>
+            <div>
+              <FontAwesomeIcon
+                icon={faXmarkCircle}
+                className="delete-btns cancel"
+                onClick={() => setDeleteRecipe(false)}
+              />
+              <FontAwesomeIcon
+                icon={faCheckCircle}
+                className="delete-btns confirm"
+                onClick={deleteFood}
+              />
+            </div>
+          </div>
+        ) : null}
       </td>
     </tr>
   );
