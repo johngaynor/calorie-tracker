@@ -14,7 +14,7 @@ import RecipeItem from "../recipeItem/recipeItem";
 import AddIngredient from "../addIngredient/addIngredient";
 import firebase from "../../../utilities/firebase";
 import styles from "./recipe.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Recipe({ recipe }) {
   const [deleteRecipe, setDeleteRecipe] = useState(false);
@@ -52,7 +52,6 @@ function Recipe({ recipe }) {
       userLogRef.push(userMeal);
       alert("added to daily log!");
       window.location.reload();
-      // add in a forEach loop to set all ingredients back to add: true
     }
   };
 
@@ -87,9 +86,15 @@ function Recipe({ recipe }) {
                   key={index}
                   ingredientIndex={index}
                   recipeID={recipe.id}
+                  category={recipe.category}
                 />
               ))
             : ""}
+          {/* {recipe.ingredients
+            ? recipe.ingredients.map((ingredient, index) => (
+                <p>{ingredient.name}</p>
+              ))
+            : null} */}
           <tr id="food-display">
             <td>
               <div className="mx-auto" id="food-meal-name-display">

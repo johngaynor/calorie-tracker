@@ -38,6 +38,8 @@ function AddIngredient({ recipe }) {
     });
   }, []);
 
+  console.log(recipe);
+
   const submitIngredient = () => {
     if (
       name === "" ||

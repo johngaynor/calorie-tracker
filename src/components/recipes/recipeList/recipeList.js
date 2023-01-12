@@ -35,8 +35,6 @@ function RecipeList({ category }) {
     });
   }, []);
 
-  console.log(recipeList);
-
   return (
     <MDBContainer className="food-table mx-auto my-3">
       {clickCategory ? (

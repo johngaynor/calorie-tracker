@@ -5,18 +5,21 @@ import Recipe from "../recipe/recipe";
 import styles from "./recipeItem.css";
 import firebase from "../../../utilities/firebase";
 
-function RecipeItem({ ingredient, recipeID, ingredientIndex }) {
+function RecipeItem({ ingredient, recipeID, ingredientIndex, category }) {
   const [weight, setWeight] = useState("");
   const [calcCal, setCalcCal] = useState(0);
   const [calcProtein, setCalcProtein] = useState(0);
   const [calcCarbs, setCalcCarbs] = useState(0);
   const [calcFat, setCalcFat] = useState(0);
 
+  // console.log(ingredientIndex);
+
   // removing item from calculator
   const removeRecipeItem = () => {
     const ingredientRef = firebase
       .database()
       .ref("recipes")
+      .child(`${category}`)
       .child(recipeID)
       .child("ingredients")
       .child(ingredientIndex);
@@ -29,6 +32,7 @@ function RecipeItem({ ingredient, recipeID, ingredientIndex }) {
     const ingredientRef = firebase
       .database()
       .ref("recipes")
+      .child(`${category}`)
       .child(recipeID)
       .child("ingredients")
       .child(ingredientIndex);
