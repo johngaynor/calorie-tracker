@@ -123,6 +123,18 @@ function Food({ food }) {
           placeholder="0"
         />
         <p className="text-muted mb-0">in {food.unit}</p>
+        <div className="only-xs">
+          <p>Cal: {calcCal}</p>
+          <p>P: {calcProtein}</p>
+          <p>C: {calcCarbs}</p>
+          <p>F: {calcFat}</p>
+        </div>
+      </td>
+      <td className="only-md">
+        <p>Cal: {calcCal}</p>
+        <p>P: {calcProtein}</p>
+        <p>C: {calcCarbs}</p>
+        <p>F: {calcFat}</p>
       </td>
       <td>
         <MDBBadge
@@ -137,7 +149,7 @@ function Food({ food }) {
         {calcProtein}/{calcCarbs}/{calcFat}
       </td>
       <td id="food-log-btns">
-        <div className="d-flex w-50 justify-content-between mx-auto">
+        <div className="d-flex justify-content-around mx-auto">
           <FontAwesomeIcon
             icon={faShoppingBasket}
             className="food-icons"
@@ -152,7 +164,7 @@ function Food({ food }) {
           />
         </div>
         {deleteRecipe ? (
-          <div className="mt-2 delete-btn-container">
+          <div className="mt-2 delete-btn-container mx-auto">
             <p>delete food?</p>
             <div>
               <FontAwesomeIcon
@@ -169,7 +181,7 @@ function Food({ food }) {
           </div>
         ) : null}
         {addLog ? (
-          <div className="mt-2 delete-btn-container">
+          <div className="mt-2 delete-btn-container mx-auto">
             <p>add to log?</p>
             <div>
               <FontAwesomeIcon

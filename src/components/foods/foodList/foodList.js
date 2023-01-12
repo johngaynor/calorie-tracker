@@ -43,11 +43,12 @@ function FoodList({ category }) {
                 Food
               </th>
               <th scope="col">Weight</th>
+              <th scope="col" className="only-md">
+                Macros
+              </th>
               <th scope="col">Calories</th>
               <th scope="col">P/C/F</th>
-              <th scope="col" className="col-2">
-                Actions
-              </th>
+              <th scope="col-3">Actions</th>
             </tr>
           </MDBTableHead>
           <MDBTableBody>
