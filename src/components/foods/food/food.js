@@ -112,7 +112,7 @@ function Food({ food }) {
             onClick={alertFoodInfo}
           />
         </div>
-        <td id="food-log-btns" className="p-2 only-xxs">
+        <div id="food-log-btns" className="p-2 only-xxs">
           <div className="d-flex justify-content-around mx-auto">
             <FontAwesomeIcon
               icon={faShoppingBasket}
@@ -161,7 +161,7 @@ function Food({ food }) {
               </div>
             </div>
           ) : null}
-        </td>
+        </div>
       </td>
       <td>
         <input
