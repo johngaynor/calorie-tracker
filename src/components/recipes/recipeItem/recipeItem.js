@@ -5,24 +5,23 @@ import Recipe from "../recipe/recipe";
 import styles from "./recipeItem.css";
 import firebase from "../../../utilities/firebase";
 
-function RecipeItem({ ingredient, recipeID, ingredientIndex, category }) {
+function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
   const [weight, setWeight] = useState("");
   const [calcCal, setCalcCal] = useState(0);
   const [calcProtein, setCalcProtein] = useState(0);
   const [calcCarbs, setCalcCarbs] = useState(0);
   const [calcFat, setCalcFat] = useState(0);
 
-  // console.log(ingredientIndex);
-
   // removing item from calculator
   const removeRecipeItem = () => {
     const ingredientRef = firebase
       .database()
       .ref("recipes")
-      .child(`${category}`)
+      .child(category)
       .child(recipeID)
       .child("ingredients")
-      .child(ingredientIndex);
+      .child(ingredientID);
+
     ingredientRef.update({
       add: false,
     });
@@ -32,41 +31,44 @@ function RecipeItem({ ingredient, recipeID, ingredientIndex, category }) {
     const ingredientRef = firebase
       .database()
       .ref("recipes")
-      .child(`${category}`)
+      .child(category)
       .child(recipeID)
       .child("ingredients")
-      .child(ingredientIndex);
+      .child(ingredientID);
+
     ingredientRef.update({
       add: true,
     });
   };
 
-  useEffect(() => {
-    const ingredientRef = firebase
-      .database()
-      .ref("recipes")
-      .child(recipeID)
-      .child("ingredients")
-      .child(ingredientIndex);
-    let calcCal = (weight * ingredient.cal).toFixed(0);
-    let calcProtein = (weight * ingredient.protein).toFixed(1);
-    let calcCarbs = (weight * ingredient.carbs).toFixed(1);
-    let calcFat = (weight * ingredient.fat).toFixed(1);
+  // console.log(ingredient);
 
-    setCalcCal(calcCal);
-    setCalcProtein(calcProtein);
-    setCalcCarbs(calcCarbs);
-    setCalcFat(calcFat);
+  // useEffect(() => {
+  //   const ingredientRef = firebase
+  //     .database()
+  //     .ref("recipes")
+  //     .child(recipeID)
+  //     .child("ingredients")
+  //     .child(ingredientIndex);
+  //   let calcCal = (weight * ingredient.cal).toFixed(0);
+  //   let calcProtein = (weight * ingredient.protein).toFixed(1);
+  //   let calcCarbs = (weight * ingredient.carbs).toFixed(1);
+  //   let calcFat = (weight * ingredient.fat).toFixed(1);
 
-    ingredientRef.update({
-      userCal: calcCal,
-      userProtein: calcProtein,
-      userCarbs: calcCarbs,
-      userFat: calcFat,
-    });
+  //   setCalcCal(calcCal);
+  //   setCalcProtein(calcProtein);
+  //   setCalcCarbs(calcCarbs);
+  //   setCalcFat(calcFat);
 
-    // I want to figure out how to show just 0 instead of 0.0
-  }, [weight]);
+  //   ingredientRef.update({
+  //     userCal: calcCal,
+  //     userProtein: calcProtein,
+  //     userCarbs: calcCarbs,
+  //     userFat: calcFat,
+  //   });
+
+  // I want to figure out how to show just 0 instead of 0.0
+  // }, [weight]);
 
   return (
     <>

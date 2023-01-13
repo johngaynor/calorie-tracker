@@ -16,14 +16,35 @@ import firebase from "../../../utilities/firebase";
 import styles from "./recipe.css";
 import { useEffect, useState } from "react";
 
-function Recipe({ recipe }) {
+function Recipe({ recipe, category, recipeID }) {
   const [deleteRecipe, setDeleteRecipe] = useState(false);
   const [addIngredient, setAddIngredient] = useState(false);
+  const [ingredientList, setIngredientList] = useState("");
 
   let recipeCalTotal = 0;
   let recipeProteinTotal = 0;
   let recipeCarbsTotal = 0;
   let recipeFatTotal = 0;
+
+  useEffect(() => {
+    const ingredientRef = firebase
+      .database()
+      .ref("recipes")
+      .child(category)
+      .child(recipeID)
+      .child("ingredients");
+
+    ingredientRef.on("value", (snapshot) => {
+      const ingredients = snapshot.val();
+      const ingredientList = [];
+      for (let id in ingredients) {
+        ingredientList.push({ id, ...ingredients[id] });
+      }
+
+      setIngredientList(ingredientList);
+      // console.log(ingredientList);
+    });
+  }, []);
 
   // recipe.ingredients.forEach((ingredient) => {
   //   if (ingredient.add === true) {
@@ -55,6 +76,8 @@ function Recipe({ recipe }) {
     }
   };
 
+  // console.log(recipe.ingredients);
+
   const confirmDeleteRecipe = () => {
     const recipeRef = firebase.database().ref("recipes").child(recipe.id);
     recipeRef.remove();
@@ -79,7 +102,18 @@ function Recipe({ recipe }) {
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          {recipe.ingredients
+          {ingredientList
+            ? ingredientList.map((ingredient, index) => (
+                <RecipeItem
+                  ingredient={ingredient}
+                  key={index}
+                  category={category}
+                  recipeID={recipeID}
+                  ingredientID={index}
+                />
+              ))
+            : null}
+          {/* {recipe.ingredients
             ? recipe.ingredients.map((ingredient, index) => (
                 <RecipeItem
                   ingredient={ingredient}
@@ -89,11 +123,9 @@ function Recipe({ recipe }) {
                   category={recipe.category}
                 />
               ))
-            : ""}
+            : ""} */}
           {/* {recipe.ingredients
-            ? recipe.ingredients.map((ingredient, index) => (
-                <p>{ingredient.name}</p>
-              ))
+            ? recipe.ingredients.map((ingredient, index) => <p>hello</p>)
             : null} */}
           <tr id="food-display">
             <td>
@@ -182,7 +214,14 @@ function Recipe({ recipe }) {
       ) : (
         ""
       )}
-      {addIngredient ? <AddIngredient recipe={recipe.id}></AddIngredient> : ""}
+      {addIngredient ? (
+        <AddIngredient
+          recipe={recipe.id}
+          category={recipe.category}
+        ></AddIngredient>
+      ) : (
+        ""
+      )}
     </MDBContainer>
   );
 }

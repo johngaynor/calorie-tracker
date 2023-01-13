@@ -62,7 +62,13 @@ function RecipeList({ category }) {
         <MDBContainer className="p-md-4">
           {recipeList
             ? recipeList.map((recipe, index) => (
-                <Recipe recipe={recipe} key={index} />
+                <Recipe
+                  recipe={recipe}
+                  key={index}
+                  category={category}
+                  recipeID={recipe.id}
+                />
+                // <p>hello</p>
               ))
             : null}
         </MDBContainer>
