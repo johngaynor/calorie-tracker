@@ -10,11 +10,13 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import RecipeItem from "../recipeItem/recipeItem";
 import AddIngredient from "../addIngredient/addIngredient";
 import firebase from "../../../utilities/firebase";
 import styles from "./recipe.css";
-import { useEffect, useState } from "react";
+import { faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Recipe({ recipe, category, recipeID }) {
   const [deleteRecipe, setDeleteRecipe] = useState(false);
@@ -174,9 +176,10 @@ function Recipe({ recipe, category, recipeID }) {
                     Add Ingredient
                   </MDBBtn>
                 )}
-                <MDBBtn color="link" rounded size="sm" onClick={pushRecipe}>
+                {/* <MDBBtn color="link" rounded size="sm" onClick={pushRecipe}>
                   Push to Log
-                </MDBBtn>
+                </MDBBtn> */}
+                <FontAwesomeIcon icon={faFileArrowUp} />
                 {deleteRecipe ? (
                   <MDBBtn
                     color="link"

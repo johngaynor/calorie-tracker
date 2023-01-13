@@ -53,29 +53,6 @@
   color: #dc4c64;
 }
 
-.delete-btn-container {
-  border: 2px solid white;
-  border-radius: 5px;
-  width: 100px;
-}
-
-.delete-btns {
-  height: 30px;
-  margin-top: -15px;
-  border: 2px solid white;
-  border-radius: 50%;
-  background-color: white;
-}
-
-.delete-btn-container .cancel {
-  color: #dc4c64;
-}
-
-.delete-btn-container .confirm {
-  color: #14a44d;
-  margin-left: 10px;
-}
-
 #food-log-btns .active-btn {
   color: #dc4c64;
 }

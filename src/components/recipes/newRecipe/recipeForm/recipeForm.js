@@ -153,7 +153,7 @@ function RecipeForm() {
 
     // console.log(recipe);
     recipeRef.push(recipe);
-    alert("recipe successfully submitted!");
+    // alert("recipe successfully submitted!");
     firebase.database().ref("add-ingredient").remove();
   };
 

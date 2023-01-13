@@ -4,3 +4,11 @@
   border: 2px solid #666;
   border-radius: 5px;
 }
+
+.recipe-item-btns {
+  height: 25px;
+}
+
+.recipe-item-btns:hover {
+  color: #dc4c64;
+}

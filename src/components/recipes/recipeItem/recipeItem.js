@@ -4,6 +4,15 @@ import Recipes from "../../../pages/recipes/recipes";
 import Recipe from "../recipe/recipe";
 import styles from "./recipeItem.css";
 import firebase from "../../../utilities/firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTrashCan,
+  faInfoCircle,
+  faXmarkCircle,
+  faCheckCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import { faSquareCheck, faSquare } from "@fortawesome/free-regular-svg-icons";
+import AddIngredient from "../addIngredient/addIngredient";
 
 function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
   const [weight, setWeight] = useState("");
@@ -11,6 +20,8 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
   const [calcProtein, setCalcProtein] = useState(0);
   const [calcCarbs, setCalcCarbs] = useState(0);
   const [calcFat, setCalcFat] = useState(0);
+
+  const [deleteIngredient, setDeleteIngredient] = useState(false);
 
   // removing item from calculator
   const removeRecipeItem = () => {
@@ -25,6 +36,20 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
     ingredientRef.update({
       add: false,
     });
+  };
+
+  // deleting item from recipe
+  const confirmDeleteIngredient = () => {
+    const ingredientRef = firebase
+      .database()
+      .ref("recipes")
+      .child(category)
+      .child(recipeID)
+      .child("ingredients")
+      .child(ingredientID);
+
+    ingredientRef.remove();
+    setDeleteIngredient(false);
   };
 
   const addRecipeItem = () => {
@@ -70,6 +95,17 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
   // I want to figure out how to show just 0 instead of 0.0
   // }, [weight]);
 
+  const alertIngredientInfo = () => {
+    window.confirm(`
+    Name: ${ingredient.name}
+    Serving Size: ${ingredient.size} ${ingredient.unit}
+    Calories (per serving): ${ingredient.cal}
+    Protein (per serving): ${ingredient.protein}
+    Carbs (per serving): ${ingredient.carbs}
+    Fat (per serving): ${ingredient.fat}
+    `);
+  };
+
   return (
     <>
       {ingredient.add ? (
@@ -79,6 +115,11 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
               <p className="fw-bold mb-1" id="food-name-display">
                 {ingredient.name}
               </p>
+              <FontAwesomeIcon
+                icon={faInfoCircle}
+                className="food-info"
+                onClick={alertIngredientInfo}
+              />
             </div>
           </td>
           <td>
@@ -106,11 +147,35 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             {calcProtein}/{calcCarbs}/{calcFat}
           </td>
           <td id="food-log-btns">
-            <div>
-              <MDBBtn color="link" rounded size="sm" onClick={removeRecipeItem}>
-                Remove
-              </MDBBtn>
+            <div className="d-flex justify-content-around mx-auto">
+              <FontAwesomeIcon
+                icon={faSquareCheck}
+                onClick={removeRecipeItem}
+                className="recipe-item-btns"
+              />
+              <FontAwesomeIcon
+                icon={faTrashCan}
+                className="recipe-item-btns"
+                onClick={() => setDeleteIngredient(true)}
+              />
             </div>
+            {deleteIngredient ? (
+              <div className="mt-2 delete-btn-container mx-auto">
+                <p>delete food?</p>
+                <div>
+                  <FontAwesomeIcon
+                    icon={faXmarkCircle}
+                    className="delete-btns cancel"
+                    onClick={() => setDeleteIngredient(false)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    className="delete-btns confirm"
+                    onClick={confirmDeleteIngredient}
+                  />
+                </div>
+              </div>
+            ) : null}
           </td>
         </tr>
       ) : (
@@ -124,7 +189,7 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             </div>
           </td>
           <td>
-            <div className="muted-weight-input"></div>
+            <div className="muted-weight-input mx-auto"></div>
           </td>
           <td>
             <MDBBadge
@@ -136,11 +201,35 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
           </td>
           <td id="food-macros-display">N/a</td>
           <td id="food-log-btns">
-            <div>
-              <MDBBtn color="link" rounded size="sm" onClick={addRecipeItem}>
-                Add
-              </MDBBtn>
+            <div className="d-flex justify-content-around mx-auto">
+              <FontAwesomeIcon
+                icon={faSquare}
+                onClick={addRecipeItem}
+                className="recipe-item-btns"
+              />
+              <FontAwesomeIcon
+                icon={faTrashCan}
+                className="recipe-item-btns"
+                onClick={() => setDeleteIngredient(true)}
+              />
             </div>
+            {deleteIngredient ? (
+              <div className="mt-2 delete-btn-container mx-auto">
+                <p>delete food?</p>
+                <div>
+                  <FontAwesomeIcon
+                    icon={faXmarkCircle}
+                    className="delete-btns cancel"
+                    onClick={() => setDeleteIngredient(false)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    className="delete-btns confirm"
+                    onClick={confirmDeleteIngredient}
+                  />
+                </div>
+              </div>
+            ) : null}
           </td>
         </tr>
       )}
