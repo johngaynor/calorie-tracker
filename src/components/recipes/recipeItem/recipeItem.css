@@ -16,3 +16,15 @@
 .recipe-item-btns:hover {
   color: #dc4c64;
 }
+
+.cal-pill {
+  border: 2px solid var(--site-yellow);
+}
+
+.calc-macros span {
+  width: 20px;
+}
+
+.calc-macros .protein {
+  border: 2px solid var(--site-olivegreen);
+}

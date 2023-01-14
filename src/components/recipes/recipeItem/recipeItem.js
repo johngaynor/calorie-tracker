@@ -187,14 +187,10 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             <p className="text-muted mb-0">in {ingredient.unit}</p>
           </td>
           <td className="d-lg-table-cell d-none">
-            <MDBBadge
-              color="success"
-              pill
-              className="d-flex"
-              id="food-cal-display"
-            >
+            <MDBBadge pill className="cal-pill">
               {calcCal}
             </MDBBadge>
+            {/* <MDBBadge>{calcCal}</MDBBadge> */}
           </td>
           <td id="food-macros-display" className="d-sm-table-cell d-none">
             <input
@@ -214,6 +210,11 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             >
               {calcCal}
             </MDBBadge>
+            <p className="my-auto d-flex calc-macros">
+              <span className="protein">{calcProtein}</span>
+              <span>content</span>
+              <span>content</span>
+            </p>
             <p className="my-auto">
               {calcProtein}/{calcCarbs}/{calcFat}
             </p>

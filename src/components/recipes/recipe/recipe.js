@@ -132,12 +132,10 @@ function Recipe({ recipe, category, recipeID }) {
                 />
               ))
             : null}
-          <tr id="food-display">
+          <tr id="recipe-totals">
             <td>
-              <div className="mx-auto" id="food-meal-name-display">
-                <p className="fw-bold mb-1" id="food-name-display">
-                  TOTAL
-                </p>
+              <div className="mx-auto">
+                <p className="fw-bold mb-1">TOTAL</p>
                 {/* btns that only show <md */}
                 <div className="d-flex justify-content-evenly mx-auto my-2 d-md-none">
                   {addIngredient ? (
