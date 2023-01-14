@@ -20,7 +20,7 @@ import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Recipe({ recipe, category, recipeID }) {
-  const [deleteRecipe, setDeleteRecipe] = useState(false);
+  // const [deleteRecipe, setDeleteRecipe] = useState(false);
   const [addIngredient, setAddIngredient] = useState(false);
   const [ingredientList, setIngredientList] = useState("");
 
@@ -78,16 +78,19 @@ function Recipe({ recipe, category, recipeID }) {
     }
   };
 
-  // console.log(recipe.ingredients);
-
-  const confirmDeleteRecipe = () => {
-    const recipeRef = firebase
-      .database()
-      .ref("recipes")
-      .child(category)
-      .child(recipeID);
-    recipeRef.remove();
-    alert("recipe has been deleted.");
+  const deleteRecipe = () => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this recipe? This action cannot be undone."
+      )
+    ) {
+      const recipeRef = firebase
+        .database()
+        .ref("recipes")
+        .child(category)
+        .child(recipeID);
+      recipeRef.remove();
+    }
   };
 
   return (
@@ -157,19 +160,11 @@ function Recipe({ recipe, category, recipeID }) {
                   />
                 </div>
                 <div className="d-md-none">
-                  {deleteRecipe ? (
-                    <FontAwesomeIcon
-                      icon={faDeleteLeft}
-                      className="recipe-btns selected-btn"
-                      onClick={() => setDeleteRecipe(false)}
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      icon={faDeleteLeft}
-                      className="recipe-btns"
-                      onClick={() => setDeleteRecipe(true)}
-                    />
-                  )}
+                  <FontAwesomeIcon
+                    icon={faDeleteLeft}
+                    className="recipe-btns selected-btn"
+                    onClick={deleteRecipe}
+                  />
                 </div>
                 {/* end <md btns */}
               </div>
@@ -217,37 +212,16 @@ function Recipe({ recipe, category, recipeID }) {
                 />
               </div>
               <div>
-                {deleteRecipe ? (
-                  <FontAwesomeIcon
-                    icon={faDeleteLeft}
-                    className="recipe-btns selected-btn"
-                    onClick={() => setDeleteRecipe(false)}
-                  />
-                ) : (
-                  <FontAwesomeIcon
-                    icon={faDeleteLeft}
-                    className="recipe-btns"
-                    onClick={() => setDeleteRecipe(true)}
-                  />
-                )}
+                <FontAwesomeIcon
+                  icon={faDeleteLeft}
+                  className="recipe-btns"
+                  onClick={deleteRecipe}
+                />
               </div>
             </td>
           </tr>
         </MDBTableBody>
       </MDBTable>
-      {deleteRecipe ? (
-        <MDBContainer fluid className="recipe-delete-warning bg-white w-75">
-          <p className="text-black">
-            Are you sure you want to delete this recipe? This action cannot be
-            undone.
-          </p>
-          <MDBBtn color="danger" size="sm" onClick={confirmDeleteRecipe}>
-            Delete Recipe
-          </MDBBtn>
-        </MDBContainer>
-      ) : (
-        ""
-      )}
       {addIngredient ? (
         <AddIngredient
           recipe={recipe.id}

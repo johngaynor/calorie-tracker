@@ -31,18 +31,6 @@
   border: 2px solid var(--site-greyblue);
 }
 
-.recipe-delete-warning {
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.recipe-delete-warning p {
-  margin: 10px auto;
-}
-
 .add-ingredient-form {
   border-radius: 10px;
   margin-bottom: 20px;

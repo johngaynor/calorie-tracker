@@ -63,16 +63,22 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
 
   // deleting item from recipe
   const confirmDeleteIngredient = () => {
-    ingredientList.splice(ingredientID, 1);
+    if (ingredientList.length === 1) {
+      alert(
+        "At least one ingredient is required per recipe. Please add another ingredient before deleting this one."
+      );
+    } else {
+      ingredientList.splice(ingredientID, 1);
 
-    const ingredientRef = firebase
-      .database()
-      .ref("recipes")
-      .child(category)
-      .child(recipeID);
-    ingredientRef.update({
-      ingredients: ingredientList,
-    });
+      const ingredientRef = firebase
+        .database()
+        .ref("recipes")
+        .child(category)
+        .child(recipeID);
+      ingredientRef.update({
+        ingredients: ingredientList,
+      });
+    }
   };
 
   // adds recipe item back to calculator
@@ -90,6 +96,7 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
     });
   };
 
+  // calculators for macros
   useEffect(() => {
     const ingredientRef = firebase
       .database()
@@ -118,6 +125,7 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
     // I want to figure out how to show just 0 instead of 0.0
   }, [weight]);
 
+  // popup that displays ingredient information
   const alertIngredientInfo = () => {
     window.confirm(`
     Name: ${ingredient.name}
@@ -215,7 +223,7 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             <MDBRow className="calc-macros mb-3">
               <MDBCol>
                 <p className="w-100 my-0">Cal</p>
-                <span className="cal mx-auto">{calcCal}123</span>
+                <span className="cal mx-auto">{calcCal}</span>
               </MDBCol>
             </MDBRow>
           </td>
