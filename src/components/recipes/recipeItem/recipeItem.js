@@ -90,34 +90,33 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
     });
   };
 
-  // console.log(ingredient);
+  useEffect(() => {
+    const ingredientRef = firebase
+      .database()
+      .ref("recipes")
+      .child(category)
+      .child(recipeID)
+      .child("ingredients")
+      .child(ingredientID);
+    let calcCal = (weight * ingredient.cal).toFixed(0);
+    let calcProtein = (weight * ingredient.protein).toFixed(0);
+    let calcCarbs = (weight * ingredient.carbs).toFixed(0);
+    let calcFat = (weight * ingredient.fat).toFixed(0);
 
-  // useEffect(() => {
-  //   const ingredientRef = firebase
-  //     .database()
-  //     .ref("recipes")
-  //     .child(recipeID)
-  //     .child("ingredients")
-  //     .child(ingredientIndex);
-  //   let calcCal = (weight * ingredient.cal).toFixed(0);
-  //   let calcProtein = (weight * ingredient.protein).toFixed(1);
-  //   let calcCarbs = (weight * ingredient.carbs).toFixed(1);
-  //   let calcFat = (weight * ingredient.fat).toFixed(1);
+    setCalcCal(calcCal);
+    setCalcProtein(calcProtein);
+    setCalcCarbs(calcCarbs);
+    setCalcFat(calcFat);
 
-  //   setCalcCal(calcCal);
-  //   setCalcProtein(calcProtein);
-  //   setCalcCarbs(calcCarbs);
-  //   setCalcFat(calcFat);
+    ingredientRef.update({
+      userCal: calcCal,
+      userProtein: calcProtein,
+      userCarbs: calcCarbs,
+      userFat: calcFat,
+    });
 
-  //   ingredientRef.update({
-  //     userCal: calcCal,
-  //     userProtein: calcProtein,
-  //     userCarbs: calcCarbs,
-  //     userFat: calcFat,
-  //   });
-
-  // I want to figure out how to show just 0 instead of 0.0
-  // }, [weight]);
+    // I want to figure out how to show just 0 instead of 0.0
+  }, [weight]);
 
   const alertIngredientInfo = () => {
     window.confirm(`
@@ -199,7 +198,7 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             <MDBRow className="calc-macros d-flex justify-content-center mb-3 d-sm-none">
               <MDBRow className="d-lg-none mb-2">
                 <p className="w-100 my-0">Cal</p>
-                <span className="cal mx-auto">{calcCal}123</span>
+                <span className="cal mx-auto">{calcCal}</span>
               </MDBRow>
 
               <p className="w-100 my-0 mx-1">P</p>
@@ -233,7 +232,7 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             <MDBRow className="calc-macros d-flex justify-content-center mb-3">
               <MDBRow className="d-lg-none mb-2">
                 <p className="w-100 my-0">Cal</p>
-                <span className="cal mx-auto">{calcCal}123</span>
+                <span className="cal mx-auto">{calcCal}</span>
               </MDBRow>
               <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center">
                 <p className="w-100 my-0 mx-1">P</p>
