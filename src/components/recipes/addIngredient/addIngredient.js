@@ -34,11 +34,7 @@ function AddIngredient({ recipe, category }) {
       for (let id in ingredients) {
         ingredientList.push({ id, ...ingredients[id] });
       }
-      // ingredientList.push(newIngredient);
-      // console.log(ingredientList);
       setIngredientList(ingredientList);
-      // ingredientRef.remove();
-      // ingredientRef.push(ingredientList);
     });
   }, []);
 

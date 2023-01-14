@@ -23,8 +23,28 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
   const [calcProtein, setCalcProtein] = useState(0);
   const [calcCarbs, setCalcCarbs] = useState(0);
   const [calcFat, setCalcFat] = useState(0);
+  const [ingredientList, setIngredientList] = useState("");
 
   const [deleteIngredient, setDeleteIngredient] = useState(false);
+
+  // creating local list of ingredients for removing them
+  useEffect(() => {
+    const ingredientRef = firebase
+      .database()
+      .ref("recipes")
+      .child(category)
+      .child(recipeID)
+      .child("ingredients");
+
+    ingredientRef.on("value", (snapshot) => {
+      const ingredients = snapshot.val();
+      const ingredientList = [];
+      for (let id in ingredients) {
+        ingredientList.push({ id, ...ingredients[id] });
+      }
+      setIngredientList(ingredientList);
+    });
+  }, []);
 
   // removing item from calculator
   const removeRecipeItem = () => {
@@ -43,18 +63,19 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
 
   // deleting item from recipe
   const confirmDeleteIngredient = () => {
+    ingredientList.splice(ingredientID, 1);
+
     const ingredientRef = firebase
       .database()
       .ref("recipes")
       .child(category)
-      .child(recipeID)
-      .child("ingredients")
-      .child(ingredientID);
-
-    ingredientRef.remove();
-    setDeleteIngredient(false);
+      .child(recipeID);
+    ingredientRef.update({
+      ingredients: ingredientList,
+    });
   };
 
+  // adds recipe item back to calculator
   const addRecipeItem = () => {
     const ingredientRef = firebase
       .database()
@@ -123,7 +144,7 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
                 className="food-info"
                 onClick={alertIngredientInfo}
               />
-              <div className="d-flex d-md-none justify-content-around mx-auto">
+              <div className="d-flex d-md-none justify-content-evenly mx-auto">
                 <FontAwesomeIcon
                   icon={faSquareCheck}
                   onClick={removeRecipeItem}
@@ -179,12 +200,12 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             <input
               id="edit-weight-input"
               type="number"
-              className="food-input-boxes d-md-none"
+              className="food-input-boxes d-sm-none"
               onChange={(e) => setWeight(e.target.value)}
               value={weight}
               placeholder="0"
             />
-            <p className="text-muted mb-0">in {ingredient.unit}</p>
+            <p className="text-muted mb-0 d-sm-none">in {ingredient.unit}</p>
             <MDBBadge
               color="success"
               pill
@@ -237,12 +258,41 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
               <p className="fw-bold mb-1" id="food-name-display">
                 {ingredient.name}
               </p>
+              <div className="d-flex d-md-none justify-content-evenly mx-auto">
+                <FontAwesomeIcon
+                  icon={faSquareCheck}
+                  onClick={addRecipeItem}
+                  className="recipe-item-btns"
+                />
+                <FontAwesomeIcon
+                  icon={faTrashCan}
+                  className="recipe-item-btns"
+                  onClick={() => setDeleteIngredient(true)}
+                />
+              </div>
+              {deleteIngredient ? (
+                <div className="mt-2 delete-btn-container mx-auto">
+                  <p>delete food?</p>
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faXmarkCircle}
+                      className="delete-btns cancel"
+                      onClick={() => setDeleteIngredient(false)}
+                    />
+                    <FontAwesomeIcon
+                      icon={faCheckCircle}
+                      className="delete-btns confirm"
+                      onClick={confirmDeleteIngredient}
+                    />
+                  </div>
+                </div>
+              ) : null}
             </div>
           </td>
           <td>
             <div className="muted-weight-input mx-auto"></div>
           </td>
-          <td>
+          <td className="d-sm-table-cell d-none">
             <MDBBadge
               color="danger"
               pill
