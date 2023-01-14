@@ -23,7 +23,7 @@ function RecipeCategoryList() {
   }, []);
 
   return (
-    <MDBContainer fluid>
+    <MDBContainer fluid className="bg-danger px-md-5">
       {categoryList
         ? categoryList.map((category, index) => (
             <RecipeList category={category} key={index} />

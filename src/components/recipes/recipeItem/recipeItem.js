@@ -123,6 +123,35 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
                 className="food-info"
                 onClick={alertIngredientInfo}
               />
+              <div className="d-flex d-md-none justify-content-around mx-auto">
+                <FontAwesomeIcon
+                  icon={faSquareCheck}
+                  onClick={removeRecipeItem}
+                  className="recipe-item-btns"
+                />
+                <FontAwesomeIcon
+                  icon={faTrashCan}
+                  className="recipe-item-btns"
+                  onClick={() => setDeleteIngredient(true)}
+                />
+              </div>
+              {deleteIngredient ? (
+                <div className="mt-2 delete-btn-container mx-auto">
+                  <p>delete food?</p>
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faXmarkCircle}
+                      className="delete-btns cancel"
+                      onClick={() => setDeleteIngredient(false)}
+                    />
+                    <FontAwesomeIcon
+                      icon={faCheckCircle}
+                      className="delete-btns confirm"
+                      onClick={confirmDeleteIngredient}
+                    />
+                  </div>
+                </div>
+              ) : null}
             </div>
           </td>
           <td>
@@ -146,10 +175,16 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
               {calcCal}
             </MDBBadge>
           </td>
-          <td id="food-macros-display">
-            <p className="my-auto">
-              {calcProtein}/{calcCarbs}/{calcFat}
-            </p>
+          <td id="food-macros-display" className="d-sm-table-cell d-none">
+            <input
+              id="edit-weight-input"
+              type="number"
+              className="food-input-boxes d-md-none"
+              onChange={(e) => setWeight(e.target.value)}
+              value={weight}
+              placeholder="0"
+            />
+            <p className="text-muted mb-0">in {ingredient.unit}</p>
             <MDBBadge
               color="success"
               pill
@@ -158,8 +193,11 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             >
               {calcCal}
             </MDBBadge>
+            <p className="my-auto">
+              {calcProtein}/{calcCarbs}/{calcFat}
+            </p>
           </td>
-          <td id="food-log-btns">
+          <td id="food-log-btns" className="d-md-table-cell d-none">
             <div className="d-flex justify-content-around mx-auto">
               <FontAwesomeIcon
                 icon={faSquareCheck}
@@ -212,7 +250,9 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
               id="food-cal-display"
             ></MDBBadge>
           </td>
-          <td id="food-macros-display">N/a</td>
+          <td id="food-macros-display" className="d-none d-lg-table-cell">
+            N/a
+          </td>
           <td id="food-log-btns">
             <div className="d-flex justify-content-around mx-auto">
               <FontAwesomeIcon

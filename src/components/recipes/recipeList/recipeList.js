@@ -36,7 +36,7 @@ function RecipeList({ category }) {
   }, []);
 
   return (
-    <MDBContainer className="food-table mx-auto my-3">
+    <MDBContainer fluid className="food-table mx-auto my-3">
       {clickCategory ? (
         <div
           className="d-flex justify-content-between align-items-center select"

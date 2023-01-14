@@ -100,7 +100,12 @@ function Recipe({ recipe, category, recipeID }) {
             <th scope="col" className="col-4">
               Food
             </th>
-            <th scope="col">Weight</th>
+            <th scope="col" className="d-sm-table-cell d-none">
+              Weight
+            </th>
+            <th scope="col" className="d-sm-none">
+              Weight/Macros
+            </th>
             <th scope="col" className="d-lg-table-cell d-none">
               Calories
             </th>
@@ -110,7 +115,7 @@ function Recipe({ recipe, category, recipeID }) {
             <th scope="col" className="d-lg-none">
               Macros
             </th>
-            <th scope="col" className="col-2">
+            <th scope="col-2" className="d-md-table-cell d-none">
               Actions
             </th>
           </tr>
@@ -133,16 +138,54 @@ function Recipe({ recipe, category, recipeID }) {
                 <p className="fw-bold mb-1" id="food-name-display">
                   TOTAL
                 </p>
+                {/* btns that only show <md */}
+                <div className="d-flex justify-content-evenly mx-auto my-2 d-md-none">
+                  {addIngredient ? (
+                    <FontAwesomeIcon
+                      icon={faRectangleList}
+                      className="recipe-btns selected-btn"
+                      onClick={() => setAddIngredient(false)}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faRectangleList}
+                      className="recipe-btns"
+                      onClick={() => setAddIngredient(true)}
+                    />
+                  )}
+
+                  <FontAwesomeIcon
+                    icon={faUpload}
+                    className="recipe-btns"
+                    onClick={pushRecipe}
+                  />
+                </div>
+                <div className="d-md-none">
+                  {deleteRecipe ? (
+                    <FontAwesomeIcon
+                      icon={faDeleteLeft}
+                      className="recipe-btns selected-btn"
+                      onClick={() => setDeleteRecipe(false)}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faDeleteLeft}
+                      className="recipe-btns"
+                      onClick={() => setDeleteRecipe(true)}
+                    />
+                  )}
+                </div>
+                {/* end <md btns */}
               </div>
             </td>
-            <td>
+            <td className="d-none d-sm-table-cell">
               <span id="total-weight"></span>
               {/* this will get replaced later */}
             </td>
             <td className="d-lg-table-cell d-none">
               <span id="recipe-total-cal">CAL: {recipeCalTotal}</span>
             </td>
-            <td id="food-macros-display">
+            <td id="food-macros-display" className="d-table-cell">
               <span id="recipe-total-cal" className="d-lg-none mb-1">
                 CAL: {recipeCalTotal}
               </span>
