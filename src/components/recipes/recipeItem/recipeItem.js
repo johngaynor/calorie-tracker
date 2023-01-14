@@ -1,4 +1,4 @@
-import { MDBBadge, MDBBtn } from "mdb-react-ui-kit";
+import { MDBBadge, MDBBtn, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 import Recipes from "../../../pages/recipes/recipes";
 import Recipe from "../recipe/recipe";
@@ -133,7 +133,7 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
   return (
     <>
       {ingredient.add ? (
-        <tr id="food-display">
+        <tr id="recipe-display">
           <td>
             <div className="mx-auto" id="food-meal-name-display">
               <p className="fw-bold mb-1" id="food-name-display">
@@ -144,6 +144,15 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
                 className="food-info"
                 onClick={alertIngredientInfo}
               />
+              <input
+                id="edit-weight-input"
+                type="number"
+                className="food-input-boxes d-sm-none d-block mx-auto mt-2"
+                onChange={(e) => setWeight(e.target.value)}
+                value={weight}
+                placeholder="0"
+              />
+              <p className="text-muted mb-2 d-sm-none">in {ingredient.unit}</p>
               <div className="d-flex d-md-none justify-content-evenly mx-auto">
                 <FontAwesomeIcon
                   icon={faSquareCheck}
@@ -157,8 +166,8 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
                 />
               </div>
               {deleteIngredient ? (
-                <div className="mt-2 delete-btn-container mx-auto">
-                  <p>delete food?</p>
+                <div className="mt-2 delete-btn-container mx-auto d-md-none">
+                  <p>delete ingredient?</p>
                   <div>
                     <FontAwesomeIcon
                       icon={faXmarkCircle}
@@ -179,18 +188,37 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             <input
               id="edit-weight-input"
               type="number"
-              className="food-input-boxes"
+              className="food-input-boxes mt-2 d-none d-sm-block mx-auto"
               onChange={(e) => setWeight(e.target.value)}
               value={weight}
               placeholder="0"
             />
-            <p className="text-muted mb-0">in {ingredient.unit}</p>
+            <p className="text-muted mb-0 d-none d-sm-block">
+              in {ingredient.unit}
+            </p>
+            <MDBRow className="calc-macros d-flex justify-content-center mb-3 d-sm-none">
+              <MDBRow className="d-lg-none mb-2">
+                <p className="w-100 my-0">Cal</p>
+                <span className="cal mx-auto">{calcCal}123</span>
+              </MDBRow>
+
+              <p className="w-100 my-0 mx-1">P</p>
+              <span className="protein bigger">{calcProtein}</span>
+
+              <p className="w-100 my-0 mx-1">C</p>
+              <span className="carbs bigger">{calcCarbs}</span>
+
+              <p className="w-100 my-0 mx-1">F</p>
+              <span className="fat bigger">{calcFat}</span>
+            </MDBRow>
           </td>
           <td className="d-lg-table-cell d-none">
-            <MDBBadge pill className="cal-pill">
-              {calcCal}
-            </MDBBadge>
-            {/* <MDBBadge>{calcCal}</MDBBadge> */}
+            <MDBRow className="calc-macros mb-3">
+              <MDBCol>
+                <p className="w-100 my-0">Cal</p>
+                <span className="cal mx-auto">{calcCal}123</span>
+              </MDBCol>
+            </MDBRow>
           </td>
           <td id="food-macros-display" className="d-sm-table-cell d-none">
             <input
@@ -202,22 +230,24 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
               placeholder="0"
             />
             <p className="text-muted mb-0 d-sm-none">in {ingredient.unit}</p>
-            <MDBBadge
-              color="success"
-              pill
-              className="d-lg-none"
-              id="food-cal-display"
-            >
-              {calcCal}
-            </MDBBadge>
-            <p className="my-auto d-flex calc-macros">
-              <span className="protein">{calcProtein}</span>
-              <span>content</span>
-              <span>content</span>
-            </p>
-            <p className="my-auto">
-              {calcProtein}/{calcCarbs}/{calcFat}
-            </p>
+            <MDBRow className="calc-macros d-flex justify-content-center mb-3">
+              <MDBRow className="d-lg-none mb-2">
+                <p className="w-100 my-0">Cal</p>
+                <span className="cal mx-auto">{calcCal}123</span>
+              </MDBRow>
+              <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center">
+                <p className="w-100 my-0 mx-1">P</p>
+                <span className="protein">{calcProtein}</span>
+              </MDBCol>
+              <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center mx-xl-1 mx-2">
+                <p className="w-100 my-0 mx-1">C</p>
+                <span className="carbs">{calcCarbs}</span>
+              </MDBCol>
+              <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center">
+                <p className="w-100 my-0 mx-1">F</p>
+                <span className="fat">{calcFat}</span>
+              </MDBCol>
+            </MDBRow>
           </td>
           <td id="food-log-btns" className="d-md-table-cell d-none">
             <div className="d-flex justify-content-around mx-auto">
@@ -234,7 +264,7 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             </div>
             {deleteIngredient ? (
               <div className="mt-2 delete-btn-container mx-auto">
-                <p>delete food?</p>
+                <p>delete ingredient?</p>
                 <div>
                   <FontAwesomeIcon
                     icon={faXmarkCircle}
@@ -294,12 +324,9 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
             <div className="muted-weight-input mx-auto"></div>
           </td>
           <td className="d-sm-table-cell d-none">
-            <MDBBadge
-              color="danger"
-              pill
-              className="d-flex"
-              id="food-cal-display"
-            ></MDBBadge>
+            <div className="calc-macros">
+              <span className="mx-auto muted"></span>
+            </div>
           </td>
           <td id="food-macros-display" className="d-none d-lg-table-cell">
             N/a

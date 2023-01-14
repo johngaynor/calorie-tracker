@@ -93,7 +93,9 @@ function Recipe({ recipe, category, recipeID }) {
 
   return (
     <MDBContainer fluid className="user-form mb-5 pb-1">
-      <h1 className="d-flex flex-wrap">{recipe.name}</h1>
+      <h1 className="d-flex flex-wrap overflow-hidden justify-content-center">
+        {recipe.name}
+      </h1>
       <MDBTable align="middle" className="w-100 mx-auto text-white">
         <MDBTableHead>
           <tr>
@@ -102,9 +104,6 @@ function Recipe({ recipe, category, recipeID }) {
             </th>
             <th scope="col" className="d-sm-table-cell d-none">
               Weight
-            </th>
-            <th scope="col" className="d-sm-none">
-              Weight/Macros
             </th>
             <th scope="col" className="d-lg-table-cell d-none">
               Calories
@@ -196,7 +195,7 @@ function Recipe({ recipe, category, recipeID }) {
                 F: {recipeFatTotal}
               </span>
             </td>
-            <td id="food-log-btns">
+            <td id="food-log-btns" className="d-none d-md-table-cell">
               <div className="d-flex justify-content-around mx-auto mb-xl-3 mb-2">
                 {addIngredient ? (
                   <FontAwesomeIcon

@@ -21,10 +21,37 @@
   border: 2px solid var(--site-yellow);
 }
 
+.calc-macros .muted {
+  width: 50px;
+  height: 30px;
+  border: 2px solid #666;
+}
+
 .calc-macros span {
-  width: 20px;
+  width: 35px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  margin: 0 2px;
+}
+
+.calc-macros .bigger {
+  width: 50px;
+}
+
+.calc-macros .cal {
+  border: 2px solid var(--site-yellow);
+  width: 50px;
 }
 
 .calc-macros .protein {
   border: 2px solid var(--site-olivegreen);
+}
+
+.calc-macros .carbs {
+  border: 2px solid var(--site-oceanblue);
+}
+
+.calc-macros .fat {
+  border: 2px solid var(--site-greyblue);
 }
