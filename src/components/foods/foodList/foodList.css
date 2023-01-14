@@ -48,4 +48,8 @@
   table th:nth-child(6) {
     display: none;
   }
+
+  .food-caret {
+    margin: 0 10px;
+  }
 }

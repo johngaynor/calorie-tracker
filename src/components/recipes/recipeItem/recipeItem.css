@@ -5,6 +5,10 @@
   border-radius: 5px;
 }
 
+#edit-weight-input {
+  width: 60px;
+}
+
 .recipe-item-btns {
   height: 25px;
 }

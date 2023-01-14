@@ -1,6 +1,7 @@
 .user-form span {
   height: 30px;
-  width: 60px;
+  /* width: 60px; */
+  width: 70px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -15,7 +16,7 @@
 
 #recipe-total-cal {
   border: 2px solid var(--site-yellow);
-  width: 100px;
+  /* width: 100px; */
 }
 
 #recipe-total-p {

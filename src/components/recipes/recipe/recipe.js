@@ -93,7 +93,7 @@ function Recipe({ recipe, category, recipeID }) {
 
   return (
     <MDBContainer fluid className="user-form mb-5 pb-1">
-      <h1>{recipe.name}</h1>
+      <h1 className="d-flex flex-wrap">{recipe.name}</h1>
       <MDBTable align="middle" className="w-100 mx-auto text-white">
         <MDBTableHead>
           <tr>
@@ -112,7 +112,7 @@ function Recipe({ recipe, category, recipeID }) {
             <th scope="col" className="d-lg-table-cell d-none">
               P/C/F
             </th>
-            <th scope="col" className="d-lg-none">
+            <th scope="col" className="d-lg-none d-table-cell">
               Macros
             </th>
             <th scope="col-2" className="d-md-table-cell d-none">
@@ -180,7 +180,6 @@ function Recipe({ recipe, category, recipeID }) {
             </td>
             <td className="d-none d-sm-table-cell">
               <span id="total-weight"></span>
-              {/* this will get replaced later */}
             </td>
             <td className="d-lg-table-cell d-none">
               <span id="recipe-total-cal">CAL: {recipeCalTotal}</span>

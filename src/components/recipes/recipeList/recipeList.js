@@ -39,7 +39,7 @@ function RecipeList({ category }) {
     <MDBContainer fluid className="food-table mx-auto my-3">
       {clickCategory ? (
         <div
-          className="d-flex justify-content-between align-items-center select"
+          className="d-flex justify-content-between align-items-center select mb-md-2 mb-4"
           onClick={() => setClickCategory(false)}
         >
           <FontAwesomeIcon icon={faSquareCaretUp} className="food-caret" />
