@@ -101,8 +101,15 @@ function Recipe({ recipe, category, recipeID }) {
               Food
             </th>
             <th scope="col">Weight</th>
-            <th scope="col">Calories</th>
-            <th scope="col">P/C/F</th>
+            <th scope="col" className="d-lg-table-cell d-none">
+              Calories
+            </th>
+            <th scope="col" className="d-lg-table-cell d-none">
+              P/C/F
+            </th>
+            <th scope="col" className="d-lg-none">
+              Macros
+            </th>
             <th scope="col" className="col-2">
               Actions
             </th>
@@ -120,20 +127,6 @@ function Recipe({ recipe, category, recipeID }) {
                 />
               ))
             : null}
-          {/* {recipe.ingredients
-            ? recipe.ingredients.map((ingredient, index) => (
-                <RecipeItem
-                  ingredient={ingredient}
-                  key={index}
-                  ingredientIndex={index}
-                  recipeID={recipe.id}
-                  category={recipe.category}
-                />
-              ))
-            : ""} */}
-          {/* {recipe.ingredients
-            ? recipe.ingredients.map((ingredient, index) => <p>hello</p>)
-            : null} */}
           <tr id="food-display">
             <td>
               <div className="mx-auto" id="food-meal-name-display">
@@ -146,10 +139,13 @@ function Recipe({ recipe, category, recipeID }) {
               <span id="total-weight"></span>
               {/* this will get replaced later */}
             </td>
-            <td>
+            <td className="d-lg-table-cell d-none">
               <span id="recipe-total-cal">CAL: {recipeCalTotal}</span>
             </td>
             <td id="food-macros-display">
+              <span id="recipe-total-cal" className="d-lg-none mb-1">
+                CAL: {recipeCalTotal}
+              </span>
               <span id="recipe-total-p" className="mb-1">
                 P: {recipeProteinTotal}
               </span>
@@ -161,52 +157,40 @@ function Recipe({ recipe, category, recipeID }) {
               </span>
             </td>
             <td id="food-log-btns">
-              <div>
+              <div className="d-flex justify-content-around mx-auto mb-xl-3 mb-2">
                 {addIngredient ? (
-                  <MDBBtn
-                    color="link"
-                    rounded
-                    size="sm"
+                  <FontAwesomeIcon
+                    icon={faRectangleList}
+                    className="recipe-btns selected-btn"
                     onClick={() => setAddIngredient(false)}
-                  >
-                    Unadd Ingredient
-                  </MDBBtn>
+                  />
                 ) : (
-                  <MDBBtn
-                    color="link"
-                    rounded
-                    size="sm"
+                  <FontAwesomeIcon
+                    icon={faRectangleList}
+                    className="recipe-btns"
                     onClick={() => setAddIngredient(true)}
-                  >
-                    Add Ingredient
-                  </MDBBtn>
+                  />
                 )}
-                {/* <MDBBtn color="link" rounded size="sm" onClick={pushRecipe}>
-                  Push to Log
-                </MDBBtn> */}
-                <FontAwesomeIcon icon={faRectangleList} />
 
-                <FontAwesomeIcon icon={faUpload} />
-                <FontAwesomeIcon icon={faDeleteLeft} />
-
+                <FontAwesomeIcon
+                  icon={faUpload}
+                  className="recipe-btns"
+                  onClick={pushRecipe}
+                />
+              </div>
+              <div>
                 {deleteRecipe ? (
-                  <MDBBtn
-                    color="link"
-                    rounded
-                    size="sm"
+                  <FontAwesomeIcon
+                    icon={faDeleteLeft}
+                    className="recipe-btns selected-btn"
                     onClick={() => setDeleteRecipe(false)}
-                  >
-                    Undelete Recipe
-                  </MDBBtn>
+                  />
                 ) : (
-                  <MDBBtn
-                    color="link"
-                    rounded
-                    size="sm"
+                  <FontAwesomeIcon
+                    icon={faDeleteLeft}
+                    className="recipe-btns"
                     onClick={() => setDeleteRecipe(true)}
-                  >
-                    Delete Recipe
-                  </MDBBtn>
+                  />
                 )}
               </div>
             </td>

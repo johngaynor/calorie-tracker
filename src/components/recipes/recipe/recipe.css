@@ -46,3 +46,15 @@
   border-radius: 10px;
   margin-bottom: 20px;
 }
+
+.recipe-btns {
+  height: 20px;
+}
+
+.recipe-btns:hover {
+  color: #dc4c64;
+}
+
+.selected-btn {
+  color: #dc4c64;
+}
