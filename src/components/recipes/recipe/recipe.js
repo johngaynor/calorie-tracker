@@ -15,7 +15,8 @@ import RecipeItem from "../recipeItem/recipeItem";
 import AddIngredient from "../addIngredient/addIngredient";
 import firebase from "../../../utilities/firebase";
 import styles from "./recipe.css";
-import { faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faUpload, faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
+import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Recipe({ recipe, category, recipeID }) {
@@ -81,7 +82,11 @@ function Recipe({ recipe, category, recipeID }) {
   // console.log(recipe.ingredients);
 
   const confirmDeleteRecipe = () => {
-    const recipeRef = firebase.database().ref("recipes").child(recipe.id);
+    const recipeRef = firebase
+      .database()
+      .ref("recipes")
+      .child(category)
+      .child(recipeID);
     recipeRef.remove();
     alert("recipe has been deleted.");
   };
@@ -179,7 +184,11 @@ function Recipe({ recipe, category, recipeID }) {
                 {/* <MDBBtn color="link" rounded size="sm" onClick={pushRecipe}>
                   Push to Log
                 </MDBBtn> */}
-                <FontAwesomeIcon icon={faFileArrowUp} />
+                <FontAwesomeIcon icon={faRectangleList} />
+
+                <FontAwesomeIcon icon={faUpload} />
+                <FontAwesomeIcon icon={faDeleteLeft} />
+
                 {deleteRecipe ? (
                   <MDBBtn
                     color="link"

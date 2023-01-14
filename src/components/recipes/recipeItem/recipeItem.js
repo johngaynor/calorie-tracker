@@ -6,12 +6,15 @@ import styles from "./recipeItem.css";
 import firebase from "../../../utilities/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faTrashCan,
   faInfoCircle,
   faXmarkCircle,
   faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import { faSquareCheck, faSquare } from "@fortawesome/free-regular-svg-icons";
+import {
+  faSquareCheck,
+  faSquare,
+  faTrashCan,
+} from "@fortawesome/free-regular-svg-icons";
 import AddIngredient from "../addIngredient/addIngredient";
 
 function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
@@ -230,6 +233,7 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
                 </div>
               </div>
             ) : null}
+            {/* when deleting ingredients I need to reupload the ingredientList to fix the index number shown on firebase */}
           </td>
         </tr>
       )}
