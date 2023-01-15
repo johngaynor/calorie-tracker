@@ -103,7 +103,7 @@ function Recipe({ recipe, category, recipeID }) {
     <MDBContainer
       fluid
       className={
-        clickRecipe ? "food-table each-recipe mb-5" : "each-recipe mb-5"
+        clickRecipe ? "food-table each-recipe mb-5" : "each-recipe mb-2"
       }
     >
       {clickRecipe ? (
@@ -112,7 +112,7 @@ function Recipe({ recipe, category, recipeID }) {
           onClick={() => setClickRecipe(false)}
         >
           <FontAwesomeIcon icon={faSquareCaretUp} className="recipe-caret" />
-          <h4 className="py-2 mt-2 d-flex flex-wrap overflow-hidden">
+          <h4 className="py-2 d-flex flex-wrap overflow-hidden">
             {recipe.name}
           </h4>
           <FontAwesomeIcon icon={faSquareCaretUp} className="recipe-caret" />
@@ -123,7 +123,7 @@ function Recipe({ recipe, category, recipeID }) {
           onClick={() => setClickRecipe(true)}
         >
           <FontAwesomeIcon icon={faSquareCaretDown} className="recipe-caret" />
-          <h4 className="py-2 mt-2 d-flex flex-wrap overflow-hidden">
+          <h4 className="d-flex flex-wrap overflow-hidden py-2">
             {recipe.name}
           </h4>
           <FontAwesomeIcon icon={faSquareCaretDown} className="recipe-caret" />

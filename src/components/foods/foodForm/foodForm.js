@@ -296,6 +296,34 @@ function FoodForm() {
                   required
                 />
               </MDBCol>
+              <MDBCol className="d-none d-sm-table-cell">
+                <MDBInput
+                  id="input-carbs"
+                  type="number"
+                  label="Carbs"
+                  contrast
+                  onChange={(e) => {
+                    setCarbs(e.target.value);
+                  }}
+                  value={carbs}
+                  required
+                />
+              </MDBCol>
+              <MDBCol className="d-none d-sm-table-cell">
+                <MDBInput
+                  id="input-fat"
+                  type="number"
+                  label="Fat"
+                  contrast
+                  onChange={(e) => {
+                    setFat(e.target.value);
+                  }}
+                  value={fat}
+                  required
+                />
+              </MDBCol>
+            </MDBRow>
+            <MDBRow className="d-sm-none mt-4">
               <MDBCol>
                 <MDBInput
                   id="input-carbs"

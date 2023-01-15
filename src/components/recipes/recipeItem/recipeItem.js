@@ -338,7 +338,7 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
           <td id="food-macros-display" className="d-none d-lg-table-cell">
             N/a
           </td>
-          <td id="food-log-btns">
+          <td id="food-log-btns" className="d-none d-md-table-cell">
             <div className="d-flex justify-content-around mx-auto">
               <FontAwesomeIcon
                 icon={faSquare}

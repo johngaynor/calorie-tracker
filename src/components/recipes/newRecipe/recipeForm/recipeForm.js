@@ -537,7 +537,10 @@ function RecipeForm() {
               </MDBCol>
             </MDBRow>
             <MDBRow className="review-recipe p-3 mb-5 mx-1">
-              <MDBCol onClick={() => setFormStep(0)}>
+              <MDBCol
+                onClick={() => setFormStep(0)}
+                className="col-md-4 col-12"
+              >
                 <p className="review-title">Recipe Name:</p>
                 <div className="review-recipe-box">{recipeName}</div>
                 <p className="review-title">Category:</p>
@@ -547,8 +550,9 @@ function RecipeForm() {
                   {recipeDesc}
                 </div>
               </MDBCol>
+
               <MDBCol
-                className="col-sm-8 col-review-table"
+                className="col-md-8 col-review-table"
                 onClick={() => setFormStep(1)}
               >
                 <MDBTable>
@@ -557,14 +561,10 @@ function RecipeForm() {
                       <th scope="col" className="col-4">
                         Ingredient
                       </th>
-                      <th scope="col" className="col-4">
+                      <th scope="col" className="col-4 d-none d-lg-table-cell">
                         Serving Size
                       </th>
-                      <th scope="col">Calories</th>
-                      <th scope="col">P/C/F</th>
-                      <th scope="col" className="xs-header">
-                        Info
-                      </th>
+                      <th scope="col">Macros (per serving)</th>
                     </tr>
                   </MDBTableHead>
                   <MDBTableBody>
