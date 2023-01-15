@@ -103,9 +103,7 @@ function Recipe({ recipe, category, recipeID }) {
     <MDBContainer
       fluid
       className={
-        clickRecipe
-          ? "food-table each-recipe mb-5 pb-1"
-          : "each-recipe mb-5 pb-1"
+        clickRecipe ? "food-table each-recipe mb-5" : "each-recipe mb-5"
       }
     >
       {clickRecipe ? (

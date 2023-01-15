@@ -6,6 +6,8 @@ import {
   MDBTableHead,
   MDBTableBody,
   MDBContainer,
+  MDBCol,
+  MDBRow,
 } from "mdb-react-ui-kit";
 import {
   faCheckCircle,
@@ -15,6 +17,7 @@ import {
   faTrashCan,
   faWindowClose,
   faXmarkCircle,
+  faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import firebase from "../../../utilities/firebase";
@@ -34,9 +37,9 @@ function Food({ food }) {
   // updates calculated macros
   useEffect(() => {
     let calcCal = ((weight * food.cal) / food.servingSize).toFixed(0);
-    let calcProtein = ((weight * food.protein) / food.servingSize).toFixed(1);
-    let calcCarbs = ((weight * food.carbs) / food.servingSize).toFixed(1);
-    let calcFat = ((weight * food.fat) / food.servingSize).toFixed(1);
+    let calcProtein = ((weight * food.protein) / food.servingSize).toFixed(0);
+    let calcCarbs = ((weight * food.carbs) / food.servingSize).toFixed(0);
+    let calcFat = ((weight * food.fat) / food.servingSize).toFixed(0);
 
     setCalcCal(calcCal);
     setCalcProtein(calcProtein);
@@ -111,11 +114,20 @@ function Food({ food }) {
             className="food-info"
             onClick={alertFoodInfo}
           />
+          <input
+            id="edit-weight-input"
+            type="number"
+            className="food-input-boxes d-sm-none d-block mx-auto mt-2"
+            onChange={(e) => setWeight(e.target.value)}
+            value={weight}
+            placeholder="0"
+          />
+          <p className="text-muted mb-2 d-sm-none">in {food.unit}</p>
         </div>
-        <div id="food-log-btns" className="p-2 only-xxs">
+        <div id="food-log-btns" className="p-2 d-md-none">
           <div className="d-flex justify-content-around mx-auto">
             <FontAwesomeIcon
-              icon={faShoppingBasket}
+              icon={faUpload}
               className="food-icons"
               id="food-add-icon"
               onClick={() => setAddLog(true)}
@@ -163,7 +175,7 @@ function Food({ food }) {
           ) : null}
         </div>
       </td>
-      <td>
+      <td className="d-none d-sm-table-cell">
         <input
           id="edit-weight-input"
           type="number"
@@ -173,35 +185,49 @@ function Food({ food }) {
           placeholder="0"
         />
         <p className="text-muted mb-0">in {food.unit}</p>
-        <div className="only-xs">
-          <p>Cal: {calcCal}</p>
-          <p>P: {calcProtein}</p>
-          <p>C: {calcCarbs}</p>
-          <p>F: {calcFat}</p>
-        </div>
       </td>
-      <td className="only-md">
-        <p>Cal: {calcCal}</p>
-        <p>P: {calcProtein}</p>
-        <p>C: {calcCarbs}</p>
-        <p>F: {calcFat}</p>
-      </td>
-      <td>
-        <MDBBadge
-          color="success"
-          pill
-          className="cal-pill d-flex justify-content-center align-items-center mx-auto"
-        >
-          {calcCal}
-        </MDBBadge>
+      <td className="d-none d-lg-table-cell">
+        <MDBRow className="calc-macros mb-3">
+          <MDBCol>
+            <p className="w-100 my-0">Cal</p>
+            <span className="cal mx-auto">{calcCal}</span>
+          </MDBCol>
+        </MDBRow>
       </td>
       <td id="food-macros-display">
-        {calcProtein}/{calcCarbs}/{calcFat}
+        <MDBRow className="calc-macros d-flex justify-content-center mb-3">
+          <MDBRow className="d-lg-none mb-2">
+            <p className="w-100 my-0">Cal</p>
+            <span className="cal mx-auto">{calcCal}</span>
+          </MDBRow>
+          <MDBRow className="justify-content-center d-none d-sm-flex">
+            <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center">
+              <p className="w-100 my-0 mx-1">P</p>
+              <span className="protein">{calcProtein}</span>
+            </MDBCol>
+            <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center mx-xl-1 mx-2">
+              <p className="w-100 my-0 mx-1">C</p>
+              <span className="carbs">{calcCarbs}</span>
+            </MDBCol>
+            <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center">
+              <p className="w-100 my-0 mx-1">F</p>
+              <span className="fat">{calcFat}</span>
+            </MDBCol>
+          </MDBRow>
+          <p className="w-100 my-0 mx-1 d-sm-none">P</p>
+          <span className="protein bigger d-sm-none">{calcProtein}</span>
+
+          <p className="w-100 my-0 mx-1 d-sm-none">C</p>
+          <span className="carbs bigger d-sm-none">{calcCarbs}</span>
+
+          <p className="w-100 my-0 mx-1 d-sm-none">F</p>
+          <span className="fat bigger d-sm-none">{calcFat}</span>
+        </MDBRow>
       </td>
-      <td id="food-log-btns">
+      <td id="food-log-btns" className="d-none d-md-table-cell">
         <div className="d-flex justify-content-around mx-auto">
           <FontAwesomeIcon
-            icon={faShoppingBasket}
+            icon={faUpload}
             className="food-icons"
             id="food-add-icon"
             onClick={() => setAddLog(true)}

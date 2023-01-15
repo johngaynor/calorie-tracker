@@ -68,7 +68,6 @@ function RecipeList({ category }) {
                   category={category}
                   recipeID={recipe.id}
                 />
-                // <p>hello</p>
               ))
             : null}
         </MDBContainer>

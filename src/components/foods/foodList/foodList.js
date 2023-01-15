@@ -33,7 +33,10 @@ function FoodList({ category }) {
   }, []);
 
   return (
-    <MDBContainer className="food-table mx-auto my-3">
+    <MDBContainer
+      fluid
+      className={clickCategory ? "food-table mx-auto my-3" : "mx-auto my-3"}
+    >
       {clickCategory ? (
         <div
           className="d-flex justify-content-between align-items-center select"
@@ -62,13 +65,21 @@ function FoodList({ category }) {
                 <th scope="col" className="col-4">
                   Food
                 </th>
-                <th scope="col">Weight</th>
-                <th scope="col" className="only-md">
+                <th scope="col" className="d-none d-sm-table-cell">
+                  Weight
+                </th>
+                <th scope="col" className="d-table-cell d-lg-none">
                   Macros
                 </th>
-                <th scope="col">Calories</th>
-                <th scope="col">P/C/F</th>
-                <th scope="col-3">Actions</th>
+                <th scope="col" className="d-none d-lg-table-cell">
+                  Calories
+                </th>
+                <th scope="col" className="d-none d-lg-table-cell">
+                  P/C/F
+                </th>
+                <th scope="col-3" className="d-none d-md-table-cell">
+                  Actions
+                </th>
               </tr>
             </MDBTableHead>
             <MDBTableBody>
