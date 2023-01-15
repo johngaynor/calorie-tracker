@@ -1,0 +1,7 @@
+.add-ingredient-form {
+  border: 2px solid white;
+}
+
+.add-ingredient-form .grey-box {
+  background-color: var(--site-grey);
+}

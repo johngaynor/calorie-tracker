@@ -8,6 +8,7 @@ import {
 import { Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import firebase from "../../../utilities/firebase";
+import styles from "./addIngredient.css";
 
 // recipe is recipe.id
 function AddIngredient({ recipe, category }) {
@@ -142,14 +143,14 @@ function AddIngredient({ recipe, category }) {
 
   return (
     <MDBContainer
-      className="p-2 add-ingredient-form bg-danger
+      className=" p-2 add-ingredient-form
       "
     >
       <h5 className="mt-2">New Ingredient Form</h5>
       <MDBRow className="m-3">
-        <MDBCol className="col-8">
+        <MDBCol className="col-lg-8">
           <MDBInput
-            className="add-name"
+            className="grey-box"
             label="Ingredient Name"
             type="text"
             onChange={(e) => {
@@ -159,11 +160,12 @@ function AddIngredient({ recipe, category }) {
             contrast
           />
         </MDBCol>
-        <MDBCol>
+        <MDBCol className="d-lg-inline-block d-none">
           <MDBInput
             id="ingredient-size"
             type="number"
             label="Serving Size"
+            className="grey-box"
             onChange={(e) => {
               setSize(e.target.value);
             }}
@@ -171,6 +173,53 @@ function AddIngredient({ recipe, category }) {
             contrast
           />
         </MDBCol>
+        <MDBCol className="d-lg-inline-block d-none">
+          <Form.Select
+            aria-label="Default select"
+            size="md"
+            onChange={(e) => {
+              setUnit(e.target.value);
+            }}
+          >
+            <option>Unit</option>
+            <option value="grams">grams</option>
+            <option value="pcs">pcs</option>
+            <option value="oz">oz</option>
+            <option value="ml">ml</option>
+          </Form.Select>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className="m-3">
+        <MDBCol className="d-inline-block d-lg-none">
+          <MDBInput
+            id="ingredient-size"
+            type="number"
+            label="Serving Size"
+            className="grey-box"
+            onChange={(e) => {
+              setSize(e.target.value);
+            }}
+            value={size}
+            contrast
+          />
+        </MDBCol>
+        <MDBCol className="d-none d-sm-inline-block d-lg-none col-5">
+          <Form.Select
+            aria-label="Default select"
+            size="md"
+            onChange={(e) => {
+              setUnit(e.target.value);
+            }}
+          >
+            <option>Unit</option>
+            <option value="grams">grams</option>
+            <option value="pcs">pcs</option>
+            <option value="oz">oz</option>
+            <option value="ml">ml</option>
+          </Form.Select>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className="m-3 d-sm-none">
         <MDBCol>
           <Form.Select
             aria-label="Default select"
@@ -212,6 +261,33 @@ function AddIngredient({ recipe, category }) {
             contrast
           />
         </MDBCol>
+        <MDBCol className="d-none d-sm-inline-block">
+          <MDBInput
+            id="input-carbs"
+            type="number"
+            label="Carbs"
+            onChange={(e) => {
+              setCarbs(e.target.value);
+            }}
+            value={carbs}
+            contrast
+          />
+        </MDBCol>
+        <MDBCol className="d-none d-sm-inline-block">
+          <MDBInput
+            id="input-fat"
+            type="number"
+            label="Fat"
+            contrast
+            onChange={(e) => {
+              setFat(e.target.value);
+            }}
+            value={fat}
+            contrast
+          />
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className="m-3 d-sm-none d-flex">
         <MDBCol>
           <MDBInput
             id="input-carbs"
