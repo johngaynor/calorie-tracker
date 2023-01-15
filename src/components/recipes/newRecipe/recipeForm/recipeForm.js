@@ -18,6 +18,8 @@ import { Form } from "react-bootstrap";
 import IngredientList from "../ingredientList/ingredientList";
 import IngredientReview from "../ingredientReview/ingredientReview";
 import styles from "./recipeForm.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfo, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 function RecipeForm() {
   // these are for form functionality
@@ -151,15 +153,19 @@ function RecipeForm() {
       ingredients: ingredientList,
     };
 
-    // console.log(recipe);
     recipeRef.push(recipe);
-    // alert("recipe successfully submitted!");
     firebase.database().ref("add-ingredient").remove();
+  };
+
+  const reviewRecipeTip = () => {
+    alert(
+      " Tip: to edit any information, click on the section you want to edit and you will be taken to that section of the form."
+    );
   };
 
   return (
     <MDBContainer className="pb-5 page-container">
-      <h3 className="p-3 basic-header">New Recipe Form</h3>
+      <h2 className="p-3 basic-header">New Recipe Form</h2>
       <MDBContainer fluid className="recipe-form">
         <form data-multi-step className="mx-auto p-3 text-black">
           {/* first card */}
@@ -191,7 +197,6 @@ function RecipeForm() {
                 <Form.Select
                   aria-label="Default select"
                   size="md"
-                  //   id="recipe-form-category"
                   onChange={(e) => {
                     setRecipeCategory(e.target.value);
                   }}
@@ -200,10 +205,10 @@ function RecipeForm() {
                   <option value="default-category" disabled>
                     Category (optional)
                   </option>
-                  <option value="breakfast">Breakfast</option>
-                  <option value="lunch">Lunch</option>
-                  <option value="dinner">Dinner</option>
-                  <option value="snack">Snack</option>
+                  <option value="Breakfast">Breakfast</option>
+                  <option value="Lunch">Lunch</option>
+                  <option value="Dinner">Dinner</option>
+                  <option value="Snack">Snack</option>
                 </Form.Select>
               </MDBCol>
             </MDBRow>
@@ -390,15 +395,16 @@ function RecipeForm() {
                 valuemax={100}
               />
             </MDBProgress>
-            <MDBRow className="pt-3 text-white">
+            <MDBRow className="py-4 text-white">
               <MDBCol className="d-flex flex-start my-auto">
                 <h4 className="text-decoration-underline">Review Recipe</h4>
               </MDBCol>
-              <MDBCol className="col-sm-5">
-                <p className="review-tip">
-                  Tip: to edit any information, click on the section you want to
-                  edit and you will be taken to that section of the form.
-                </p>
+              <MDBCol className="col-1 mx-4 mx-sm-3">
+                <FontAwesomeIcon
+                  icon={faInfoCircle}
+                  onClick={reviewRecipeTip}
+                  className="review-tip"
+                />
               </MDBCol>
             </MDBRow>
             <MDBRow className="review-recipe p-3 mb-5 mx-1">

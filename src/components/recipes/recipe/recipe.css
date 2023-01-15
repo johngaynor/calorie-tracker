@@ -10,6 +10,11 @@
   background-color: var(--site-darkgrey);
 }
 
+.recipe-caret {
+  height: 30px;
+  margin: 0 30px;
+}
+
 #recipe-totals span {
   height: 30px;
   /* width: 60px; */
@@ -57,4 +62,10 @@
 
 .selected-btn {
   color: #dc4c64;
+}
+
+@media screen and (max-width: 525px) {
+  .recipe-caret {
+    margin: 0 10px;
+  }
 }

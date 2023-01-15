@@ -137,7 +137,7 @@ function FoodForm() {
 
   return (
     <MDBContainer className="pb-5 page-container">
-      <h3 className="p-3 basic-header">New Food Form</h3>
+      <h2 className="p-3 basic-header">New Food Form</h2>
       <MDBContainer fluid className="recipe-form">
         <form data-multi-step className="mx-auto p-3 text-black">
           {/* first card */}
@@ -156,6 +156,7 @@ function FoodForm() {
                 <MDBInput
                   label="Food Name"
                   type="text"
+                  id="form-box-grey"
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
@@ -164,7 +165,7 @@ function FoodForm() {
                   required
                 />
               </MDBCol>
-              <MDBCol className="recipe-form-category">
+              <MDBCol>
                 <Form.Select
                   aria-label="Default select"
                   size="md"
@@ -235,6 +236,7 @@ function FoodForm() {
                 <MDBInput
                   type="number"
                   label="Serving Size"
+                  id="form-box-grey"
                   onChange={(e) => {
                     setSize(e.target.value);
                   }}

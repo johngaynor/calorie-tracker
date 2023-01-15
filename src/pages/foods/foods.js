@@ -4,9 +4,9 @@ import FoodCategoryList from "../../components/foods/foodCategoryList/foodCatego
 function Foods() {
   return (
     <MDBContainer fluid>
-      <h3 className="p-3 d-flex basic-header justify-content-center">
+      <h2 className="p-3 d-flex basic-header justify-content-center">
         Your Foods
-      </h3>
+      </h2>
       <FoodCategoryList></FoodCategoryList>
     </MDBContainer>
   );

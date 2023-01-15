@@ -30,6 +30,10 @@
   background-color: var(--site-greyblue);
 }
 
+#form-box-grey {
+  background-color: var(--site-grey);
+}
+
 @media screen and (max-width: 421px) {
   #food-input-unit {
     margin: 0px;

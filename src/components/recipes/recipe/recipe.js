@@ -100,24 +100,35 @@ function Recipe({ recipe, category, recipeID }) {
   };
 
   return (
-    <MDBContainer fluid className="food-table each-recipe mb-5 pb-1">
+    <MDBContainer
+      fluid
+      className={
+        clickRecipe
+          ? "food-table each-recipe mb-5 pb-1"
+          : "each-recipe mb-5 pb-1"
+      }
+    >
       {clickRecipe ? (
         <div
           className="d-flex justify-content-between align-items-center select"
           onClick={() => setClickRecipe(false)}
         >
-          <FontAwesomeIcon icon={faSquareCaretUp} className="food-caret" />
-          <h2 className="py-2 mt-2">{recipe.name}</h2>
-          <FontAwesomeIcon icon={faSquareCaretUp} className="food-caret" />
+          <FontAwesomeIcon icon={faSquareCaretUp} className="recipe-caret" />
+          <h4 className="py-2 mt-2 d-flex flex-wrap overflow-hidden">
+            {recipe.name}
+          </h4>
+          <FontAwesomeIcon icon={faSquareCaretUp} className="recipe-caret" />
         </div>
       ) : (
         <div
           className="d-flex justify-content-between align-items-center unselect"
           onClick={() => setClickRecipe(true)}
         >
-          <FontAwesomeIcon icon={faSquareCaretDown} className="food-caret" />
-          <h2 className="py-2 mt-2">{recipe.name}</h2>
-          <FontAwesomeIcon icon={faSquareCaretDown} className="food-caret" />
+          <FontAwesomeIcon icon={faSquareCaretDown} className="recipe-caret" />
+          <h4 className="py-2 mt-2 d-flex flex-wrap overflow-hidden">
+            {recipe.name}
+          </h4>
+          <FontAwesomeIcon icon={faSquareCaretDown} className="recipe-caret" />
         </div>
       )}
       {clickRecipe ? (
