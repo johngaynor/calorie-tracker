@@ -66,18 +66,26 @@ function Ingredient({ ingredient }) {
             <p className="w-100 my-0">Cal</p>
             <span className="cal mx-auto">{ingredient.cal}</span>
           </MDBRow>
-          <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center">
+          <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center d-none d-sm-flex">
             <p className="w-100 my-0 mx-1">P</p>
             <span className="protein">{ingredient.protein}</span>
           </MDBCol>
-          <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center mx-xl-1 mx-2">
+          <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center mx-xl-1 mx-2 d-none d-sm-flex">
             <p className="w-100 my-0 mx-1">C</p>
             <span className="carbs">{ingredient.carbs}</span>
           </MDBCol>
-          <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center">
+          <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center d-none d-sm-flex">
             <p className="w-100 my-0 mx-1">F</p>
             <span className="fat">{ingredient.fat}</span>
           </MDBCol>
+          <p className="w-100 m-1 d-sm-none">P</p>
+          <span className="protein bigger d-sm-none">{ingredient.protein}</span>
+
+          <p className="w-100 m-1 d-sm-none">C</p>
+          <span className="carbs bigger d-sm-none">{ingredient.carbs}</span>
+
+          <p className="w-100 m-1 d-sm-none">F</p>
+          <span className="fat bigger d-sm-none">{ingredient.fat}</span>
         </MDBRow>
       </td>
       <td id="food-log-btns" className="d-none d-xl-table-cell">
