@@ -15,7 +15,11 @@ import RecipeItem from "../recipeItem/recipeItem";
 import AddIngredient from "../addIngredient/addIngredient";
 import firebase from "../../../utilities/firebase";
 import styles from "./recipe.css";
-import { faUpload, faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUpload,
+  faDeleteLeft,
+  faPlateWheat,
+} from "@fortawesome/free-solid-svg-icons";
 import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -141,13 +145,13 @@ function Recipe({ recipe, category, recipeID }) {
                 <div className="d-flex justify-content-evenly mx-auto my-2 d-md-none">
                   {addIngredient ? (
                     <FontAwesomeIcon
-                      icon={faRectangleList}
+                      icon={faPlateWheat}
                       className="recipe-btns selected-btn"
                       onClick={() => setAddIngredient(false)}
                     />
                   ) : (
                     <FontAwesomeIcon
-                      icon={faRectangleList}
+                      icon={faPlateWheat}
                       className="recipe-btns"
                       onClick={() => setAddIngredient(true)}
                     />
@@ -193,13 +197,13 @@ function Recipe({ recipe, category, recipeID }) {
               <div className="d-flex justify-content-around mx-auto mb-xl-3 mb-2">
                 {addIngredient ? (
                   <FontAwesomeIcon
-                    icon={faRectangleList}
+                    icon={faPlateWheat}
                     className="recipe-btns selected-btn"
                     onClick={() => setAddIngredient(false)}
                   />
                 ) : (
                   <FontAwesomeIcon
-                    icon={faRectangleList}
+                    icon={faPlateWheat}
                     className="recipe-btns"
                     onClick={() => setAddIngredient(true)}
                   />
