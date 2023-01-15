@@ -4,9 +4,9 @@ import RecipeCategoryList from "../../components/recipes/recipeCategoryList/reci
 function Recipes() {
   return (
     <MDBContainer fluid>
-      <h3 className="p-3 d-flex basic-header justify-content-center">
+      <h2 className="p-3 d-flex basic-header justify-content-center">
         Your Recipes
-      </h3>
+      </h2>
       <RecipeCategoryList></RecipeCategoryList>
     </MDBContainer>
   );

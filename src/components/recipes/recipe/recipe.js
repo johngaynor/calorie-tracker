@@ -19,12 +19,14 @@ import {
   faUpload,
   faDeleteLeft,
   faPlateWheat,
+  faSquareCaretDown,
+  faSquareCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Recipe({ recipe, category, recipeID }) {
-  // const [deleteRecipe, setDeleteRecipe] = useState(false);
+  const [clickRecipe, setClickRecipe] = useState(false);
   const [addIngredient, setAddIngredient] = useState(false);
   const [ingredientList, setIngredientList] = useState("");
 
@@ -98,51 +100,120 @@ function Recipe({ recipe, category, recipeID }) {
   };
 
   return (
-    <MDBContainer fluid className="user-form mb-5 pb-1">
-      <h1 className="d-flex flex-wrap overflow-hidden justify-content-center">
-        {recipe.name}
-      </h1>
-      <MDBTable align="middle" className="w-100 mx-auto text-white">
-        <MDBTableHead>
-          <tr>
-            <th scope="col" className="col-4">
-              Food
-            </th>
-            <th scope="col" className="d-sm-table-cell d-none">
-              Weight
-            </th>
-            <th scope="col" className="d-lg-table-cell d-none">
-              Calories
-            </th>
-            <th scope="col" className="d-lg-table-cell d-none">
-              P/C/F
-            </th>
-            <th scope="col" className="d-lg-none d-table-cell">
-              Macros
-            </th>
-            <th scope="col-2" className="d-md-table-cell d-none">
-              Actions
-            </th>
-          </tr>
-        </MDBTableHead>
-        <MDBTableBody>
-          {ingredientList
-            ? ingredientList.map((ingredient, index) => (
-                <RecipeItem
-                  ingredient={ingredient}
-                  key={index}
-                  category={category}
-                  recipeID={recipeID}
-                  ingredientID={index}
-                />
-              ))
-            : null}
-          <tr id="recipe-totals">
-            <td>
-              <div className="mx-auto">
-                <p className="fw-bold mb-1">TOTAL</p>
-                {/* btns that only show <md */}
-                <div className="d-flex justify-content-evenly mx-auto my-2 d-md-none">
+    <MDBContainer fluid className="food-table each-recipe mb-5 pb-1">
+      {clickRecipe ? (
+        <div
+          className="d-flex justify-content-between align-items-center select"
+          onClick={() => setClickRecipe(false)}
+        >
+          <FontAwesomeIcon icon={faSquareCaretUp} className="food-caret" />
+          <h2 className="py-2 mt-2">{recipe.name}</h2>
+          <FontAwesomeIcon icon={faSquareCaretUp} className="food-caret" />
+        </div>
+      ) : (
+        <div
+          className="d-flex justify-content-between align-items-center unselect"
+          onClick={() => setClickRecipe(true)}
+        >
+          <FontAwesomeIcon icon={faSquareCaretDown} className="food-caret" />
+          <h2 className="py-2 mt-2">{recipe.name}</h2>
+          <FontAwesomeIcon icon={faSquareCaretDown} className="food-caret" />
+        </div>
+      )}
+      {clickRecipe ? (
+        <MDBTable align="middle" className="w-100 mx-auto text-white">
+          <MDBTableHead>
+            <tr>
+              <th scope="col" className="col-4">
+                Food
+              </th>
+              <th scope="col" className="d-sm-table-cell d-none">
+                Weight
+              </th>
+              <th scope="col" className="d-lg-table-cell d-none">
+                Calories
+              </th>
+              <th scope="col" className="d-lg-table-cell d-none">
+                P/C/F
+              </th>
+              <th scope="col" className="d-lg-none d-table-cell">
+                Macros
+              </th>
+              <th scope="col-2" className="d-md-table-cell d-none">
+                Actions
+              </th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            {ingredientList
+              ? ingredientList.map((ingredient, index) => (
+                  <RecipeItem
+                    ingredient={ingredient}
+                    key={index}
+                    category={category}
+                    recipeID={recipeID}
+                    ingredientID={index}
+                  />
+                ))
+              : null}
+            <tr id="recipe-totals">
+              <td>
+                <div className="mx-auto">
+                  <p className="fw-bold mb-1">TOTAL</p>
+                  {/* btns that only show <md */}
+                  <div className="d-flex justify-content-evenly mx-auto my-2 d-md-none">
+                    {addIngredient ? (
+                      <FontAwesomeIcon
+                        icon={faPlateWheat}
+                        className="recipe-btns selected-btn"
+                        onClick={() => setAddIngredient(false)}
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faPlateWheat}
+                        className="recipe-btns"
+                        onClick={() => setAddIngredient(true)}
+                      />
+                    )}
+
+                    <FontAwesomeIcon
+                      icon={faUpload}
+                      className="recipe-btns"
+                      onClick={pushRecipe}
+                    />
+                  </div>
+                  <div className="d-md-none">
+                    <FontAwesomeIcon
+                      icon={faDeleteLeft}
+                      className="recipe-btns selected-btn"
+                      onClick={deleteRecipe}
+                    />
+                  </div>
+                  {/* end <md btns */}
+                </div>
+              </td>
+              <td className="d-none d-sm-table-cell">
+                <span id="total-weight"></span>
+              </td>
+              <td className="d-lg-table-cell d-none">
+                <span id="recipe-total-cal">CAL: {recipeCalTotal}</span>
+              </td>
+              <td id="food-macros-display" className="d-table-cell">
+                <span id="recipe-total-cal" className="d-lg-none mb-1">
+                  CAL: {recipeCalTotal}
+                </span>
+                <span id="recipe-total-p" className="mb-1">
+                  P: {recipeProteinTotal}
+                </span>
+                <span id="recipe-total-c" className="mb-1">
+                  C: {recipeCarbsTotal}
+                </span>
+                <span id="recipe-total-f" className="mb-1">
+                  F: {recipeFatTotal}
+                </span>
+              </td>
+              <td id="food-log-btns" className="d-none d-md-table-cell">
+                <div className="d-flex justify-content-around mx-auto mb-xl-3 mb-2">
                   {addIngredient ? (
                     <FontAwesomeIcon
                       icon={faPlateWheat}
@@ -163,69 +234,19 @@ function Recipe({ recipe, category, recipeID }) {
                     onClick={pushRecipe}
                   />
                 </div>
-                <div className="d-md-none">
+                <div>
                   <FontAwesomeIcon
                     icon={faDeleteLeft}
-                    className="recipe-btns selected-btn"
+                    className="recipe-btns"
                     onClick={deleteRecipe}
                   />
                 </div>
-                {/* end <md btns */}
-              </div>
-            </td>
-            <td className="d-none d-sm-table-cell">
-              <span id="total-weight"></span>
-            </td>
-            <td className="d-lg-table-cell d-none">
-              <span id="recipe-total-cal">CAL: {recipeCalTotal}</span>
-            </td>
-            <td id="food-macros-display" className="d-table-cell">
-              <span id="recipe-total-cal" className="d-lg-none mb-1">
-                CAL: {recipeCalTotal}
-              </span>
-              <span id="recipe-total-p" className="mb-1">
-                P: {recipeProteinTotal}
-              </span>
-              <span id="recipe-total-c" className="mb-1">
-                C: {recipeCarbsTotal}
-              </span>
-              <span id="recipe-total-f" className="mb-1">
-                F: {recipeFatTotal}
-              </span>
-            </td>
-            <td id="food-log-btns" className="d-none d-md-table-cell">
-              <div className="d-flex justify-content-around mx-auto mb-xl-3 mb-2">
-                {addIngredient ? (
-                  <FontAwesomeIcon
-                    icon={faPlateWheat}
-                    className="recipe-btns selected-btn"
-                    onClick={() => setAddIngredient(false)}
-                  />
-                ) : (
-                  <FontAwesomeIcon
-                    icon={faPlateWheat}
-                    className="recipe-btns"
-                    onClick={() => setAddIngredient(true)}
-                  />
-                )}
+              </td>
+            </tr>
+          </MDBTableBody>
+        </MDBTable>
+      ) : null}
 
-                <FontAwesomeIcon
-                  icon={faUpload}
-                  className="recipe-btns"
-                  onClick={pushRecipe}
-                />
-              </div>
-              <div>
-                <FontAwesomeIcon
-                  icon={faDeleteLeft}
-                  className="recipe-btns"
-                  onClick={deleteRecipe}
-                />
-              </div>
-            </td>
-          </tr>
-        </MDBTableBody>
-      </MDBTable>
       {addIngredient ? (
         <AddIngredient
           recipe={recipe.id}

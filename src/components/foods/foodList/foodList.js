@@ -40,7 +40,7 @@ function FoodList({ category }) {
           onClick={() => setClickCategory(false)}
         >
           <FontAwesomeIcon icon={faSquareCaretUp} className="food-caret" />
-          <h3 className="p-2">{category}</h3>
+          <h2 className="p-2">{category}</h2>
           <FontAwesomeIcon icon={faSquareCaretUp} className="food-caret" />
         </div>
       ) : (
@@ -49,7 +49,7 @@ function FoodList({ category }) {
           onClick={() => setClickCategory(true)}
         >
           <FontAwesomeIcon icon={faSquareCaretDown} className="food-caret" />
-          <h3 className="p-2">{category}</h3>
+          <h2 className="p-2">{category}</h2>
           <FontAwesomeIcon icon={faSquareCaretDown} className="food-caret" />
         </div>
       )}
