@@ -15,13 +15,18 @@ import styles from "./ingredient.css";
 
 function Ingredient({ ingredient }) {
   const deleteIngredient = () => {
-    console.log("deleted ingredient");
-    const ingredientRef = firebase
-      .database()
-      .ref("add-ingredient")
-      .child(ingredient.id);
+    if (
+      window.confirm(
+        "Are you sure you want to delete this ingredient? This action cannot be undone."
+      )
+    ) {
+      const ingredientRef = firebase
+        .database()
+        .ref("add-ingredient")
+        .child(ingredient.id);
 
-    ingredientRef.remove();
+      ingredientRef.remove();
+    }
   };
 
   return (
