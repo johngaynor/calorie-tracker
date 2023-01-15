@@ -142,15 +142,12 @@ function AddIngredient({ recipe, category }) {
   };
 
   return (
-    <MDBContainer
-      className=" p-2 add-ingredient-form
-      "
-    >
+    <MDBContainer className="p-2 add-ingredient-form">
       <h5 className="mt-2">New Ingredient Form</h5>
       <MDBRow className="m-3">
         <MDBCol className="col-lg-8">
           <MDBInput
-            className="grey-box"
+            id="ingredient-name"
             label="Ingredient Name"
             type="text"
             onChange={(e) => {
@@ -165,7 +162,6 @@ function AddIngredient({ recipe, category }) {
             id="ingredient-size"
             type="number"
             label="Serving Size"
-            className="grey-box"
             onChange={(e) => {
               setSize(e.target.value);
             }}
@@ -318,7 +314,7 @@ function AddIngredient({ recipe, category }) {
         <MDBBtn
           outline
           color="light"
-          className="border-1"
+          className="border-1 bg-danger"
           onClick={submitIngredient}
         >
           Add Ingredient

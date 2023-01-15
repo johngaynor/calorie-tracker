@@ -180,7 +180,7 @@ function RecipeForm() {
               />
             </MDBProgress>
             <MDBRow className="pt-5 mb-4">
-              <MDBCol className="col-8">
+              <MDBCol className="col-sm-8">
                 <MDBInput
                   label="Recipe Name"
                   type="text"
@@ -193,7 +193,7 @@ function RecipeForm() {
                   required
                 />
               </MDBCol>
-              <MDBCol className="recipe-form-category">
+              <MDBCol className="recipe-form-category d-none d-sm-flex">
                 <Form.Select
                   aria-label="Default select"
                   size="md"
@@ -212,7 +212,27 @@ function RecipeForm() {
                 </Form.Select>
               </MDBCol>
             </MDBRow>
-            <MDBRow>
+            <MDBRow className="d-sm-none">
+              <MDBCol className="recipe-form-category mb-4">
+                <Form.Select
+                  aria-label="Default select"
+                  size="md"
+                  onChange={(e) => {
+                    setRecipeCategory(e.target.value);
+                  }}
+                  defaultValue="default-category"
+                >
+                  <option value="default-category" disabled>
+                    Category (optional)
+                  </option>
+                  <option value="Breakfast">Breakfast</option>
+                  <option value="Lunch">Lunch</option>
+                  <option value="Dinner">Dinner</option>
+                  <option value="Snack">Snack</option>
+                </Form.Select>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow className="pb-4">
               <MDBCol>
                 <MDBTextArea
                   label="Description (optional)"
@@ -251,7 +271,7 @@ function RecipeForm() {
               />
             </MDBProgress>
             <MDBRow className="pt-5 mb-4">
-              <MDBCol className="col-8">
+              <MDBCol className="col-md-8">
                 <MDBInput
                   id="recipe-form-grey"
                   label="Ingredient Name"
@@ -263,7 +283,7 @@ function RecipeForm() {
                   value={ingredientName}
                 />
               </MDBCol>
-              <MDBCol>
+              <MDBCol className="d-none d-md-inline-block">
                 <MDBInput
                   id="recipe-form-grey"
                   type="number"
@@ -275,6 +295,63 @@ function RecipeForm() {
                   contrast
                 />
               </MDBCol>
+              <MDBCol className="d-none d-md-flex">
+                <Form.Select
+                  aria-label="Default select"
+                  size="md"
+                  className="form-unit"
+                  onChange={(e) => {
+                    setUnit(e.target.value);
+                  }}
+                  defaultValue="unit"
+                >
+                  <option value="unit" disabled>
+                    Unit
+                  </option>
+                  <option value="grams">grams</option>
+                  <option value="pcs">pcs</option>
+                  <option value="oz">oz</option>
+                  <option value="ml">ml</option>
+                </Form.Select>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow className="text-white px-3 my-2">
+              Add nutritional information for one (1) serving.
+            </MDBRow>
+            <MDBRow className="mb-4 d-md-none">
+              <MDBCol className="col-sm-8">
+                <MDBInput
+                  id="recipe-form-grey"
+                  type="number"
+                  label="Serving Size"
+                  onChange={(e) => {
+                    setSize(e.target.value);
+                  }}
+                  value={size}
+                  contrast
+                />
+              </MDBCol>
+              <MDBCol className="d-none d-sm-flex">
+                <Form.Select
+                  aria-label="Default select"
+                  size="md"
+                  className="form-unit"
+                  onChange={(e) => {
+                    setUnit(e.target.value);
+                  }}
+                  defaultValue="unit"
+                >
+                  <option value="unit" disabled>
+                    Unit
+                  </option>
+                  <option value="grams">grams</option>
+                  <option value="pcs">pcs</option>
+                  <option value="oz">oz</option>
+                  <option value="ml">ml</option>
+                </Form.Select>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow className="d-sm-none mb-4">
               <MDBCol>
                 <Form.Select
                   aria-label="Default select"
@@ -295,7 +372,7 @@ function RecipeForm() {
                 </Form.Select>
               </MDBCol>
             </MDBRow>
-            <MDBRow>
+            <MDBRow className="d-none d-sm-flex">
               <MDBCol>
                 <MDBInput
                   id="input-cal"
@@ -320,6 +397,58 @@ function RecipeForm() {
                   contrast
                 />
               </MDBCol>
+              <MDBCol>
+                <MDBInput
+                  id="input-carbs"
+                  type="number"
+                  label="Carbs"
+                  contrast
+                  onChange={(e) => {
+                    setCarbs(e.target.value);
+                  }}
+                  value={carbs}
+                />
+              </MDBCol>
+              <MDBCol>
+                <MDBInput
+                  id="input-fat"
+                  type="number"
+                  label="Fat"
+                  contrast
+                  onChange={(e) => {
+                    setFat(e.target.value);
+                  }}
+                  value={fat}
+                />
+              </MDBCol>
+            </MDBRow>
+            <MDBRow className="d-sm-none">
+              <MDBCol>
+                <MDBInput
+                  id="input-cal"
+                  type="number"
+                  label="Calories"
+                  onChange={(e) => {
+                    setCal(e.target.value);
+                  }}
+                  value={cal}
+                  contrast
+                />
+              </MDBCol>
+              <MDBCol>
+                <MDBInput
+                  id="input-protein"
+                  type="number"
+                  label="Protein"
+                  onChange={(e) => {
+                    setProtein(e.target.value);
+                  }}
+                  value={protein}
+                  contrast
+                />
+              </MDBCol>
+            </MDBRow>
+            <MDBRow className="d-sm-none mt-4">
               <MDBCol>
                 <MDBInput
                   id="input-carbs"

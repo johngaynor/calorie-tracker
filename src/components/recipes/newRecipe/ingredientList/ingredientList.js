@@ -50,17 +50,19 @@ function IngredientList() {
               <th scope="col" className="col-4">
                 Ingredient
               </th>
-              <th scope="col" className="col-2 only-sm">
-                Info
-              </th>
-              <th scope="col" className="col-4">
+              <th scope="col" className="d-none d-md-table-cell">
                 Serving Size
               </th>
-              <th scope="col">Calories</th>
-              <th scope="col" className="col-4">
-                P/C/F
+              <th scope="col" className="d-none d-lg-table-cell col-3">
+                Calories (per serving)
               </th>
-              <th scope="col" className="col-2">
+              <th scope="col" className="d-none d-lg-table-cell">
+                P/C/F (per serving)
+              </th>
+              <th scope="col" className="d-lg-none col-4">
+                Macros (per serving)
+              </th>
+              <th scope="col" className="d-none d-xl-table-cell">
                 Actions
               </th>
             </tr>

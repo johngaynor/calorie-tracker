@@ -1,30 +1,14 @@
-.only-sm,
-#ingredient-xs-btn {
-  display: none;
+.ingredient-list-btns {
+  height: 25px;
 }
 
-@media screen and (max-width: 770px) {
-  .only-sm {
-    display: table-cell;
-  }
-
-  .ingredient-display td:nth-child(3),
-  .ingredient-display td:nth-child(4),
-  .ingredient-display td:nth-child(5) {
-    display: none;
-  }
+#food-display .ingredient-serving-box {
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 90px;
+  margin: 0 auto;
 }
 
-@media screen and (max-width: 421px) {
-  .form-unit {
-    margin-top: 22px;
-  }
-
-  tr td:nth-child(6) {
-    display: none;
-  }
-
-  #ingredient-xs-btn {
-    display: flex;
-  }
+#food-display .serving-box-text {
+  margin: -15px auto 0 auto;
 }
