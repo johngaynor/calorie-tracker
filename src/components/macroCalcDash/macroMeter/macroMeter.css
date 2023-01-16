@@ -1,0 +1,40 @@
+.progress {
+  height: 400px;
+  width: 400px;
+  background-color: var(--site-lightgrey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.progress-inner {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  transform: rotate(270deg);
+  background: conic-gradient(var(--site-black) 50deg, var(--site-yellow) 0deg);
+  z-index: 1;
+}
+
+.progress-center {
+  width: 270px;
+  height: 270px;
+  position: absolute;
+  border-radius: 50%;
+  border: 10px solid var(--site-lightgrey);
+  z-index: 2;
+}
+
+.progress-outer {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  border-radius: 50%;
+  transform: rotate(270deg);
+  background: conic-gradient(
+    var(--site-black) 50deg,
+    rgba(100, 100, 100, 0) 0deg
+  );
+  z-index: 0;
+}

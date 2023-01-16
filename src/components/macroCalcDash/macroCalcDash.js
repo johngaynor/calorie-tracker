@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  MDBCol,
-  MDBRow,
-  MDBContainer,
-  MDBProgress,
-  MDBProgressBar,
-} from "mdb-react-ui-kit";
+import { MDBCol, MDBRow, MDBContainer } from "mdb-react-ui-kit";
 import firebase from "../../utilities/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,6 +8,7 @@ import {
   faCow,
   faEgg,
 } from "@fortawesome/free-solid-svg-icons";
+import MacroMeter from "./macroMeter/macroMeter";
 import styles from "./macroCalcDash.css";
 
 function MacroCalcDash() {
@@ -176,13 +171,7 @@ function MacroCalcDash() {
           <h4>Progress Tracker</h4>
           <p>Daily |</p>
         </div>
-        <MDBContainer>
-          <div className="dashboard-macro-progress">
-            <MDBProgress>
-              <MDBProgressBar width={50} valuemin={0} valuemax={100} />
-            </MDBProgress>
-          </div>
-        </MDBContainer>
+        <MacroMeter></MacroMeter>
       </MDBCol>
     </MDBRow>
   );
