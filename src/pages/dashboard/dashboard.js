@@ -16,18 +16,7 @@ function Dashboard() {
       <MDBRow>
         <h3 className="p-3 d-flex basic-header">Dashboard</h3>
       </MDBRow>
-      <MDBRow>
-        <MDBCol className="m-2 p-2">
-          <div className="random d-flex justify-content-between pb-4">
-            <h4>Progress Tracker</h4>
-            <p>Daily |</p>
-          </div>
-          <MacroCalcDash></MacroCalcDash>
-        </MDBCol>
-        <MDBCol className="m-2">
-          2 of 2 <FontAwesomeIcon icon={faApple} />
-        </MDBCol>
-      </MDBRow>
+      <MacroCalcDash></MacroCalcDash>
     </MDBContainer>
   );
 }
