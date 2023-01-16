@@ -32,6 +32,7 @@ function FoodForm() {
   //   multi step form functionality
   useEffect(() => {
     const multiStepForm = document.querySelector("[data-multi-step]");
+    console.log(multiStepForm);
     const formSteps = Array.from(multiStepForm.querySelectorAll("[data-step]"));
 
     // event listeners to update formStep
