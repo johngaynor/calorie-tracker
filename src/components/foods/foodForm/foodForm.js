@@ -142,13 +142,17 @@ function FoodForm() {
         <form data-multi-step className="mx-auto p-3 text-black">
           {/* first card */}
           <div className="form-card" data-step>
-            <MDBProgress style={{ height: "10px" }}>
+            <MDBProgress
+              style={{ height: "10px" }}
+              className="w-100 d-flex justify-content-start"
+            >
               <MDBProgressBar
                 striped
                 animated
                 width="33"
                 valuemin={0}
                 valuemax={100}
+                style={{ height: "10px" }}
               />
             </MDBProgress>
             <MDBRow className="pt-5 mb-4">
@@ -222,13 +226,17 @@ function FoodForm() {
           </div>
           {/* second card */}
           <div className="form-card" data-step>
-            <MDBProgress style={{ height: "10px" }}>
+            <MDBProgress
+              style={{ height: "10px" }}
+              className="w-100 d-flex justify-content-start"
+            >
               <MDBProgressBar
                 striped
                 animated
                 width="66"
                 valuemin={0}
                 valuemax={100}
+                style={{ height: "10px" }}
               />
             </MDBProgress>
             <MDBRow className="mb-2 pt-5">
@@ -375,13 +383,17 @@ function FoodForm() {
           </div>
           {/* third card */}
           <div className="form-card" data-step>
-            <MDBProgress style={{ height: "10px" }}>
+            <MDBProgress
+              style={{ height: "10px" }}
+              className="w-100 d-flex justify-content-start"
+            >
               <MDBProgressBar
                 striped
                 animated
                 width="100"
                 valuemin={0}
                 valuemax={100}
+                style={{ height: "10px" }}
               />
             </MDBProgress>
             <MDBRow className="pt-5 text-white">

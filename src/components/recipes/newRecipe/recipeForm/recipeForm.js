@@ -170,13 +170,17 @@ function RecipeForm() {
         <form data-multi-step className="mx-auto p-3 text-black">
           {/* first card */}
           <div className="form-card" data-step>
-            <MDBProgress style={{ height: "10px" }}>
+            <MDBProgress
+              style={{ height: "10px" }}
+              className="w-100 d-flex justify-content-start"
+            >
               <MDBProgressBar
                 striped
                 animated
                 width="25"
                 valuemin={0}
                 valuemax={100}
+                style={{ height: "10px" }}
               />
             </MDBProgress>
             <MDBRow className="pt-5 mb-4">
@@ -261,13 +265,17 @@ function RecipeForm() {
           </div>
           {/* second card */}
           <div className="form-card" data-step>
-            <MDBProgress style={{ height: "10px" }}>
+            <MDBProgress
+              style={{ height: "10px" }}
+              className="w-100 d-flex justify-content-start"
+            >
               <MDBProgressBar
                 striped
                 animated
                 width="50"
                 valuemin={0}
                 valuemax={100}
+                style={{ height: "10px" }}
               />
             </MDBProgress>
             <MDBRow className="pt-5 mb-4">
@@ -515,13 +523,17 @@ function RecipeForm() {
           </div>
           {/* third card */}
           <div className="form-card" data-step>
-            <MDBProgress style={{ height: "10px" }}>
+            <MDBProgress
+              style={{ height: "10px" }}
+              className="w-100 d-flex justify-content-start"
+            >
               <MDBProgressBar
                 striped
                 animated
                 width="75"
                 valuemin={0}
                 valuemax={100}
+                style={{ height: "10px" }}
               />
             </MDBProgress>
             <MDBRow className="py-4 text-white">
@@ -604,13 +616,17 @@ function RecipeForm() {
           </div>
           {/* fourth card */}
           <div className="form-card" data-step>
-            <MDBProgress style={{ height: "10px" }}>
+            <MDBProgress
+              style={{ height: "10px" }}
+              className="w-100 d-flex justify-content-start"
+            >
               <MDBProgressBar
                 striped
                 animated
                 width="100"
                 valuemin={0}
                 valuemax={100}
+                style={{ height: "10px" }}
               />
             </MDBProgress>
             <MDBRow className="pt-3 text-white">

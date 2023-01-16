@@ -1,6 +1,6 @@
 .progress {
-  height: 400px;
-  width: 400px;
+  height: 200px;
+  width: 200px;
   background-color: var(--site-lightgrey);
   display: flex;
   justify-content: center;
@@ -8,33 +8,66 @@
   position: relative;
 }
 
-.progress-inner {
+.pie {
+  width: 150px;
+  /* aspect-ratio: 1; */
+  display: inline-grid;
+  place-content: center;
+  margin: 5px;
+  font-size: 25px;
+}
+
+.pie:before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  inset: 0;
+  rotate: 270deg;
+  background: conic-gradient(var(--site-black) 120deg, #0000 0);
+}
+
+.pie:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  inset: calc(50% - 20 / 2);
+  background: var(--site-black);
+  transform: rotate(calc(120 * 3.6deg)) translateY(calc(50% - 20 / 2));
+}
+
+.animate {
+  animation: 120deg 1s 0.5s both;
+}
+
+/* .progress-inner {
   width: 260px;
   height: 260px;
   border-radius: 50%;
   transform: rotate(270deg);
   background: conic-gradient(var(--site-black) 50deg, var(--site-yellow) 0deg);
   z-index: 1;
-}
+} */
 
 .progress-center {
-  width: 270px;
-  height: 270px;
+  width: 180px;
+  height: 180px;
   position: absolute;
+  rotate: 270deg;
+  background: conic-gradient(var(--site-black) 120deg, var(--site-yellow) 0deg);
   border-radius: 50%;
   border: 10px solid var(--site-lightgrey);
   z-index: 2;
 }
 
-.progress-outer {
+/* .progress-outer {
   width: 300px;
   height: 300px;
   position: absolute;
   border-radius: 50%;
   transform: rotate(270deg);
-  background: conic-gradient(
+  background: repeating-conic-gradient(
     var(--site-black) 50deg,
-    rgba(100, 100, 100, 0) 0deg
+    rgba(225, 225, 255, 0) 100deg
   );
   z-index: 0;
-}
+}  */
