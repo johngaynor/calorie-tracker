@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { MDBCol, MDBRow, MDBContainer } from "mdb-react-ui-kit";
-import firebase from "../../utilities/firebase";
+import firebase from "../../../utilities/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBreadSlice,
@@ -8,8 +8,9 @@ import {
   faCow,
   faEgg,
 } from "@fortawesome/free-solid-svg-icons";
-import MacroMeter from "./macroMeter/macroMeter";
+import MacroOverview from "../macroOverview/macroOverview";
 import styles from "./macroCalcDash.css";
+import { faGoodreads } from "@fortawesome/free-brands-svg-icons";
 
 function MacroCalcDash() {
   const [mealList, setMealList] = useState();
@@ -20,6 +21,7 @@ function MacroCalcDash() {
 
   const [activeMacro, setActiveMacro] = useState(0);
 
+  // calculators for total macros
   useEffect(() => {
     const mealRef = firebase.database().ref("user-log");
     mealRef.on("value", (snapshot) => {
@@ -30,7 +32,6 @@ function MacroCalcDash() {
       }
 
       setMealList(mealList);
-      // console.log(mealList);
 
       let calcCalTotal = 0;
       let calcProteinTotal = 0;
@@ -168,10 +169,10 @@ function MacroCalcDash() {
       </MDBCol>
       <MDBCol className="m-2 p-2">
         <div className="d-flex justify-content-between pb-4">
-          <h4>Progress Tracker</h4>
+          <h4>Overview</h4>
           <p>Daily |</p>
         </div>
-        <MacroMeter></MacroMeter>
+        <MacroOverview macro={activeMacro}></MacroOverview>
       </MDBCol>
     </MDBRow>
   );

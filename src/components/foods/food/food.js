@@ -31,7 +31,7 @@ function Food({ food }) {
   const [calcFat, setCalcFat] = useState(0);
 
   // these are for delete/log functionality
-  const [deleteRecipe, setDeleteRecipe] = useState(false);
+  const [removeFood, setRemoveFood] = useState(false);
   const [addLog, setAddLog] = useState(false);
 
   // updates calculated macros
@@ -52,7 +52,7 @@ function Food({ food }) {
   // toggles food btn styling
   useEffect(() => {
     const deleteBtn = document.getElementById("food-delete-icon");
-    if (deleteRecipe) {
+    if (removeFood) {
       deleteBtn.classList.add("active-btn");
     } else {
       deleteBtn.classList.remove("active-btn");
@@ -76,7 +76,6 @@ function Food({ food }) {
     Carbs (per serving): ${food.carbs}
     Fat (per serving): ${food.fat}
     `);
-    // might want to come up with something better for this, maybe hover?
   };
 
   const deleteFood = () => {
@@ -87,18 +86,28 @@ function Food({ food }) {
       .child(food.id);
 
     foodRef.remove();
-    window.location.reload();
-    // can't think of a better way to get this to reload, need to update foodList in "foodList.js" but can't access that useEffect from here
+    setRemoveFood(false);
   };
 
   const submitFood = () => {
-    if (weight === "" || "0") {
-      alert("please add weight before submitting to your log.");
+    if (weight === "") {
+      alert("Please add weight before submitting to your log.");
+    } else if (weight === "0") {
+      alert("Weight must be greater than 0 before submitting to your log.");
     } else {
+      const newFood = {
+        name: food.name,
+        cal: calcCal,
+        protein: calcProtein,
+        carbs: calcCarbs,
+        fat: calcFat,
+      };
+      const logRef = firebase.database().ref("user-log");
+      logRef.push(newFood);
+      alert("Added to log!");
+      setWeight("");
       setAddLog(false);
-      setDeleteRecipe(false);
-      alert("tried to submit food");
-      // not sure if I want to refresh the page or just clear it out, probably just set setWeight to 0
+      setRemoveFood(false);
     }
   };
 
@@ -136,17 +145,17 @@ function Food({ food }) {
               icon={faTrashCan}
               className="food-icons"
               id="food-delete-icon"
-              onClick={() => setDeleteRecipe(true)}
+              onClick={() => setRemoveFood(true)}
             />
           </div>
-          {deleteRecipe ? (
+          {removeFood ? (
             <div className="mt-2 delete-btn-container mx-auto">
               <p>delete food?</p>
               <div>
                 <FontAwesomeIcon
                   icon={faXmarkCircle}
                   className="delete-btns cancel"
-                  onClick={() => setDeleteRecipe(false)}
+                  onClick={() => setRemoveFood(false)}
                 />
                 <FontAwesomeIcon
                   icon={faCheckCircle}
@@ -236,17 +245,17 @@ function Food({ food }) {
             icon={faTrashCan}
             className="food-icons"
             id="food-delete-icon"
-            onClick={() => setDeleteRecipe(true)}
+            onClick={() => setRemoveFood(true)}
           />
         </div>
-        {deleteRecipe ? (
+        {removeFood ? (
           <div className="mt-2 delete-btn-container mx-auto">
             <p>delete food?</p>
             <div>
               <FontAwesomeIcon
                 icon={faXmarkCircle}
                 className="delete-btns cancel"
-                onClick={() => setDeleteRecipe(false)}
+                onClick={() => setRemoveFood(false)}
               />
               <FontAwesomeIcon
                 icon={faCheckCircle}
