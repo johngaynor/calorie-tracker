@@ -28,7 +28,6 @@ function MacroMeter({ macro, macroGoal, macroCurrent }) {
   }, [macroGoal, macroCurrent]);
 
   useEffect(() => {
-    const pieCenter = document.querySelector("#pie-center");
     const macroColors = [
       "--site-yellow",
       "--site-olivegreen",
@@ -36,10 +35,15 @@ function MacroMeter({ macro, macroGoal, macroCurrent }) {
       "--site-greyblue",
     ];
     let currentColor = macroColors[macro];
+    const pieCenter = document.querySelector("#pie-center");
     pieCenter.style.background = `conic-gradient(var(--site-black) ${
       macroPercent * 1.8
     }deg, var(${currentColor}) 0deg)`;
-    // pieCenter.style.background = `red`;
+
+    const pieOuter = document.querySelector(".outer-circle");
+    pieOuter.style.background = `conic-gradient(var(--site-black) ${
+      macroPercent * 1.8
+    }deg, #0000 0deg)`;
   }, [macroPercent]);
 
   return (
@@ -55,6 +59,7 @@ function MacroMeter({ macro, macroGoal, macroCurrent }) {
       </MDBRow>
       <MDBContainer className="progress-container w-100">
         <div className="progress-circle">
+          <div className="outer-circle"></div>
           <div className="pie"></div>
           <div id="pie-center"></div>
         </div>

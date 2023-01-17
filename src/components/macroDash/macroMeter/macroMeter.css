@@ -29,17 +29,14 @@
   height: 180px;
   position: absolute;
   rotate: 270deg;
-  /* background: conic-gradient(var(--site-black) 120deg, var(--site-yellow) 0deg); */
   border-radius: 50%;
   border: 10px solid var(--site-lightgrey);
   z-index: 2;
 }
 
-.pie:before {
-  content: "";
+.outer-circle {
   position: absolute;
   border-radius: 50%;
   inset: 0;
   rotate: 270deg;
-  background: conic-gradient(var(--site-black) 120deg, #0000 0);
 }
