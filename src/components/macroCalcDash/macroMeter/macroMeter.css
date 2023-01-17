@@ -1,7 +1,15 @@
-.progress {
-  height: 200px;
-  width: 200px;
+.progress-container {
+  height: 100px;
+  min-width: 200px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
   background-color: var(--site-lightgrey);
+}
+
+.progress-circle {
+  height: 200px;
+  min-width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,11 +18,21 @@
 
 .pie {
   width: 150px;
-  /* aspect-ratio: 1; */
   display: inline-grid;
   place-content: center;
   margin: 5px;
   font-size: 25px;
+}
+
+.pie-center {
+  width: 180px;
+  height: 180px;
+  position: absolute;
+  rotate: 270deg;
+  background: conic-gradient(var(--site-black) 120deg, var(--site-yellow) 0deg);
+  border-radius: 50%;
+  border: 10px solid var(--site-lightgrey);
+  z-index: 2;
 }
 
 .pie:before {
@@ -26,48 +44,37 @@
   background: conic-gradient(var(--site-black) 120deg, #0000 0);
 }
 
-.pie:after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  inset: calc(50% - 20 / 2);
-  background: var(--site-black);
-  transform: rotate(calc(120 * 3.6deg)) translateY(calc(50% - 20 / 2));
+.macro-percents {
+  background-color: var(--site-lightgrey);
+  max-width: 260px;
+  margin-left: 0px;
 }
 
-.animate {
-  animation: 120deg 1s 0.5s both;
+.macro-percents .percent-text {
+  margin: 0 auto;
+  font-weight: 400;
+  font-size: 14;
+  height: 100%;
+  text-align: left;
+  width: 80px;
 }
 
-/* .progress-inner {
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  transform: rotate(270deg);
-  background: conic-gradient(var(--site-black) 50deg, var(--site-yellow) 0deg);
-  z-index: 1;
-} */
-
-.progress-center {
-  width: 180px;
-  height: 180px;
-  position: absolute;
-  rotate: 270deg;
-  background: conic-gradient(var(--site-black) 120deg, var(--site-yellow) 0deg);
-  border-radius: 50%;
-  border: 10px solid var(--site-lightgrey);
-  z-index: 2;
+.macro-percents .cal {
+  background-color: var(--site-yellow);
+  color: white;
 }
 
-/* .progress-outer {
-  width: 300px;
-  height: 300px;
-  position: absolute;
-  border-radius: 50%;
-  transform: rotate(270deg);
-  background: repeating-conic-gradient(
-    var(--site-black) 50deg,
-    rgba(225, 225, 255, 0) 100deg
-  );
-  z-index: 0;
-}  */
+.macro-percents .protein {
+  background-color: var(--site-olivegreen);
+  color: white;
+}
+
+.macro-percents .carbs {
+  background-color: var(--site-oceanblue);
+  color: white;
+}
+
+.macro-percents .fat {
+  background-color: var(--site-greyblue);
+  color: white;
+}
