@@ -108,6 +108,7 @@
   margin: 10px auto;
   display: flex;
   align-items: center;
+  margin-left: 10px;
 }
 
 .macro-small-icon {
@@ -132,4 +133,39 @@
 .macro-small-text p:nth-child(2) {
   font-weight: 900;
   margin-top: -20px;
+}
+
+.macro-percents {
+  background-color: var(--site-lightgrey);
+  max-width: 260px;
+  margin-left: 0px;
+}
+
+.macro-percents .percent-text {
+  margin: 0 auto;
+  font-weight: 400;
+  font-size: 14;
+  height: 100%;
+  text-align: left;
+  width: 80px;
+}
+
+.macro-percents .cal {
+  background-color: var(--site-yellow);
+  color: white;
+}
+
+.macro-percents .protein {
+  background-color: var(--site-olivegreen);
+  color: white;
+}
+
+.macro-percents .carbs {
+  background-color: var(--site-oceanblue);
+  color: white;
+}
+
+.macro-percents .fat {
+  background-color: var(--site-greyblue);
+  color: white;
 }
