@@ -1,0 +1,21 @@
+.dash-log-container {
+  color: var(--site-black);
+}
+
+.dash-log-items {
+  background-color: var(--site-lightgrey);
+}
+
+.dash-log-items tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.dash-log-container select {
+  border: 0px;
+  width: 110px;
+}
+
+.dash-log-items path:hover {
+  color: #3b71ca;
+}

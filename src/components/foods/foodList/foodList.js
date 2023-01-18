@@ -28,7 +28,6 @@ function FoodList({ category }) {
       }
 
       setFoodList(foodList);
-      // console.log(`${category}` + " foodList: " + foodList);
     });
   }, []);
 
@@ -97,8 +96,3 @@ function FoodList({ category }) {
 }
 
 export default FoodList;
-
-// old loop for foods
-// {foodList
-// ? foodList.map((food, index) => <Food food={food} key={index} />)
-// : ""}

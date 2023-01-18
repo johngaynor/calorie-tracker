@@ -11,7 +11,6 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import styles from "./nav.css";
-import MacroCalcNav from "../macroCalcNav/macroCalcNav";
 
 function Navigation() {
   const [showNav, setShowNav] = useState(false);
@@ -48,7 +47,6 @@ function Navigation() {
               <MDBNavbarLink href="/new-recipe">New Recipe</MDBNavbarLink>
             </MDBNavbarItem>
           </MDBNavbarNav>
-          {/* <MacroCalcNav></MacroCalcNav> */}
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>

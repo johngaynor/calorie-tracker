@@ -232,7 +232,7 @@ function MacroCalcDash() {
             macroCurrent={macroCurrent}
           ></MacroMeter>
 
-          <MDBContainer className="macro-percents m-2 text-muted d-lg-flex d-sm-block d-sm-flex">
+          <MDBContainer className="macro-percents m-2 text-muted d-lg-flex d-sm-block d-flex">
             <div className="macro-small" onClick={() => setActiveMacro(0)}>
               <div className="macro-small-icon cal">
                 <FontAwesomeIcon icon={faChartPie} />
