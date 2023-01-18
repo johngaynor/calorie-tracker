@@ -7,6 +7,11 @@
   display: none;
 }
 
+.dashboard-macro-display {
+  display: flex;
+  flex-direction: row;
+}
+
 .dashboard-macro-display .cal {
   background-color: var(--site-yellow);
 }
@@ -168,4 +173,38 @@
 .macro-percents .fat {
   background-color: var(--site-greyblue);
   color: white;
+}
+
+.overview-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 575px) {
+  .dashboard-macros {
+    max-width: 200px;
+  }
+
+  .overview-container {
+    flex-direction: column;
+  }
+
+  .macro-percents {
+    background-color: red;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .macro-small {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .dashboard-macro-display {
+    flex-direction: column;
+  }
 }

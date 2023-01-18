@@ -86,6 +86,21 @@ function MacroCalcDash() {
     });
   }, [activeMacro]);
 
+  // gets current date for
+  var today = new Date();
+  var dd = today.getDate();
+
+  var mm = today.getMonth() + 1;
+  var yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+  today = mm + "/" + dd + "/" + yyyy;
+
   return (
     <MDBRow>
       <MDBCol className="m-2 p-2">
@@ -93,9 +108,9 @@ function MacroCalcDash() {
           <h4>Progress Tracker</h4>
           <p>Daily |</p>
         </div>
-        <MDBContainer className="dashboard-macro-display d-flex px-0">
+        <MDBContainer className="dashboard-macro-display px-0">
           {/* big display for cal */}
-          <MDBCol className="dashboard-big-display cal col-4 my-auto">
+          <MDBCol className="dashboard-big-display cal col-4 my-auto mx-auto">
             <div className="ring-one ring-cal"></div>
             <div className="ring-two ring-cal"></div>
 
@@ -110,7 +125,7 @@ function MacroCalcDash() {
             </MDBContainer>
           </MDBCol>
           {/* big display for protein */}
-          <MDBCol className="dashboard-big-display protein col-4 my-auto">
+          <MDBCol className="dashboard-big-display protein col-4 my-auto mx-auto">
             <div className="ring-one ring-protein"></div>
             <div className="ring-two ring-protein"></div>
             <MDBContainer className="px-5 pt-5 h-100 d-flex flex-column">
@@ -124,7 +139,7 @@ function MacroCalcDash() {
             </MDBContainer>
           </MDBCol>
           {/* big display for carbs */}
-          <MDBCol className="dashboard-big-display carbs col-4 my-auto">
+          <MDBCol className="dashboard-big-display carbs col-4 my-auto mx-auto">
             <div className="ring-one ring-carbs"></div>
             <div className="ring-two ring-carbs"></div>
             <MDBContainer className="px-5 pt-5 h-100 d-flex flex-column">
@@ -138,7 +153,7 @@ function MacroCalcDash() {
             </MDBContainer>
           </MDBCol>
           {/* big display for fat */}
-          <MDBCol className="dashboard-big-display fat col-4 my-auto">
+          <MDBCol className="dashboard-big-display fat col-4 my-auto mx-auto">
             <div className="ring-one ring-fat"></div>
             <div className="ring-two ring-fat"></div>
             <MDBContainer className="px-5 pt-5 h-100 d-flex flex-column">
@@ -151,9 +166,12 @@ function MacroCalcDash() {
               </h3>
             </MDBContainer>
           </MDBCol>
-          <MDBCol className="dashboard-macros my-auto">
+          <MDBCol className="dashboard-macros my-auto w-75 w-sm-100 mx-auto">
             <MDBContainer className="d-flex flex-wrap mx-md-4">
-              <div className="macro-small" onClick={() => setActiveMacro(0)}>
+              <div
+                className="macro-small mx-auto"
+                onClick={() => setActiveMacro(0)}
+              >
                 <div className="macro-small-icon cal-dark">
                   <FontAwesomeIcon icon={faChartPie} />
                 </div>
@@ -162,7 +180,10 @@ function MacroCalcDash() {
                   <p>{totalCal}kcal</p>
                 </div>
               </div>
-              <div className="macro-small" onClick={() => setActiveMacro(1)}>
+              <div
+                className="macro-small mx-auto"
+                onClick={() => setActiveMacro(1)}
+              >
                 <div className="macro-small-icon protein">
                   <FontAwesomeIcon icon={faCow} />
                 </div>
@@ -171,7 +192,10 @@ function MacroCalcDash() {
                   <p>{totalProtein}g</p>
                 </div>
               </div>
-              <div className="macro-small" onClick={() => setActiveMacro(2)}>
+              <div
+                className="macro-small mx-auto"
+                onClick={() => setActiveMacro(2)}
+              >
                 <div className="macro-small-icon carbs">
                   <FontAwesomeIcon icon={faBreadSlice} />
                 </div>
@@ -180,7 +204,10 @@ function MacroCalcDash() {
                   <p>{totalCarbs}g</p>
                 </div>
               </div>
-              <div className="macro-small" onClick={() => setActiveMacro(3)}>
+              <div
+                className="macro-small mx-auto"
+                onClick={() => setActiveMacro(3)}
+              >
                 <div className="macro-small-icon fat">
                   <FontAwesomeIcon icon={faEgg} />
                 </div>
@@ -193,12 +220,15 @@ function MacroCalcDash() {
           </MDBCol>
         </MDBContainer>
       </MDBCol>
-      <MDBCol className="m-2 p-2">
+      <MDBCol className="m-sm-2 m-3 p-2">
         <div className="d-flex justify-content-between pb-4">
           <h4>Overview</h4>
-          <p>Daily |</p>
+          <p>{today} |</p>
         </div>
-        <MDBContainer className="bg-white d-flex p-0 justify-content-center align-items-center flex-column">
+        <MDBContainer
+          className="bg-white p-0 overview-container"
+          // will add flex column here
+        >
           <MacroMeter
             macro={activeMacro}
             macroGoal={macroGoal}
