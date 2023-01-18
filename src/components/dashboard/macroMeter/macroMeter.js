@@ -49,7 +49,7 @@ function MacroMeter({ macro, macroGoal, macroCurrent }) {
   return (
     <MDBContainer
       className="w-100 p-2 m-2 text-muted"
-      style={{ height: "250px", "background-color": `var(--site-lightgrey)` }}
+      style={{ height: "250px", backgroundColor: `var(--site-lightgrey)` }}
     >
       <MDBRow>
         <h4 className="d-flex align-left">{macroName}:</h4>

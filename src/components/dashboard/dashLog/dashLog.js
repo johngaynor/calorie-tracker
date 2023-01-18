@@ -58,7 +58,7 @@ function DashLog() {
           <MDBContainer className="dash-log-items w-100 p-0">
             <MDBTable align="middle">
               <MDBTableBody>
-                <DashLogItem activeName={activeName} thingy={itemList} />
+                <DashLogItem />
               </MDBTableBody>
             </MDBTable>
           </MDBContainer>

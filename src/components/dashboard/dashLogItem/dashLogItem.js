@@ -1,9 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
-function DashLogItem(activeName, thingy) {
-  console.log(thingy);
-  console.log(activeName);
+function DashLogItem() {
   return (
     <tr>
       <td className="col-8 p-1">
