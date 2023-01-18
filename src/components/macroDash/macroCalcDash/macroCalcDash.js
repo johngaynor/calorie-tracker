@@ -166,7 +166,7 @@ function MacroCalcDash() {
               </h3>
             </MDBContainer>
           </MDBCol>
-          <MDBCol className="dashboard-macros my-auto w-75 w-sm-100 mx-auto">
+          <MDBCol className="dashboard-macros my-auto w-100 mx-auto">
             <MDBContainer className="d-flex flex-wrap mx-md-4">
               <div
                 className="macro-small mx-auto"
@@ -225,17 +225,14 @@ function MacroCalcDash() {
           <h4>Overview</h4>
           <p>{today} |</p>
         </div>
-        <MDBContainer
-          className="bg-white p-0 overview-container"
-          // will add flex column here
-        >
+        <MDBContainer className="bg-white p-0 overview-container">
           <MacroMeter
             macro={activeMacro}
             macroGoal={macroGoal}
             macroCurrent={macroCurrent}
           ></MacroMeter>
 
-          <MDBContainer className="macro-percents m-2 text-muted">
+          <MDBContainer className="macro-percents m-2 text-muted d-lg-flex d-sm-block d-sm-flex">
             <div className="macro-small" onClick={() => setActiveMacro(0)}>
               <div className="macro-small-icon cal">
                 <FontAwesomeIcon icon={faChartPie} />

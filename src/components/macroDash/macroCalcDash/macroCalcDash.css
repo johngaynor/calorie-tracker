@@ -144,6 +144,8 @@
   background-color: var(--site-lightgrey);
   max-width: 260px;
   margin-left: 0px;
+  /* display: flex; */
+  flex-wrap: wrap;
 }
 
 .macro-percents .percent-text {
@@ -191,15 +193,15 @@
   }
 
   .macro-percents {
-    background-color: red;
     max-width: 100%;
+    padding: 20px 0;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .macro-small {
-    margin: 0 auto;
+    margin: 5px 20px;
   }
 }
 
