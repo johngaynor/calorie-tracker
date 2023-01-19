@@ -7,7 +7,7 @@ function MacroMeter({ macro, macroGoal, macroCurrent }) {
   const [macroPercent, setMacroPercent] = useState("");
 
   useEffect(() => {
-    //   changing color on meter
+    // changing color on meter
     const pieCenter = document.querySelector("#pie-center");
     const macroTypes = ["cal", "protein", "carbs", "fat"];
     let activeMacro = macroTypes[macro];

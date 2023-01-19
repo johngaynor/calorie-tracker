@@ -12,7 +12,7 @@ import DashLogItem from "../dashLogItem/dashLogItem";
 import styles from "./dashLog.css";
 
 function DashLog() {
-  const [itemList, setItemList] = useState("");
+  const [logItems, setLogItems] = useState("");
   const [selectMacro, setSelectMacro] = useState(0);
   const [activeName, setActiveName] = useState("");
 
@@ -21,9 +21,8 @@ function DashLog() {
     setActiveName(macroNames[selectMacro]);
   }, [selectMacro]);
 
-  const logRef = firebase.database().ref("user-log");
-
   useEffect(() => {
+    const logRef = firebase.database().ref("user-log");
     logRef.on("value", (snapshot) => {
       const items = snapshot.val();
       const itemList = [];
@@ -31,16 +30,16 @@ function DashLog() {
         itemList.push({ id, ...items[id] });
       }
 
-      setItemList(itemList);
+      setLogItems(itemList);
     });
   }, []);
 
   return (
     <MDBContainer fluid className="px-4 bg-white dash-log-container text-muted">
-      <MDBRow>
-        <MDBCol className="m-2 p-2">
-          <div className="d-flex justify-content-between mb-3">
-            <h4>Today's Log</h4>
+      <MDBRow className="d-md-flex d-block">
+        <MDBCol className="m-md-2 p-md-2">
+          <div className="d-flex justify-content-between mb-3 pt-3 pt-md-0">
+            <h4 className="mt-1 mt-md-0">Today's Log</h4>
 
             <Form.Select
               aria-label="Default select"
@@ -58,12 +57,31 @@ function DashLog() {
           <MDBContainer className="dash-log-items w-100 p-0">
             <MDBTable align="middle">
               <MDBTableBody>
-                <DashLogItem />
+                {logItems
+                  ? logItems.map((item, index) => (
+                      <DashLogItem
+                        item={item}
+                        key={index}
+                        activeMacro={selectMacro}
+                      />
+                    ))
+                  : null}
               </MDBTableBody>
             </MDBTable>
           </MDBContainer>
         </MDBCol>
-        <MDBCol className="m-2 p-2 bg-success">2 of 2</MDBCol>
+        <MDBCol className="m-2 p-2 w-100 mx-auto">
+          <iframe
+            className="tutorial-video"
+            // width="560"
+            // height="315"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </MDBCol>
       </MDBRow>
     </MDBContainer>
   );
