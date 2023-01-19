@@ -47,6 +47,7 @@ function DashLog() {
               onChange={(e) => {
                 setSelectMacro(e.target.value);
               }}
+              id="dash-macro-selector"
             >
               <option value="0">Calories</option>
               <option value="1">Protein</option>
@@ -54,7 +55,7 @@ function DashLog() {
               <option value="3">Fat</option>
             </Form.Select>
           </div>
-          <MDBContainer className="dash-log-items w-100 p-0">
+          <MDBContainer className="dash-log-items w-100 p-0 mb-4 mb-md-0">
             <MDBTable align="middle">
               <MDBTableBody>
                 {logItems
@@ -70,7 +71,7 @@ function DashLog() {
             </MDBTable>
           </MDBContainer>
         </MDBCol>
-        <MDBCol className="m-2 p-2 w-100 mx-auto">
+        <MDBCol className="m-md-2 p-md-2 w-100 mx-auto">
           <iframe
             className="tutorial-video"
             // width="560"
