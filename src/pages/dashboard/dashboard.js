@@ -16,8 +16,7 @@ function Dashboard() {
     <>
       <MDBContainer fluid className="dashboard-container pb-3 px-4">
         <MDBRow>
-          {/* <h3 className="p-3 basic-header">Dashboard</h3> */}
-          <h3 style={{ color: "#0000" }}>hello</h3>
+          <h3 className="p-3 text-start">Dashboard</h3>
         </MDBRow>
         <MacroDash></MacroDash>
       </MDBContainer>
