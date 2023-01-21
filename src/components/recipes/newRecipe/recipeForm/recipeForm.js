@@ -155,6 +155,7 @@ function RecipeForm() {
 
     recipeRef.push(recipe);
     firebase.database().ref("add-ingredient").remove();
+    setFormStep(formStep + 1);
   };
 
   const reviewRecipeTip = () => {
@@ -599,7 +600,6 @@ function RecipeForm() {
                 className="border-1 next bg-danger"
                 type="button"
                 onClick={submitRecipe}
-                data-next
               >
                 Submit
               </MDBBtn>
