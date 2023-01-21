@@ -24,6 +24,8 @@ function RecipeCategoryList() {
 
   return (
     <MDBContainer fluid className="px-md-5">
+      <h3 className="p-3 text-start">Your Recipes</h3>
+
       {categoryList
         ? categoryList.map((category, index) => (
             <RecipeList category={category} key={index} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MDBContainer,
   MDBNavbar,
@@ -15,10 +15,23 @@ import styles from "./nav.css";
 function Navigation() {
   const [showNav, setShowNav] = useState(false);
 
+  useEffect(() => {
+    const pageLinks = Array.from(document.querySelectorAll(".nav-link"));
+    const activePage = window.location.pathname;
+
+    pageLinks.forEach((page) => {
+      if (activePage == page.pathname) {
+        page.classList.add("text-black");
+      } else {
+        page.classList.remove("text-black");
+      }
+    });
+  }, []);
+
   return (
     <MDBNavbar expand="lg" light bgColor="light">
       <MDBContainer fluid>
-        <MDBNavbarBrand href="#">Calorie Tracker</MDBNavbarBrand>
+        <MDBNavbarBrand href="/">Calorie Tracker</MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"
@@ -30,18 +43,16 @@ function Navigation() {
         <MDBCollapse navbar show={showNav}>
           <MDBNavbarNav>
             <MDBNavbarItem>
-              <MDBNavbarLink active aria-current="page" href="/">
-                Dashboard
-              </MDBNavbarLink>
+              <MDBNavbarLink href="/">Dashboard</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink href="/foods">Foods</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="/new-food">New Food</MDBNavbarLink>
+              <MDBNavbarLink href="/recipes">Recipes</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="/recipes">Recipes</MDBNavbarLink>
+              <MDBNavbarLink href="/new-food">New Food</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink href="/new-recipe">New Recipe</MDBNavbarLink>

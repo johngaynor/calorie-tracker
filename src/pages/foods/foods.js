@@ -2,14 +2,7 @@ import { MDBContainer } from "mdb-react-ui-kit";
 import FoodCategoryList from "../../components/foods/foodCategoryList/foodCategoryList";
 
 function Foods() {
-  return (
-    <MDBContainer fluid>
-      <h2 className="p-3 d-flex basic-header justify-content-center">
-        Your Foods
-      </h2>
-      <FoodCategoryList></FoodCategoryList>
-    </MDBContainer>
-  );
+  return <FoodCategoryList></FoodCategoryList>;
 }
 
 export default Foods;
