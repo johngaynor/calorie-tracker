@@ -34,6 +34,7 @@ function MacroMeter({ macro, macroGoal, macroCurrent }) {
       "--site-oceanblue",
       "--site-greyblue",
     ];
+
     let currentColor = macroColors[macro];
     const pieCenter = document.querySelector("#pie-center");
     pieCenter.style.background = `conic-gradient(var(--site-black) ${
@@ -44,7 +45,7 @@ function MacroMeter({ macro, macroGoal, macroCurrent }) {
     pieOuter.style.background = `conic-gradient(var(--site-black) ${
       macroPercent * 1.8
     }deg, #0000 0deg)`;
-  }, [macroPercent]);
+  }, [macro, macroPercent]);
 
   return (
     <MDBContainer

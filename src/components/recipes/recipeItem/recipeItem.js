@@ -105,10 +105,12 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
       .child(recipeID)
       .child("ingredients")
       .child(ingredientID);
-    let calcCal = (weight * ingredient.cal).toFixed(0);
-    let calcProtein = (weight * ingredient.protein).toFixed(0);
-    let calcCarbs = (weight * ingredient.carbs).toFixed(0);
-    let calcFat = (weight * ingredient.fat).toFixed(0);
+    let calcCal = ((weight * ingredient.cal) / ingredient.size).toFixed(0);
+    let calcProtein = ((weight * ingredient.protein) / ingredient.size).toFixed(
+      0
+    );
+    let calcCarbs = ((weight * ingredient.carbs) / ingredient.size).toFixed(0);
+    let calcFat = ((weight * ingredient.fat) / ingredient.size).toFixed(0);
 
     setCalcCal(calcCal);
     setCalcProtein(calcProtein);
