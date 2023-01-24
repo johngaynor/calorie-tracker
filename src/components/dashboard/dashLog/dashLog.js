@@ -74,7 +74,7 @@ function DashLog() {
         <MDBCol className="m-md-2 p-md-2 w-100 mx-auto">
           <iframe
             className="tutorial-video"
-            src="https://youtu.be/HDsxu-zDY3Q"
+            src="https://www.youtube.com/embed/HDsxu-zDY3Q"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
