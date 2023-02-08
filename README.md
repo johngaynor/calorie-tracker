@@ -8,6 +8,10 @@
 
 > This application is a calorie tracker to monitor calories, protein, carbs, and fat on a daily basis.
 
+<p>
+<img alt="Homepage Image" src="src/assets/images/readme-img.png">
+</p>
+
 ### 🏠 [Homepage](https://calorietracker.johngaynor.dev)
 
 ## Description
