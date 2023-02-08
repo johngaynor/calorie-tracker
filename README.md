@@ -37,6 +37,12 @@ Calorie tracker allows users to create foods/recipes, calculate nutrition inform
 
 1.0.0 - Initial launch, Realtime Database open to the public to contribute foods/recipes and store nutritional information in the daily log
 
+## Future Releases
+- User auth (Firebase authentification)
+- Default foods/recipes
+- Weekly analysis
+- User customizability (i.e. setting custom macro goals)
+
 ## Author
 
 👤 **John Gaynor**
