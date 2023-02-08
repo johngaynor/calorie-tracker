@@ -7,11 +7,13 @@ import NewFood from "./pages/newFood/newFood";
 import Recipes from "./pages/recipes/recipes";
 import NewRecipe from "./pages/newRecipe/newRecipe";
 import { Route, Routes } from "react-router";
+import Login from "./components/login/login";
 
 function App() {
   return (
     <div className="App">
       <Navigation></Navigation>
+      <Login></Login>
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/recipes" element={<Recipes />} />
