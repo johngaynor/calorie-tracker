@@ -3,13 +3,7 @@ import {
   MDBTable,
   MDBTableHead,
   MDBTableBody,
-  MDBBtn,
-  MDBBadge,
-  MDBRow,
-  MDBCol,
-  MDBInput,
 } from "mdb-react-ui-kit";
-import { Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import RecipeItem from "../recipeItem/recipeItem";
 import AddIngredient from "../addIngredient/addIngredient";
@@ -22,7 +16,6 @@ import {
   faSquareCaretDown,
   faSquareCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
-import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Recipe({ recipe, category, recipeID }) {
