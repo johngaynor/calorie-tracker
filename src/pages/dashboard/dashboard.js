@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { MDBCol, MDBRow, MDBContainer } from "mdb-react-ui-kit";
-import firebase from "../../utilities/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBreadSlice,
@@ -8,6 +7,8 @@ import {
   faCow,
   faEgg,
 } from "@fortawesome/free-solid-svg-icons";
+
+import firebase from "../../utilities/firebase";
 import Meter from "./components/meter";
 import styles from "./styles/dashboard.css";
 

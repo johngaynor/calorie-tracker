@@ -1,5 +1,6 @@
 import { MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
+
 import styles from "../styles/meter.css";
 
 function Meter({ macro, macroGoal, macroCurrent }) {

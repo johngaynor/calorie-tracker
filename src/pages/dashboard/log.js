@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Form } from "react-bootstrap";
 import {
   MDBCol,
   MDBRow,
@@ -6,7 +7,7 @@ import {
   MDBTable,
   MDBTableBody,
 } from "mdb-react-ui-kit";
-import { Form } from "react-bootstrap";
+
 import firebase from "../../utilities/firebase";
 import LogItem from "./components/logItem";
 import styles from "./styles/log.css";

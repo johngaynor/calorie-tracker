@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
 
 function LogItem(item) {
   const [activeInfo, setActiveInfo] = useState("");
