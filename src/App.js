@@ -8,24 +8,20 @@ import Recipes from "./pages/recipes";
 import NewRecipe from "./pages/newRecipe";
 import { Route, Routes } from "react-router";
 import Login from "./components/login/login";
-import { AuthProvider } from "./utilities/auth/authContext";
-
 function App() {
   return (
-    <AuthProvider>
-      <div className="App">
-        <Navigation></Navigation>
-        <Login></Login>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/recipes" element={<Recipes />} />
-          <Route path="/foods" element={<Foods />} />
-          <Route path="/new-food" element={<NewFood />} />
-          <Route path="/new-recipe" element={<NewRecipe />} />
-        </Routes>
-        <Footer></Footer>
-      </div>
-    </AuthProvider>
+    <div className="App">
+      <Navigation></Navigation>
+      <Login></Login>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/recipes" element={<Recipes />} />
+        <Route path="/foods" element={<Foods />} />
+        <Route path="/new-food" element={<NewFood />} />
+        <Route path="/new-recipe" element={<NewRecipe />} />
+      </Routes>
+      <Footer></Footer>
+    </div>
   );
 }
 
