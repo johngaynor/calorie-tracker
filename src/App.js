@@ -11,12 +11,6 @@ import Login from "./components/login/login";
 import { AuthProvider } from "./utilities/auth/authContext";
 
 function App() {
-  // var _db = "";
-  // var userExists = false;
-  // var userDisplayName = "";
-  // var _userProfileInfo = {};
-  // var userID = "";
-
   return (
     <AuthProvider>
       <div className="App">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { MDBCol, MDBRow, MDBContainer } from "mdb-react-ui-kit";
-import firebase from "../../../utilities/firebase";
+import firebase from "../../utilities/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBreadSlice,
@@ -8,8 +8,8 @@ import {
   faCow,
   faEgg,
 } from "@fortawesome/free-solid-svg-icons";
-import MacroMeter from "../macroMeter/macroMeter";
-import styles from "./macroCalcDash.css";
+import Meter from "./components/meter";
+import styles from "./styles/dashboard.css";
 
 function MacroCalcDash() {
   const [mealList, setMealList] = useState();
@@ -226,12 +226,11 @@ function MacroCalcDash() {
           <p>{today} |</p>
         </div>
         <MDBContainer className="bg-white p-0 overview-container">
-          <MacroMeter
+          <Meter
             macro={activeMacro}
             macroGoal={macroGoal}
             macroCurrent={macroCurrent}
-          ></MacroMeter>
-
+          ></Meter>
           <MDBContainer className="macro-percents m-2 text-muted d-lg-flex d-sm-block d-flex">
             <div className="macro-small" onClick={() => setActiveMacro(0)}>
               <div className="macro-small-icon cal">

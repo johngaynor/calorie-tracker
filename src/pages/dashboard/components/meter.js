@@ -1,8 +1,8 @@
 import { MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
-import styles from "./macroMeter.css";
+import styles from "../styles/meter.css";
 
-function MacroMeter({ macro, macroGoal, macroCurrent }) {
+function Meter({ macro, macroGoal, macroCurrent }) {
   const [macroName, setMacroName] = useState("");
   const [macroPercent, setMacroPercent] = useState("");
 
@@ -72,4 +72,4 @@ function MacroMeter({ macro, macroGoal, macroCurrent }) {
   );
 }
 
-export default MacroMeter;
+export default Meter;

@@ -1,15 +1,7 @@
-import { faApple } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBCarousel,
-  MDBCarouselItem,
-} from "mdb-react-ui-kit";
-import MacroDash from "../../components/dashboard/macroCalcDash/macroCalcDash";
+import { MDBContainer, MDBRow } from "mdb-react-ui-kit";
+import MacroDashboard from "./dashboard";
 import DashLog from "../../components/dashboard/dashLog/dashLog";
-import styles from "./dashboard.css";
+import styles from "./styles/index.css";
 
 function Dashboard() {
   return (
@@ -18,7 +10,7 @@ function Dashboard() {
         <MDBRow>
           <h3 className="p-3 text-start">Dashboard</h3>
         </MDBRow>
-        <MacroDash></MacroDash>
+        <MacroDashboard></MacroDashboard>
       </MDBContainer>
       <DashLog></DashLog>
     </>
