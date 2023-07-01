@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   MDBContainer,
   MDBBtn,
@@ -6,9 +7,9 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
-import { useState, useEffect } from "react";
+
 import firebase from "../../../utilities/firebase";
-import styles from "./addIngredient.css";
+import styles from "../styles/addIngredient.css";
 
 // recipe is recipe.id
 function AddIngredient({ recipe, category }) {
@@ -39,22 +40,13 @@ function AddIngredient({ recipe, category }) {
     });
   }, []);
 
-  // console.log(ingredientList);
-
   const submitIngredient = () => {
-    // function to generate a unique ID for the ingredient
+    // function to generate a unique ID for the ingredient, copied from stack overflow
     let generatePushID = () => {
-      // Modeled after base64 web-safe chars, but ordered by ASCII.
       var PUSH_CHARS =
         "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz";
 
-      // Timestamp of last push, used to prevent local collisions if you push twice in one ms.
       var lastPushTime = 0;
-
-      // We generate 72-bits of randomness which get turned into 12 characters and appended to the
-      // timestamp to prevent collisions with other clients.  We store the last characters we
-      // generated because in the event of a collision, we'll use those same characters except
-      // "incremented" by one.
       var lastRandChars = [];
 
       return function () {
@@ -65,7 +57,6 @@ function AddIngredient({ recipe, category }) {
         var timeStampChars = new Array(8);
         for (var i = 7; i >= 0; i--) {
           timeStampChars[i] = PUSH_CHARS.charAt(now % 64);
-          // NOTE: Can't use << here because javascript will convert to int and lose the upper bits.
           now = Math.floor(now / 64);
         }
         if (now !== 0)
@@ -78,7 +69,6 @@ function AddIngredient({ recipe, category }) {
             lastRandChars[i] = Math.floor(Math.random() * 64);
           }
         } else {
-          // If the timestamp hasn't changed since last push, use the same random number, except incremented by 1.
           for (i = 11; i >= 0 && lastRandChars[i] === 63; i--) {
             lastRandChars[i] = 0;
           }
@@ -94,7 +84,6 @@ function AddIngredient({ recipe, category }) {
     };
 
     const newID = generatePushID()();
-    // console.log(newID);
 
     if (
       name === "" ||

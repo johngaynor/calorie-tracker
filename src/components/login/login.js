@@ -6,14 +6,14 @@ function Login() {
   };
   return (
     <div className="login-container">
-      <label for="user-email">Email</label>
+      {/* <label for="user-email">Email</label>
       <input type="email" id="user-email" />
       <label for="user-password">Password</label>
       <input type="password" id="user-password" />
 
       <div onClick={userLogin} className="login-submit">
         submit
-      </div>
+      </div> */}
     </div>
   );
 }

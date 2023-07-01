@@ -1,26 +1,18 @@
-import {
-  MDBContainer,
-  MDBTable,
-  MDBTableHead,
-  MDBTableBody,
-} from "mdb-react-ui-kit";
+import React, { useEffect, useState } from "react";
+import { MDBContainer } from "mdb-react-ui-kit";
 import {
   faSquareCaretDown,
   faSquareCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import firebase from "../../../utilities/firebase";
-import styles from "./recipeList.css";
-import React, { useEffect, useState } from "react";
-import Recipe from "../recipe/recipe";
 
-function RecipeList({ category }) {
+import firebase from "../../utilities/firebase";
+import Recipe from "./recipe";
+import styles from "./styles/categories.css";
+
+function List({ category }) {
   const [recipeList, setRecipeList] = useState();
   const [clickCategory, setClickCategory] = useState(false);
-
-  // these are for weight calculations
-  const [weight, setWeight] = useState(0);
-  const [weightCal, setWeightCal] = useState("");
 
   useEffect(() => {
     const recipeRef = firebase.database().ref("recipes").child(`${category}`);
@@ -76,4 +68,4 @@ function RecipeList({ category }) {
   );
 }
 
-export default RecipeList;
+export default List;

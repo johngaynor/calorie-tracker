@@ -5,10 +5,6 @@ import {
   MDBTableBody,
 } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
-import RecipeItem from "../recipeItem/recipeItem";
-import AddIngredient from "../addIngredient/addIngredient";
-import firebase from "../../../utilities/firebase";
-import styles from "./recipe.css";
 import {
   faUpload,
   faDeleteLeft,
@@ -17,6 +13,11 @@ import {
   faSquareCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import firebase from "../../utilities/firebase";
+import RecipeItem from "./components/recipeItem";
+import AddIngredient from "./components/addIngredient";
+import styles from "./styles/recipe.css";
 
 function Recipe({ recipe, category, recipeID }) {
   const [clickRecipe, setClickRecipe] = useState(false);

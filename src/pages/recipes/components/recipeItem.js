@@ -1,9 +1,5 @@
-import { MDBBadge, MDBBtn, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
-import Recipes from "../../../pages/recipes/recipes";
-import Recipe from "../recipe/recipe";
-import styles from "./recipeItem.css";
-import firebase from "../../../utilities/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInfoCircle,
@@ -15,7 +11,10 @@ import {
   faSquare,
   faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
-import AddIngredient from "../addIngredient/addIngredient";
+
+import firebase from "../../../utilities/firebase";
+// import AddIngredient from "../addIngredient/addIngredient";
+import styles from "../styles/recipeItem.css";
 
 function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
   const [weight, setWeight] = useState("");
@@ -379,8 +378,3 @@ function RecipeItem({ ingredient, recipeID, category, ingredientID }) {
 }
 
 export default RecipeItem;
-
-// console.logs for removeRecipeItem:
-// console.log("ingredient.id: " + ingredient.id);
-// console.log("key: " + recipeID);
-// console.log("ingredientIndex: " + ingredientIndex);
