@@ -10,6 +10,8 @@ import {
   MDBCollapse,
   MDBIcon,
 } from "mdb-react-ui-kit";
+
+import Login from "../login";
 import styles from "./nav.css";
 
 function Navigation() {
@@ -56,6 +58,11 @@ function Navigation() {
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink href="/new-recipe">New Recipe</MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <MDBNavbarItem>
+                <Login />
+              </MDBNavbarItem>
             </MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>
