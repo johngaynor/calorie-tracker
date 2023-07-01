@@ -1,6 +1,6 @@
 import { MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import MacroDashboard from "./dashboard";
-import DashLog from "../../components/dashboard/dashLog/dashLog";
+import Log from "./log";
 import styles from "./styles/index.css";
 
 function Dashboard() {
@@ -12,7 +12,7 @@ function Dashboard() {
         </MDBRow>
         <MacroDashboard></MacroDashboard>
       </MDBContainer>
-      <DashLog></DashLog>
+      <Log></Log>
     </>
   );
 }

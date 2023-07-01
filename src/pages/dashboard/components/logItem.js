@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
-function DashLogItem(item) {
+function LogItem(item) {
   const [activeInfo, setActiveInfo] = useState("");
   useEffect(() => {
     const macroNames = ["cal", "protein", "carbs", "fat"];
@@ -44,4 +44,4 @@ function DashLogItem(item) {
     </tr>
   );
 }
-export default DashLogItem;
+export default LogItem;

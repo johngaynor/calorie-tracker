@@ -7,19 +7,13 @@ import {
   MDBTableBody,
 } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
-import firebase from "../../../utilities/firebase";
-import DashLogItem from "../dashLogItem/dashLogItem";
-import styles from "./dashLog.css";
+import firebase from "../../utilities/firebase";
+import LogItem from "./components/logItem";
+import styles from "./styles/log.css";
 
-function DashLog() {
+function Log() {
   const [logItems, setLogItems] = useState("");
   const [selectMacro, setSelectMacro] = useState(0);
-  const [activeName, setActiveName] = useState("");
-
-  useEffect(() => {
-    const macroNames = ["cal", "protein", "carbs", "fat"];
-    setActiveName(macroNames[selectMacro]);
-  }, [selectMacro]);
 
   useEffect(() => {
     const logRef = firebase.database().ref("user-log");
@@ -60,7 +54,7 @@ function DashLog() {
               <MDBTableBody>
                 {logItems
                   ? logItems.map((item, index) => (
-                      <DashLogItem
+                      <LogItem
                         item={item}
                         key={index}
                         activeMacro={selectMacro}
@@ -86,4 +80,4 @@ function DashLog() {
   );
 }
 
-export default DashLog;
+export default Log;
