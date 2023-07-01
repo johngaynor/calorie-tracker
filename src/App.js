@@ -1,7 +1,7 @@
 import "./App.css";
 import Navigation from "./components/nav/nav";
 import Footer from "./components/footer/footer";
-import Dashboard from "./pages/dashboard/dashboard";
+import Dashboard from "./pages/dashboard";
 import Foods from "./pages/foods/foods";
 import NewFood from "./pages/newFood/newFood";
 import Recipes from "./pages/recipes/recipes";
@@ -10,6 +10,12 @@ import { Route, Routes } from "react-router";
 import Login from "./components/login/login";
 
 function App() {
+  // var _db = "";
+  // var userExists = false;
+  // var userDisplayName = "";
+  // var _userProfileInfo = {};
+  // var userID = "";
+
   return (
     <div className="App">
       <Navigation></Navigation>
