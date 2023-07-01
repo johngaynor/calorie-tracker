@@ -5,7 +5,7 @@ import firebase from "../../utilities/firebase";
 import List from "./categories";
 
 function Recipes() {
-  const [categoryList, setCategoryList] = useState("");
+  const [categoryList, setCategoryList] = useState([]);
 
   useEffect(() => {
     const categoryListRef = firebase.database().ref("recipes");
@@ -16,7 +16,7 @@ function Recipes() {
         categoryList.push({ categoryName, ...categories[categoryName] });
       }
       const categoryNames = [];
-      categoryList.forEach(function (category, index) {
+      categoryList.forEach(function (category) {
         categoryNames.push(category.categoryName);
       });
       setCategoryList(categoryNames);

@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../../../utilities/firebase";
-import {
-  MDBBadge,
-  MDBBtn,
-  MDBTable,
-  MDBTableHead,
-  MDBTableBody,
-  MDBRow,
-  MDBContainer,
-} from "mdb-react-ui-kit";
-import FoodList from "../foodList/foodList";
+import { MDBContainer } from "mdb-react-ui-kit";
 
-function FoodCategoryList() {
-  const [categoryList, setCategoryList] = useState("");
+import firebase from "../../utilities/firebase";
+import FoodList from "./foodList";
+
+function Foods() {
+  const [categoryList, setCategoryList] = useState([]);
 
   useEffect(() => {
     const categoryListRef = firebase.database().ref("foods");
@@ -23,7 +16,7 @@ function FoodCategoryList() {
         categoryList.push({ categoryName, ...categories[categoryName] });
       }
       const categoryNames = [];
-      categoryList.forEach(function (category, index) {
+      categoryList.forEach(function (category) {
         categoryNames.push(category.categoryName);
       });
       setCategoryList(categoryNames);
@@ -43,4 +36,4 @@ function FoodCategoryList() {
   );
 }
 
-export default FoodCategoryList;
+export default Foods;

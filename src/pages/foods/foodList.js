@@ -1,18 +1,19 @@
-import Food from "../food/food";
 import React, { useState, useEffect } from "react";
-import firebase from "../../../utilities/firebase";
 import {
   MDBTable,
   MDBTableHead,
   MDBTableBody,
   MDBContainer,
 } from "mdb-react-ui-kit";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSquareCaretDown,
   faSquareCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./foodList.css";
+
+import firebase from "../../utilities/firebase";
+import Food from "./components/food";
+import styles from "./styles/foodList.css";
 
 function FoodList({ category }) {
   const [foodList, setFoodList] = useState();

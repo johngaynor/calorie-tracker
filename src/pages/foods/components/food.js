@@ -1,27 +1,16 @@
 import React, { useState, useEffect } from "react";
-import {
-  MDBBadge,
-  MDBBtn,
-  MDBTable,
-  MDBTableHead,
-  MDBTableBody,
-  MDBContainer,
-  MDBCol,
-  MDBRow,
-} from "mdb-react-ui-kit";
+import { MDBCol, MDBRow } from "mdb-react-ui-kit";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckCircle,
   faInfoCircle,
-  faShoppingBag,
-  faShoppingBasket,
   faTrashCan,
-  faWindowClose,
   faXmarkCircle,
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import firebase from "../../../utilities/firebase";
-import styles from "./food.css";
+import styles from "../styles/food.css";
 
 function Food({ food }) {
   const [weight, setWeight] = useState("");

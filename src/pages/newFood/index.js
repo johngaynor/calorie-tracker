@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../../../utilities/firebase";
+import { Form } from "react-bootstrap";
 import {
   MDBInput,
   MDBRow,
@@ -9,8 +9,9 @@ import {
   MDBProgress,
   MDBProgressBar,
 } from "mdb-react-ui-kit";
-import { Form } from "react-bootstrap";
-import styles from "./foodForm.css";
+
+import firebase from "../../utilities/firebase";
+import styles from "./styles/index.css";
 
 function FoodForm() {
   // these are for form functionality
