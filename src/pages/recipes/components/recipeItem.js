@@ -1,5 +1,5 @@
-import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
+import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInfoCircle,
@@ -13,7 +13,6 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 
 import firebase from "../../../utilities/firebase";
-// import AddIngredient from "../addIngredient/addIngredient";
 import styles from "../styles/recipeItem.css";
 
 function RecipeItem({ ingredient, recipeID, category, ingredientID }) {

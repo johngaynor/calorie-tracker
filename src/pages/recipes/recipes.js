@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../../utilities/firebase";
 import { MDBContainer } from "mdb-react-ui-kit";
 
+import firebase from "../../utilities/firebase";
 import List from "./categories";
 
 function Recipes() {

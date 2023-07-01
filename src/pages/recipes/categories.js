@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { MDBContainer } from "mdb-react-ui-kit";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSquareCaretDown,
   faSquareCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import firebase from "../../utilities/firebase";
 import Recipe from "./recipe";

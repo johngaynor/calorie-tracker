@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
 import {
   MDBContainer,
   MDBTable,
   MDBTableHead,
   MDBTableBody,
 } from "mdb-react-ui-kit";
-import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUpload,
   faDeleteLeft,
@@ -12,7 +13,6 @@ import {
   faSquareCaretDown,
   faSquareCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import firebase from "../../utilities/firebase";
 import RecipeItem from "./components/recipeItem";
