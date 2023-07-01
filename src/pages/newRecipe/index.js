@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../../../../utilities/firebase";
+import { Form } from "react-bootstrap";
 import {
   MDBInput,
   MDBRow,
@@ -11,15 +11,15 @@ import {
   MDBProgress,
   MDBProgressBar,
   MDBTextArea,
-  MDBTabsContent,
   MDBTableBody,
 } from "mdb-react-ui-kit";
-import { Form } from "react-bootstrap";
-import IngredientList from "../ingredientList/ingredientList";
-import IngredientReview from "../ingredientReview/ingredientReview";
-import styles from "./recipeForm.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+
+import firebase from "../../utilities/firebase";
+import IngredientList from "./ingredientList";
+import IngredientReview from "./ingredientReview";
+import styles from "./styles/index.css";
 
 function RecipeForm() {
   // these are for form functionality

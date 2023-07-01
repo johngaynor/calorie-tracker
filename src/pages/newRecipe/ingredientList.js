@@ -1,18 +1,17 @@
+import React, { useState, useEffect } from "react";
 import {
   MDBTable,
   MDBTableHead,
-  MDBBadge,
-  MDBBtn,
   MDBTableBody,
   MDBContainer,
 } from "mdb-react-ui-kit";
-import React, { useState, useEffect } from "react";
-import firebase from "../../../../utilities/firebase";
-import Ingredient from "../ingredient/ingredient";
-import styles from "./ingredientList.css";
+
+import firebase from "../../utilities/firebase";
+import Ingredient from "./components/ingredient";
+import styles from "./styles/ingredientList.css";
 
 function IngredientList() {
-  const [ingredientList, setIngredientList] = useState("");
+  const [ingredientList, setIngredientList] = useState([]);
   const [ingredientTable, setIngredientTable] = useState(false);
 
   // used to reference firebase "add-ingredient" database

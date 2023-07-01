@@ -1,5 +1,6 @@
-import { MDBBadge, MDBRow, MDBCol } from "mdb-react-ui-kit";
-import styles from "./ingredientReview.css";
+import { MDBRow, MDBCol } from "mdb-react-ui-kit";
+
+import styles from "./styles/ingredientReview.css";
 
 function IngredientReview({ ingredient }) {
   return (

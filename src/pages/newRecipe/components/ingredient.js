@@ -1,17 +1,10 @@
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import React from "react";
+import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  MDBTable,
-  MDBTableHead,
-  MDBBadge,
-  MDBBtn,
-  MDBTableBody,
-  MDBRow,
-  MDBCol,
-} from "mdb-react-ui-kit";
-import React, { useState, useEffect } from "react";
-import firebase from "../../../../utilities/firebase";
-import styles from "./ingredient.css";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+
+import firebase from "../../../utilities/firebase";
+import styles from "../styles/ingredient.css";
 
 function Ingredient({ ingredient }) {
   const deleteIngredient = () => {
