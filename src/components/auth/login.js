@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   MDBBtn,
   MDBModal,
@@ -12,7 +12,6 @@ import {
 import { useNavigate } from "react-router";
 
 import firebase from "../../utilities/firebase";
-import { AuthContext } from "../../utilities/auth/authContext";
 
 const Login = ({ history }) => {
   const navigate = useNavigate();
@@ -27,6 +26,7 @@ const Login = ({ history }) => {
           .auth()
           .signInWithEmailAndPassword(email.value, password.value);
         navigate("/");
+
         setBasicModal(false);
       } catch (error) {
         alert(error);
@@ -34,12 +34,6 @@ const Login = ({ history }) => {
     },
     [history]
   );
-
-  const { currentUser } = useContext(AuthContext);
-
-  if (currentUser) {
-    // return <Redirect to="/" />;
-  }
 
   return (
     <>

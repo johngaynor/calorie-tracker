@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   MDBContainer,
   MDBNavbar,
@@ -11,7 +11,10 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 
-import Login from "../login";
+import { AuthContext } from "../../utilities/auth/authContext";
+import Login from "../auth/login";
+import Signup from "../auth/signup";
+import Logout from "../auth/logout";
 import styles from "./nav.css";
 
 function Navigation() {
@@ -29,6 +32,9 @@ function Navigation() {
       }
     });
   }, []);
+
+  const { currentUser } = useContext(AuthContext);
+  console.log(currentUser);
 
   return (
     <MDBNavbar expand="lg" light bgColor="light">
@@ -59,11 +65,19 @@ function Navigation() {
             <MDBNavbarItem>
               <MDBNavbarLink href="/new-recipe">New Recipe</MDBNavbarLink>
             </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarItem>
-                <Login />
-              </MDBNavbarItem>
-            </MDBNavbarItem>
+
+            {currentUser ? (
+              <Logout />
+            ) : (
+              <>
+                <MDBNavbarItem>
+                  <Login />
+                </MDBNavbarItem>
+                <MDBNavbarItem>
+                  <Signup />
+                </MDBNavbarItem>
+              </>
+            )}
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBContainer>
