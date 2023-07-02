@@ -15,22 +15,8 @@ import firebase from "../../utilities/firebase";
 import Food from "./components/food";
 import styles from "./styles/foodList.css";
 
-function FoodList({ category }) {
-  const [foodList, setFoodList] = useState();
+function FoodList({ category, userFoods }) {
   const [clickCategory, setClickCategory] = useState(false);
-
-  useEffect(() => {
-    const foodRef = firebase.database().ref("foods").child(`${category}`);
-    foodRef.on("value", (snapshot) => {
-      const foods = snapshot.val();
-      const foodList = [];
-      for (let id in foods) {
-        foodList.push({ id, ...foods[id] });
-      }
-
-      setFoodList(foodList);
-    });
-  }, []);
 
   return (
     <MDBContainer
@@ -83,9 +69,9 @@ function FoodList({ category }) {
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {foodList
-                ? foodList.map((food, index) => (
-                    <Food food={food} key={index} />
+              {userFoods[`${category}`]
+                ? Object.keys(userFoods[`${category}`]).map((food, index) => (
+                    <Food food={userFoods[category][food]} key={index} />
                   ))
                 : null}
             </MDBTableBody>

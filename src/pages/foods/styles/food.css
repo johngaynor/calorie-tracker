@@ -49,6 +49,10 @@
   height: 25px;
 }
 
+.food-icons.disabled {
+  color: grey;
+}
+
 .food-icons:hover {
   color: #dc4c64;
 }

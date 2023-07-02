@@ -43,6 +43,9 @@ Calorie tracker allows users to create foods/recipes, calculate nutrition inform
 - Weekly analysis
 - User customizability (i.e. setting custom macro goals)
 
+## V3 Releases
+- Change API calls to make only 1 at the foods/recipes page, instead of a call at each level going down the chain
+
 ## Author
 
 👤 **John Gaynor**

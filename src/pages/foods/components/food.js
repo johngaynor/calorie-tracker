@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { MDBCol, MDBRow } from "mdb-react-ui-kit";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import firebase from "../../../utilities/firebase";
+import { AuthContext } from "../../../utilities/auth/authContext";
 import styles from "../styles/food.css";
 
 function Food({ food }) {
@@ -18,6 +19,10 @@ function Food({ food }) {
   const [calcProtein, setCalcProtein] = useState(0);
   const [calcCarbs, setCalcCarbs] = useState(0);
   const [calcFat, setCalcFat] = useState(0);
+
+  const { currentUser } = useContext(AuthContext);
+
+  // console.log(food);
 
   // these are for delete/log functionality
   const [removeFood, setRemoveFood] = useState(false);
@@ -122,17 +127,18 @@ function Food({ food }) {
           />
           <p className="text-muted mb-2 d-sm-none">in {food.unit}</p>
         </div>
+        {/* this area is for smaller buttons */}
         <div id="food-log-btns" className="p-2 d-md-none">
           <div className="d-flex justify-content-around mx-auto">
             <FontAwesomeIcon
               icon={faUpload}
-              className="food-icons"
+              className={`food-icons ${currentUser ? "" : "disabled"}`}
               id="food-add-icon"
               onClick={() => setAddLog(true)}
             />
             <FontAwesomeIcon
               icon={faTrashCan}
-              className="food-icons"
+              className={`food-icons ${currentUser ? "" : "disabled"}`}
               id="food-delete-icon"
               onClick={() => setRemoveFood(true)}
             />
@@ -226,13 +232,13 @@ function Food({ food }) {
         <div className="d-flex justify-content-around mx-auto">
           <FontAwesomeIcon
             icon={faUpload}
-            className="food-icons"
+            className={`food-icons ${currentUser ? "" : "disabled"}`}
             id="food-add-icon"
             onClick={() => setAddLog(true)}
           />
           <FontAwesomeIcon
             icon={faTrashCan}
-            className="food-icons"
+            className={`food-icons ${currentUser ? "" : "disabled"}`}
             id="food-delete-icon"
             onClick={() => setRemoveFood(true)}
           />
