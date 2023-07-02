@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { MDBContainer } from "mdb-react-ui-kit";
 
 import firebase from "../../utilities/firebase";
+import { AuthContext } from "../../utilities/auth/authContext";
 import FoodList from "./foodList";
 
 function Foods() {
   const [categoryList, setCategoryList] = useState([]);
+  const { currentUser } = useContext(AuthContext);
+
+  if (currentUser) {
+    console.log(currentUser.uid);
+  }
 
   useEffect(() => {
     const categoryListRef = firebase.database().ref("foods");

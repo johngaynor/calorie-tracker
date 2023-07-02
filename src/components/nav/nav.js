@@ -34,7 +34,6 @@ function Navigation() {
   }, []);
 
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
 
   return (
     <MDBNavbar expand="lg" light bgColor="light">

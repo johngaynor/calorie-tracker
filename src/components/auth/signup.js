@@ -32,6 +32,13 @@ const Signup = ({ history }) => {
         await firebase
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value);
+        const user = firebase.auth().currentUser;
+        await firebase
+          .database()
+          .ref("users/" + user.uid)
+          .set({
+            user: user.email,
+          });
         navigate("/");
         setBasicModal(false);
       } catch (error) {
