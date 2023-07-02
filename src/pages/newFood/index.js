@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form } from "react-bootstrap";
 import {
   MDBInput,
@@ -11,11 +11,14 @@ import {
 } from "mdb-react-ui-kit";
 
 import firebase from "../../utilities/firebase";
+import { AuthContext } from "../../utilities/auth/authContext";
 import styles from "./styles/index.css";
 
 function FoodForm() {
   // these are for form functionality
   const [formStep, setFormStep] = useState(0);
+
+  const { currentUser } = useContext(AuthContext);
 
   // these are for food info
   const [name, setName] = useState("");
@@ -105,7 +108,7 @@ function FoodForm() {
     } else {
       setFinalCategory(category);
     }
-  });
+  }, [category, customCategory]);
 
   function submitFood() {
     if (
@@ -119,8 +122,7 @@ function FoodForm() {
     } else {
       const foodRef = firebase
         .database()
-        .ref("foods")
-        .child(`${finalCategory}`);
+        .ref(`users/${currentUser.uid}/foods/${finalCategory}`);
       const food = {
         name: name,
         category: finalCategory,
@@ -367,6 +369,7 @@ function FoodForm() {
                 className="border-1 next bg-danger"
                 type="button"
                 onClick={submitFood}
+                disabled={!currentUser}
                 data-next
               >
                 Submit

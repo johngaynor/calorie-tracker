@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form } from "react-bootstrap";
 import {
   MDBInput,
@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 import firebase from "../../utilities/firebase";
+import { AuthContext } from "../../utilities/auth/authContext";
 import IngredientList from "./ingredientList";
 import IngredientReview from "./ingredientReview";
 import styles from "./styles/index.css";
@@ -24,6 +25,12 @@ import styles from "./styles/index.css";
 function RecipeForm() {
   // these are for form functionality
   const [formStep, setFormStep] = useState(0);
+
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    firebase.database().ref("add-ingredient").remove();
+  }, []);
 
   // these are for recipe submission
   const [recipeName, setRecipeName] = useState("");
@@ -601,6 +608,7 @@ function RecipeForm() {
                 className="border-1 next bg-danger"
                 type="button"
                 onClick={submitRecipe}
+                disabled={!currentUser}
               >
                 Submit
               </MDBBtn>
