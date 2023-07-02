@@ -1,14 +1,12 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useState } from "react";
+import { useNavigate } from "react-router";
 import {
   MDBBtn,
   MDBModal,
   MDBModalDialog,
   MDBModalContent,
   MDBModalHeader,
-  MDBModalTitle,
   MDBModalBody,
-  MDBModalFooter,
-  //   MDBBtn,
   MDBContainer,
   MDBRow,
   MDBCol,
@@ -16,9 +14,7 @@ import {
   MDBCardBody,
   MDBInput,
   MDBIcon,
-  MDBCheckbox,
 } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router";
 
 import firebase from "../../utilities/firebase";
 
@@ -92,6 +88,11 @@ const Signup = ({ history }) => {
                           className="mb-2 w-100"
                           size="lg"
                           style={{ backgroundColor: "#dd4b39" }}
+                          onClick={() =>
+                            alert(
+                              "Sorry, this functionality is not available yet. Please try again at a later date. "
+                            )
+                          }
                         >
                           <MDBIcon fab icon="google" className="mx-1" />
                           Sign in with google
