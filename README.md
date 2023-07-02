@@ -45,6 +45,7 @@ Calorie tracker allows users to create foods/recipes, calculate nutrition inform
 
 ## V3 Releases
 - Change API calls to make only 1 at the foods/recipes page, instead of a call at each level going down the chain
+- Tooltips for each of the icons
 
 ## Author
 

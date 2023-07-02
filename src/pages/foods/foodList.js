@@ -71,7 +71,11 @@ function FoodList({ category, userFoods }) {
             <MDBTableBody>
               {userFoods[`${category}`]
                 ? Object.keys(userFoods[`${category}`]).map((food, index) => (
-                    <Food food={userFoods[category][food]} key={index} />
+                    <Food
+                      food={userFoods[category][food]}
+                      foodId={food}
+                      key={index}
+                    />
                   ))
                 : null}
             </MDBTableBody>

@@ -13,7 +13,7 @@ import firebase from "../../../utilities/firebase";
 import { AuthContext } from "../../../utilities/auth/authContext";
 import styles from "../styles/food.css";
 
-function Food({ food }) {
+function Food({ food, foodId }) {
   const [weight, setWeight] = useState("");
   const [calcCal, setCalcCal] = useState(0);
   const [calcProtein, setCalcProtein] = useState(0);
@@ -23,6 +23,7 @@ function Food({ food }) {
   const { currentUser } = useContext(AuthContext);
 
   // console.log(food);
+  // console.log(foodId);
 
   // these are for delete/log functionality
   const [removeFood, setRemoveFood] = useState(false);
@@ -73,14 +74,18 @@ function Food({ food }) {
   };
 
   const deleteFood = () => {
-    const foodRef = firebase
-      .database()
-      .ref("foods")
-      .child(`${food.category}`)
-      .child(food.id);
+    if (currentUser) {
+      const foodRef = firebase
+        .database()
+        .ref(`users/${currentUser.uid}/foods/${food.category}/${foodId}`);
 
-    foodRef.remove();
-    setRemoveFood(false);
+      foodRef.remove();
+      setRemoveFood(false);
+    } else {
+      alert(
+        "This is a demo version of Calorie Tracker. Please create an account/log in to delete foods."
+      );
+    }
   };
 
   const submitFood = () => {
@@ -89,19 +94,25 @@ function Food({ food }) {
     } else if (weight === "0") {
       alert("Weight must be greater than 0 before submitting to your log.");
     } else {
-      const newFood = {
-        name: food.name,
-        cal: calcCal,
-        protein: calcProtein,
-        carbs: calcCarbs,
-        fat: calcFat,
-      };
-      const logRef = firebase.database().ref("user-log");
-      logRef.push(newFood);
-      alert("Added to log!");
-      setWeight("");
-      setAddLog(false);
-      setRemoveFood(false);
+      if (currentUser) {
+        const newFood = {
+          name: food.name,
+          cal: calcCal,
+          protein: calcProtein,
+          carbs: calcCarbs,
+          fat: calcFat,
+        };
+        const logRef = firebase.database().ref(`users/${currentUser.uid}/log`);
+        logRef.push(newFood);
+        alert("Added to log!");
+        setWeight("");
+        setAddLog(false);
+        setRemoveFood(false);
+      } else {
+        alert(
+          "This is a demo version of Calorie Tracker. Please create an account/log in to add foods to your log."
+        );
+      }
     }
   };
 

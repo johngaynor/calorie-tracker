@@ -6,33 +6,32 @@ import { AuthContext } from "../../utilities/auth/authContext";
 import FoodList from "./foodList";
 
 function Foods() {
-  const [categoryList, setCategoryList] = useState([]);
   const [userFoods, setUserFoods] = useState({});
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
-    console.log(currentUser.uid);
+    console.log("there is a user: " + currentUser.uid);
+    console.log(userFoods);
   }
 
   useEffect(() => {
-    const categoryListRef = currentUser
-      ? firebase.database().ref(`users/${currentUser.uid}/foods`)
-      : firebase.database().ref("foods");
+    let userFoodRef = firebase.database().ref("foods");
 
-    categoryListRef.on("value", (snapshot) => {
-      const categories = snapshot.val();
-      setUserFoods(categories);
-      const categoryList = [];
-
-      for (let categoryName in categories) {
-        categoryList.push({ categoryName, ...categories[categoryName] });
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        userFoodRef = firebase.database().ref(`users/${user.uid}/foods`);
       }
-      const categoryNames = [];
-      categoryList.forEach(function (category) {
-        categoryNames.push(category.categoryName);
+
+      userFoodRef.on("value", (snapshot) => {
+        const categories = snapshot.val();
+        setUserFoods(categories);
       });
-      setCategoryList(categoryNames);
     });
+
+    return () => {
+      // unmounting listener
+      unsubscribe();
+    };
   }, []);
 
   console.log(userFoods);
@@ -45,6 +44,11 @@ function Foods() {
             <FoodList userFoods={userFoods} category={category} key={index} />
           ))
         : null}
+      {userFoods == null ? (
+        <p className="mb-5">You do not have any foods entered!</p>
+      ) : (
+        ""
+      )}
     </MDBContainer>
   );
 }
