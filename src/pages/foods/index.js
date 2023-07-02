@@ -2,17 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { MDBContainer } from "mdb-react-ui-kit";
 
 import firebase from "../../utilities/firebase";
-import { AuthContext } from "../../utilities/auth/authContext";
 import FoodList from "./foodList";
 
 function Foods() {
   const [userFoods, setUserFoods] = useState({});
-  const { currentUser } = useContext(AuthContext);
-
-  if (currentUser) {
-    console.log("there is a user: " + currentUser.uid);
-    console.log(userFoods);
-  }
 
   useEffect(() => {
     let userFoodRef = firebase.database().ref("foods");

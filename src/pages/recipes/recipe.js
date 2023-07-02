@@ -23,6 +23,7 @@ function Recipe({ recipe, category, recipeID }) {
   const [clickRecipe, setClickRecipe] = useState(false);
   const [addIngredient, setAddIngredient] = useState(false);
   const [ingredientList, setIngredientList] = useState("");
+  console.log(recipe);
 
   let recipeCalTotal = 0;
   let recipeProteinTotal = 0;

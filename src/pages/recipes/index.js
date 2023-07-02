@@ -5,31 +5,36 @@ import firebase from "../../utilities/firebase";
 import List from "./categories";
 
 function Recipes() {
-  const [categoryList, setCategoryList] = useState([]);
+  const [userRecipes, setUserRecipes] = useState({});
 
   useEffect(() => {
-    const categoryListRef = firebase.database().ref("recipes");
-    categoryListRef.on("value", (snapshot) => {
-      const categories = snapshot.val();
-      const categoryList = [];
-      for (let categoryName in categories) {
-        categoryList.push({ categoryName, ...categories[categoryName] });
+    let userRecipeRef = firebase.database().ref("recipes");
+
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        userRecipeRef = firebase.database().ref(`users/${user.uid}/recipes`);
+        console.log("there is a user, routing ref to user's recipes");
       }
-      const categoryNames = [];
-      categoryList.forEach(function (category) {
-        categoryNames.push(category.categoryName);
+
+      userRecipeRef.on("value", (snapshot) => {
+        const categories = snapshot.val();
+        setUserRecipes(categories);
       });
-      setCategoryList(categoryNames);
     });
+
+    return () => {
+      // unmounting listener
+      unsubscribe();
+    };
   }, []);
 
   return (
     <MDBContainer fluid className="px-md-5">
       <h3 className="p-3 text-start">Your Recipes</h3>
 
-      {categoryList
-        ? categoryList.map((category, index) => (
-            <List category={category} key={index} />
+      {userRecipes
+        ? Object.keys(userRecipes).map((category, index) => (
+            <List userRecipes={userRecipes} category={category} key={index} />
           ))
         : null}
     </MDBContainer>

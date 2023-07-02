@@ -10,22 +10,25 @@ import firebase from "../../utilities/firebase";
 import Recipe from "./recipe";
 import styles from "./styles/categories.css";
 
-function List({ category }) {
-  const [recipeList, setRecipeList] = useState();
+function List({ category, userRecipes }) {
+  // const [recipeList, setRecipeList] = useState();
   const [clickCategory, setClickCategory] = useState(false);
 
-  useEffect(() => {
-    const recipeRef = firebase.database().ref("recipes").child(`${category}`);
-    recipeRef.on("value", (snapshot) => {
-      const recipes = snapshot.val();
-      const recipeList = [];
-      for (let id in recipes) {
-        recipeList.push({ id, ...recipes[id] });
-      }
+  // useEffect(() => {
+  //   const recipeRef = firebase.database().ref("recipes").child(`${category}`);
+  //   recipeRef.on("value", (snapshot) => {
+  //     const recipes = snapshot.val();
+  //     const recipeList = [];
+  //     for (let id in recipes) {
+  //       recipeList.push({ id, ...recipes[id] });
+  //     }
 
-      setRecipeList(recipeList);
-    });
-  }, []);
+  //     setRecipeList(recipeList);
+  //   });
+  // }, []);
+  console.log("category: " + category);
+  console.log(userRecipes[`${category}`]);
+  console.log("----------------");
 
   return (
     <MDBContainer fluid className="recipe-list mx-auto my-3">
@@ -49,17 +52,18 @@ function List({ category }) {
         </div>
       )}
 
-      {/* this is where recipes will be looped through */}
       {clickCategory ? (
         <MDBContainer className="p-md-4">
-          {recipeList
-            ? recipeList.map((recipe, index) => (
-                <Recipe
-                  recipe={recipe}
-                  key={index}
-                  category={category}
-                  recipeID={recipe.id}
-                />
+          {userRecipes[`${category}`]
+            ? Object.keys(userRecipes[`${category}`]).map((recipe, index) => (
+                <Recipe userRecipes={userRecipes} />
+                // <Recipe
+                //   recipe={recipe}
+                //   key={index}
+                //   category={category}
+                //   recipeID={recipe.id}
+                // />
+                // <h1>test file</h1>
               ))
             : null}
         </MDBContainer>
