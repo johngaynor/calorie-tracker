@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,25 +15,17 @@ import {
 import firebase from "../../../utilities/firebase";
 import styles from "../styles/recipeItem.css";
 
-function RecipeItem({
-  ingredient,
-  cal,
-  setCal,
-  protein,
-  setProtein,
-  carbs,
-  setCarbs,
-  fat,
-  setFat,
-}) {
-  const [weight, setWeight] = useState("");
-  const [calcCal, setCalcCal] = useState(0);
-  const [calcProtein, setCalcProtein] = useState(0);
-  const [calcCarbs, setCalcCarbs] = useState(0);
-  const [calcFat, setCalcFat] = useState(0);
+function RecipeItem({ ingredient, updateTotalMacros }) {
+  // const [weight, setWeight] = useState("");
+  const [macros, setMacros] = useState({
+    cal: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+  });
+  const oldMacrosRef = useRef(macros);
   const [ingredientList, setIngredientList] = useState("");
 
-  // console.log(ingredient);
   const [deleteIngredient, setDeleteIngredient] = useState(false);
 
   // creating local list of ingredients for removing them
@@ -106,25 +98,33 @@ function RecipeItem({
   // };
 
   // calculators for macros
-  useEffect(() => {
-    let calcCal = Number(
+  // useEffect(() => {
+  const handleWeightChange = (e) => {
+    const weight = e.target.value;
+    const cal = Number(
       ((weight * ingredient.cal) / ingredient.size).toFixed(0)
     );
-    let calcProtein = ((weight * ingredient.protein) / ingredient.size).toFixed(
-      0
+    const protein = Number(
+      ((weight * ingredient.protein) / ingredient.size).toFixed(0)
     );
-    let calcCarbs = ((weight * ingredient.carbs) / ingredient.size).toFixed(0);
-    let calcFat = ((weight * ingredient.fat) / ingredient.size).toFixed(0);
 
-    setCalcCal(calcCal);
-    setCalcProtein(calcProtein);
-    setCalcCarbs(calcCarbs);
-    setCalcFat(calcFat);
+    const carbs = Number(
+      ((weight * ingredient.carbs) / ingredient.size).toFixed(0)
+    );
+    const fat = Number(
+      ((weight * ingredient.fat) / ingredient.size).toFixed(0)
+    );
 
-    console.log(typeof calcCal);
+    const newMacros = { cal, protein, carbs, fat };
 
-    setCal(cal + calcCal);
-  }, [weight]);
+    console.log("old macros", macros);
+    console.log("new macros", newMacros);
+    console.log("-----------");
+
+    updateTotalMacros(macros, newMacros);
+
+    setMacros(newMacros);
+  };
 
   // popup that displays ingredient information
   const alertIngredientInfo = () => {
@@ -156,8 +156,9 @@ function RecipeItem({
               id="edit-weight-input"
               type="number"
               className="food-input-boxes d-sm-none d-block mx-auto mt-2"
-              onChange={(e) => setWeight(e.target.value)}
-              value={weight}
+              // onChange={(e) => setWeight(e.target.value)}
+              onChange={handleWeightChange}
+              // value={weight}
               placeholder="0"
             />
             <p className="text-muted mb-2 d-sm-none">in {ingredient.unit}</p>
@@ -197,8 +198,8 @@ function RecipeItem({
             id="edit-weight-input"
             type="number"
             className="food-input-boxes mt-2 d-none d-sm-block mx-auto"
-            onChange={(e) => setWeight(e.target.value)}
-            value={weight}
+            onChange={handleWeightChange}
+            // value={weight}
             placeholder="0"
           />
           <p className="text-muted mb-0 d-none d-sm-block">
@@ -207,24 +208,24 @@ function RecipeItem({
           <MDBRow className="calc-macros d-flex justify-content-center mb-3 d-sm-none">
             <MDBRow className="d-lg-none mb-2">
               <p className="w-100 my-0">Cal</p>
-              <span className="cal mx-auto">{calcCal}</span>
+              <span className="cal mx-auto">{macros.cal}</span>
             </MDBRow>
 
             <p className="w-100 my-0 mx-1">P</p>
-            <span className="protein bigger">{calcProtein}</span>
+            <span className="protein bigger">{macros.protein}</span>
 
             <p className="w-100 my-0 mx-1">C</p>
-            <span className="carbs bigger">{calcCarbs}</span>
+            <span className="carbs bigger">{macros.carbs}</span>
 
             <p className="w-100 my-0 mx-1">F</p>
-            <span className="fat bigger">{calcFat}</span>
+            <span className="fat bigger">{macros.fat}</span>
           </MDBRow>
         </td>
         <td className="d-lg-table-cell d-none">
           <MDBRow className="calc-macros mb-3">
             <MDBCol>
               <p className="w-100 my-0">Cal</p>
-              <span className="cal mx-auto">{calcCal}</span>
+              <span className="cal mx-auto">{macros.cal}</span>
             </MDBCol>
           </MDBRow>
         </td>
@@ -233,27 +234,28 @@ function RecipeItem({
             id="edit-weight-input"
             type="number"
             className="food-input-boxes d-sm-none"
-            onChange={(e) => setWeight(e.target.value)}
-            value={weight}
+            // onChange={(e) => setWeight(e.target.value)}
+            onChange={handleWeightChange}
+            // value={weight}
             placeholder="0"
           />
           <p className="text-muted mb-0 d-sm-none">in {ingredient.unit}</p>
           <MDBRow className="calc-macros d-flex justify-content-center mb-3">
             <MDBRow className="d-lg-none mb-2">
               <p className="w-100 my-0">Cal</p>
-              <span className="cal mx-auto">{calcCal}</span>
+              <span className="cal mx-auto">{macros.cal}</span>
             </MDBRow>
             <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center">
               <p className="w-100 my-0 mx-1">P</p>
-              <span className="protein">{calcProtein}</span>
+              <span className="protein">{macros.protein}</span>
             </MDBCol>
             <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center mx-xl-1 mx-2">
               <p className="w-100 my-0 mx-1">C</p>
-              <span className="carbs">{calcCarbs}</span>
+              <span className="carbs">{macros.carbs}</span>
             </MDBCol>
             <MDBCol className="col-xl-2 col-3 d-flex flex-column align-items-center">
               <p className="w-100 my-0 mx-1">F</p>
-              <span className="fat">{calcFat}</span>
+              <span className="fat">{macros.fat}</span>
             </MDBCol>
           </MDBRow>
         </td>

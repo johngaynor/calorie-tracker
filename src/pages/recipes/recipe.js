@@ -23,17 +23,18 @@ function Recipe({ userRecipes, category, recipeId }) {
   const [clickRecipe, setClickRecipe] = useState(false);
   const [addIngredient, setAddIngredient] = useState(false);
 
-  // console.log("category: " + category);
-  // console.log("recipeId:");
-  // console.log(recipeId);
-  // console.log(userRecipes[`${category}`][`${recipeId}`].ingredients);
-  // console.log("----------------");
-
   // useStates to keep track of total macros
-  const [cal, setCal] = useState(0);
-  const [protein, setProtein] = useState(0);
-  const [carbs, setCarbs] = useState(0);
-  const [fat, setFat] = useState(0);
+  const [totalCal, setTotalCal] = useState(0);
+  const [totalProtein, setTotalProtein] = useState(0);
+  const [totalCarbs, setTotalCarbs] = useState(0);
+  const [totalFat, setTotalFat] = useState(0);
+
+  const updateTotalMacros = (prevMacros, newMacros) => {
+    setTotalCal((prev) => prev - prevMacros.cal + newMacros.cal);
+    setTotalProtein((prev) => prev - prevMacros.protein + newMacros.protein);
+    setTotalCarbs((prev) => prev - prevMacros.carbs + newMacros.carbs);
+    setTotalFat((prev) => prev - prevMacros.fat + newMacros.fat);
+  };
 
   // useEffect(() => {
   //   const ingredientRef = firebase
@@ -159,33 +160,20 @@ function Recipe({ userRecipes, category, recipeId }) {
                   (ingredient, index) => (
                     <RecipeItem
                       ingredient={ingredient}
-                      cal={cal}
-                      protein={protein}
-                      carbs={carbs}
-                      fat={fat}
-                      setCal={setCal}
-                      setProtein={setProtein}
-                      setCarbs={setCarbs}
-                      setFat={setFat}
+                      updateTotalMacros={updateTotalMacros}
+                      // cal={cal}
+                      // protein={protein}
+                      // carbs={carbs}
+                      // fat={fat}
+                      // setCal={setCal}
+                      // setProtein={setProtein}
+                      // setCarbs={setCarbs}
+                      // setFat={setFat}
                       key={index}
                     />
                   )
                 )
               : null}
-            {
-              // ingredientList
-              // ? ingredientList.map((ingredient, index) => (
-              // <RecipeItem
-              //   ingredient={ingredient}
-              //   key={index}
-              //   category={category}
-              //   recipeID={recipeID}
-              //   ingredientID={index}
-              // />
-              // <h1>hello</h1>
-              // ))
-              // : null}
-            }
             <tr id="recipe-totals">
               <td>
                 <div className="mx-auto">
@@ -226,20 +214,20 @@ function Recipe({ userRecipes, category, recipeId }) {
                 <span id="total-weight"></span>
               </td>
               <td className="d-lg-table-cell d-none">
-                <span id="recipe-total-cal">CAL: {cal}</span>
+                <span id="recipe-total-cal">CAL: {totalCal}</span>
               </td>
               <td id="food-macros-display" className="d-table-cell">
                 <span id="recipe-total-cal" className="d-lg-none mb-1">
-                  CAL: {cal}
+                  CAL: {totalCal}
                 </span>
                 <span id="recipe-total-p" className="mb-1">
-                  P: {protein}
+                  P: {totalProtein}
                 </span>
                 <span id="recipe-total-c" className="mb-1">
-                  C: {carbs}
+                  C: {totalCarbs}
                 </span>
                 <span id="recipe-total-f" className="mb-1">
-                  F: {fat}
+                  F: {totalFat}
                 </span>
               </td>
               <td id="food-log-btns" className="d-none d-md-table-cell">
