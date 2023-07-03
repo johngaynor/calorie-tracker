@@ -28,6 +28,7 @@ function Recipe({ userRecipes, category, recipeId }) {
   const [totalProtein, setTotalProtein] = useState(0);
   const [totalCarbs, setTotalCarbs] = useState(0);
   const [totalFat, setTotalFat] = useState(0);
+  console.log(userRecipes);
 
   const updateTotalMacros = (prevMacros, newMacros) => {
     setTotalCal((prev) => prev - prevMacros.cal + newMacros.cal);
@@ -159,17 +160,11 @@ function Recipe({ userRecipes, category, recipeId }) {
               ? userRecipes[`${category}`][`${recipeId}`].ingredients.map(
                   (ingredient, index) => (
                     <RecipeItem
+                      recipeId={recipeId}
                       ingredient={ingredient}
                       updateTotalMacros={updateTotalMacros}
-                      // cal={cal}
-                      // protein={protein}
-                      // carbs={carbs}
-                      // fat={fat}
-                      // setCal={setCal}
-                      // setProtein={setProtein}
-                      // setCarbs={setCarbs}
-                      // setFat={setFat}
-                      key={index}
+                      index={index}
+                      category={category}
                     />
                   )
                 )
