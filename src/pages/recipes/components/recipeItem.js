@@ -1,11 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faInfoCircle,
-  faXmarkCircle,
-  faCheckCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import {
   faSquareCheck,
   faSquare,
@@ -21,6 +17,7 @@ function RecipeItem({
   recipeId,
   index,
   category,
+  ingredientLength,
 }) {
   const [weight, setWeight] = useState("");
   const [macros, setMacros] = useState({
@@ -30,37 +27,22 @@ function RecipeItem({
     fat: 0,
   });
   const [removeIngredient, setRemoveIngredient] = useState(false);
-  const [deleteIngredient, setDeleteIngredient] = useState(false);
-
-  // deleting item from recipe
-  // const confirmDeleteIngredient = () => {
-  //   if (ingredientList.length === 1) {
-  //     alert(
-  //       "At least one ingredient is required per recipe. Please add another ingredient before deleting this one."
-  //     );
-  //   } else {
-  //     ingredientList.splice(ingredientID, 1);
-
-  //     const ingredientRef = firebase
-  //       .database()
-  //       .ref("recipes")
-  //       .child(category)
-  //       .child(recipeID);
-  //     ingredientRef.update({
-  //       ingredients: ingredientList,
-  //     });
-  //   }
-  // };
 
   const handleDeleteIngredient = () => {
     const confirmed = window.confirm(
-      "Are you sure you want to delete this ingredient? This action cannot be undone. Deleting the last ingredient from a recipe will also delete the recipe."
+      "Are you sure you want to delete this ingredient? This action cannot be undone."
     );
     if (confirmed) {
-      const ingredientRef = firebase
-        .database()
-        .ref(`recipes/${category}/${recipeId}/ingredients/${index}`);
-      ingredientRef.remove();
+      if (ingredientLength <= 1) {
+        alert(
+          "At least one ingredient is required per recipe. Please add another ingredient before deleting this one."
+        );
+      } else {
+        const ingredientRef = firebase
+          .database()
+          .ref(`recipes/${category}/${recipeId}/ingredients/${index}`);
+        ingredientRef.remove();
+      }
     } else return;
   };
 
@@ -138,23 +120,6 @@ function RecipeItem({
                   onClick={handleDeleteIngredient}
                 />
               </div>
-              {deleteIngredient ? (
-                <div className="mt-2 delete-btn-container mx-auto d-md-none">
-                  <p>delete ingredient?</p>
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faXmarkCircle}
-                      className="delete-btns cancel"
-                      onClick={() => setDeleteIngredient(false)}
-                    />
-                    <FontAwesomeIcon
-                      icon={faCheckCircle}
-                      className="delete-btns confirm"
-                      // onClick={confirmDeleteIngredient}
-                    />
-                  </div>
-                </div>
-              ) : null}
             </div>
           </td>
           <td>
@@ -235,23 +200,6 @@ function RecipeItem({
                 onClick={handleDeleteIngredient}
               />
             </div>
-            {deleteIngredient ? (
-              <div className="mt-2 delete-btn-container mx-auto">
-                <p>delete ingredient?</p>
-                <div>
-                  <FontAwesomeIcon
-                    icon={faXmarkCircle}
-                    className="delete-btns cancel"
-                    onClick={() => setDeleteIngredient(false)}
-                  />
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    className="delete-btns confirm"
-                    // onClick={confirmDeleteIngredient}
-                  />
-                </div>
-              </div>
-            ) : null}
           </td>
         </tr>
       ) : (
@@ -274,23 +222,6 @@ function RecipeItem({
                   onClick={handleDeleteIngredient}
                 />
               </div>
-              {deleteIngredient ? (
-                <div className="mt-2 delete-btn-container mx-auto">
-                  <p>delete food?</p>
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faXmarkCircle}
-                      className="delete-btns cancel"
-                      onClick={() => setDeleteIngredient(false)}
-                    />
-                    <FontAwesomeIcon
-                      icon={faCheckCircle}
-                      className="delete-btns confirm"
-                      // onClick={confirmDeleteIngredient}
-                    />
-                  </div>
-                </div>
-              ) : null}
             </div>
           </td>
           <td>
@@ -317,23 +248,6 @@ function RecipeItem({
                 onClick={handleDeleteIngredient}
               />
             </div>
-            {deleteIngredient ? (
-              <div className="mt-2 delete-btn-container mx-auto">
-                <p>delete food?</p>
-                <div>
-                  <FontAwesomeIcon
-                    icon={faXmarkCircle}
-                    className="delete-btns cancel"
-                    onClick={() => setDeleteIngredient(false)}
-                  />
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    className="delete-btns confirm"
-                    // onClick={confirmDeleteIngredient}
-                  />
-                </div>
-              </div>
-            ) : null}
           </td>
         </tr>
       )}

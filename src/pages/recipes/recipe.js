@@ -30,6 +30,9 @@ function Recipe({ userRecipes, category, recipeId }) {
   const [totalFat, setTotalFat] = useState(0);
   console.log(userRecipes);
 
+  const ingredientLength =
+    userRecipes[`${category}`][`${recipeId}`].ingredients.length;
+
   const updateTotalMacros = (prevMacros, newMacros) => {
     setTotalCal((prev) => prev - prevMacros.cal + newMacros.cal);
     setTotalProtein((prev) => prev - prevMacros.protein + newMacros.protein);
@@ -55,15 +58,6 @@ function Recipe({ userRecipes, category, recipeId }) {
   //     setIngredientList(ingredientList);
   //   });
   // }, []);
-
-  // recipe.ingredients.forEach((ingredient) => {
-  //   if (ingredient.add === true) {
-  //     recipeCalTotal = recipeCalTotal + +ingredient.userCal;
-  //     recipeProteinTotal = recipeProteinTotal + +ingredient.userProtein;
-  //     recipeCarbsTotal = recipeCarbsTotal + +ingredient.userCarbs;
-  //     recipeFatTotal = recipeFatTotal + +ingredient.userFat;
-  //   }
-  // });
 
   // const pushRecipe = () => {
   //   if (recipeCalTotal === 0) {
@@ -165,6 +159,7 @@ function Recipe({ userRecipes, category, recipeId }) {
                       updateTotalMacros={updateTotalMacros}
                       index={index}
                       category={category}
+                      ingredientLength={ingredientLength}
                     />
                   )
                 )
