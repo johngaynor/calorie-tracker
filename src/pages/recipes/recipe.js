@@ -16,83 +16,88 @@ import {
 
 import firebase from "../../utilities/firebase";
 import RecipeItem from "./components/recipeItem";
-import AddIngredient from "./components/addIngredient";
+// import AddIngredient from "./components/addIngredient";
 import styles from "./styles/recipe.css";
 
-function Recipe({ recipe, category, recipeID }) {
+function Recipe({ userRecipes, category, recipeId }) {
   const [clickRecipe, setClickRecipe] = useState(false);
   const [addIngredient, setAddIngredient] = useState(false);
-  const [ingredientList, setIngredientList] = useState("");
-  console.log(recipe);
 
-  let recipeCalTotal = 0;
-  let recipeProteinTotal = 0;
-  let recipeCarbsTotal = 0;
-  let recipeFatTotal = 0;
+  // console.log("category: " + category);
+  // console.log("recipeId:");
+  // console.log(recipeId);
+  // console.log(userRecipes[`${category}`][`${recipeId}`].ingredients);
+  // console.log("----------------");
 
-  useEffect(() => {
-    const ingredientRef = firebase
-      .database()
-      .ref("recipes")
-      .child(category)
-      .child(recipeID)
-      .child("ingredients");
+  // useStates to keep track of total macros
+  const [cal, setCal] = useState(0);
+  const [protein, setProtein] = useState(0);
+  const [carbs, setCarbs] = useState(0);
+  const [fat, setFat] = useState(0);
 
-    ingredientRef.on("value", (snapshot) => {
-      const ingredients = snapshot.val();
-      const ingredientList = [];
-      for (let id in ingredients) {
-        ingredientList.push({ id, ...ingredients[id] });
-      }
+  // useEffect(() => {
+  //   const ingredientRef = firebase
+  //     .database()
+  //     .ref("recipes")
+  //     .child(category)
+  //     .child(recipeID)
+  //     .child("ingredients");
 
-      setIngredientList(ingredientList);
-    });
-  }, []);
+  //   ingredientRef.on("value", (snapshot) => {
+  //     const ingredients = snapshot.val();
+  //     const ingredientList = [];
+  //     for (let id in ingredients) {
+  //       ingredientList.push({ id, ...ingredients[id] });
+  //     }
 
-  recipe.ingredients.forEach((ingredient) => {
-    if (ingredient.add === true) {
-      recipeCalTotal = recipeCalTotal + +ingredient.userCal;
-      recipeProteinTotal = recipeProteinTotal + +ingredient.userProtein;
-      recipeCarbsTotal = recipeCarbsTotal + +ingredient.userCarbs;
-      recipeFatTotal = recipeFatTotal + +ingredient.userFat;
-    }
-  });
+  //     setIngredientList(ingredientList);
+  //   });
+  // }, []);
 
-  const pushRecipe = () => {
-    if (recipeCalTotal === 0) {
-      alert(
-        "please add at least one ingredient/weight before adding the recipe to daily log."
-      );
-    } else {
-      const userLogRef = firebase.database().ref("user-log");
-      const userMeal = {
-        name: recipe.name,
-        cal: recipeCalTotal,
-        protein: recipeProteinTotal,
-        carbs: recipeCarbsTotal,
-        fat: recipeFatTotal,
-      };
+  // recipe.ingredients.forEach((ingredient) => {
+  //   if (ingredient.add === true) {
+  //     recipeCalTotal = recipeCalTotal + +ingredient.userCal;
+  //     recipeProteinTotal = recipeProteinTotal + +ingredient.userProtein;
+  //     recipeCarbsTotal = recipeCarbsTotal + +ingredient.userCarbs;
+  //     recipeFatTotal = recipeFatTotal + +ingredient.userFat;
+  //   }
+  // });
 
-      userLogRef.push(userMeal);
-      alert("added to daily log!");
-      window.location.reload();
-    }
-  };
+  // const pushRecipe = () => {
+  //   if (recipeCalTotal === 0) {
+  //     alert(
+  //       "please add at least one ingredient/weight before adding the recipe to daily log."
+  //     );
+  //   } else {
+  //     const userLogRef = firebase.database().ref("user-log");
+  //     const userMeal = {
+  //       name: recipe.name,
+  //       cal,
+  //       protein,
+  //       carbs,
+  //       fat,
+  //     };
 
-  const deleteRecipe = () => {
-    if (
-      window.confirm(
-        "Are you sure you want to delete this recipe? This action cannot be undone."
-      )
-    ) {
-      const recipeRef = firebase
-        .database()
-        .ref("recipes")
-        .child(category)
-        .child(recipeID);
-      recipeRef.remove();
-    }
-  };
+  //     userLogRef.push(userMeal);
+  //     alert("added to daily log!");
+  //     window.location.reload();
+  //   }
+  // };
+
+  // const deleteRecipe = () => {
+  //   if (
+  //     window.confirm(
+  //       "Are you sure you want to delete this recipe? This action cannot be undone."
+  //     )
+  //   ) {
+  //     const recipeRef = firebase
+  //       .database()
+  //       .ref("recipes")
+  //       .child(category)
+  //       .child(recipeID);
+  //     recipeRef.remove();
+  //   }
+  // };
 
   return (
     <MDBContainer
@@ -108,7 +113,7 @@ function Recipe({ recipe, category, recipeID }) {
         >
           <FontAwesomeIcon icon={faSquareCaretUp} className="recipe-caret" />
           <h4 className="py-2 d-flex flex-wrap overflow-hidden">
-            {recipe.name}
+            {/* {recipe.name} */}
           </h4>
           <FontAwesomeIcon icon={faSquareCaretUp} className="recipe-caret" />
         </div>
@@ -119,7 +124,7 @@ function Recipe({ recipe, category, recipeID }) {
         >
           <FontAwesomeIcon icon={faSquareCaretDown} className="recipe-caret" />
           <h4 className="d-flex flex-wrap overflow-hidden py-2">
-            {recipe.name}
+            {/* {recipe.name} */}
           </h4>
           <FontAwesomeIcon icon={faSquareCaretDown} className="recipe-caret" />
         </div>
@@ -149,17 +154,38 @@ function Recipe({ recipe, category, recipeID }) {
             </tr>
           </MDBTableHead>
           <MDBTableBody>
-            {ingredientList
-              ? ingredientList.map((ingredient, index) => (
-                  <RecipeItem
-                    ingredient={ingredient}
-                    key={index}
-                    category={category}
-                    recipeID={recipeID}
-                    ingredientID={index}
-                  />
-                ))
+            {userRecipes[`${category}`][`${recipeId}`].ingredients
+              ? userRecipes[`${category}`][`${recipeId}`].ingredients.map(
+                  (ingredient, index) => (
+                    <RecipeItem
+                      ingredient={ingredient}
+                      cal={cal}
+                      protein={protein}
+                      carbs={carbs}
+                      fat={fat}
+                      setCal={setCal}
+                      setProtein={setProtein}
+                      setCarbs={setCarbs}
+                      setFat={setFat}
+                      key={index}
+                    />
+                  )
+                )
               : null}
+            {
+              // ingredientList
+              // ? ingredientList.map((ingredient, index) => (
+              // <RecipeItem
+              //   ingredient={ingredient}
+              //   key={index}
+              //   category={category}
+              //   recipeID={recipeID}
+              //   ingredientID={index}
+              // />
+              // <h1>hello</h1>
+              // ))
+              // : null}
+            }
             <tr id="recipe-totals">
               <td>
                 <div className="mx-auto">
@@ -183,14 +209,14 @@ function Recipe({ recipe, category, recipeID }) {
                     <FontAwesomeIcon
                       icon={faUpload}
                       className="recipe-btns"
-                      onClick={pushRecipe}
+                      // onClick={pushRecipe}
                     />
                   </div>
                   <div className="d-md-none">
                     <FontAwesomeIcon
                       icon={faDeleteLeft}
                       className="recipe-btns selected-btn"
-                      onClick={deleteRecipe}
+                      // onClick={deleteRecipe}
                     />
                   </div>
                   {/* end <md btns */}
@@ -200,20 +226,20 @@ function Recipe({ recipe, category, recipeID }) {
                 <span id="total-weight"></span>
               </td>
               <td className="d-lg-table-cell d-none">
-                <span id="recipe-total-cal">CAL: {recipeCalTotal}</span>
+                <span id="recipe-total-cal">CAL: {cal}</span>
               </td>
               <td id="food-macros-display" className="d-table-cell">
                 <span id="recipe-total-cal" className="d-lg-none mb-1">
-                  CAL: {recipeCalTotal}
+                  CAL: {cal}
                 </span>
                 <span id="recipe-total-p" className="mb-1">
-                  P: {recipeProteinTotal}
+                  P: {protein}
                 </span>
                 <span id="recipe-total-c" className="mb-1">
-                  C: {recipeCarbsTotal}
+                  C: {carbs}
                 </span>
                 <span id="recipe-total-f" className="mb-1">
-                  F: {recipeFatTotal}
+                  F: {fat}
                 </span>
               </td>
               <td id="food-log-btns" className="d-none d-md-table-cell">
@@ -235,14 +261,14 @@ function Recipe({ recipe, category, recipeID }) {
                   <FontAwesomeIcon
                     icon={faUpload}
                     className="recipe-btns"
-                    onClick={pushRecipe}
+                    // onClick={pushRecipe}
                   />
                 </div>
                 <div>
                   <FontAwesomeIcon
                     icon={faDeleteLeft}
                     className="recipe-btns"
-                    onClick={deleteRecipe}
+                    // onClick={deleteRecipe}s
                   />
                 </div>
               </td>
@@ -252,10 +278,11 @@ function Recipe({ recipe, category, recipeID }) {
       ) : null}
 
       {addIngredient ? (
-        <AddIngredient
-          recipe={recipe.id}
-          category={recipe.category}
-        ></AddIngredient>
+        // <AddIngredient
+        //   recipe={recipe.id}
+        //   category={recipe.category}
+        // />
+        <h1>other add ingredient</h1>
       ) : (
         ""
       )}

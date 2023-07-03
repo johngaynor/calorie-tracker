@@ -11,24 +11,11 @@ import Recipe from "./recipe";
 import styles from "./styles/categories.css";
 
 function List({ category, userRecipes }) {
-  // const [recipeList, setRecipeList] = useState();
   const [clickCategory, setClickCategory] = useState(false);
 
-  // useEffect(() => {
-  //   const recipeRef = firebase.database().ref("recipes").child(`${category}`);
-  //   recipeRef.on("value", (snapshot) => {
-  //     const recipes = snapshot.val();
-  //     const recipeList = [];
-  //     for (let id in recipes) {
-  //       recipeList.push({ id, ...recipes[id] });
-  //     }
-
-  //     setRecipeList(recipeList);
-  //   });
-  // }, []);
-  console.log("category: " + category);
-  console.log(userRecipes[`${category}`]);
-  console.log("----------------");
+  // console.log("category: " + category);
+  // console.log(userRecipes[`${category}`]);
+  // console.log("----------------");
 
   return (
     <MDBContainer fluid className="recipe-list mx-auto my-3">
@@ -56,13 +43,11 @@ function List({ category, userRecipes }) {
         <MDBContainer className="p-md-4">
           {userRecipes[`${category}`]
             ? Object.keys(userRecipes[`${category}`]).map((recipe, index) => (
-                <Recipe userRecipes={userRecipes} />
-                // <Recipe
-                //   recipe={recipe}
-                //   key={index}
-                //   category={category}
-                //   recipeID={recipe.id}
-                // />
+                <Recipe
+                  userRecipes={userRecipes}
+                  category={category}
+                  recipeId={recipe}
+                />
                 // <h1>test file</h1>
               ))
             : null}
