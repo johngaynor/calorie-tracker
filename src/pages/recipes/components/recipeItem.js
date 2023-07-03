@@ -30,56 +30,7 @@ function RecipeItem({
     fat: 0,
   });
   const [removeIngredient, setRemoveIngredient] = useState(false);
-  const [ingredientList, setIngredientList] = useState("");
-
   const [deleteIngredient, setDeleteIngredient] = useState(false);
-
-  // creating local list of ingredients for removing them
-  // useEffect(() => {
-  //   const ingredientRef = firebase
-  //     .database()
-  //     .ref("recipes")
-  //     .child(category)
-  //     .child(recipeID)
-  //     .child("ingredients");
-
-  //   ingredientRef.on("value", (snapshot) => {
-  //     const ingredients = snapshot.val();
-  //     const ingredientList = [];
-  //     for (let id in ingredients) {
-  //       ingredientList.push({ id, ...ingredients[id] });
-  //     }
-  //     setIngredientList(ingredientList);
-  //   });
-  // }, []);
-
-  // removing item from calculator
-  const removeRecipeItem = () => {
-    const user = firebase.auth().currentUser;
-    console.log(user);
-    console.log(ingredient);
-
-    const ingredientRef = firebase
-      .database()
-      .ref(`recipes/${category}/${recipeId}/ingredients/${index}`);
-
-    console.log(index);
-
-    ingredientRef.update({ add: false });
-
-    // const ingredientRef = firebase
-    //   .database()
-    //   .ref.database()
-    //   .ref("recipes")
-    //   .child(category)
-    //   .child(recipeID)
-    //   .child("ingredients")
-    //   .child(ingredientID);
-
-    // ingredientRef.update({
-    //   add: false,
-    // });
-  };
 
   // deleting item from recipe
   // const confirmDeleteIngredient = () => {
@@ -101,29 +52,26 @@ function RecipeItem({
   //   }
   // };
 
-  // adds recipe item back to calculator
-  // const addRecipeItem = () => {
-  //   const ingredientRef = firebase
-  //     .database()
-  //     .ref("recipes")
-  //     .child(category)
-  //     .child(recipeID)
-  //     .child("ingredients")
-  //     .child(ingredientID);
-
-  //   ingredientRef.update({
-  //     add: true,
-  //   });
-  // };
+  const handleDeleteIngredient = () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this ingredient? This action cannot be undone. Deleting the last ingredient from a recipe will also delete the recipe."
+    );
+    if (confirmed) {
+      const ingredientRef = firebase
+        .database()
+        .ref(`recipes/${category}/${recipeId}/ingredients/${index}`);
+      ingredientRef.remove();
+    } else return;
+  };
 
   // calculators for macros
   useEffect(() => {
     if (removeIngredient === true) {
+      setWeight("");
       const clearedMacros = { cal: 0, protein: 0, carbs: 0, fat: 0 };
       updateTotalMacros(macros, clearedMacros);
       setMacros(clearedMacros);
     } else {
-      // const weight = e.target.value;
       const cal = Number(
         ((weight * ingredient.cal) / ingredient.size).toFixed(0)
       );
@@ -143,8 +91,6 @@ function RecipeItem({
       setMacros(newMacros);
     }
   }, [weight, removeIngredient]);
-  // const handleWeightChange = (e) => {
-  // };
 
   // popup that displays ingredient information
   const alertIngredientInfo = () => {
@@ -189,7 +135,7 @@ function RecipeItem({
                 <FontAwesomeIcon
                   icon={faTrashCan}
                   className="recipe-item-btns"
-                  onClick={() => setDeleteIngredient(true)}
+                  onClick={handleDeleteIngredient}
                 />
               </div>
               {deleteIngredient ? (
@@ -286,7 +232,7 @@ function RecipeItem({
               <FontAwesomeIcon
                 icon={faTrashCan}
                 className="recipe-item-btns"
-                onClick={() => setDeleteIngredient(true)}
+                onClick={handleDeleteIngredient}
               />
             </div>
             {deleteIngredient ? (
@@ -325,7 +271,7 @@ function RecipeItem({
                 <FontAwesomeIcon
                   icon={faTrashCan}
                   className="recipe-item-btns"
-                  onClick={() => setDeleteIngredient(true)}
+                  onClick={handleDeleteIngredient}
                 />
               </div>
               {deleteIngredient ? (
@@ -368,7 +314,7 @@ function RecipeItem({
               <FontAwesomeIcon
                 icon={faTrashCan}
                 className="recipe-item-btns"
-                onClick={() => setDeleteIngredient(true)}
+                onClick={handleDeleteIngredient}
               />
             </div>
             {deleteIngredient ? (

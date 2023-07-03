@@ -13,9 +13,9 @@ import styles from "./styles/categories.css";
 function List({ category, userRecipes }) {
   const [clickCategory, setClickCategory] = useState(false);
 
-  // console.log("category: " + category);
-  // console.log(userRecipes[`${category}`]);
-  // console.log("----------------");
+  console.log("category: " + category);
+  console.log(userRecipes[`${category}`]);
+  console.log("----------------");
 
   return (
     <MDBContainer fluid className="recipe-list mx-auto my-3">
@@ -48,7 +48,6 @@ function List({ category, userRecipes }) {
                   category={category}
                   recipeId={recipe}
                 />
-                // <h1>test file</h1>
               ))
             : null}
         </MDBContainer>
