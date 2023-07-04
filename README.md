@@ -50,6 +50,8 @@ Calorie tracker allows users to create foods/recipes, calculate nutrition inform
 ## V4 Anticipated Releases
 - Fix bug where deleting last ingredient from a recipe deletes the recipe itself
 - Add catch to make sure macros cannot be negative
+- New routing for custom categories
+- Possibility to add custom category for recipes
 
 ## Author
 

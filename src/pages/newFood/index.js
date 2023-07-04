@@ -125,7 +125,7 @@ function FoodForm() {
     } else {
       const foodRef = firebase
         .database()
-        .ref(`users/${currentUser.uid}/foods/${category}`);
+        .ref(`users/${currentUser.uid}/foods/${finalCategory}`);
       const food = {
         name,
         category: finalCategory,
@@ -136,6 +136,8 @@ function FoodForm() {
         carbs: parseFloat(carbs),
         fat: parseFloat(fat),
       };
+
+      console.log(food);
 
       foodRef.push(food);
     }
@@ -194,7 +196,9 @@ function FoodForm() {
                           </option>
                         ))
                     : null}
-                  <option value="custom">New Category</option>
+                  <option value="custom" disabled={!currentUser}>
+                    New Category
+                  </option>
                 </Form.Select>
               </MDBCol>
             </MDBRow>
