@@ -28,7 +28,7 @@ function Recipe({ userRecipes, category, recipeId }) {
   const [totalProtein, setTotalProtein] = useState(0);
   const [totalCarbs, setTotalCarbs] = useState(0);
   const [totalFat, setTotalFat] = useState(0);
-  console.log(userRecipes);
+  // console.log(userRecipes);
 
   const ingredientLength =
     userRecipes[`${category}`][`${recipeId}`].ingredients.length;
@@ -40,60 +40,39 @@ function Recipe({ userRecipes, category, recipeId }) {
     setTotalFat((prev) => prev - prevMacros.fat + newMacros.fat);
   };
 
-  // useEffect(() => {
-  //   const ingredientRef = firebase
-  //     .database()
-  //     .ref("recipes")
-  //     .child(category)
-  //     .child(recipeID)
-  //     .child("ingredients");
+  const pushRecipe = () => {
+    if (totalCal === 0) {
+      alert(
+        "please add at least one ingredient/weight before adding the recipe to daily log."
+      );
+    } else {
+      const logRef = firebase.database().ref("user-log");
+      const userMeal = {
+        name: userRecipes[`${category}`][`${recipeId}`].name,
+        cal: totalCal,
+        protein: totalProtein,
+        carbs: totalCarbs,
+        fat: totalFat,
+      };
 
-  //   ingredientRef.on("value", (snapshot) => {
-  //     const ingredients = snapshot.val();
-  //     const ingredientList = [];
-  //     for (let id in ingredients) {
-  //       ingredientList.push({ id, ...ingredients[id] });
-  //     }
+      logRef.push(userMeal);
+      alert("added to daily log!");
+      window.location.reload();
+    }
+  };
 
-  //     setIngredientList(ingredientList);
-  //   });
-  // }, []);
-
-  // const pushRecipe = () => {
-  //   if (recipeCalTotal === 0) {
-  //     alert(
-  //       "please add at least one ingredient/weight before adding the recipe to daily log."
-  //     );
-  //   } else {
-  //     const userLogRef = firebase.database().ref("user-log");
-  //     const userMeal = {
-  //       name: recipe.name,
-  //       cal,
-  //       protein,
-  //       carbs,
-  //       fat,
-  //     };
-
-  //     userLogRef.push(userMeal);
-  //     alert("added to daily log!");
-  //     window.location.reload();
-  //   }
-  // };
-
-  // const deleteRecipe = () => {
-  //   if (
-  //     window.confirm(
-  //       "Are you sure you want to delete this recipe? This action cannot be undone."
-  //     )
-  //   ) {
-  //     const recipeRef = firebase
-  //       .database()
-  //       .ref("recipes")
-  //       .child(category)
-  //       .child(recipeID);
-  //     recipeRef.remove();
-  //   }
-  // };
+  const deleteRecipe = () => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this recipe? This action cannot be undone."
+      )
+    ) {
+      const recipeRef = firebase
+        .database()
+        .ref(`recipes/${category}/${recipeId}`);
+      recipeRef.remove();
+    }
+  };
 
   return (
     <MDBContainer
@@ -109,7 +88,7 @@ function Recipe({ userRecipes, category, recipeId }) {
         >
           <FontAwesomeIcon icon={faSquareCaretUp} className="recipe-caret" />
           <h4 className="py-2 d-flex flex-wrap overflow-hidden">
-            {/* {recipe.name} */}
+            {userRecipes[`${category}`][`${recipeId}`].name}
           </h4>
           <FontAwesomeIcon icon={faSquareCaretUp} className="recipe-caret" />
         </div>
@@ -120,7 +99,7 @@ function Recipe({ userRecipes, category, recipeId }) {
         >
           <FontAwesomeIcon icon={faSquareCaretDown} className="recipe-caret" />
           <h4 className="d-flex flex-wrap overflow-hidden py-2">
-            {/* {recipe.name} */}
+            {userRecipes[`${category}`][`${recipeId}`].name}
           </h4>
           <FontAwesomeIcon icon={faSquareCaretDown} className="recipe-caret" />
         </div>
@@ -187,14 +166,14 @@ function Recipe({ userRecipes, category, recipeId }) {
                     <FontAwesomeIcon
                       icon={faUpload}
                       className="recipe-btns"
-                      // onClick={pushRecipe}
+                      onClick={pushRecipe}
                     />
                   </div>
                   <div className="d-md-none">
                     <FontAwesomeIcon
                       icon={faDeleteLeft}
                       className="recipe-btns selected-btn"
-                      // onClick={deleteRecipe}
+                      onClick={deleteRecipe}
                     />
                   </div>
                   {/* end <md btns */}
@@ -239,14 +218,14 @@ function Recipe({ userRecipes, category, recipeId }) {
                   <FontAwesomeIcon
                     icon={faUpload}
                     className="recipe-btns"
-                    // onClick={pushRecipe}
+                    onClick={pushRecipe}
                   />
                 </div>
                 <div>
                   <FontAwesomeIcon
                     icon={faDeleteLeft}
                     className="recipe-btns"
-                    // onClick={deleteRecipe}s
+                    onClick={deleteRecipe}
                   />
                 </div>
               </td>
