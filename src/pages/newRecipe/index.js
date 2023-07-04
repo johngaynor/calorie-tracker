@@ -26,17 +26,13 @@ function RecipeForm() {
   // these are for form functionality
   const [formStep, setFormStep] = useState(0);
 
-  const { currentUser } = useContext(AuthContext);
-
-  useEffect(() => {
-    firebase.database().ref("add-ingredient").remove();
-  }, []);
-
   // these are for recipe submission
   const [recipeName, setRecipeName] = useState("");
   const [recipeCategory, setRecipeCategory] = useState("Miscellaneous");
   const [recipeDesc, setRecipeDesc] = useState("");
-  const [ingredientList, setIngredientList] = useState("");
+  const [ingredientList, setIngredientList] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+  console.log(ingredients);
 
   // these are for ingredient submission
   const [ingredientName, setIngredientName] = useState("");
@@ -46,6 +42,8 @@ function RecipeForm() {
   const [protein, setProtein] = useState("");
   const [carbs, setCarbs] = useState("");
   const [fat, setFat] = useState("");
+
+  const { currentUser } = useContext(AuthContext);
 
   //   multi step form functionality
   useEffect(() => {
@@ -72,29 +70,7 @@ function RecipeForm() {
     });
   }, [formStep]);
 
-  // creates local list of new ingredients from firebase
-  useEffect(() => {
-    const ingredientListRef = firebase.database().ref("add-ingredient");
-    ingredientListRef.on("value", (snapshot) => {
-      const ingredients = snapshot.val();
-      const ingredientList = [];
-      for (let id in ingredients) {
-        ingredientList.push({ id, ...ingredients[id] });
-      }
-
-      setIngredientList(ingredientList);
-
-      // hiding the next button if there are no ingredients
-      const nextBtn = document.getElementById("step-two-submit");
-      if (ingredientList.length === 0) {
-        nextBtn.classList.add("prevent-next");
-      } else {
-        nextBtn.classList.remove("prevent-next");
-      }
-    });
-  }, []);
-
-  // function to submit ingredients
+  // function to add ingredients
   const submitIngredient = () => {
     if (!currentUser) {
       alert(
@@ -102,9 +78,6 @@ function RecipeForm() {
       );
       return;
     }
-    const newIngredientRef = firebase
-      .database()
-      .ref(`users/${currentUser.uid}/add-ingredient`);
     if (
       ingredientName === "" ||
       size === "" ||
@@ -127,7 +100,8 @@ function RecipeForm() {
         fat: parseFloat(fat),
       };
 
-      newIngredientRef.push(newIngredient);
+      setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
+
       setIngredientName("");
       setSize("");
       setCal("");
@@ -146,11 +120,10 @@ function RecipeForm() {
       name: recipeName,
       description: recipeDesc,
       category: recipeCategory,
-      ingredients: ingredientList,
+      ingredients,
     };
 
     recipeRef.push(recipe);
-    firebase.database().ref(`users/${currentUser.uid}/add-ingredient`).remove();
     setFormStep(formStep + 1);
   };
 
@@ -492,7 +465,10 @@ function RecipeForm() {
               </MDBCol>
             </MDBRow>
             <MDBRow className="mb-5">
-              <IngredientList></IngredientList>
+              <IngredientList
+                userId={currentUser ? currentUser.uid : null}
+                ingredients={ingredients}
+              />
             </MDBRow>
 
             <MDBRow className="recipe-form-btns">
@@ -512,6 +488,7 @@ function RecipeForm() {
                 type="button"
                 id="step-two-submit"
                 data-next
+                disabled={ingredients.length === 0 ? true : false}
               >
                 Next
               </MDBBtn>

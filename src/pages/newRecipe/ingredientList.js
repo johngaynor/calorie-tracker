@@ -10,38 +10,22 @@ import firebase from "../../utilities/firebase";
 import Ingredient from "./components/ingredient";
 import styles from "./styles/ingredientList.css";
 
-function IngredientList() {
-  const [ingredientList, setIngredientList] = useState([]);
+function IngredientList({ ingredients }) {
   const [ingredientTable, setIngredientTable] = useState(false);
-
-  // used to reference firebase "add-ingredient" database
-  const newIngredientRef = firebase.database().ref("add-ingredient");
-
-  useEffect(() => {
-    newIngredientRef.on("value", (snapshot) => {
-      const ingredients = snapshot.val();
-      const ingredientList = [];
-      for (let id in ingredients) {
-        ingredientList.push({ id, ...ingredients[id] });
-      }
-
-      setIngredientList(ingredientList);
-    });
-  }, []);
+  // console.log(ingredients);
 
   // checks length of ingredientList to show/hide table head
   useEffect(() => {
-    if (ingredientList.length == 0) {
+    if (ingredients.length == 0) {
       setIngredientTable(false);
     } else {
       setIngredientTable(true);
     }
-  }, [ingredientList]);
+  }, [ingredients]);
 
   return (
     <MDBContainer className="">
       {ingredientTable ? <h3 className="text-white mt-4">Ingredients:</h3> : ""}
-      {/* <h3 className="text-white mt-4">Ingredients:</h3> */}
       <MDBTable align="middle" className="ingredient-table text-white">
         {ingredientTable ? (
           <MDBTableHead>
@@ -74,8 +58,8 @@ function IngredientList() {
           </thead>
         )}
         <MDBTableBody>
-          {ingredientList
-            ? ingredientList.map((ingredient, index) => (
+          {ingredients
+            ? ingredients.map((ingredient, index) => (
                 <Ingredient ingredient={ingredient} key={index} />
               ))
             : null}
