@@ -20,12 +20,13 @@ function FoodForm() {
 
   const { currentUser } = useContext(AuthContext);
 
-  // these are for food info
   const [name, setName] = useState("");
-  const [categoryList, setCategoryList] = useState("");
-  const [category, setCategory] = useState("");
+  const [userCategories, setUserCategories] = useState([]);
+  // these are for determining categories
+  const [category, setCategory] = useState("Miscellaneous");
   const [customCategory, setCustomCategory] = useState("");
   const [finalCategory, setFinalCategory] = useState("");
+
   const [unit, setUnit] = useState("");
   const [size, setSize] = useState("");
   const [cal, setCal] = useState("");
@@ -76,39 +77,41 @@ function FoodForm() {
       customForm.classList.remove("visible");
       customForm.classList.add("invisible");
     }
-  });
+  }, [category]);
 
-  // creates local list of user categories
+  // routing to see which will be the final category
   useEffect(() => {
-    const categoryListRef = firebase.database().ref("foods");
-    categoryListRef.on("value", (snapshot) => {
-      const categories = snapshot.val();
-      const categoryList = [];
-      for (let categoryName in categories) {
-        categoryList.push({ categoryName, ...categories[categoryName] });
-      }
-      const categoryNames = [];
-      categoryList.forEach(function (category, index) {
-        categoryNames.push(category.categoryName);
-      });
-      setCategoryList(categoryNames);
-    });
-  }, []);
-
-  // updates the finalCategory useState();
-  useEffect(() => {
-    if (category === "custom") {
-      if (customCategory === "") {
-        setFinalCategory("Miscellaneous");
-      } else {
-        setFinalCategory(customCategory);
-      }
-    } else if (category === "") {
+    if (category !== "custom") {
+      setFinalCategory(category);
+    } else if (customCategory === "") {
       setFinalCategory("Miscellaneous");
     } else {
-      setFinalCategory(category);
+      setFinalCategory(customCategory);
     }
-  }, [category, customCategory]);
+  });
+
+  // creating local list of user categories
+  useEffect(() => {
+    let userCategoriesRef = firebase.database().ref("foods");
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        userCategoriesRef = firebase.database().ref(`users/${user.uid}/foods`);
+      }
+      userCategoriesRef.on("value", (snapshot) => {
+        const categories = snapshot.val();
+        const categoryList = [];
+        Object.keys(categories).forEach((category) => {
+          categoryList.push(category);
+        });
+        setUserCategories(categoryList);
+      });
+    });
+
+    return () => {
+      // unmounting listener
+      unsubscribe();
+    };
+  }, []);
 
   function submitFood() {
     if (
@@ -122,12 +125,12 @@ function FoodForm() {
     } else {
       const foodRef = firebase
         .database()
-        .ref(`users/${currentUser.uid}/foods/${finalCategory}`);
+        .ref(`users/${currentUser.uid}/foods/${category}`);
       const food = {
-        name: name,
+        name,
         category: finalCategory,
         servingSize: parseFloat(size),
-        unit: unit,
+        unit,
         cal: parseFloat(cal),
         protein: parseFloat(protein),
         carbs: parseFloat(carbs),
@@ -180,19 +183,18 @@ function FoodForm() {
                   onChange={(e) => {
                     setCategory(e.target.value);
                   }}
-                  defaultValue="default-category"
                 >
-                  <option disabled value="default-category">
-                    Category (optional)
-                  </option>
-                  <option value="custom">CUSTOM</option>
-                  {categoryList
-                    ? categoryList.map((category, index) => (
-                        <option key={index} value={category}>
-                          {category}
-                        </option>
-                      ))
+                  <option value="Miscellaneous">Miscellaneous</option>
+                  {userCategories
+                    ? userCategories
+                        .filter((category) => category !== "Miscellaneous")
+                        .map((category, index) => (
+                          <option key={index} value={category}>
+                            {category}
+                          </option>
+                        ))
                     : null}
+                  <option value="custom">New Category</option>
                 </Form.Select>
               </MDBCol>
             </MDBRow>
@@ -210,7 +212,6 @@ function FoodForm() {
                   onChange={(e) => {
                     setCustomCategory(e.target.value);
                   }}
-                  value={customCategory}
                   contrast
                 />
               </MDBCol>
