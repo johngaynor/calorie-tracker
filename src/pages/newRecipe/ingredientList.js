@@ -6,28 +6,19 @@ import {
   MDBContainer,
 } from "mdb-react-ui-kit";
 
-import firebase from "../../utilities/firebase";
 import Ingredient from "./components/ingredient";
 import styles from "./styles/ingredientList.css";
 
 function IngredientList({ ingredients }) {
-  const [ingredientTable, setIngredientTable] = useState(false);
-  // console.log(ingredients);
-
-  // checks length of ingredientList to show/hide table head
-  useEffect(() => {
-    if (ingredients.length == 0) {
-      setIngredientTable(false);
-    } else {
-      setIngredientTable(true);
-    }
-  }, [ingredients]);
-
   return (
-    <MDBContainer className="">
-      {ingredientTable ? <h3 className="text-white mt-4">Ingredients:</h3> : ""}
+    <MDBContainer>
+      {ingredients.length !== 0 ? (
+        <h3 className="text-white mt-4">Ingredients:</h3>
+      ) : (
+        ""
+      )}
       <MDBTable align="middle" className="ingredient-table text-white">
-        {ingredientTable ? (
+        {ingredients.length !== 0 ? (
           <MDBTableHead>
             <tr>
               <th scope="col" className="col-4">
