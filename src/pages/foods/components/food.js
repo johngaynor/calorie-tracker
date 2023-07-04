@@ -74,18 +74,23 @@ function Food({ food, foodId }) {
   };
 
   const deleteFood = () => {
-    if (currentUser) {
-      const foodRef = firebase
-        .database()
-        .ref(`users/${currentUser.uid}/foods/${food.category}/${foodId}`);
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this food? This action cannot be undone."
+    );
+    if (confirmed) {
+      if (currentUser) {
+        const foodRef = firebase
+          .database()
+          .ref(`users/${currentUser.uid}/foods/${food.category}/${foodId}`);
 
-      foodRef.remove();
-      setRemoveFood(false);
-    } else {
-      alert(
-        "This is a demo version of Calorie Tracker. Please create an account/log in to delete foods."
-      );
-    }
+        foodRef.remove();
+        setRemoveFood(false);
+      } else {
+        alert(
+          "This is a demo version of Calorie Tracker. Please create an account/log in to delete foods."
+        );
+      }
+    } else return;
   };
 
   const submitFood = () => {
