@@ -34,8 +34,7 @@ function RecipeForm() {
 
   // these are for recipe submission
   const [recipeName, setRecipeName] = useState("");
-  const [recipeCategory, setRecipeCategory] = useState("");
-  const [finalCategory, setFinalCategory] = useState("");
+  const [recipeCategory, setRecipeCategory] = useState("Miscellaneous");
   const [recipeDesc, setRecipeDesc] = useState("");
   const [finalDesc, setFinalDesc] = useState("");
   const [ingredientList, setIngredientList] = useState("");
@@ -76,12 +75,6 @@ function RecipeForm() {
 
   // updates the finalCategory useState();
   useEffect(() => {
-    if (recipeCategory === "") {
-      setFinalCategory("Miscellaneous");
-    } else {
-      setFinalCategory(recipeCategory);
-    }
-
     if (recipeDesc === "") {
       setFinalDesc("no description added");
     } else {
@@ -151,12 +144,11 @@ function RecipeForm() {
   const submitRecipe = () => {
     const recipeRef = firebase
       .database()
-      .ref("recipes")
-      .child(`${finalCategory}`);
+      .ref(`users/${currentUser.uid}/recipes/${recipeCategory}`);
     const recipe = {
       name: recipeName,
       description: finalDesc,
-      category: finalCategory,
+      category: recipeCategory,
       ingredients: ingredientList,
     };
 
@@ -213,11 +205,9 @@ function RecipeForm() {
                   onChange={(e) => {
                     setRecipeCategory(e.target.value);
                   }}
-                  defaultValue="default-category"
+                  defaultValue="Miscellaneous"
                 >
-                  <option value="default-category" disabled>
-                    Category (optional)
-                  </option>
+                  <option value="Miscellaneous">Miscellaneous</option>
                   <option value="Breakfast">Breakfast</option>
                   <option value="Lunch">Lunch</option>
                   <option value="Dinner">Dinner</option>

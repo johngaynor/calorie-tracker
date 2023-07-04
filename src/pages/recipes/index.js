@@ -37,6 +37,11 @@ function Recipes() {
             <List userRecipes={userRecipes} category={category} key={index} />
           ))
         : null}
+      {userRecipes == null ? (
+        <p className="mb-5">You do not have any recipes entered!</p>
+      ) : (
+        ""
+      )}
     </MDBContainer>
   );
 }
