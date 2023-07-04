@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   MDBTable,
   MDBTableHead,
@@ -9,7 +9,7 @@ import {
 import Ingredient from "./components/ingredient";
 import styles from "./styles/ingredientList.css";
 
-function IngredientList({ ingredients }) {
+function IngredientList({ ingredients, setIngredients }) {
   return (
     <MDBContainer>
       {ingredients.length !== 0 ? (
@@ -51,7 +51,12 @@ function IngredientList({ ingredients }) {
         <MDBTableBody>
           {ingredients
             ? ingredients.map((ingredient, index) => (
-                <Ingredient ingredient={ingredient} key={index} />
+                <Ingredient
+                  ingredient={ingredient}
+                  allIngredients={ingredients}
+                  setIngredients={setIngredients}
+                  index={index}
+                />
               ))
             : null}
         </MDBTableBody>

@@ -3,22 +3,17 @@ import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 
-import firebase from "../../../utilities/firebase";
 import styles from "../styles/ingredient.css";
 
-function Ingredient({ ingredient }) {
+function Ingredient({ ingredient, allIngredients, setIngredients, index }) {
   const deleteIngredient = () => {
     if (
       window.confirm(
         "Are you sure you want to delete this ingredient? This action cannot be undone."
       )
     ) {
-      const ingredientRef = firebase
-        .database()
-        .ref("add-ingredient")
-        .child(ingredient.id);
-
-      ingredientRef.remove();
+      const newIngredients = allIngredients.filter((_, i) => i !== index);
+      setIngredients(newIngredients);
     }
   };
 

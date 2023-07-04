@@ -30,9 +30,7 @@ function RecipeForm() {
   const [recipeName, setRecipeName] = useState("");
   const [recipeCategory, setRecipeCategory] = useState("Miscellaneous");
   const [recipeDesc, setRecipeDesc] = useState("");
-  const [ingredientList, setIngredientList] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  console.log(ingredients);
 
   // these are for ingredient submission
   const [ingredientName, setIngredientName] = useState("");
@@ -72,12 +70,6 @@ function RecipeForm() {
 
   // function to add ingredients
   const submitIngredient = () => {
-    if (!currentUser) {
-      alert(
-        "This is a demo version of Calorie Tracker. Please create an account/log in to add ingredients."
-      );
-      return;
-    }
     if (
       ingredientName === "" ||
       size === "" ||
@@ -113,6 +105,12 @@ function RecipeForm() {
 
   // function to submit recipes
   const submitRecipe = () => {
+    if (!currentUser) {
+      alert(
+        "This is a demo version of Calorie Tracker. Please create an account/log in to create recipes."
+      );
+      return;
+    }
     const recipeRef = firebase
       .database()
       .ref(`users/${currentUser.uid}/recipes/${recipeCategory}`);
@@ -466,8 +464,8 @@ function RecipeForm() {
             </MDBRow>
             <MDBRow className="mb-5">
               <IngredientList
-                userId={currentUser ? currentUser.uid : null}
                 ingredients={ingredients}
+                setIngredients={setIngredients}
               />
             </MDBRow>
 
@@ -553,8 +551,8 @@ function RecipeForm() {
                     </tr>
                   </MDBTableHead>
                   <MDBTableBody>
-                    {ingredientList
-                      ? ingredientList.map((ingredient, index) => (
+                    {ingredients
+                      ? ingredients.map((ingredient, index) => (
                           <IngredientReview
                             ingredient={ingredient}
                             key={index}
@@ -572,7 +570,6 @@ function RecipeForm() {
                 className="border-1 next bg-danger"
                 type="button"
                 onClick={submitRecipe}
-                disabled={!currentUser}
               >
                 Submit
               </MDBBtn>
