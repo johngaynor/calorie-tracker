@@ -36,7 +36,6 @@ function RecipeForm() {
   const [recipeName, setRecipeName] = useState("");
   const [recipeCategory, setRecipeCategory] = useState("Miscellaneous");
   const [recipeDesc, setRecipeDesc] = useState("");
-  const [finalDesc, setFinalDesc] = useState("");
   const [ingredientList, setIngredientList] = useState("");
 
   // these are for ingredient submission
@@ -73,15 +72,6 @@ function RecipeForm() {
     });
   }, [formStep]);
 
-  // updates the finalCategory useState();
-  useEffect(() => {
-    if (recipeDesc === "") {
-      setFinalDesc("no description added");
-    } else {
-      setFinalDesc(recipeDesc);
-    }
-  });
-
   // creates local list of new ingredients from firebase
   useEffect(() => {
     const ingredientListRef = firebase.database().ref("add-ingredient");
@@ -106,7 +96,15 @@ function RecipeForm() {
 
   // function to submit ingredients
   const submitIngredient = () => {
-    const newIngredientRef = firebase.database().ref("add-ingredient");
+    if (!currentUser) {
+      alert(
+        "This is a demo version of Calorie Tracker. Please create an account/log in to add ingredients."
+      );
+      return;
+    }
+    const newIngredientRef = firebase
+      .database()
+      .ref(`users/${currentUser.uid}/add-ingredient`);
     if (
       ingredientName === "" ||
       size === "" ||
@@ -121,13 +119,12 @@ function RecipeForm() {
     } else {
       let newIngredient = {
         name: ingredientName,
-        size: size,
+        size: parseFloat(size),
         unit: unit,
-        cal: cal,
-        protein: protein,
-        carbs: carbs,
-        fat: fat,
-        add: true,
+        cal: parseFloat(cal),
+        protein: parseFloat(protein),
+        carbs: parseFloat(carbs),
+        fat: parseFloat(fat),
       };
 
       newIngredientRef.push(newIngredient);
@@ -147,13 +144,13 @@ function RecipeForm() {
       .ref(`users/${currentUser.uid}/recipes/${recipeCategory}`);
     const recipe = {
       name: recipeName,
-      description: finalDesc,
+      description: recipeDesc,
       category: recipeCategory,
       ingredients: ingredientList,
     };
 
     recipeRef.push(recipe);
-    firebase.database().ref("add-ingredient").remove();
+    firebase.database().ref(`users/${currentUser.uid}/add-ingredient`).remove();
     setFormStep(formStep + 1);
   };
 
