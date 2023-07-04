@@ -126,12 +126,12 @@ function FoodForm() {
       const food = {
         name: name,
         category: finalCategory,
-        servingSize: size,
+        servingSize: parseFloat(size),
         unit: unit,
-        cal: cal,
-        protein: protein,
-        carbs: carbs,
-        fat: fat,
+        cal: parseFloat(cal),
+        protein: parseFloat(protein),
+        carbs: parseFloat(carbs),
+        fat: parseFloat(fat),
       };
 
       foodRef.push(food);
