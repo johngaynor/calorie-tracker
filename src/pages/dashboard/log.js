@@ -55,15 +55,6 @@ function Log({ userLog }) {
           <MDBContainer className="dash-log-items w-100 p-0 mb-4 mb-md-0">
             <MDBTable align="middle">
               <MDBTableBody>
-                {/* {logItems
-                  ? logItems.map((item, index) => (
-                      <LogItem
-                        item={item}
-                        key={index}
-                        activeMacro={selectMacro}
-                      />
-                    ))
-                  : null} */}
                 {userLog
                   ? Object.keys(userLog).map((item) => (
                       <LogItem
