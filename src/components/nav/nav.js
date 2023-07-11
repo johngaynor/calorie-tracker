@@ -37,8 +37,10 @@ function Navigation() {
 
   return (
     <MDBNavbar expand="lg" light bgColor="light">
-      <MDBContainer fluid>
-        <MDBNavbarBrand href="/">Calorie Tracker</MDBNavbarBrand>
+      <MDBContainer fluid className="mb-3 mb-lg-0">
+        <MDBNavbarBrand href="/">
+          Calorie Tracker {!currentUser ? "(Demo)" : null}
+        </MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"
@@ -69,10 +71,10 @@ function Navigation() {
               <Logout />
             ) : (
               <>
-                <MDBNavbarItem>
+                <MDBNavbarItem className="mx-4">
                   <Login />
                 </MDBNavbarItem>
-                <MDBNavbarItem>
+                <MDBNavbarItem className="pt-lg-0 pt-2">
                   <Signup />
                 </MDBNavbarItem>
               </>
