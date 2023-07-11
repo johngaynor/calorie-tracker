@@ -16,6 +16,8 @@ function Log({ userLog }) {
   const [logItems, setLogItems] = useState("");
   const [selectMacro, setSelectMacro] = useState(0);
 
+  console.log(userLog);
+
   useEffect(() => {
     const logRef = firebase.database().ref("user-log");
     logRef.on("value", (snapshot) => {
@@ -53,11 +55,19 @@ function Log({ userLog }) {
           <MDBContainer className="dash-log-items w-100 p-0 mb-4 mb-md-0">
             <MDBTable align="middle">
               <MDBTableBody>
-                {logItems
+                {/* {logItems
                   ? logItems.map((item, index) => (
                       <LogItem
                         item={item}
                         key={index}
+                        activeMacro={selectMacro}
+                      />
+                    ))
+                  : null} */}
+                {userLog
+                  ? Object.keys(userLog).map((item) => (
+                      <LogItem
+                        item={userLog[`${item}`]}
                         activeMacro={selectMacro}
                       />
                     ))

@@ -2,35 +2,31 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
-function LogItem(item) {
+function LogItem({ item, activeMacro }) {
   const [activeInfo, setActiveInfo] = useState("");
+
   useEffect(() => {
     const macroNames = ["cal", "protein", "carbs", "fat"];
-    let activeMacroName = macroNames[item.activeMacro];
-    let macroStats = [
-      item.item.cal,
-      item.item.protein,
-      item.item.carbs,
-      item.item.fat,
-    ];
-    let activeMacroStat = macroStats[item.activeMacro];
+    let activeMacroName = macroNames[activeMacro];
+    let macroStats = [item.cal, item.protein, item.carbs, item.fat];
+    let activeMacroStat = macroStats[activeMacro];
     setActiveInfo(activeMacroName + ": " + activeMacroStat);
-  }, [item]);
+  }, [activeMacro]);
 
   const showItemInfo = () => {
     alert(`
-    Name: ${item.item.name}
-    Calories: ${item.item.cal}kcal
-    Protein: ${item.item.protein}g
-    Carbs: ${item.item.carbs}g
-    Fat: ${item.item.fat}g 
+    Name: ${item.name}
+    Calories: ${item.cal}kcal
+    Protein: ${item.protein}g
+    Carbs: ${item.carbs}g
+    Fat: ${item.fat}g
     `);
   };
 
   return (
     <tr onClick={showItemInfo}>
       <td className="col-8 p-1">
-        <p className="m-2 float-start text-start">{item.item.name}</p>
+        <p className="m-2 float-start text-start">{item.name}</p>
       </td>
       <td className="col-4">{activeInfo}</td>
 
