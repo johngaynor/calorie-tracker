@@ -1,9 +1,9 @@
 <h1 align="center">Welcome to Calorie Tracker 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-   <img alt="Last Updated" src="https://img.shields.io/badge/last%20updated-February%202023-red" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.0.0-blue.svg?cacheSeconds=2592000" />
+   <img alt="Last Updated" src="https://img.shields.io/badge/last%20updated-July%202023-red" />
    <img alt="Contributors" src="https://img.shields.io/badge/contributors-1-bright%20green">
-   <img alt="Status" src="https://img.shields.io/badge/status-WIP-critical">
+   <img alt="Status" src="https://img.shields.io/badge/status-stable-bright%20green">
 </p>
 
 > This application is a calorie tracker to monitor calories, protein, carbs, and fat on a daily basis.
@@ -25,29 +25,27 @@ Calorie tracker allows users to create foods/recipes, calculate nutrition inform
 - React.js
 - Bootstrap
 - Firebase
-<!--
-
-## Run tests
-
-````sh
-
-``` -->
 
 ## Version History
 
-1.0.0 - Initial launch, Realtime Database open to the public to contribute foods/recipes and store nutritional information in the daily log
+1.0.0 (Feb 2023) - Initial launch, Realtime Database open to the public to contribute foods/recipes and store nutritional information in the daily log
 
-2.0.0 - User auth, major architecture changes, user-specific content, demo mode if not logged in
+2.0.0 (July 2023) - User auth, major architecture changes, user-specific content, demo mode if not logged in
+
+## Next Release
 
 ## Future Releases
+
 - Default foods/recipes
 - Weekly analysis
 - User customizability (i.e. setting custom macro goals)
 
 ## V3 Releases
+
 - Change API calls to make only 1 at the foods/recipes page, instead of a call at each level going down the chain
 
 ## V4 Anticipated Releases
+
 - Global tooltip component
 - Fix bug where deleting last ingredient from a recipe deletes the recipe itself
 - Add catch to make sure macros cannot be negative
@@ -66,4 +64,6 @@ Calorie tracker allows users to create foods/recipes, calculate nutrition inform
 
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
 
-````
+```
+
+```
