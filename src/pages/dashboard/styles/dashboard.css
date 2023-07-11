@@ -144,7 +144,6 @@
   background-color: var(--site-lightgrey);
   max-width: 260px;
   margin-left: 0px;
-  /* display: flex; */
   flex-wrap: wrap;
 }
 

@@ -3,30 +3,34 @@ import { useEffect, useState } from "react";
 
 import styles from "../styles/meter.css";
 
-function Meter({ macro, macroGoal, macroCurrent }) {
+function Meter({ activeMacro, userMacros, userGoals }) {
   const [macroName, setMacroName] = useState("");
   const [macroPercent, setMacroPercent] = useState("");
+  const [macroNum, setMacroNum] = useState(0);
+  const [macroGoal, setMacroGoal] = useState(0);
 
   useEffect(() => {
     // changing color on meter
     const pieCenter = document.querySelector("#pie-center");
     const macroTypes = ["cal", "protein", "carbs", "fat"];
-    let activeMacro = macroTypes[macro];
+    let currentMacro = macroTypes[activeMacro];
+    setMacroNum(userMacros[`${currentMacro}`]);
+    setMacroGoal(userGoals[`${currentMacro}`]);
     pieCenter.classList.remove(...pieCenter.classList);
     pieCenter.classList.add(activeMacro);
     // changing display information
     const macroNames = ["Calories", "Protein", "Carbs", "Fat"];
-    setMacroName(macroNames[macro]);
-  }, [macro]);
+    setMacroName(macroNames[activeMacro]);
+  }, [activeMacro, userMacros]);
 
   useEffect(() => {
-    const percent = ((macroCurrent / macroGoal) * 100).toFixed(0);
+    const percent = ((macroNum / macroGoal) * 100).toFixed(0);
     if (percent >= 100) {
       setMacroPercent(100);
     } else {
       setMacroPercent(percent);
     }
-  }, [macroGoal, macroCurrent]);
+  }, [macroNum, macroGoal]);
 
   useEffect(() => {
     const macroColors = [
@@ -36,7 +40,7 @@ function Meter({ macro, macroGoal, macroCurrent }) {
       "--site-greyblue",
     ];
 
-    let currentColor = macroColors[macro];
+    let currentColor = macroColors[activeMacro];
     const pieCenter = document.querySelector("#pie-center");
     pieCenter.style.background = `conic-gradient(var(--site-black) ${
       macroPercent * 1.8
@@ -46,7 +50,7 @@ function Meter({ macro, macroGoal, macroCurrent }) {
     pieOuter.style.background = `conic-gradient(var(--site-black) ${
       macroPercent * 1.8
     }deg, #0000 0deg)`;
-  }, [macro, macroPercent]);
+  }, [activeMacro, macroPercent]);
 
   return (
     <MDBContainer
@@ -56,7 +60,7 @@ function Meter({ macro, macroGoal, macroCurrent }) {
       <MDBRow>
         <h4 className="d-flex align-left">{macroName}:</h4>
         <p className="d-flex align-left">
-          {macroCurrent}/{macroGoal}
+          {macroNum}/{macroGoal}
         </p>
       </MDBRow>
       <MDBContainer className="progress-container w-100">

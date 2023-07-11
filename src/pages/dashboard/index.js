@@ -4,7 +4,6 @@ import { MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import firebase from "../../utilities/firebase";
 import MacroDashboard from "./dashboard";
 import Log from "./log";
-import styles from "./styles/index.css";
 
 function Dashboard() {
   const [userMacros, setUserMacros] = useState({
@@ -13,9 +12,16 @@ function Dashboard() {
     carbs: 0,
     fat: 0,
   });
-  const [cal, setCal] = useState(0);
-
   const [userLog, setUserLog] = useState({});
+
+  const [activeMacro, setActiveMacro] = useState(0);
+
+  const [userGoals, setUserGoals] = useState({
+    cal: 4000,
+    protein: 200,
+    carbs: 505,
+    fat: 185,
+  });
 
   useEffect(() => {
     let userLogRef = firebase.database().ref("user-log");
@@ -37,10 +43,10 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    let calTotal = 0;
-    let proteinTotal = 0;
-    let carbTotal = 0;
-    let fatTotal = 0;
+    let cal = 0;
+    let protein = 0;
+    let carbs = 0;
+    let fat = 0;
 
     for (let food in userLog) {
       const foodCal = userLog[`${food}`].cal;
@@ -48,18 +54,14 @@ function Dashboard() {
       const foodCarbs = userLog[`${food}`].carbs;
       const foodFat = userLog[`${food}`].fat;
 
-      calTotal += foodCal;
-      proteinTotal += foodProtein;
-      carbTotal += foodCarbs;
-      fatTotal += foodFat;
+      cal += foodCal;
+      protein += foodProtein;
+      carbs += foodCarbs;
+      fat += foodFat;
 
-      setUserMacros({ calTotal, proteinTotal, carbTotal, fatTotal });
+      setUserMacros({ cal, protein, carbs, fat });
     }
   }, [userLog]);
-
-  useEffect(() => {
-    console.log(userMacros);
-  }, [userMacros]);
 
   return (
     <>
@@ -67,7 +69,11 @@ function Dashboard() {
         <MDBRow>
           <h3 className="p-3 text-start">Dashboard</h3>
         </MDBRow>
-        <MacroDashboard></MacroDashboard>
+        <MacroDashboard
+          userMacros={userMacros}
+          userGoals={userGoals}
+          activeMacro={activeMacro}
+        ></MacroDashboard>
       </MDBContainer>
       <Log></Log>
     </>

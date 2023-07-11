@@ -8,75 +8,11 @@ import {
   faEgg,
 } from "@fortawesome/free-solid-svg-icons";
 
-import firebase from "../../utilities/firebase";
 import Meter from "./components/meter";
 import styles from "./styles/dashboard.css";
 
-function MacroCalcDash() {
-  const [mealList, setMealList] = useState();
-  let [macroCurrent, setMacroCurrent] = useState("");
-  let [macroGoal, setMacroGoal] = useState("");
-  let [totalCal, setTotalCal] = useState(0);
-  let [totalProtein, setTotalProtein] = useState(0);
-  let [totalCarbs, setTotalCarbs] = useState(0);
-  let [totalFat, setTotalFat] = useState(0);
-
+function MacroCalcDash({ userMacros, userGoals }) {
   const [activeMacro, setActiveMacro] = useState(0);
-
-  // calculators for total macros
-  useEffect(() => {
-    const mealRef = firebase.database().ref("user-log");
-    mealRef.on("value", (snapshot) => {
-      const meals = snapshot.val();
-      const mealList = [];
-      for (let id in meals) {
-        mealList.push({ id, ...meals[id] });
-      }
-
-      setMealList(mealList);
-
-      let calcCalTotal = 0;
-      let calcProteinTotal = 0;
-      let calcCarbsTotal = 0;
-      let calcFatTotal = 0;
-
-      mealList.forEach((food) => {
-        calcCalTotal = calcCalTotal + +food.cal;
-        calcProteinTotal = calcProteinTotal + +food.protein;
-        calcCarbsTotal = calcCarbsTotal + +food.carbs;
-        calcFatTotal = calcFatTotal + +food.fat;
-      });
-      setTotalCal(calcCalTotal);
-      setTotalProtein(calcProteinTotal);
-      setTotalCarbs(calcCarbsTotal);
-      setTotalFat(calcFatTotal);
-
-      let allMacros = [
-        calcCalTotal,
-        calcProteinTotal,
-        calcCarbsTotal,
-        calcFatTotal,
-      ];
-      let currentMacro = allMacros[activeMacro];
-      setMacroCurrent(currentMacro);
-    });
-  }, [totalCal, totalProtein, totalCarbs, totalFat, activeMacro]);
-
-  let userGoalCal = 4000,
-    userGoalProtein = 200,
-    userGoalCarbs = 505,
-    userGoalFat = 185;
-
-  useEffect(() => {
-    const userGoals = [
-      userGoalCal,
-      userGoalProtein,
-      userGoalCarbs,
-      userGoalFat,
-    ];
-    let activeMacroGoal = userGoals[activeMacro];
-    setMacroGoal(activeMacroGoal);
-  }, [activeMacro]);
 
   useEffect(() => {
     const macroDisplays = Array.from(
@@ -86,21 +22,6 @@ function MacroCalcDash() {
       macro.classList.toggle("active-macro", index === activeMacro);
     });
   }, [activeMacro]);
-
-  // gets current date for
-  var today = new Date();
-  var dd = today.getDate();
-
-  var mm = today.getMonth() + 1;
-  var yyyy = today.getFullYear();
-  if (dd < 10) {
-    dd = "0" + dd;
-  }
-
-  if (mm < 10) {
-    mm = "0" + mm;
-  }
-  today = mm + "/" + dd + "/" + yyyy;
 
   return (
     <MDBRow>
@@ -121,7 +42,7 @@ function MacroCalcDash() {
               </div>
               <p className="d-flex mt-4 mb-2">Calories</p>
               <h3 className="d-flex w-50">
-                {totalCal} <span>Kcl</span>
+                {userMacros.cal} <span>Kcl</span>
               </h3>
             </MDBContainer>
           </MDBCol>
@@ -135,7 +56,7 @@ function MacroCalcDash() {
               </div>
               <p className="d-flex mt-4 mb-2">Protein</p>
               <h3 className="d-flex w-50">
-                {totalProtein} <span>g</span>
+                {userMacros.protein} <span>g</span>
               </h3>
             </MDBContainer>
           </MDBCol>
@@ -149,7 +70,7 @@ function MacroCalcDash() {
               </div>
               <p className="d-flex mt-4 mb-2">Carbs</p>
               <h3 className="d-flex w-50">
-                {totalCarbs} <span>g</span>
+                {userMacros.carbs} <span>g</span>
               </h3>
             </MDBContainer>
           </MDBCol>
@@ -163,7 +84,7 @@ function MacroCalcDash() {
               </div>
               <p className="d-flex mt-4 mb-2">Fat</p>
               <h3 className="d-flex w-50">
-                {totalFat} <span>g</span>
+                {userMacros.fat} <span>g</span>
               </h3>
             </MDBContainer>
           </MDBCol>
@@ -178,7 +99,7 @@ function MacroCalcDash() {
                 </div>
                 <div className="macro-small-text">
                   <p>calories</p>
-                  <p>{totalCal}kcal</p>
+                  <p>{userMacros.cal}kcal</p>
                 </div>
               </div>
               <div
@@ -190,7 +111,7 @@ function MacroCalcDash() {
                 </div>
                 <div className="macro-small-text">
                   <p>protein</p>
-                  <p>{totalProtein}g</p>
+                  <p>{userMacros.protein}g</p>
                 </div>
               </div>
               <div
@@ -202,7 +123,7 @@ function MacroCalcDash() {
                 </div>
                 <div className="macro-small-text">
                   <p>carbs</p>
-                  <p>{totalCarbs}g</p>
+                  <p>{userMacros.carbs}g</p>
                 </div>
               </div>
               <div
@@ -214,7 +135,7 @@ function MacroCalcDash() {
                 </div>
                 <div className="macro-small-text">
                   <p>fat</p>
-                  <p>{totalFat}g</p>
+                  <p>{userMacros.fat}g</p>
                 </div>
               </div>
             </MDBContainer>
@@ -224,13 +145,14 @@ function MacroCalcDash() {
       <MDBCol className="m-sm-2 m-3 p-2">
         <div className="d-flex justify-content-between pb-4">
           <h4>Overview</h4>
-          <p>{today} |</p>
+          {/* <p>{today} |</p> */}
+          <p>12/12/2023 |</p>
         </div>
         <MDBContainer className="bg-white p-0 overview-container">
           <Meter
-            macro={activeMacro}
-            macroGoal={macroGoal}
-            macroCurrent={macroCurrent}
+            activeMacro={activeMacro}
+            userMacros={userMacros}
+            userGoals={userGoals}
           ></Meter>
           <MDBContainer className="macro-percents m-2 text-muted d-lg-flex d-sm-block d-flex">
             <div className="macro-small" onClick={() => setActiveMacro(0)}>
@@ -240,7 +162,7 @@ function MacroCalcDash() {
               <div className="percent-text">
                 <p className="m-0">calories</p>
                 <p className="fw-bold">
-                  {totalCal}/{userGoalCal}
+                  {userMacros.cal}/{userGoals.cal}
                 </p>
               </div>
             </div>
@@ -251,7 +173,7 @@ function MacroCalcDash() {
               <div className="percent-text">
                 <p className="m-0">protein (g)</p>
                 <p className="fw-bold">
-                  {totalProtein}/{userGoalProtein}
+                  {userMacros.protein}/{userGoals.protein}
                 </p>
               </div>
             </div>
@@ -262,7 +184,7 @@ function MacroCalcDash() {
               <div className="percent-text">
                 <p className="m-0">carbs (g)</p>
                 <p className="fw-bold">
-                  {totalCarbs}/{userGoalCarbs}
+                  {userMacros.carbs}/{userGoals.carbs}
                 </p>
               </div>
             </div>
@@ -273,7 +195,7 @@ function MacroCalcDash() {
               <div className="percent-text">
                 <p className="m-0">fat (g)</p>
                 <p className="fw-bold">
-                  {totalFat}/{userGoalFat}
+                  {userMacros.fat}/{userGoals.fat}
                 </p>
               </div>
             </div>
