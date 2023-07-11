@@ -49,10 +49,10 @@ function Recipe({ userRecipes, category, recipeId }) {
       const logRef = firebase.database().ref("user-log");
       const userMeal = {
         name: userRecipes[`${category}`][`${recipeId}`].name,
-        cal: totalCal,
-        protein: totalProtein,
-        carbs: totalCarbs,
-        fat: totalFat,
+        cal: parseFloat(totalCal),
+        protein: parseFloat(totalProtein),
+        carbs: parseFloat(totalCarbs),
+        fat: parseFloat(totalFat),
       };
 
       logRef.push(userMeal);

@@ -22,9 +22,6 @@ function Food({ food, foodId }) {
 
   const { currentUser } = useContext(AuthContext);
 
-  // console.log(food);
-  // console.log(foodId);
-
   // these are for delete/log functionality
   const [removeFood, setRemoveFood] = useState(false);
   const [addLog, setAddLog] = useState(false);
@@ -102,10 +99,10 @@ function Food({ food, foodId }) {
       if (currentUser) {
         const newFood = {
           name: food.name,
-          cal: calcCal,
-          protein: calcProtein,
-          carbs: calcCarbs,
-          fat: calcFat,
+          cal: parseFloat(calcCal),
+          protein: parseFloat(calcProtein),
+          carbs: parseFloat(calcCarbs),
+          fat: parseFloat(calcFat),
         };
         const logRef = firebase.database().ref(`users/${currentUser.uid}/log`);
         logRef.push(newFood);
