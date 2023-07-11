@@ -37,17 +37,18 @@ Calorie tracker allows users to create foods/recipes, calculate nutrition inform
 
 1.0.0 - Initial launch, Realtime Database open to the public to contribute foods/recipes and store nutritional information in the daily log
 
+2.0.0 - User auth, major architecture changes, user-specific content, demo mode if not logged in
+
 ## Future Releases
-- User auth (Firebase authentification)
 - Default foods/recipes
 - Weekly analysis
 - User customizability (i.e. setting custom macro goals)
 
 ## V3 Releases
 - Change API calls to make only 1 at the foods/recipes page, instead of a call at each level going down the chain
-- Tooltips for each of the icons
 
 ## V4 Anticipated Releases
+- Global tooltip component
 - Fix bug where deleting last ingredient from a recipe deletes the recipe itself
 - Add catch to make sure macros cannot be negative
 - New routing for custom categories
