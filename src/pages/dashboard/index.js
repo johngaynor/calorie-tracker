@@ -13,9 +13,6 @@ function Dashboard() {
     fat: 0,
   });
   const [userLog, setUserLog] = useState({});
-
-  const [activeMacro, setActiveMacro] = useState(0);
-
   const [userGoals, setUserGoals] = useState({
     cal: 4000,
     protein: 200,
@@ -72,10 +69,9 @@ function Dashboard() {
         <MacroDashboard
           userMacros={userMacros}
           userGoals={userGoals}
-          activeMacro={activeMacro}
         ></MacroDashboard>
       </MDBContainer>
-      <Log></Log>
+      <Log userLog={userLog}></Log>
     </>
   );
 }

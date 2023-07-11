@@ -12,7 +12,7 @@ import firebase from "../../utilities/firebase";
 import LogItem from "./components/logItem";
 import styles from "./styles/log.css";
 
-function Log() {
+function Log({ userLog }) {
   const [logItems, setLogItems] = useState("");
   const [selectMacro, setSelectMacro] = useState(0);
 
