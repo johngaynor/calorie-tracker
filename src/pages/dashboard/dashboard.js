@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import Meter from "./components/meter";
+import SetGoalsModal from "./components/setGoals";
 import styles from "./styles/dashboard.css";
 
 function MacroCalcDash({ userMacros, userGoals }) {
@@ -145,8 +146,7 @@ function MacroCalcDash({ userMacros, userGoals }) {
       <MDBCol className="m-sm-2 m-3 p-2">
         <div className="d-flex justify-content-between pb-4">
           <h4>Overview</h4>
-          {/* <p>{today} |</p> */}
-          <p>12/12/2023 |</p>
+          <SetGoalsModal userGoals={userGoals} />
         </div>
         <MDBContainer className="bg-white p-0 overview-container">
           <Meter
