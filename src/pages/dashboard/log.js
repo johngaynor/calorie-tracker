@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Form } from "react-bootstrap";
 import {
   MDBCol,
@@ -8,28 +8,11 @@ import {
   MDBTableBody,
 } from "mdb-react-ui-kit";
 
-import firebase from "../../utilities/firebase";
 import LogItem from "./components/logItem";
 import styles from "./styles/log.css";
 
 function Log({ userLog }) {
-  const [logItems, setLogItems] = useState("");
   const [selectMacro, setSelectMacro] = useState(0);
-
-  console.log(userLog);
-
-  useEffect(() => {
-    const logRef = firebase.database().ref("user-log");
-    logRef.on("value", (snapshot) => {
-      const items = snapshot.val();
-      const itemList = [];
-      for (let id in items) {
-        itemList.push({ id, ...items[id] });
-      }
-
-      setLogItems(itemList);
-    });
-  }, []);
 
   return (
     <MDBContainer fluid className="px-4 bg-white dash-log-container text-muted">

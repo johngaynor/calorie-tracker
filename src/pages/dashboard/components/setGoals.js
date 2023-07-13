@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   MDBBtn,
   MDBModal,
@@ -16,16 +16,50 @@ import {
 } from "mdb-react-ui-kit";
 
 import firebase from "../../../utilities/firebase";
+import { AuthContext } from "../../../utilities/auth/authContext";
 
 const SetGoalsModal = ({ userGoals }) => {
   const [basicModal, setBasicModal] = useState(false);
-  const [cal, setCal] = useState(userGoals.cal);
-  const [protein, setProtein] = useState(userGoals.protein);
-  const [carbs, setCarbs] = useState(userGoals.carbs);
-  const [fat, setFat] = useState(userGoals.fat);
+  const [cal, setCal] = useState(0);
+  const [protein, setProtein] = useState(0);
+  const [carbs, setCarbs] = useState(0);
+  const [fat, setFat] = useState(0);
+
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    setCal(userGoals.cal);
+    setProtein(userGoals.protein);
+    setCarbs(userGoals.carbs);
+    setFat(userGoals.fat);
+  }, [userGoals]);
 
   const handleGoalSubmit = () => {
-    console.log("attempted to submit goals");
+    if (currentUser) {
+      console.log("a user is present");
+      if (cal > 0 && protein > 0 && carbs > 0 && fat > 0) {
+        console.log("attempting to post data to user " + currentUser.uid);
+        const goalRef = firebase
+          .database()
+          .ref(`users/${currentUser.uid}/macro-goals`);
+        goalRef.set({
+          cal: parseFloat(cal),
+          protein: parseFloat(protein),
+          carbs: parseFloat(carbs),
+          fat: parseFloat(fat),
+        });
+        alert("Thank you, your goals have been recorded.");
+        window.location.reload();
+      } else {
+        alert(
+          "Please make sure all macros are positive numbers before submitting."
+        );
+      }
+    } else {
+      alert(
+        "This is a demo version of Calorie Tracker. Please login or create an account to edit user goals."
+      );
+    }
   };
 
   return (
@@ -55,47 +89,45 @@ const SetGoalsModal = ({ userGoals }) => {
                         <h2 className="fw-bold mb-4 text-center">
                           Set Macro Goals
                         </h2>
-                        <form onSubmit={handleGoalSubmit}>
-                          <MDBInput
-                            wrapperClass="mb-4 w-100"
-                            label="Calories"
-                            type=""
-                            size="lg"
-                            name="calories"
-                            defaultValue={userGoals.cal}
-                            onChange={(e) => setCal(e.target.value)}
-                          />
-                          <MDBInput
-                            wrapperClass="mb-4 w-100"
-                            label="Protein"
-                            type=""
-                            size="lg"
-                            name="protein"
-                            defaultValue={userGoals.protein}
-                            onChange={(e) => setProtein(e.target.value)}
-                          />
-                          <MDBInput
-                            wrapperClass="mb-4 w-100"
-                            label="Carbs"
-                            type=""
-                            size="lg"
-                            name="carbs"
-                            defaultValue={userGoals.carbs}
-                            onChange={(e) => setCarbs(e.target.value)}
-                          />
-                          <MDBInput
-                            wrapperClass="mb-4 w-100"
-                            label="Fat"
-                            type=""
-                            size="lg"
-                            name="fat"
-                            defaultValue={userGoals.fat}
-                            onChange={(e) => setFat(e.target.value)}
-                          />
-                          <MDBBtn size="lg" type="submit">
-                            Submit
-                          </MDBBtn>
-                        </form>
+                        <MDBInput
+                          wrapperClass="mb-4 w-100"
+                          label="Calories"
+                          type=""
+                          size="lg"
+                          name="calories"
+                          defaultValue={cal}
+                          onChange={(e) => setCal(e.target.value)}
+                        />
+                        <MDBInput
+                          wrapperClass="mb-4 w-100"
+                          label="Protein"
+                          type=""
+                          size="lg"
+                          name="protein"
+                          defaultValue={protein}
+                          onChange={(e) => setProtein(e.target.value)}
+                        />
+                        <MDBInput
+                          wrapperClass="mb-4 w-100"
+                          label="Carbs"
+                          type=""
+                          size="lg"
+                          name="carbs"
+                          defaultValue={carbs}
+                          onChange={(e) => setCarbs(e.target.value)}
+                        />
+                        <MDBInput
+                          wrapperClass="mb-4 w-100"
+                          label="Fat"
+                          type=""
+                          size="lg"
+                          name="fat"
+                          defaultValue={fat}
+                          onChange={(e) => setFat(e.target.value)}
+                        />
+                        <MDBBtn size="lg" onClick={handleGoalSubmit}>
+                          Submit
+                        </MDBBtn>
                         <hr className="my-4" />
                       </MDBCardBody>
                     </MDBCard>

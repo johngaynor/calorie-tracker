@@ -13,19 +13,32 @@ function Dashboard() {
     fat: 0,
   });
   const [userLog, setUserLog] = useState({});
-  const [userGoals, setUserGoals] = useState({
-    cal: 4000,
-    protein: 200,
-    carbs: 505,
-    fat: 185,
-  });
+  const [userGoals, setUserGoals] = useState({});
+
+  console.log(userGoals);
 
   useEffect(() => {
     let userLogRef = firebase.database().ref("user-log");
 
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        const goalRef = firebase
+          .database()
+          .ref(`users/${user.uid}/macro-goals`);
+
+        goalRef.on("value", (snapshot) => {
+          const goals = snapshot.val();
+          setUserGoals(goals);
+        });
+
         userLogRef = firebase.database().ref(`users/${user.uid}/log`);
+      } else {
+        setUserGoals({
+          cal: 4000,
+          protein: 200,
+          carbs: 505,
+          fat: 185,
+        });
       }
 
       userLogRef.on("value", (snapshot) => {
