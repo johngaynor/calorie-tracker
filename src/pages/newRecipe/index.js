@@ -157,7 +157,7 @@ function RecipeForm() {
                 <MDBInput
                   label="Recipe Name"
                   type="text"
-                  id="recipe-form-grey"
+                  className="recipe-form-grey"
                   onChange={(e) => {
                     setRecipeName(e.target.value);
                   }}
@@ -208,7 +208,7 @@ function RecipeForm() {
                 <MDBTextArea
                   label="Description (optional)"
                   type="text"
-                  id="recipe-form-grey"
+                  className="recipe-form-grey"
                   onChange={(e) => {
                     setRecipeDesc(e.target.value);
                   }}
@@ -248,7 +248,7 @@ function RecipeForm() {
             <MDBRow className="pt-5 mb-4">
               <MDBCol className="col-md-8">
                 <MDBInput
-                  id="recipe-form-grey"
+                  className="recipe-form-grey"
                   label="Ingredient Name"
                   type="text"
                   onChange={(e) => {
@@ -260,7 +260,7 @@ function RecipeForm() {
               </MDBCol>
               <MDBCol className="d-none d-md-inline-block">
                 <MDBInput
-                  id="recipe-form-grey"
+                  className="recipe-form-grey"
                   type="number"
                   label="Serving Size"
                   onChange={(e) => {
@@ -296,7 +296,7 @@ function RecipeForm() {
             <MDBRow className="mb-4 d-md-none">
               <MDBCol className="col-sm-8">
                 <MDBInput
-                  id="recipe-form-grey"
+                  className="recipe-form-grey"
                   type="number"
                   label="Serving Size"
                   onChange={(e) => {
@@ -350,7 +350,7 @@ function RecipeForm() {
             <MDBRow className="d-none d-sm-flex">
               <MDBCol>
                 <MDBInput
-                  id="input-cal"
+                  className="input-cal"
                   type="number"
                   label="Calories"
                   onChange={(e) => {
@@ -362,7 +362,7 @@ function RecipeForm() {
               </MDBCol>
               <MDBCol>
                 <MDBInput
-                  id="input-protein"
+                  className="input-protein"
                   type="number"
                   label="Protein"
                   onChange={(e) => {
@@ -374,7 +374,7 @@ function RecipeForm() {
               </MDBCol>
               <MDBCol>
                 <MDBInput
-                  id="input-carbs"
+                  className="input-carbs"
                   type="number"
                   label="Carbs"
                   contrast
@@ -386,7 +386,7 @@ function RecipeForm() {
               </MDBCol>
               <MDBCol>
                 <MDBInput
-                  id="input-fat"
+                  className="input-fat"
                   type="number"
                   label="Fat"
                   contrast
@@ -400,7 +400,7 @@ function RecipeForm() {
             <MDBRow className="d-sm-none">
               <MDBCol>
                 <MDBInput
-                  id="input-cal"
+                  className="input-cal"
                   type="number"
                   label="Calories"
                   onChange={(e) => {
@@ -412,7 +412,7 @@ function RecipeForm() {
               </MDBCol>
               <MDBCol>
                 <MDBInput
-                  id="input-protein"
+                  className="input-protein"
                   type="number"
                   label="Protein"
                   onChange={(e) => {
@@ -426,7 +426,7 @@ function RecipeForm() {
             <MDBRow className="d-sm-none mt-4">
               <MDBCol>
                 <MDBInput
-                  id="input-carbs"
+                  className="input-carbs"
                   type="number"
                   label="Carbs"
                   contrast
@@ -438,7 +438,7 @@ function RecipeForm() {
               </MDBCol>
               <MDBCol>
                 <MDBInput
-                  id="input-fat"
+                  className="input-fat"
                   type="number"
                   label="Fat"
                   contrast

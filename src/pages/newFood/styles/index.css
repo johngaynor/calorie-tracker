@@ -14,23 +14,23 @@
   background-color: var(--site-grey);
 }
 
-#input-cal {
+.page-container .input-cal {
   background-color: var(--site-yellow);
 }
 
-#input-protein {
+.page-container .input-protein {
   background-color: var(--site-olivegreen);
 }
 
-#input-carbs {
+.page-container .input-carbs {
   background-color: var(--site-oceanblue);
 }
 
-#input-fat {
+.page-container .input-fat {
   background-color: var(--site-greyblue);
 }
 
-#form-box-grey {
+.page-container .form-box-grey {
   background-color: var(--site-grey);
 }
 

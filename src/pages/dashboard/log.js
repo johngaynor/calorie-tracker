@@ -39,10 +39,11 @@ function Log({ userLog }) {
             <MDBTable align="middle">
               <MDBTableBody>
                 {userLog
-                  ? Object.keys(userLog).map((item) => (
+                  ? Object.keys(userLog).map((item, index) => (
                       <LogItem
                         item={userLog[`${item}`]}
                         activeMacro={selectMacro}
+                        key={index}
                       />
                     ))
                   : null}

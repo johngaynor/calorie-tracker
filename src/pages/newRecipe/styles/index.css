@@ -2,6 +2,10 @@
   min-height: 85vh;
 }
 
+.page-container .recipe-form-grey {
+  background-color: var(--site-grey);
+}
+
 .recipe-form {
   background-color: var(--site-black);
 }

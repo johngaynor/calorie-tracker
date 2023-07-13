@@ -169,7 +169,7 @@ function FoodForm() {
                 <MDBInput
                   label="Food Name"
                   type="text"
-                  id="form-box-grey"
+                  className="form-box-grey"
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
@@ -252,7 +252,7 @@ function FoodForm() {
                 <MDBInput
                   type="number"
                   label="Serving Size"
-                  id="form-box-grey"
+                  className="form-box-grey"
                   onChange={(e) => {
                     setSize(e.target.value);
                   }}
@@ -288,7 +288,7 @@ function FoodForm() {
             <MDBRow>
               <MDBCol>
                 <MDBInput
-                  id="input-cal"
+                  className="input-cal"
                   type="number"
                   label="Calories"
                   onChange={(e) => {
@@ -301,7 +301,7 @@ function FoodForm() {
               </MDBCol>
               <MDBCol>
                 <MDBInput
-                  id="input-protein"
+                  className="input-protein"
                   type="number"
                   label="Protein"
                   onChange={(e) => {
@@ -314,7 +314,7 @@ function FoodForm() {
               </MDBCol>
               <MDBCol className="d-none d-sm-table-cell">
                 <MDBInput
-                  id="input-carbs"
+                  className="input-carbs"
                   type="number"
                   label="Carbs"
                   contrast
@@ -327,7 +327,7 @@ function FoodForm() {
               </MDBCol>
               <MDBCol className="d-none d-sm-table-cell">
                 <MDBInput
-                  id="input-fat"
+                  className="input-fat"
                   type="number"
                   label="Fat"
                   contrast
@@ -342,7 +342,7 @@ function FoodForm() {
             <MDBRow className="d-sm-none mt-4">
               <MDBCol>
                 <MDBInput
-                  id="input-carbs"
+                  className="input-carbs"
                   type="number"
                   label="Carbs"
                   contrast
@@ -355,7 +355,7 @@ function FoodForm() {
               </MDBCol>
               <MDBCol>
                 <MDBInput
-                  id="input-fat"
+                  className="input-fat"
                   type="number"
                   label="Fat"
                   contrast

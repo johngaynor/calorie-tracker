@@ -7,7 +7,6 @@ import {
 } from "mdb-react-ui-kit";
 
 import Ingredient from "./components/ingredient";
-import styles from "./styles/ingredientList.css";
 
 function IngredientList({ ingredients, setIngredients }) {
   return (
@@ -55,7 +54,7 @@ function IngredientList({ ingredients, setIngredients }) {
                   ingredient={ingredient}
                   allIngredients={ingredients}
                   setIngredients={setIngredients}
-                  index={index}
+                  key={index}
                 />
               ))
             : null}
