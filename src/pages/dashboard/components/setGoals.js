@@ -12,7 +12,6 @@ import {
   MDBCard,
   MDBCardBody,
   MDBInput,
-  MDBIcon,
 } from "mdb-react-ui-kit";
 
 import firebase from "../../../utilities/firebase";
@@ -28,17 +27,22 @@ const SetGoalsModal = ({ userGoals }) => {
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    setCal(userGoals.cal);
-    setProtein(userGoals.protein);
-    setCarbs(userGoals.carbs);
-    setFat(userGoals.fat);
+    if (
+      userGoals.cal &&
+      userGoals.protein &&
+      userGoals.carbs &&
+      userGoals.fat
+    ) {
+      setCal(userGoals.cal);
+      setProtein(userGoals.protein);
+      setCarbs(userGoals.carbs);
+      setFat(userGoals.fat);
+    }
   }, [userGoals]);
 
   const handleGoalSubmit = () => {
     if (currentUser) {
-      console.log("a user is present");
       if (cal > 0 && protein > 0 && carbs > 0 && fat > 0) {
-        console.log("attempting to post data to user " + currentUser.uid);
         const goalRef = firebase
           .database()
           .ref(`users/${currentUser.uid}/macro-goals`);
@@ -92,37 +96,37 @@ const SetGoalsModal = ({ userGoals }) => {
                         <MDBInput
                           wrapperClass="mb-4 w-100"
                           label="Calories"
-                          type=""
+                          type="number"
                           size="lg"
-                          name="calories"
-                          defaultValue={cal}
+                          name="cal"
+                          value={cal}
                           onChange={(e) => setCal(e.target.value)}
                         />
                         <MDBInput
                           wrapperClass="mb-4 w-100"
                           label="Protein"
-                          type=""
+                          type="number"
                           size="lg"
                           name="protein"
-                          defaultValue={protein}
+                          value={protein}
                           onChange={(e) => setProtein(e.target.value)}
                         />
                         <MDBInput
                           wrapperClass="mb-4 w-100"
                           label="Carbs"
-                          type=""
+                          type="number"
                           size="lg"
                           name="carbs"
-                          defaultValue={carbs}
+                          value={carbs}
                           onChange={(e) => setCarbs(e.target.value)}
                         />
                         <MDBInput
                           wrapperClass="mb-4 w-100"
                           label="Fat"
-                          type=""
+                          type="number"
                           size="lg"
                           name="fat"
-                          defaultValue={fat}
+                          value={fat}
                           onChange={(e) => setFat(e.target.value)}
                         />
                         <MDBBtn size="lg" onClick={handleGoalSubmit}>

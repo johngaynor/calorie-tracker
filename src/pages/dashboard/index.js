@@ -15,8 +15,6 @@ function Dashboard() {
   const [userLog, setUserLog] = useState({});
   const [userGoals, setUserGoals] = useState({});
 
-  console.log(userGoals);
-
   useEffect(() => {
     let userLogRef = firebase.database().ref("user-log");
 

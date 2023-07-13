@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { MDBContainer } from "mdb-react-ui-kit";
 
 import firebase from "../../utilities/firebase";
