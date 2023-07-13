@@ -73,14 +73,22 @@ function RecipeForm() {
     if (
       ingredientName === "" ||
       size === "" ||
+      size <= 0 ||
       unit === "Unit" ||
       unit === "" ||
+      unit <= 0 ||
       cal === "" ||
+      cal < 0 ||
       protein === "" ||
+      protein < 0 ||
       carbs === "" ||
-      fat === ""
+      carbs < 0 ||
+      fat === "" ||
+      fat < 0
     ) {
-      alert("please fill all fields before submitting.");
+      alert(
+        "please fill all fields and ensure they are valid inputs before submitting."
+      );
     } else {
       let newIngredient = {
         name: ingredientName,
