@@ -27,8 +27,6 @@ function Foods() {
     };
   }, []);
 
-  console.log(userFoods);
-
   return (
     <MDBContainer fluid className="px-md-5">
       <h3 className="p-3 text-start">Your Foods</h3>

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { MDBCol, MDBRow, MDBContainer } from "mdb-react-ui-kit";
+import { useState, useEffect, useContext } from "react";
+import { MDBCol, MDBRow, MDBContainer, MDBBtn } from "mdb-react-ui-kit";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBreadSlice,
@@ -8,6 +8,8 @@ import {
   faEgg,
 } from "@fortawesome/free-solid-svg-icons";
 
+import firebase from "../../utilities/firebase";
+import { AuthContext } from "../../utilities/auth/authContext";
 import Meter from "./components/meter";
 import SetGoalsModal from "./components/setGoals";
 import styles from "./styles/dashboard.css";
@@ -24,12 +26,33 @@ function MacroCalcDash({ userMacros, userGoals }) {
     });
   }, [activeMacro]);
 
+  const { currentUser } = useContext(AuthContext);
+
+  const handleClearLog = () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to clear your log? This action cannot be undone."
+    );
+    if (confirmed) {
+      if (currentUser) {
+        const logRef = firebase.database().ref(`users/${currentUser.uid}/log`);
+        logRef.remove();
+        alert("Your log has been cleared.");
+        window.location.reload();
+      } else {
+        alert(
+          "This is the demo version of Calorie Tracker. Please log in or create an account to access your log."
+        );
+      }
+    }
+  };
+
   return (
     <MDBRow>
       <MDBCol className="m-2 p-2">
         <div className="d-flex justify-content-between pb-4">
           <h4>Progress Tracker</h4>
-          <p>Daily |</p>
+          {/* <p>Daily |</p> */}
+          <MDBBtn onClick={handleClearLog}>Clear Log</MDBBtn>
         </div>
         <MDBContainer className="dashboard-macro-display px-0">
           {/* big display for cal */}
