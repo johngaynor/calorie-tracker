@@ -31,8 +31,7 @@ const Login = ({ history }) => {
           .auth()
           .signInWithEmailAndPassword(email.value, password.value);
         navigate("/");
-
-        setBasicModal(false);
+        window.location.reload();
       } catch (error) {
         alert(error);
       }

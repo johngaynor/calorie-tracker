@@ -39,8 +39,12 @@ const Signup = ({ history }) => {
           .set({
             user: user.email,
           });
+        await firebase
+          .database()
+          .ref(`users/${user.uid}/macro-goals`)
+          .set({ cal: 3500, protein: 180, carbs: 400, fat: 140 });
         navigate("/");
-        setBasicModal(false);
+        window.location.reload();
       } catch (error) {
         alert(error);
       }

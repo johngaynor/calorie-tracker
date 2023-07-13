@@ -21,9 +21,10 @@ const Logout = ({ history }) => {
       event.preventDefault();
       try {
         await firebase.auth().signOut();
-        navigate("/");
         setBasicModal(false);
+        navigate("/");
         alert("Thank you for visiting our site, come again soon!");
+        window.location.reload();
       } catch (error) {
         alert(error);
       }
