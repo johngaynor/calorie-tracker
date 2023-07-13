@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to Calorie Tracker 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-2.0.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.1.1-blue.svg?cacheSeconds=2592000" />
    <img alt="Last Updated" src="https://img.shields.io/badge/last%20updated-July%202023-red" />
    <img alt="Contributors" src="https://img.shields.io/badge/contributors-1-bright%20green">
    <img alt="Status" src="https://img.shields.io/badge/status-stable-bright%20green">
@@ -20,35 +20,31 @@ Calorie tracker allows users to create foods/recipes, calculate nutrition inform
 
 ## Tech Stack
 
-- HTML/CSS
-- Bootstrap
 - React.js
+- Node.js
 - Bootstrap
 - Firebase
 
 ## Version History
 
+### v1
+
 1.0.0 (Feb 2023) - Initial launch, Realtime Database open to the public to contribute foods/recipes and store nutritional information in the daily log
+
+### v2
 
 2.0.0 (July 2023) - User auth, major architecture changes, user-specific content, demo mode if not logged in
 
-## Next Release
+2.0.1 - fixed some duplicate ID's in the food/recipe forms
+
+2.1.1 - added button to clear log & validation for negative form values
 
 ## Future Releases
 
 - Default foods/recipes
 - Weekly analysis
 - User customizability (i.e. setting custom macro goals)
-
-## V3 Releases
-
-- Change API calls to make only 1 at the foods/recipes page, instead of a call at each level going down the chain
-
-## V4 Anticipated Releases
-
 - Global tooltip component
-- Fix bug where deleting last ingredient from a recipe deletes the recipe itself
-- Add catch to make sure macros cannot be negative
 - New routing for custom categories
 - Possibility to add custom category for recipes
 
@@ -63,7 +59,3 @@ Calorie tracker allows users to create foods/recipes, calculate nutrition inform
 ---
 
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
-
-```
-
-```
