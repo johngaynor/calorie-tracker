@@ -44,13 +44,23 @@ function FoodForm() {
       if (e.target.matches("[data-next]")) {
         const inputs = [...formSteps[formStep].querySelectorAll("input")];
         const allValid = inputs.every((input) => input.reportValidity());
+        const allPositive = inputs.every((input) => {
+          const value = parseFloat(input.value);
+          return !isNaN(value) && value >= 0;
+        });
 
         if (formStep === 1) {
           let unitInput = document.getElementById("food-input-unit").value;
           if (unitInput === "unit") {
             alert("Please select a unit of measurement.");
           } else if (allValid) {
-            setFormStep(formStep + 1);
+            if (!allPositive) {
+              alert(
+                "Please make sure all values are positive before proceeding."
+              );
+            } else {
+              setFormStep(formStep + 1);
+            }
           }
         } else if (allValid) {
           setFormStep(formStep + 1);
@@ -116,12 +126,14 @@ function FoodForm() {
   function submitFood() {
     if (
       unit === "" ||
-      size === "" ||
-      cal === "" ||
-      protein === "" ||
-      carbs === "" ||
-      fat === ""
+      size < 0 ||
+      cal < 0 ||
+      protein < 0 ||
+      carbs < 0 ||
+      fat < 0
     ) {
+      alert("Please make sure all values are positive before proceeding.");
+      setFormStep(1);
     } else {
       const foodRef = firebase
         .database()
