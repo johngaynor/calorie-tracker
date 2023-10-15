@@ -54,7 +54,7 @@ Calorie tracker allows users to create foods/recipes, calculate nutrition inform
 
 - Portfolio: https://johngaynor.dev
 - Github: [@johngaynor](https://github.com/johngaynor)
-- LinkedIn: [@john-gaynor-71092a262](https://linkedin.com/in/john-gaynor-71092a262)
+- LinkedIn: [@john-gaynor1](https://linkedin.com/in/john-gaynor1)
 
 ---
 
